@@ -1,0 +1,26 @@
+% table listing the Ga lines, both from Hyperspy and from the X-ray booklet
+
+\begin{table}[tbp]
+    \centering
+    \begin{tabular}{llll}
+                       & X-ray booklet & HyperSpy     & HyperSpy         \\
+                       & Energy [keV]  & Energy [keV] & Weight, unitless \\
+        \hline
+        $K \alpha_1$   & 9.25174       & 9.2517       & 1.0              \\
+        $K \alpha_2$** & 9.22482       &              &                  \\
+        $K \beta_1$    & 10.2642       & 10.2642      & 0.1287           \\
+        $L \alpha_1$   & 1.09792       & 1.098        & 1.0              \\
+        $L \alpha_2$** & 1.09792       &              &                  \\
+        $L \beta_1$    & 1.1248        & 1.1249       & 0.16704          \\
+        $Ln$*          &               & 0.9843       & 0.02509          \\
+        $Ll$*          &               & 0.0544       & 0.9573           \\
+        $Lb_3$*        &               & 0.0461       & 1.1948
+    \end{tabular}
+    \caption{
+        Ga lines from HyperSpy cite ?? and X-ray booklet \cite{thompson_x-ray_2004}.
+        ** HyperSpy operates with a single line for each $K$ and $L$ shell, but the X-ray booklet lists two lines for each shell.
+        * HyperSpy lists $Ln$, $Ll$ and $Lb_3$ as separate lines, but I am not sure what they correspond to in the X-ray booklet.
+        TODO: Figure out this, eventually just dropping the additional lines.}
+    \label{tab:theory:Ga-lines}
+
+\end{table}

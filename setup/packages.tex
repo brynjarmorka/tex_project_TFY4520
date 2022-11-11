@@ -1,0 +1,35 @@
+
+% dakrmode: make it a little easier on the eyes
+\usepackage{xcolor}
+\pagecolor[rgb]{0.128, 0.128, 0.128}  %black
+\color[rgb]{0.848, 0.848, 0.848}  %grey
+
+% fonts
+% garamond - https://tug.org/FontCatalogue/ebgaramond/
+\usepackage[cmintegrals,cmbraces]{newtxmath} % prettier math
+\usepackage{ebgaramond-maths}
+\usepackage[T1]{fontenc}
+
+% line spacing
+\renewcommand{\baselinestretch}{1.5} % 1.5
+
+% urls
+\usepackage[hidelinks]{hyperref}
+
+% clever references
+\usepackage[capitalise, nameinlink, noabbrev]{cleveref}
+% \cref{...} makes a link, \cref*{...} does not make a link
+
+% BibTex
+\usepackage{cite}
+
+% tables and figures, give \includegraphics options and \resizebox
+\usepackage{graphicx}
+
+\usepackage[font=small,labelfont=bf]{caption}
+
+
+
+% todo-notes as emphasized text and in red and green
+\newcommand\brynjar[1]{\textcolor{red}{\textbf{(Brynjar: #1)}}}
+\newcommand\ton[1]{\textcolor{green}{\textbf{(Question for Ton: #1)}}}

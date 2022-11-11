@@ -1,0 +1,2 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThe manufacturer of EDS sensors, like EDAX(?), Hitatchi, Thermo Fisher Scientific, and Oxford Instruments \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, provide software for analyzing EDS data.\\E$"}
+{"rule":"LIGATURES","sentence":"^\\QImproving EDS Brynjar Morka Mæhlum\\E$"}

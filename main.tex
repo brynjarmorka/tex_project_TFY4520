@@ -1,0 +1,41 @@
+\documentclass{report}
+
+\input{setup/packages.tex}
+
+
+\title{Improving EDS}
+\author{Brynjar Morka Mæhlum}
+
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\maketitle
+
+% intro 
+% \input{chapters/intro/abstract.tex}
+% \input{chapters/intro/sammendrag.tex}
+% \input{chapters/intro/preface.tex}
+\input{chapters/intro/abbrevations.tex}
+
+\newpage
+\tableofcontents
+
+\pagenumbering{arabic}
+\newpage
+
+% chapters
+\input{chapters/introduction.tex}
+\input{chapters/theory.tex}
+\input{chapters/method.tex}
+\input{chapters/results.tex}
+\input{chapters/discussion.tex}
+
+
+% references
+\bibliography{references_EDS}{}
+\bibliographystyle{plain}
+
+
+\end{document}
