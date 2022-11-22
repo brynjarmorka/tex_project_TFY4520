@@ -40,7 +40,7 @@ The TEM grid had GaAs nanowires on it, and the grid was made of Mo with C film.
 % insert figure Materials-sample1.png
 \begin{figure}[ht]
     \centering
-    \colorbox{white}{\includegraphics[width=0.7\textwidth]{../tex_prosjektoppgaven/figures/Materials-sample1.png}}
+    \colorbox{white}{\includegraphics[width=0.7\textwidth]{figures/Materials-sample1.png}}
     \caption{
         The sample used for the EDS data collection in the SEM Apreo.
         (a) is top view and (b) is side view.
@@ -116,7 +116,29 @@ The repository "eds-analysis"\footnote{\url{https://github.com/brynjarmorka/eds-
 The code is written in Python and uses Jupyter notebooks.
 NumPy is used for calculations, SciPy for fitting and peak finding, and Plotly for plotting \ton{do I to reference these packages?}.
 
+% different normalization methods
+\subsection{Normalization}
+\label{sec:method:treatment:normalization}
+Since the total amount of counts in a spectrum differs with $V_{acc}$, $I_{beam}$, DT, etc., the spectra had to be normalized to be able to compare them.
+(Figure with raw counts of e.g. GaAs?)
+Initially the spectra were normalized to the highest peak in each spectrum, $Intensity_{\textnormal{relative} to max} = Counts_{\textnormal{raw}} / Counts_{\textnormal{max}}$.
+Later different methods were explored to see which normalization gave the best results.
+To measure how good a method was, the area under the peaks of Ga and As in the GaAs spectrum was used.
+\brynjar{unfinished.}
 
+\brynjar{The data can look very different, but a simple scaling can change that drastically. The different normalizations didnt change anything in the quantification.}
+
+
+% Gaussian fitting and peak finding
+\subsection{Gaussian fitting and peak finding}
+\label{sec:method:treatment:fitting}
+First tried just peak fitting.
+Then spent a lot of time trying to fit the background, as either linear or 6th order polynomial.
+Then tried to fit the peaks with a Gaussian function.
+The final, and best \brynjar{quantify why best?} solution was to fit with curvefit from SciPy, using a function that is a sum of a 6th order polynomial and n Gaussian curves.
+
+
+% calibration of x-axis
 \subsection{Calibration}
 \label{sec:method:treatment:calibration}
 A third repository, "spectroscopy-channel-calibration"\footnote{\url{https://github.com/brynjarmorka/spectroscopy-channel-calibration}}, was made specifically for calibration of spectra, which was used in the course "TFY4255 - Materials Physics" at NTNU, October 2022.
@@ -131,7 +153,7 @@ The same calibration is implemented in "eds-analysis-final", but without the plo
 \brynjar{Implement the sentence above.}
 
 
-
+% background subtraction
 \subsection{Background subtraction}
 \label{sec:method:treatment:background}
 I subtracted the background from the spectra to see if the quantification would be better.
