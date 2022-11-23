@@ -1,46 +1,125 @@
 \chapter{Results}
 
-
 \section{Introduction}
 \label{sec:results:intro}
 The results are presented in this chapter.
 The sections follow the structure of the sub-problems in \cref{chap:introduction}.
 
+%
+%
 \section{Initial quantification}
 \label{sec:results:initial_quantification}
-The initial quantification was done on GaAs in AZtec and in HyperSpy as out-of-the-box as possible. The results are presented in \cref{tab:initial_quantification}.
+% How accurate it the out-of-the-box quantification in AZtec and HyperSpy?
 
-% GaAs 5, 10, 15 and 30 kV for AZtec and HyperSpy, 
-% Table with initial quantification
+The initial quantification was done on the data from the GaAs wafer in AZtec and in HyperSpy as out-of-the-box as possible.
+The results are presented in \cref{tab:initial_quantification}.
+The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and As should be 50\% and 50\% respectively.
+
 \input{tables/initial-quantification.tex}
 
-
-
-
-\section{Steps in the analysis}
+%
+%
+\section{Analysis steps in HyperSpy}
 \label{sec:results:steps}
-The first sub-problem was to find out what is done with the data at the different steps in the analysis.
+% What are done with the data at the different steps in the analysis when using HyperSpy?
 \ton{Is this interesting to write about?}
 
+\ton{This section is both presenting what and why we do the steps. That is leaning into the discussion. Should I separate it?}
 
+The next sub-problem was to find out what is done with the data at the different steps in the analysis when using HyperSpy.
+In these steps it is assumed that the user have done qualitative analysis and want to do quantitative analysis on a set of elements.
+The analysis in AZtec is done as a black box, so it is not possible to see what is done with the data at the different steps.
+All variables inside croccodile need to be set by the user, e.g. \verb|<element_list>| would be set to \verb|['Ga', 'As']| for the GaAs wafer.
+An example notebook with quantification of the GaAs wafer is attached in APPENDIX.
+\brynjar{Make a notebook with GaAs quantification in HyperSpy, with the data somehow.}
+
+\subsection{Loading the data and specifying the elements}
+\label{sec:results:steps:load}
+\begin{quote}
+    \verb|s = hs.load(<filepath>, signal="EDS_TEM")|
+
+    \verb|s.set_elements(<element_list>)|
+\end{quote}
+
+The first step in the analysis is to load the data as a HyperSpy \verb|signal| type, and specifying the signal as TEM.
+The \verb|signal| type is a class in HyperSpy that contains the data and the metadata, and it has methods for analysis.
+The \verb|signal| type must be specified as TEM, because the \verb|signal| type for SEM is very limited and does not have a method for quantification.
+When using .emsa files from AZtec, as is done in this project, the metadata contains some relevant and some irrelevant information.
+The information relevant later in this project is:
+acceleration voltage, dispersion, zero offset, energy resolution Mn $K\alpha$,
+After loading, it is possible to plot the data with \verb|s.plot()|.
+
+\subsection{Removing the background linearly}
+\label{sec:results:steps:background}
+\begin{quote}
+    \verb|bw = s1.estimate_background_windows(windows_width=<number>)|
+
+    \verb|iw =  s1.estimate_integration_windows(windows_width=<number>)|
+\end{quote}
+
+The next step is to remove the background, which with the above code is done by a linear fit.
+The background can be removed through model fitting, which is covered in \cref{sec:results:steps:model_fitting}.
+The variable \verb|windows_width| sets how wide the windows are for the background and integration, measured in FWHMs.
+A good value for \verb|windows_width| is 2, but it should be tested by the user with a plot.
+The estimated windows can be plottet with:
+
+\begin{quote}
+    \verb|s.plot(xray_lines=True, background_windows=bw, integration_windows=iw)|
+\end{quote}
+
+
+\subsection{Quantification after linear background removal}
+\label{sec:results:steps:quantification:linear}
+
+\begin{quote}
+    \verb|s_i = s.get_lines_intensity(background_windows=bw, integration_windows=iw)|
+
+    \verb|k_factors = [<k-factor 1>, <k-factor 2>]  |
+
+    \verb|quant = s.quantification(s_i, method='CL', factors=k_factors)|
+
+    \verb|print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')|
+\end{quote}
+
+The quantification is done with the four lines of code above, where the last one prints the results.
+The first line gets the intensity of the peak corresponding to the lines of the specified element.
+HyperSpy selects automatically which lines to use for quantification.
+To see which lines are used, the \verb|s_i| variable can be printed.
+The second line sets the k-factors.
+The k-factors in this project have been the one from AZtec, which are theoretically estimated.
+The third line does the quantification, where the method is specified.
+
+%
+%
 \section{Calibration}
 \label{sec:results:calibration}
-The calibration of the
+% How is the spectrum calibrated, and is AZtec different than HyperSpy?
+
+The next sub-problem was to calibrate the data with a self produced Python script.
 
 % Something about how the calibrated peak of Ga $K\alpha$ is directly on $K\alpha_1$.
 
-
+%
+%
 \section{Peak and background modelling}
 \label{sec:results:modelling}
-The third sub-problem was to find out how the peaks and the background are modelled in a way that is easy to understand.
+% How can the peaks and the background be modelled in a way that is easy to understand?
 
+The next sub-problem was to find out how the peaks and the background are modelled in a way that is easy to understand.
 
+%
+%
 \section{Background models}
 \label{sec:results:background}
-The fourth sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy.
+% How does different background models affect the quantitative analysis done in HyperSpy?
 
+The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy.
 
-\section{Failure}
+%
+%
+\section{Analysis failure}
 \label{sec:results:failure}
-The fifth sub-problem was to find out when the analysis fails, both in AZtec and HyperSpy.
+% When does the analysis fail, both in AZtec and HyperSpy?
+
+The next sub-problem was to find out when the analysis fails, both in AZtec and HyperSpy.
 % quantification with 
