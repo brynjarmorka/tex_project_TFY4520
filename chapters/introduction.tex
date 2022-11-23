@@ -6,29 +6,40 @@
 % \section{Main goal}
 % Main goal
 The main goal of this project is to improve EDS analysis. There are multiple ways to do this.
-One could make the analysis more transparent, which would make it easier to understand and use.
-One could also improve the input parameters of the analysis by checking the instrument with a known sample.
-Another way is to make the quantitative analysis more accurate, which would improve EDS analysis.
-In this project, the focus began with enhancing transparency, then moved to improving input parameters, and finally ended with trying to improve accuracy.
+One way is to make the analysis more transparent, which would make it easier to understand and use.
+A second option is to improve the input parameters of the analysis by control checking the instrument with a known sample.
+A third way is to make the quantitative analysis more accurate, which would improve EDS analysis.
+In this project, the main focus have been trying to improve the transparency of the analysis. Thus, the problem statement was formulated as:
+
+\begin{quote}
+    \textbf{How can the transparency of the steps in the EDS analysis be improved, so that the analysis is easier to understand and use?
+    }
+\end{quote}
 
 
-Problem statement \dots
+% sub-problems 
+With this problem statement, the following sub-problems were formulated:
+
+\begin{itemize}
+    \item How accurate are the out-of-the-box quantification in AZtec and HyperSpy?
+    \item What are done with the data at the different steps in the analysis?
+    \item How is the spectrum calibrated, and is AZtec different than HyperSpy?
+    \item How can the peaks and the background be modelled in a way that is easy to understand?
+    \item How does different background models affect the quantitative analysis done in HyperSpy?
+    \item When does the analysis fail, both in AZtec and HyperSpy?
+\end{itemize}
+
+
 
 %
 %
 % \section{EDS analysis today}
-EDS analysis today \dots
-
-% \begin{itemize}
-%     \item EDS in AZtec is for dummies.
-%     \item What the user understands.
-%     \item Cliff-Lorimer for thin sample.
-%     \item The reason for and problem with k-factors. (and k-ratios)
-% \end{itemize}
+\ton{Should I have a short paragraph here about the status of EDS analysis today?}
 
 
 % Transparency: why EDS in AZtec is for dummies.
-The manufacturer of EDS sensors, like EDAX, Hitatchi, Thermo Fisher Scientific, and Oxford Instruments \ton{Cite this?}, provide software for analyzing EDS data.
+One of the main problems with the existing software for EDS analysis is that they are like black boxes.
+The manufacturer of EDS sensors, like EDAX, Hitatchi, Thermo Fisher Scientific, and Oxford Instruments \ton{Cite this?}, provide their own software for analyzing EDS data.
 These software packages are black boxes, because the code is hidden, and the users does not know what is happening inside the software.
 In other words, the user pushes some buttons to start the analysis of their sample, and then the software does some "magic" to analyze the data and produce some results.
 The user has few options to change the analysis to fit their needs.
@@ -46,18 +57,19 @@ One could solve this problem with an increase in transparency, because that woul
 
 %
 %
-% \section{Parameters of EDS analysis}
-Parameters of EDS analysis
-
-% Den gamle standardtesten er veldig utdatert. Noen må finne et alternativ for parameterne til en detektor, og hva testprøven skal være. Finnes det noe standard noe sted som noen bruker allerede (ikke bruk mye tid på å finne ut om noen andre har en standard)
 
 % OBS! Goldstein har "Creating a QC Project", side 229 (QC = quality control), og DTSA-II har funksjonalitet for QC. Der skriver de bare at det er viktig med en fast prøve og noen bestemte målegreier.
 
-Dispersion, offset, energy resolution \dots
+\brynjar{Dispersion, offset, energy resolution?}
+
+
+\brynjar{Other parameters of EDS analysis?}
+
+% Den gamle standardtesten er veldig utdatert. Noen må finne et alternativ for parameterne til en detektor, og hva testprøven skal være. Finnes det noe standard noe sted som noen bruker allerede (ikke bruk mye tid på å finne ut om noen andre har en standard)
 
 
 %
 %
 % \section{Improving quantitative EDS analysis}
-Improving quantitative EDS analysis
+\brynjar{Improving quantitative EDS analysis?}
 
