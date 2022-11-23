@@ -60,7 +60,7 @@ After loading, it is possible to plot the data with \verb|s.plot()|.
 The next step is to remove the background, which with the above code is done by a linear fit.
 The background can be removed through model fitting, which is covered in \cref{sec:results:steps:model_fitting}.
 The variable \verb|windows_width| sets how wide the windows are for the background and integration, measured in FWHMs.
-A good value for \verb|windows_width| is 2, but it should be tested by the user with a plot.
+A good starting value for \verb|windows_width| is 2, but it should be tested by the user with a plot to see if the background will be removed correctly.
 The estimated windows can be plottet with:
 
 \begin{quote}
@@ -88,6 +88,89 @@ To see which lines are used, the \verb|s_i| variable can be printed.
 The second line sets the k-factors.
 The k-factors in this project have been the one from AZtec, which are theoretically estimated.
 The third line does the quantification, where the method is specified.
+The method is the Cliff-Lorimer method, described in detail in Mari Skomedal's master thesis \cite[Sec. 2.2.3]{skomedal_improving_2022}.
+HyperSpy has a method for quantification with the zeta factor method.
+The zeta method requires the value for the beam current, which was not measured in this project. \footnote{Results from the zeta methon can be converted to the cross section method, see the EDS Quantification documentation in HyperSpy.}
+% \footnote{Results from the zeta methon can be converted to the cross section method, see \url{http://hyperspy.org/hyperspy-doc/current/user_guide/eds.html#eds-quantification}.}
+
+
+
+\subsection{Removing the background with model fitting}
+\label{sec:results:steps:model_fitting}
+Another way to remove the background is to fit a model to the data.
+This step would be done right after loading the data.
+If the raw data contains a zero peak, as is the case for most Oxford instrument EDS detectors, the zero peak needs to be removed before fitting the model.
+The zero peak is removed by skipping the first n channels, where n=30 works well with the data from the GaAs wafer.
+The model fitting is done with the following code:
+
+\begin{quote}
+    \verb|m = s.isig[<zero_peak>:].create_model(auto_background=False)|
+
+    \verb|m.add_polynomial_background(order=12)|
+
+    \verb|m.add_family_lines(<list_of_element_lines>)|
+
+    \verb|m.plot()|
+
+\end{quote}
+
+The three lines above create a model from the \verb|signal| s, adds a 12th order polynomial, add the lines of the elements in the \verb|signal|, and plot the model.
+This model is not fitted, it is just a generated spectrum with the lines of the elements.
+Eventually, the method \verb|create_model()| can take the boolean argument \verb|auto_add_lines=True|, which will automatically detect the elements in the sample.
+The model consists of a number of components, which can be accessed with \verb|m.components|.
+The components are all the gaussian peaks in the spectrum, in addition to the background as a 12th order polynomial.
+The order of the polynomial can be changed, but it should be tested by the user to see if it is a good fit.
+Further, the model must be fitted.
+
+\begin{quote}
+    \verb|m.fit()|
+
+    % \verb|m.fit_background()| % not neccessary
+
+    \verb|m.plot()|
+\end{quote}
+
+The first line fits the model to the data to the components and the second line plots the model.
+HyperSpy have a own option for fitting only the background.
+Since the background is one of the components in m, it is fittet with the code line above.
+
+
+\subsection{Quantification after model fitting}
+\label{sec:results:steps:quantification:model}
+
+\begin{quote}
+    \verb|m_i = m.get_lines_intensity()|
+
+    \verb|k_factors = [<k-factor 1>, <k-factor 2>] |
+
+    \verb|quant = s.quantification(s_i, method='CL', factors=k_factors)|
+
+    \verb|print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')|
+
+\end{quote}
+
+The quantification after model fitting is done in the same way as in \cref{sec:results:steps:quantification:linear}, but with intensity from the model instead of the signal.
+When modelling GaAs, the model adds both K-lines and L-lines.
+Since AZtec only gives the k-factors for the K-lines, the L-lines must be removed before quantification.
+
+
+\subsection{Calibrating the spectrum with the HyperSpy model}
+\label{sec:results:steps:HyperSpycalibration}
+
+\begin{quote}
+
+    \verb|m.calibrate_energy_axis(calibrate='scale')|
+
+    \verb|m.calibrate_energy_axis(calibrate='offset')|
+
+\end{quote}
+
+The two lines above calibrates the spectrum with the HyperSpy model and updates the dispersion and zero offset.
+%%% THE Calibration gave 1% better result, i think. I need to look at it again.
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %
 %
