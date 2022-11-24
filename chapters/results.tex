@@ -3,7 +3,7 @@
 \section{Introduction}
 \label{sec:results:intro}
 The results are presented in this chapter.
-The sections follow the structure of the sub-problems in \cref{chap:introduction}.
+The sections follow the structure of the sub-problems of the main problem statement formulated in \cref{chap:introduction}.
 
 %
 %
@@ -22,9 +22,7 @@ The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and
 \section{Analysis steps in HyperSpy}
 \label{sec:results:steps}
 % What are done with the data at the different steps in the analysis when using HyperSpy?
-\ton{Is this interesting to write about?}
-
-\ton{This section is both presenting what and why we do the steps. That is leaning into the discussion. Should I separate it?}
+\ton{Is this interesting to write about? The problem here is that the text is both method, some results and kind of discussion. What do I do with that? I want to keep it, but also restructuring it.}
 
 The next sub-problem was to find out what is done with the data at the different steps in the analysis when using HyperSpy.
 In these steps it is assumed that the user have done qualitative analysis and want to do quantitative analysis on a set of elements.
@@ -90,7 +88,7 @@ The k-factors in this project have been the one from AZtec, which are theoretica
 The third line does the quantification, where the method is specified.
 The method is the Cliff-Lorimer method, described in detail in Mari Skomedal's master thesis \cite[Sec. 2.2.3]{skomedal_improving_2022}.
 HyperSpy has a method for quantification with the zeta factor method.
-The zeta method requires the value for the beam current, which was not measured in this project. \footnote{Results from the zeta methon can be converted to the cross section method, see the EDS Quantification documentation in HyperSpy.}
+The zeta method requires the value for the beam current, which was not measured in this project. \footnote{Results from the zeta methon can be converted to the cross section method, see the "EDS Quantification" documentation in HyperSpy.}
 % \footnote{Results from the zeta methon can be converted to the cross section method, see \url{http://hyperspy.org/hyperspy-doc/current/user_guide/eds.html#eds-quantification}.}
 
 
@@ -104,7 +102,9 @@ The zero peak is removed by skipping the first n channels, where n=30 works well
 The model fitting is done with the following code:
 
 \begin{quote}
-    \verb|m = s.isig[<zero_peak>:].create_model(auto_background=False)|
+    \verb|s = s.isig[<zero_peak>:]|
+
+    \verb|m = s.create_model(auto_background=False)|
 
     \verb|m.add_polynomial_background(order=12)|
 
@@ -114,7 +114,7 @@ The model fitting is done with the following code:
 
 \end{quote}
 
-The three lines above create a model from the \verb|signal| s, adds a 12th order polynomial, add the lines of the elements in the \verb|signal|, and plot the model.
+The lines above removes the zero peak, create a model from the \verb|signal| s, adds a 12th order polynomial, add the lines of the elements in the \verb|signal|, and plot the model.
 This model is not fitted, it is just a generated spectrum with the lines of the elements.
 Eventually, the method \verb|create_model()| can take the boolean argument \verb|auto_add_lines=True|, which will automatically detect the elements in the sample.
 The model consists of a number of components, which can be accessed with \verb|m.components|.
@@ -150,8 +150,8 @@ Since the background is one of the components in m, it is fittet with the code l
 \end{quote}
 
 The quantification after model fitting is done in the same way as in \cref{sec:results:steps:quantification:linear}, but with intensity from the model instead of the signal.
-When modelling GaAs, the model adds both K-lines and L-lines.
-Since AZtec only gives the k-factors for the K-lines, the L-lines must be removed before quantification.
+When modelling GaAs, the model can add the intensity from both K-lines and L-lines.
+Since AZtec only gives the k-factors for either the K-lines or the L-lines, the user must remove the lines without k-factors before quantification.
 
 
 \subsection{Calibrating the spectrum with the HyperSpy model}
@@ -166,6 +166,8 @@ Since AZtec only gives the k-factors for the K-lines, the L-lines must be remove
 \end{quote}
 
 The two lines above calibrates the spectrum with the HyperSpy model and updates the dispersion and zero offset.
+The metadata in the \verb|signal| s is updated with the new calibration.
+Thus, doing the previous step with quantification after model fitting can give a more correct quantification.
 %%% THE Calibration gave 1% better result, i think. I need to look at it again.
 %
 %
@@ -174,21 +176,72 @@ The two lines above calibrates the spectrum with the HyperSpy model and updates 
 
 %
 %
-\section{Calibration}
-\label{sec:results:calibration}
-% How is the spectrum calibrated, and is AZtec different than HyperSpy?
-
-The next sub-problem was to calibrate the data with a self produced Python script.
-
-% Something about how the calibrated peak of Ga $K\alpha$ is directly on $K\alpha_1$.
-
-%
-%
 \section{Peak and background modelling}
 \label{sec:results:modelling}
 % How can the peaks and the background be modelled in a way that is easy to understand?
 
 The next sub-problem was to find out how the peaks and the background are modelled in a way that is easy to understand.
+The model was buildt without HyperSpy, with the idea of making every step easier to understand.
+The model was used to be able to remove the background and be able to calibrate the spectrum.
+The model was compared to the HyperSpy model.
+The model could be used to quantify the elements in the sample, but this was not done in this project.
+\brynjar{Do I want to do this?}
+
+% identyfy peaks with peak finder
+% problem: double peaks, eg. Mo
+% problem: includes zero peak. Is that an issue?
+The first step in creating a model is to identify the peaks.
+The peaks are assumed to be gaussian curves.
+The initial way of identifying peaks was that the user manualy identified the peaks.
+Later the peaks were identified with the function \verb|find_peaks()| from the \verb|scipy.signal| package.
+Different peak prominence were tested, and the peak prominence of 0.01 gave the best results.
+
+
+% make gaussian and a polynomial
+% problem: initial background guess. Solution: clip out the peaks with linear interpolation and fit a polynomial to the rest.
+% problem: normalized data. initial guesses are hard on counts, and fitting is slower.
+% early problem, now solved: some gaussians would be put as the background. solution: fit both gaussians and polynomial
+The second step is to make a gaussian in each peak and one polynomial for the background.
+To do the fitting, the components need an initial guess.
+The background needs a coefficient for each order of the polynomial.
+Each gaussian need to have a mean, a standard deviation, and a height.
+The mean is the peak position.
+The standard deviation is the width of the peak, where $\textnormal{FWHM} = \textnormal{std}*2*\sqrt{2*\ln{2}}$ \footnote{FWHM defined at: \url{https://en.wikipedia.org/wiki/Full_width_at_half_maximum}}.
+The height is the amplitude of the peak.
+The easiest way to get the initial guesses for the gaussians is to normalize the data and set all three parameters to 1.
+In the normalization the highest peak was set to 1, and the rest of the peaks were scaled accordingly.
+The best way to get the initial guesses for the background is to clip out the peaks with linear interpolation and fit a polynomial.
+The initial guesses for the background is then the coefficients of the polynomial.
+With the initial guesses, the whole model is ready to be fitted.
+
+% curve fit
+% problem: sometimes fails
+The third step is to fit the model to the data.
+Using the \verb|curve_fit()| function from the \verb|scipy.optimize| package, the model is fitted to the data.
+The function \verb|curve_fit()| uses the Levenberg-Marquardt algorithm to fit the model to the data.
+The function \verb|curve_fit()| returns the optimal parameters for the model.
+Fitting both the gaussians and the background at the same time makes the fitting more stable.
+One of the first iterations, where the user manually inputted the peaks, the fitting tended to partially fail.
+The issue was that the fitting only was done on the peaks.
+To minimize the error in the fitting, one of the gaussian curves with a low amplitude was moved and got a huge standard deviation, which compensated the background.
+This was fixed by fitting both the gaussians and the background at the same time.
+Doing this made the fitting both better and it failed less often.
+
+%
+%
+\section{Calibration}
+\label{sec:results:calibration}
+% How is the spectrum calibrated, and is AZtec different than HyperSpy?
+
+The next sub-problem was to calibrate the data with a self produced Python script.
+With a fitted model of the spectrum, the calibration can be done.
+Calibration can both be done on raw data with channels on the x-axis and on poorly calibrated data with energy on the x-axis.
+The dispersion is calculated with \cref{eq:theory:calibration:dispersion}.
+Table \cref{tab:results:calibrations} shows calibration from AZtec, HyperSpy, and the self produced Python script.
+
+\input{tables/calibrations.tex}
+
+% Something about how the calibrated peak of Ga $K\alpha$ is directly on $K\alpha_1$.
 
 %
 %
@@ -196,7 +249,19 @@ The next sub-problem was to find out how the peaks and the background are modell
 \label{sec:results:background}
 % How does different background models affect the quantitative analysis done in HyperSpy?
 
-The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy.
+The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy, and how well different order polynomials fit the background.
+The background models were tested on the spectrum of GaAs, and later also on \brynjar{TODO: other spectra. Also make a table here with results}.
+The background was modelled as a polynomial of different orders.
+To quantify the different background models, the residuals were calculated.
+The residuals are the difference between the data and the model.
+\brynjar[]{use root-mean-square error?}
+The TABLE XXXX \brynjar[]{make table} shows the residuals for the different order background models.
+The best orders were visually inspected.
+A later idea was to model the background as a spline, which is a piecewise polynomial.
+The spline is a piecewise polynomial with a smooth transition between the pieces.
+The spline was not tested in this project, but it could be a good alternative to the polynomial background model.
+
+% TODO: Try the background as a spline, which is a piecewise polynomials.
 
 %
 %
@@ -206,3 +271,6 @@ The next sub-problem was to find out how different background models affect the 
 
 The next sub-problem was to find out when the analysis fails, both in AZtec and HyperSpy.
 % quantification with 
+
+
+\ton{Section about normalization too?}

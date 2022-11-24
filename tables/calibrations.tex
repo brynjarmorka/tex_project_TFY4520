@@ -1,0 +1,22 @@
+% initial quantification
+% chapter Results
+\begin{table}[ht]
+    \centering
+    \caption{
+        Different calibration values.
+        The AZtec calibration is reffered to as the uncalibrated value.
+        The dispersion is calculated with \cref{eq:theory:calibration:dispersion}.
+        The offset is calculated with \cref{eq:theory:calibration:offset}.
+        The own calibration was done on Ga L$_\alpha$ and As K$_\alpha$ from the 30 kV measurement on the GaAs wafer.
+    }
+    \label{tab:results:calibrations}
+    \begin{tabular}{m{4cm} m{2cm} m{2cm}}
+        Calibration method & Dispersion,   & Zero offset \\
+                           & [keV/channel] & [channels]  \\
+        \hline
+        AZtec              & 50 \%         & 50 \%       \\
+        HyperSpy           & 50 \%         & 50 \%       \\
+        Own calibration    & 50 \%         & 50 \%       \\
+        30 kV              & 50 \%         & 50 \%
+    \end{tabular}
+\end{table}

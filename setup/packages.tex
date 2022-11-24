@@ -1,8 +1,31 @@
+%
+% % Commands and colors
+% 
+
+% my own color definitions
+\usepackage[dvipsnames]{xcolor}
+\definecolor{darkmodepaper}{RGB}{32, 32, 32}
+\definecolor{darkmodetext}{RGB}{212, 212, 212}
+\definecolor{myred}{RGB}{204, 92, 76}
+\definecolor{mypurple}{RGB}{141, 60, 83}
+\definecolor{mypurple2}{RGB}{106, 56, 99}
+\definecolor{mygreen}{RGB}{0, 133, 118}
+
 
 % dakrmode: make it a little easier on the eyes
-\usepackage{xcolor}
-\pagecolor[rgb]{0.128, 0.128, 0.128}  %black
-\color[rgb]{0.848, 0.848, 0.848}  %grey
+% \usepackage{xcolor}
+\pagecolor{darkmodepaper}  %black
+\color{darkmodetext}  %grey
+
+% todo-notes as emphasized text and with color
+\newcommand\brynjar[1]{\textcolor{mygreen}{\textbf{(Brynjar: #1)}}}
+\newcommand\ton[1]{\textcolor{myred}{\textbf{(Question for Ton: #1)}}}
+
+
+%
+% % Packages
+%
+
 
 % fonts
 % garamond - https://tug.org/FontCatalogue/ebgaramond/
@@ -21,6 +44,8 @@
 
 % set link color to pink. Use purple with white background?
 \hypersetup{colorlinks=true, linkcolor=pink, citecolor=pink, urlcolor=pink}
+% \hypersetup{colorlinks=true, linkcolor=mypurple, citecolor=mypurple, urlcolor=mypurple}
+
 
 % clever references
 \usepackage[capitalise, nameinlink, noabbrev]{cleveref}
@@ -39,7 +64,3 @@
 \usepackage[font=small,labelfont=bf]{caption}
 
 
-
-% todo-notes as emphasized text and in red and green
-\newcommand\brynjar[1]{\textcolor{red}{\textbf{(Brynjar: #1)}}}
-\newcommand\ton[1]{\textcolor{green}{\textbf{(Question for Ton: #1)}}}
