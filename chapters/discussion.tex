@@ -1,10 +1,7 @@
-% \chapter{Discussion}
-% \label{chap:discussion}
+\chapter{Discussion}
+\label{chap:discussion}
 
 
-% \section{Introduction}
-% \label{sec:discussion:intro}
-% The discussion is presented in this chapter. \dots
 
 
 
@@ -26,7 +23,12 @@
 %%%%%% below is directly copied from results
 
 
-The sections follow the structure of the sub-problems of the main problem statement formulated in \cref{chap:introduction}.
+\section{Introduction}
+\label{sec:discussion:intro}
+The discussion is presented in this chapter.
+Producing code from scratch is a time consuming process, but it is also a learning process.
+While developing the code, the author learned a lot about EDS analysis and new ideas emerged.
+The sections below follow the structure of the sub-problems of the main problem statement formulated in \cref{chap:introduction}.
 
 %
 %
@@ -242,6 +244,7 @@ To minimize the error in the fitting, one of the gaussian curves with a low ampl
 This was fixed by fitting both the gaussians and the background at the same time.
 Doing this made the fitting both better and it failed less often.
 
+\brynjar{Issue: fitting e.g. Mo with two clear peaks, but not with enough prominence to be found by the peak finder.}
 %
 %
 \section{Calibration}
@@ -268,8 +271,8 @@ The background models were tested on the spectrum of GaAs, and later also on \br
 The background was modelled as a polynomial of different orders.
 To quantify the different background models, the residuals were calculated.
 The residuals are the difference between the data and the model.
-\brynjar[]{use root-mean-square error?}
-The TABLE XXXX \brynjar[]{make table} shows the residuals for the different order background models.
+\brynjar{use root-mean-square error?}
+The TABLE XXXX \brynjar{make table} shows the residuals for the different order background models.
 The best orders were visually inspected.
 A later idea was to model the background as a spline, which is a piecewise polynomial.
 The spline is a piecewise polynomial with a smooth transition between the pieces.

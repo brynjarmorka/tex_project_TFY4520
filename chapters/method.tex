@@ -18,11 +18,15 @@
 %
 \section{Introduction}
 \label{sec:method:intro}
-The data I needed \dots
 
+The data needed in this project was SEM EDS spectra.
+The spectra were acquired on a SEM APREO at NTNU NanoLab.
+The spectra were from a sample containing different sections with different elements to get different spectra to work with.
+Thanks to Mari Skomedal \cite{skomedal_improving_2022} and Martin Lundeby \cite{lundeby_improving_2019} who made manuals for easily extracting data from AZtec.
+The relevant material for data extraction is available on the GitHub repository for this project (ref).
+The data is also available on the GitHub repository for this project, under the folder \verb|data/2022-09-06_EDS-Apreo|.
+This method chapter describes the material used, the microscope and detector, the analysis in AZtec and HyperSpy, and the post data treatment.
 
-Thanks to Mari (ref) and Martin (ref) who made manuals for easily extracting data from AZtec.
-The relevant material for data extraction is available on the GitHub repository for this project (ref)
 
 
 %
@@ -36,6 +40,8 @@ On the Si wafer a smaller piece of a GaAs wafer was mounted with Cu tape.
 A Mo disk was mounted to the Si wafer with Ag paint.
 In the middle of the Mo disk there was a hole where a TEM grid was mounted.
 The TEM grid had GaAs nanowires on it, and the grid was made of Mo with C film.
+Growth of the GaAs nanowires is described in \cite[Ch. 3]{skomedal_improving_2022}.
+A schematic of the sample is shown in \cref{fig:method:materials:sample1}.
 
 % insert figure Materials-sample1.png
 \begin{figure}[ht]
@@ -51,7 +57,7 @@ The TEM grid had GaAs nanowires on it, and the grid was made of Mo with C film.
         Cu is the Cu tape.
         Al is the Al FIB stub.
         Four spectra with different $V_{acc}$ was collected on the GaAs, Mo, Si, and GaAs NW.
-        One spectrum was taken on the Cu tape and the Al FIB stub.
+        Three spectra was taken on the Cu tape and one spectrum on the Al FIB stub.
     }
     \label{fig:method:materials:sample1}
 \end{figure}
@@ -72,76 +78,94 @@ The SEM is equipped with a BSE and a SE detector.
 % my settings
 The data collection was done on 5, 10, 15, and 30 kV.
 The beam current was 0.2, 0.4, 0.8, or 1.6 nA, depending on the dead time of the detector, trying to get the dead time around 30\%.
+Dead time at around 30\% was recommended by the supervisor of this project, Antonius T. J. von Helvoort, and is well below the problematic dead time of >60\%.
+The dead time on the nano wire area was closer to 20\%, which is what Goldstein \cite[page 223]{goldstein_scanning_2018} recommends.
 All samples were collected on 2048 channels ranging from 0 to 20 keV.
 Working distance was 10 mm.
 Processing time was set to 5 and each spectrum was collected with 2 minutes time live.
 Some spectra were stopped early due to high dead time and thus very long sampling.
 At leas one SE picture was taken for each sampling area.
+Counts per second in and out was noted down, but not used in this project.
+See table \ref{tab:method:detector:settings} for the settings used for the different spectra.
 
-\ton{Is this enough to reproduce the data? I think so.}
-
+\input{tables/detector-settings.tex}
 
 %
 %
-\section{Analysis in AZtec}
+\section{Analysis in AZtec and data extraction}
 \label{sec:method:aztec}
-How to get the results from AZtec, what buttons and settings to use.
-Which results AZtec gives: elements, concentrations, uncertainties, k-factors, etc.
+The results from AZtec was taken as described in \cite[Appendix A]{lundeby_improving_2019}.
+Both qualitative and quantitative results were acquired.
+The quantitative results were acquired after selecting the elements in the sample and noted as atomic percent.
+The k-factors calculated theoretically by AZtec was noted down, as they are needed for the quantitative analysis in HyperSpy.
+\brynjar{Uncertainties? Also get this data properly from AZtec.}
+% How to get the results from AZtec, what buttons and settings to use.
+% Which results AZtec gives: elements, concentrations, uncertainties, k-factors, etc.
 
-%
-%
-\section{Extracting the data}
-\label{sec:method:extracting}
-The help from Mari and from Daniel.
-What data I took out from AZtec.
-Why I needed the k-factors from AZtec.
 
 
 %
 %
 \section{Analysis in HyperSpy}
 \label{sec:method:hspy}
-What HyperSpy needs to do the analysis.
-What functions I used in HyperSpy.
-The different quantification methods in HyperSpy.
-The results from HyperSpy: concentration, uncertainties
+The data was analyzed in HyperSpy, both qualitative and quantitative.
+The qualitative analysis was done by loading the spectra and plotting with lines marking the theoretical peak center and empirical weight.
+The quantitative analysis was done in different ways, and just on the GaAs bulk spectra.
+All the quantitative analysis was done with the k-factors from AZtec.
+The first way was to use the area under the peaks in the raw spectra, where the background was removed linearly.
+The second way was to make a fitted model of the background and the peaks as Gaussian curves, and use the area under the peaks in the model.
+Then the x-axis spectrum was calibrated, and the two ways of quantification was used again.
+The different calibrations used was a model fitted calibration from HyperSpy, a self made calibration and the calibration from AZtec.
+The calibration values from AZtec is reffered to as uncalibrated.
+\brynjar{Uncertainties from HyperSpy?}
+
 
 %
 %
 \section{Data treatment}
 \label{sec:method:treatment}
-In this project the data was also analyzed with new code, which is available on the GitHub.
-The repository "eds-analysis"\footnote{\url{https://github.com/brynjarmorka/eds-analysis/}} contains the code developed throughout the semester, and the repository "eds-analysis-final"\footnote{\url{https://github.com/brynjarmorka/}} contains the final code.
-\brynjar{Make the "eds-analysis-final" repository public.}
+In this project the data was also analyzed with new code, which is available on the GitHub profile of the author, \url{https://github.com/brynjarmorka/}.
+The end goal of this code is to improve understanding of the process.
 The code is written in Python and uses Jupyter notebooks.
-NumPy is used for calculations, SciPy for fitting and peak finding, and Plotly for plotting \ton{do I to reference these packages?}.
+HyperSpy 1.7.1 was used for the analysis.
+NumPy 1.22.4 is used for calculations, SciPy 1.9.0 for fitting and peak finding, and Plotly 5.10.0 for plotting \ton{do I reference these packages?}.
+The repository "eds-analysis"\footnote{\url{https://github.com/brynjarmorka/eds-analysis/}} contains the code developed throughout the semester, and the repository "eds-analysis-final"\footnote{\url{https://github.com/brynjarmorka/eds-analysis-final}} contains the final code.
+The final code is the code which is intended to enhance a users understanding of the analysis steps.
+\brynjar{Make the "eds-analysis-final" repository public.}
 
 % different normalization methods
 \subsection{Normalization}
 \label{sec:method:treatment:normalization}
 Since the total amount of counts in a spectrum differs with $V_{acc}$, $I_{beam}$, DT, etc., the spectra had to be normalized to be able to compare them.
-(Figure with raw counts of e.g. GaAs?)
-Initially the spectra were normalized to the highest peak in each spectrum, $Intensity_{\textnormal{relative} to max} = Counts_{\textnormal{raw}} / Counts_{\textnormal{max}}$.
-Later different methods were explored to see which normalization gave the best results.
-To measure how good a method was, the area under the peaks of Ga and As in the GaAs spectrum was used.
-\brynjar{unfinished.}
-
-\brynjar{The data can look very different, but a simple scaling can change that drastically. The different normalizations didnt change anything in the quantification.}
-
+% (Figure with raw counts of e.g. GaAs?)
+Initially the spectra were normalized to the highest peak in each spectrum, $\textnormal{Intensity}_{\textnormal{relative to max}} = \textnormal{Counts}_{\textnormal{raw}} / \textnormal{Counts}_{\textnormal{max}}$.
+Later other normalization methods were explored, but since the quantitative analysis is based on the area under the peaks, it does not matter how the spectra are normalized.
+However, for the SciPy function \verb|curve_fit| to work, the spectra had to be normalized and the raw channel numbers used as x-axis.
+This was probably due to the fact that the function \verb|curve_fit| is not designed for spectra with a large dynamic range.
+Whatever normalization method is used, the quantitative results would be the same because of the use of peak ratios.
+\ton{This is getting argumentative, but it is the base for the decision and not really anything with the end results. It is just to reproduce. OK?}
 
 % Gaussian fitting and peak finding
 \subsection{Gaussian fitting and peak finding}
 \label{sec:method:treatment:fitting}
-First tried just peak fitting.
-Then spent a lot of time trying to fit the background, as either linear or 6th order polynomial.
-Then tried to fit the peaks with a Gaussian function.
-The final, and best \brynjar{quantify why best?} solution was to fit with curvefit from SciPy, using a function that is a sum of a 6th order polynomial and n Gaussian curves.
+The fitting of a model to the spectra was done progessively more and more advanced.
+All the peaks was fitted as Gaussian curves, and the fitting itself was done with the SciPy function \verb|curve_fit|.
+The first model fitting was just making a Gaussian at two specified peaks.
+The second model was fitting a Gaussian at all the peaks in the spectrum, but still with a user input of the peak positions.
+The third model was fitting a Gaussian at all the peaks in the spectrum, but with the peak positions found by the SciPy function \verb|find_peaks|.
+The problem with these models was that one of the peaks was usually moved to compensate for the background.
+Thus the forth model was made, where the background was fitted as a sixth order polynomial.
+The background was fitted after removing the peaks, and then the peaks were fitted on top of the background.
+The fifth and final model was fitting the peaks and background in one go.
+The background was fitted as a n-th order polynomial, and different orders were tested.
+
 
 
 % calibration of x-axis
 \subsection{Calibration}
 \label{sec:method:treatment:calibration}
 A third repository, "spectroscopy-channel-calibration"\footnote{\url{https://github.com/brynjarmorka/spectroscopy-channel-calibration}}, was made specifically for calibration of spectra, which was used in the course "TFY4255 - Materials Physics" at NTNU, October 2022.
+The model used in this calibration is the first model from \ref{sec:method:treatment:fitting}, and thus is not as advanced as the model used in the final code.
 The calibration is done with a spectrum of known elements, where the user inputs the energy of the peaks.
 The user further specifies the channel value of two peaks.
 The energy of the peaks are available through HyperSpy, or can be set manually from e.g. the X-ray booklet.
@@ -149,25 +173,32 @@ The code makes a Gaussian fit to the two peaks, to find the true peak center.
 A plot of the spectrum and the fit are shown, and the user can decide if the fit is good enough.
 The code then calculates the dispersion, and the zero-offset.
 In the end the code plots the spectrum with the calibration, and the user can decide if the calibration is good enough.
-The same calibration is implemented in "eds-analysis-final", but without the plots and the user interaction.
+The same calibration principle is implemented in "eds-analysis-final", but without the plots and the user interaction.
 \brynjar{Implement the sentence above.}
+The final calibration is using the fifth model with both background and peaks in one fit.
+However, since the calibration only needs the distance between two peaks, using the first model could be sufficient.
 
 
-% background subtraction
-\subsection{Background subtraction}
-\label{sec:method:treatment:background}
-I subtracted the background from the spectra to see if the quantification would be better.
-Linear background subtraction.
-Sixth order polynomial background subtraction.
-Additional subtraction?
+
+% % background subtraction
+% \subsection{Background subtraction}
+% \label{sec:method:treatment:background}
+% I subtracted the background from the spectra to see if the quantification would be better.
+% Linear background subtraction.
+% Sixth order polynomial background subtraction.
+% Additional subtraction?
 
 \subsection{Area under the peaks}
 \label{sec:method:treatment:area}
-I calculated the area under the peaks to see if working on the raw data could help make the quantification better than AZtec and HyperSpy.
+A function finding the area under the peaks was made as a simple first step in a quantitative analysis.
+This simple analysis was used to quantify if different calibrations gave different results.
+\brynjar{Do this.}
+Implementing the Cliff-Lorimer method for quantification was not done, but could be done in the future.
+The author started to look at implementation of a factorless quantification method, but did not have time to dive deep enough into that in this project.
 
 
-%
-%
-\section{Data from Mari?}
-\label{sec:method:mar}
-\ton{Do I need this? Is it to compare with my results? Or did you mean to use Maris code to get additional results?}
+% %
+% %
+% \section{Data from Mari?}
+% \label{sec:method:mar}
+% \ton{Do I need this? Is it to compare with my results? Or did you mean to use Maris code to get additional results?}
