@@ -1,4 +1,5 @@
 \chapter{Results}
+\label{chap:results}
 
 % Qualitative first, as is the way in EDS.
 % 	- spectrum calibrated, 5-30 kV
@@ -17,14 +18,54 @@
 \label{sec:results:intro}
 The results are presented in this chapter.
 First qualitative then quantitative results are presented.
+All the spectra taken were qualitatively analyzed.
+The spectrum from the GaAs bulk wafer taken on 30 kV is shown in \cref{fig:GaAs30kV_HS}.
+This plot was made with HyperSpy, which utilize Matplotlib for plotting.
+The plotting method in HyperSpy can add where the theoretical peak centers are.
+The lines added also show an estimate of the weight of the peak.
+
+
+% add figure figures/GaAs30kV_HS.png
+\begin{figure}
+    \centering
+    \includegraphics[width=0.45\textwidth]{figures/GaAs30kV_HS.png}
+    \caption{
+        The GaAs spectrum taken at 30 kV.
+        This plot was made with HyperSpy, which use Matplotlib.
+        The theoretical peak centers are added as lines.
+        The first plot is the whole spectrum, the second is zoomed in on the L-peaks and the last is zoomed in on the K-peaks.
+        This plot has the calibration from AZtec, and it is clear that the peak positions are not correct.
+    }
+    \label{fig:GaAs30kV_HS}
+\end{figure}
+
 
 
 \section{Qualitative results}
 \label{sec:results:qualitative}
 
+\cref{fig:results:Spectra_Al} to \cref{fig:Spectra_Si} shows the plotly spectra for the six sample parts.
+The plot is available as an interactive HTML plot on the GitHub repository.
+\brynjar{Upload the HTML files to the GitHub repository.}
+The calibration used in these spectra is based on the calibration of Ga and As from the GaAs bulk wafer.
+The y-axis is normalized to the highest peak value in each spectrum.
+When doing the qualitative analysis, it became clear that the FIB stub was not made of Fe as expected, but rather of Al.
+Another discovery was that the Cu-tape does not give a good Cu signal.
+
+
+\input{figures/spectra_figures.tex}
 
 \subsection{Calibration}
 \label{sec:results:qualitative:calibration}
+
+Different calibrations were explored.
+The initial calibration is the one from AZtec, and is the one used in the spectra in \cref{fig:GaAs30kV_HS}.
+This calibration has a left shift for the L-peaks and a right shift for the K-peaks.
+The second type of calibration is the one given by the model fit in HyperSpy.
+The third type is from the self made model fit, using the distance between two high intensity and far apart peaks to calibrate the energy scale.
+All three types are given in \ref{tab:results:calibrations}.
+The deviations are a few percent, and the accuracy of the different calibrations give on spesific peaks are given in \cref{tab:results:calibration-peak-accuracy}.
+Here accuracy is the difference between the theoretical peak position and the peak center in the spectrum, given in percent.
 
 % dispersion and offset table
 \input{tables/calibrations.tex}
