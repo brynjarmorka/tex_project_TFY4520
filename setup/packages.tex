@@ -2,6 +2,13 @@
 % % Commands and colors
 % 
 
+% defining my own type of theorems for the problem statement and sub-problems
+\usepackage{amsthm} % needs to be loaded high up, else it breaks all references
+\theoremstyle{definition} % extra space around, not italic
+\newtheorem*{mainprob}{\emph{Main problem statement}}
+\theoremstyle{remark}
+\newtheorem{subprob}{Sub-problem}
+
 % my own color definitions
 \usepackage[dvipsnames]{xcolor}
 \definecolor{darkmodepaper}{RGB}{32, 32, 32}
@@ -63,10 +70,4 @@
 
 \usepackage[font=small,labelfont=bf]{caption}
 
-% defining my own type of theorems for the problem statement and sub-problems
-\usepackage{amsthm}
-\theoremstyle{definition} % extra space around, not italic
-\newtheorem*{mainprob}{\emph{Main problem statement}}
-\theoremstyle{remark}
-\newtheorem{subprob}{Sub-problem}
 

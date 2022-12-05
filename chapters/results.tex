@@ -19,6 +19,7 @@
 The results are presented in this chapter.
 First qualitative then quantitative results are presented.
 All the spectra taken were qualitatively analyzed.
+Only the GaAs bulk spectra was quantitatively analyzed.
 The spectrum from the GaAs bulk wafer taken on 30 kV is shown in \cref{fig:GaAs30kV_HS}.
 This plot was made with HyperSpy, which utilize Matplotlib for plotting.
 The plotting method in HyperSpy can add where the theoretical peak centers are.
@@ -44,6 +45,7 @@ The lines added also show an estimate of the weight of the peak.
 
 
 
+
 \section{Qualitative results}
 \label{sec:results:qualitative}
 
@@ -52,11 +54,88 @@ The plots are available as an interactive HTML plots on the GitHub repository.
 \brynjar{Upload the HTML files to the GitHub repository.}
 The calibration used in these spectra is based on the calibration of Ga L$\alpha$ and As K$\alpha$ from the GaAs bulk wafer.
 The y-axis is normalized to the highest peak value in each spectrum.
-When doing the qualitative analysis, it became clear that the FIB stub was not made of Fe as expected, but rather of Al.
-Another discovery was that the Cu-tape does not give a good Cu signal.
+
 
 
 \input{figures/spectra_figures.tex}
+
+\subsection{Peaks and background}
+\label{sec:results:qualitative:peaks}
+% Peaks, 
+% zero peak
+% peak width higher at higher E
+% very strange that Cu 30 kV have a small Cu Ka and no Cu La at all (since La is bigger than Ka and Ga and Cu is close in the table), which is the case for Ga
+
+All the spectra have peaks with high peak-to-background ratio. The zero peak from the Oxford detector is visible in all the spectra as the first peak, with a center at 0.00924 keV. The GaAs, NW and Mo spectra show clearly that the lines broadens with higher E. All the highest peaks are below 5 keV.
+When doing the qualitative analysis, it became clear that the FIB stub was not made of Fe as expected, but rather of Al with a peak at 1.48 keV.
+The FIB stub have a small peak at 1.25 keV, which could be from Mg K$\alpha$ at 1.253 keV.
+The Al FIB stub spectrum also have a peak at 5.90 keV, which could be from Mn K$\alpha$ at 5.899 keV.
+% discussion: Al-Mg-Mn alloy, but unable to quantify with my bad signal, or?
+Another discovery was that the Cu-tape does not give a good Cu signal.
+The high peak in the Cu-tape spectra at 0.260 keV are from C and not the Cu L$\alpha$ peak.
+Only the Cu-tape taken at 30 kV has a Cu peak, but it is very small.
+Even though the Cu spectra at 30 kV has the Cu K$\alpha$ peak, the Cu L$\alpha$ peak is completely missing. % this is very, very strange. ! TODO: Discuss
+
+% double peaks, ie peaks which are overlapping
+Some of the peaks in the spectras are overlapping, which shifts the shape of the peaks.
+An example of this is the As K$\alpha$ peak and the Ga K$\beta$ peak in the GaAs bulk wafer spectra.
+These peaks are overlapping, but also far enough apart that the peaks are still distinguishable.
+Another example is the Mo L$\alpha$ peak and the Mo L$\beta_1$, but these are overlapping so much that they are harder to distinguish.
+Since they are harder to distinguish, the peak fitting makes one Gaussian for the two peaks, which is off on both peak centers. % for discussu\ion: which is why the deviation of the Mo L$\alpha$ peak is off in the calibration accuracy table, \cref{tab:results:calibration-peak-accuracy}.
+Overlapping peaks makes counting the signal from a spesific peak harder.
+
+
+The signal from the background is another factor which makes counting more difficult.
+In general, background in the aquired spectra is low, but with different shapes.
+In the GaAs, Si and Mo the height of the background decrease with higher acceleration voltage.
+In the Cu spectra the bacgrkoud increase with higher acceleration voltage.
+In the NW spectra the background is fairly similar, except for the 5 kV spectrum where the background is cut off at 5 keV.
+All the 5 kV spectra have decrease linearly from 1 to 5 keV.
+The background is very low and almost flat above the highest peak in the spectra. % discussion: nothing to reduce the speed of the e-
+For example, the Cu 10 kV spectrum have its highest peak at 0.5 keV, and the background is almost flat above 0.5 keV.
+The background in the Si 30 kV spectrum increase a lot up to the high Si K$\alpha$ peak at 1.7 keV, but the drop off significantly after the peak. % discussion: explain that the bg is dependent on a peak (ie material) being present. This makes fiting hard, since there are some peak-dependency which is hard to predict.
+The Mo 30 kV spectrum have the same behavior as the Si 30 kV spectrum.
+In general, the background singals are low, but their different shapes makes it harder to fit the peaks.
+\ton{The last sentence is meant to be a transition/finishing sentence, but might be too much discussion.}
+
+% background, 
+% bg increase with lower kV, 
+% bg shape, 
+
+
+% \subsection{Spectra artifacts and strays}
+% \label{sec:results:qualitative:artifacts}
+
+% Use time on this to show that I have results and that I know what I am doing.
+% It will also help to point at errors in AZtec.
+
+Some of the peaks in the spectra are artifacts.
+All the spectra have a Si peak at 1.74 keV. % This is the Si escape peak for some spectra, but not all.
+Some of the spectra have peaks from areas outside the main beam, like the Mo, Sb and Cu peak in the NW spectra. % pretty sure it is Sb, because of the series of peaks at 3.6, 3.8, 4.1 and 4.3
+The Sb peaks in the NW spectra are at 3.60, 3.85, 4.10 and 4.35 keV, being the L$\alpha_1$, L$\beta_1$, L$\beta_2$ and L$\gamma_1$ peaks.
+NW have clear C K$\alpha$ and O K$\alpha$ peaks ar 0.260 and 0.515 keV.
+GaAs and Mo have some C and O signal.
+The C and O signal is higher at lower acceleration voltage.
+All four Mo spectra have a peak at 0.175 keV, which match with B K$\alpha$ or Be K$\alpha$.
+% discussion: understanding the strays properly is actually helpful for the qualitative analysis, since some elements can be excluded based on the strays and some strays are only present in certain materials.
+% Si stray in all spectra
+% stray in NW outside beam, Mo, Cu and Sb
+
+Another aritfact present in most spectra is sum peaks.
+The Si spectra have a sum peak at 3.49 keV, which is the sum of Si K$\alpha$ at 1.74 keV. % discusiion: this could be Sb, but not like NW where Sb is a series of peaks. Also say something about the resolution of the detector, which is higher at lower E. And also that Sb cannot be excluded bc. of the K peak. And also that the sum peaks can be tested with low DT. And something here about the bad calibration in AZtec which might make this sum peak as a Sb peak, but I now know that it is a Si peak sum peak and not a Sb peak.
+The Al spectrum have its highest peak at 1.48 keV and a sum peak at 2.98 keV
+The Mo spectrum have a sum peak at 4.65 keV, which is the sum of Mo L$\alpha$ at 2.293 keV and Mo L$\beta_1$ at 2.395 keV. % same shape as Mo La  Mo Lb1, i.e. also Mo La+MoLa sum
+The GaAs spectrum at 30 kV have two small sum peak signals at 18.5 and 19.5 keV, while the NW spectrum at 30 kV with lower DT does not have these peaks. % discussion: results show that sum peaks are lower with lower DT
+
+% Mo double peak
+% GaAs double peak
+% Si stray on Cu
+% also a sum peak at Al 30 kV spectrum (look at DT)
+% Si double count at 3.4 keV which could be Sn (but the E resolution could seperate them Ton thinks at this low keV and Sn would have multiple peaks, cannot exclude bc of the K peak could count with low DT to minimize double counts consequence of AZtecs bad calibration)
+
+
+
+
 
 \subsection{Calibration}
 \label{sec:results:qualitative:calibration}
@@ -81,13 +160,45 @@ Here accuracy is the difference between the theoretical peak position and the pe
 \section{Quantitative results}
 \label{sec:results:quantification}
 
+% from intro paragraph:
+% The different methods are using AZtec and two approaches in HyperSpy.
+% The different adjustments are results with different calibrations, different background models, \brynjar{"and different peak models"?}
 
-\subsection{Initial quantification}
-\label{sec:results:initial_quantification}
+
+% \subsection{Quantification methods}
+% \label{sec:results:quantification_methods}
 % How accurate it the out-of-the-box quantification in AZtec and HyperSpy?
+
+Its okay to only do the GaAs here.
+Could also look at NW, but not nessesary.
+
+To do the quantitative analysis, HyperSpy needs k-factors.
+The k-factors for Ga and As are given in \cref{tab:results:k-factors}.
+These k-factors are from the GaAs bulk wafer, and HyperSpy have estimated them theoretically.
+\ton{Shall I list the other k-factors for the other sample areas? I do not think I will use them, since I've only quantified the GaAs bulk wafer. But the other k-factors are results too. Eventually including NW data too, but I do not know that ratio.}
+
+\include{tables/k-factors.tex}
 
 The initial quantification was done on the data from the GaAs wafer in AZtec and in HyperSpy as out-of-the-box as possible.
 The results are presented in \cref{tab:initial_quantification}.
 The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and As should be 50\% and 50\% respectively.
 
 \input{tables/initial-quantification.tex}
+
+
+One of the adjustments explored was the affect of the calibration on the quantification.
+Using different the calibrations in \ref{tab:results:calibrations} gave different quantification results when using Cliff-Lorimer in HyperSpy.
+The results are presented in \cref{tab:results:calibration-quantification}.
+
+% affect of calibration
+% accuracy on quantification
+
+
+% affect of peak and background modelling
+% both errors and the quantification accuracy
+% could model as other than Gaussian? Discusssion
+
+
+
+
+% Conclusion: update dispersion and offset for the APREO?

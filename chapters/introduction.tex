@@ -21,8 +21,29 @@ In this project, the main focus have been trying to improve the transparency of 
 Most of the time used in this project was spent on trying to understand the different methods of data processing in EDS analysis.
 Towards the end the different methods were applied on the same data set using the Cliff-Lorimer quantification in HyperSpy to see how the different methods influence the quantitative analysis.
 Solving the main problem statement with an open-source Jupyter Notebook would increase the transparency of the analysis and allow users to both adjust their analysis and understand better the different steps in the analysis.
-The main problem statement was broken down into six sub-problems.
+The main problem statement was broken down into five sub-problems.
 The sub-problems and a short description follow below.
+
+
+\begin{subprob} \label{subproblem1}
+    How accurate it the out-of-the-box quantification in AZtec and HyperSpy?
+\end{subprob}
+\begin{subprob} \label{subproblem2}
+    What are done with the data at the different steps in the analysis when using HyperSpy?
+\end{subprob}
+\begin{subprob} \label{subproblem3}
+    How are the peaks and the background be modelled?
+\end{subprob}
+\begin{subprob} \label{subproblem4}
+    How is the spectrum calibrated, and is AZtec different than HyperSpy?
+\end{subprob}
+% \begin{subprob} \label{subproblem5}
+%     How does different background models affect the quantitative analysis done in HyperSpy?
+% \end{subprob}
+\begin{subprob} \label{subproblem6}
+    When does the analysis fail, both in AZtec and HyperSpy?
+\end{subprob}
+
 
 % enumerated list
 % \begin{subprob}
@@ -35,27 +56,6 @@ The sub-problems and a short description follow below.
 %         \item When does the analysis fail, both in AZtec and HyperSpy?
 %     \end{enumerate}
 % \end{subprob}
-
-
-\begin{subprob} \label{subproblem1}
-    How accurate it the out-of-the-box quantification in AZtec and HyperSpy?
-\end{subprob}
-\begin{subprob} \label{subproblem2}
-    What are done with the data at the different steps in the analysis when using HyperSpy?
-\end{subprob}
-\begin{subprob} \label{subproblem3}
-    How can the peaks and the background be modelled in a way that is easy to understand?
-\end{subprob}
-\begin{subprob} \label{subproblem4}
-    How is the spectrum calibrated, and is AZtec different than HyperSpy?
-\end{subprob}
-\begin{subprob} \label{subproblem5}
-    How does different background models affect the quantitative analysis done in HyperSpy?
-\end{subprob}
-\begin{subprob} \label{subproblem6}
-    When does the analysis fail, both in AZtec and HyperSpy?
-\end{subprob}
-
 
 %
 %
@@ -95,8 +95,8 @@ The methods chapter explains how the data was collected, while the arguments for
 The results chapter contains qualitative and quantitative results.
 The qualitative results are presented as figures of spectras showing the elements in the sample, and also how well different calibrations fit with the theoretical values.
 The quantitative results are presented as tables with compositional results with different methods and adjustments.
-The different methods are quantification in AZtec and different ways to quantify with HyperSpy.
-The different adjustments are results with different calibrations, different background models, \brynjar{and different peak models?}
+The different methods are using AZtec and two approaches in HyperSpy.
+The different adjustments are results with different calibrations, different background models, \brynjar{"and different peak models"?}
 The discussion chapter follow the structure of the sub-problems, and discuss both the methods and the results of the analysis consecutively.
 The conclusion chapter summarizes the report with an answer to the main problem statement, and provides ideas for further work.
 The appendix contains the code used in the analysis, which is also available on GitHub \brynjar{Link to GitHub}.
