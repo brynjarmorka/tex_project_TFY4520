@@ -6,28 +6,33 @@
         Peak accuracy of the different calibration methods.
         The accuracy here is the deviation from the theoretical peak to the measured peak.
         The measured peak is the Gaussian fitted center of the peak.
+        The Mo L$\alpha$ deviates much because the peak is not well fitted.
+        The C K$\alpha$ is fitted well, but deviates much more than all the other peaks.
         All results are from the 30 kV measurements.
-        The own calibration was done on Ga L$_\alpha$ and As K$_\alpha$ from the 30 kV measurement on the GaAs wafer.
+        The other acceleration voltages gave similar results.
+        The self made calibration was done on two data sets.
+        One was done on Ga L$_\alpha$ and As K$_\alpha$ from the 30 kV measurement on the GaAs wafer.
+        The other was done on the more far apart peaks Mo L$_\alpha$ and Mo K$_\alpha$ from the 30 kV measurement on the Mo wafer.
         The HyperSpy cailbration was done by making a model and fitting it to the data on the 30 kV GaAs spectrum.
         AZ is short for AZtec.
         HS is short for HyperSpy.
         All deviations are in percentage difference from the theoretical peak value.
     }
     \label{tab:results:calibration-peak-accuracy}
-    \begin{tabular}{ccccc}
-        Peak and line & Theoretical [keV] & AZ deviation [\%] & HS deviation [\%] & Own deviation [\%] \\
+    \begin{tabular}{cccccc}
+        Peak         & Theoretical [keV] & AZ dev. [\%] & HS dev. [\%] & Ga L{$\alpha$} \& As K{$\alpha$} [\%] & Mo L{$\alpha$} \& Mo K{$\alpha$} [\%] \\
         \hline
-        As L$\alpha$  & 1.2819            & 1.000             & 0.439             & 0.422              \\
-        As K$\alpha$  & 10.5436           & -0.202            & -0.025            & -0.010             \\
-        Ga L$\alpha$  & 1.098             & 1.044             & 0.342             & 0.318              \\
-        Ga K$\alpha$  & 9.2517            & -0.153            & 0.009             & 0.024              \\
-        Cu L$\alpha$  & 0.9295            & 1.767             & 0.888             & 0.857              \\
-        Cu K$\alpha$  & 8.0478            & -0.114            & 0.031             & 0.045              \\
-        Mo K$\alpha$  & 17.4793           & -0.325            & -0.108            & -0.090             \\
-        Mo L$\alpha$  & 2.2932            & 1.047             & 0.859             & 0.858              \\
-        Si K$\alpha$  & 1.7397            & 0.167             & -0.175            & -0.182             \\
-        Al K$\alpha$  & 1.4865            & 0.200             & -0.247            & -0.259             \\
-        Cu K$\alpha$  & 8.0478            & -0.116            & 0.029             & 0.043              \\
-        C K$\alpha$   & 0.2774            & -2.955            & -6.583            & -6.738
+        As L$\alpha$ & 1.2819            & 1.000        & 0.439        & 0.422                                 & 0.560                                 \\
+        As K$\alpha$ & 10.5436           & -0.202       & -0.025       & -0.010                                & 0.093                                 \\
+        Ga L$\alpha$ & 1.098             & 1.044        & 0.342        & 0.318                                 & 0.463                                 \\
+        Ga K$\alpha$ & 9.2517            & -0.153       & 0.009        & 0.024                                 & 0.128                                 \\
+        Cu L$\alpha$ & 0.9295            & 1.767        & 0.888        & 0.857                                 & 1.010                                 \\
+        Cu K$\alpha$ & 8.0478            & -0.114       & 0.031        & 0.045                                 & 0.150                                 \\
+        Mo K$\alpha$ & 17.4793           & -0.325       & -0.108       & -0.090                                & 0.011                                 \\
+        Mo L$\alpha$ & 2.2932            & 1.047        & 0.859        & 0.858                                 & 0.979                                 \\
+        Si K$\alpha$ & 1.7397            & 0.167        & -0.175       & -0.182                                & -0.055                                \\
+        Al K$\alpha$ & 1.4865            & 0.200        & -0.247       & -0.259                                & -0.127                                \\
+        Cu K$\alpha$ & 8.0478            & -0.116       & 0.029        & 0.043                                 & 0.148                                 \\
+        C K$\alpha$  & 0.2774            & -2.955       & -6.583       & -6.738                                & -6.464
     \end{tabular}
 \end{table}
