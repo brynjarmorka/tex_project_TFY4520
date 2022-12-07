@@ -27,13 +27,13 @@ The lines added also show an estimate of the weight of the peak.
 
 
 % add figure figures/GaAs30kV_HS.png
-\begin{figure}
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.90\textwidth]{figures/GaAs30kV_HS.png}
+    \includegraphics[width=0.70\textwidth]{figures/GaAs30kV_HS.png}
     \caption{
         The GaAs spectrum taken at 30 kV.
-        This plot was made with HyperSpy, which use Matplotlib.
-        The theoretical peak centers are added as lines.
+        % This plot was made with HyperSpy, which use Matplotlib.
+        % The theoretical peak centers are added as lines.
         (a) is the whole spectrum.
         (b) is the zoomed in on the L-peaks.
         (c) is zoomed in on the K-peaks.
@@ -49,17 +49,211 @@ The lines added also show an estimate of the weight of the peak.
 \section{Qualitative results}
 \label{sec:results:qualitative}
 
-\cref{fig:results:Spectra_Al} to \cref{fig:results:Spectra_Si} shows the spectra for the six different areas of the sample plotted with Plotly.
+\cref{fig:results:Spectra_Al} to \cref{fig:results:Spectra_NW} shows the spectra for the six different areas of the sample plotted with Plotly.
 The plots are available as an interactive HTML plots on the GitHub repository.
 \brynjar{Upload the HTML files to the GitHub repository.}
 The calibration used in these spectra is based on the calibration of Ga L$\alpha$ and As K$\alpha$ from the GaAs bulk wafer.
-The y-axis is normalized to the highest peak value in each spectrum.
+The y-axis is normalized to the highest peak value in each spectrum, i.e. the highest peak is always 1. % discuss: why normalize.
+The spectra are scaled to show the region of interest for each sample area.
+Peaks which are taller than the y-axis are marked with a grey stippled line.
+The annotated energy on the plots are where the annotation line ends, and it not necessarily exactly the center of the peak when the peak is Gaussian fitted and nor exactly the theoretical line value.
+Even though the annotated values deviate a few eV, the goal in the qualitative analysis is to figure out what the peaks are.
+\brynjar{Move to discussion?}
+
+% figure Spectra_Al.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../eds-analysis/plots/spectra_plots/Al_everything.png}
+    \caption{
+        The spectrum of the FIB stub, which gave a strong Al signal.
+        This was expected to be Fe, but very little Fe signal was found.
+        The tallest peak is at 1.49 keV and it is the Al K$\alpha$ peak with some signal at the K$\beta$ peak at 1.56 keV.
+        The relative weight for Al K$\beta$ to K$\alpha$ is 0.013 (from HyperSpy).
+        Fe K$\alpha$ at 6.40 keV has a question mark, because the FIB stub was initially expected to be Fe.
+        The signal from Fe K$\alpha$ is barely a signal different than the background.
+    }
+    \label{fig:results:Spectra_Al}
+\end{figure}
+
+% The Al spectra
+\cref{fig:results:Spectra_Al} shows the spectrum of the FIB stub, which gave a strong Al signal.
+Only one spectrum was taken of the FIB stub, and it was taken at 30 kV.
+As for all the other spectra, this spectrum have a zero peak, a C K$\alpha$ peak at 0.260 keV and a O K$\alpha$ peak at 0.51 keV.
+Most of the other spectra also have a Si K$\alpha$ peak at 1.74 keV.
+The tallest peak with a relative intensity of 1 is the combined peak of Al K$\alpha$ and K$\beta$ at 1.49 keV.
+The contribution of Al K$\beta$ to Al K$\alpha$ is 0.013, which is small, but still changes the peak shape.
+The FIB stub was initially expected to be Fe, but the spectrum lacks a Fe K$\alpha$ peak at 6.40 keV.
+There are some signal at 6.40 keV, but it is barely a signal different than the background.
+The peaks at 1.25 keV and 5.9 keV indicate that the FIB stub is an alloy of mostly Al with some Mg and Mn.
+The last peak in the spectrum is the Al K$\alpha$ sum peak at 2.97 keV. % discussion: what other peaks could this be.
+\ton{When stating that some peaks are sum peaks, do you want me to state what other possibilities they could be or can I just discuss that in the discussion?}
+The background is increase rapidly and almost linearly from C K$\alpha$ to Al K$\alpha$, and drops down to 10\% after the Al K$\alpha$ peak.
+\ton{How much of the free text do you want me to repeat in the figure text?}
 
 
 
-\input{figures/spectra_figures.tex}
 
-\subsection{Peaks and background}
+% The Si spectra
+\cref{fig:results:Spectra_Si} shows the spectra taken from the pure Si wafer sample part.
+As in the other spectra, this spectrum have a zero peak, a C K$\alpha$ peak at 0.260 keV and a O K$\alpha$ peak at 0.51 keV.
+In addition, there is an unidentified peak at 0.080 keV.
+The tallest peak with a relative intensity of 1 is the Si K$\alpha$ peak at 1.73 keV, which have a contribution from the K$\beta$ peak at 1.84 keV.
+The relative weight for Si K$\beta$ to K$\alpha$ is 0.028.
+As in the Ai spectrum, the Si spectra have a sum peak from the tallest peak.
+The sum peak is at 3.48 keV, which is the sum peak of the Si K$\alpha$.
+In all four spectra the background drops down significantly after the Si K$\alpha$ peak.
+The relative drop down is biggest in the 30 kV spectrum.
+
+% figure Spectra_Si.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../eds-analysis/plots/spectra_plots/Si_everything.png}
+    \caption{
+        The spectra of the pure Si wafer sample part.
+        All four spectra have one large peak at 1.73 keV, which is the Si K$\alpha$ peak with some signal at the K$\beta$ peak at 1.83 keV.
+        The relative weight for Si K$\beta$ to K$\alpha$ is 0.028.
+        The zero peak is marked at 0.008 keV.
+        After the zero peak there is another sharp peak at 0.080 keV, which is not identified.
+        The energies annotated are the end of the annotation line, which can deviate a few percent from the actual peak energy.
+    }
+    \label{fig:results:Spectra_Si}
+\end{figure}
+
+
+% The Cu spectra
+\cref{fig:results:Spectra_Cu} shows the spectra taken from the Cu-tape sample part.
+These spectra have a zero peak, a C K$\alpha$, a O K$\alpha$ peak and a small Si K$\alpha$ peak.
+The tallest peak with a relative intensity of 1 is the C K$\alpha$ peak at 0.26 keV.
+The Cu K$\alpha$ and Cu K$\beta$ peaks are only visible at the 30 kV spectrum.
+The height of the Cu K$\alpha$ peak is 0.017, which means that the C K$\alpha$ peak is more than 55 times taller.
+None of the spectra have a Cu L$\alpha$ peak, which should have been at 0.93 keV.
+The 30 kV spectrum also have a signal at 2.29 keV, which could be the Mo L$\alpha$ peak.
+However, the 30 kV spectrum have no peak at the Mo K$\alpha$ peak at 17.48 keV. % discussion: The other spectra show that the L peaks are taller. But still no singal except noise at all at 17.48 keV.
+
+% figure Spectra_Cu.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../eds-analysis/plots/spectra_plots/Cu_everything.png}
+    \caption{
+        The spectra of the Cu sample part.
+        The Cu sample was Cu-tape from the lab, but the Cu K$\beta$ peak is only barely visible at the 30 kV spectrum.
+        The highest peak in all three spectra is at 0.260 keV, which is the C K$\alpha$ peak, slightly off from the expected 0.277 keV.
+        The plot is limited to 9.5 keV, because there are no peaks above that energy.
+        The Mo L$\alpha$ peak at 2.29 keV is visible at the 30 kV spectrum, but not in the 5 or 10 kV spectra.
+        The Mo L$\alpha$ is marked with a question mark, because there are no signal whatsoever at the Mo K$\alpha$ peak at 17.48 keV.
+    }
+    \label{fig:results:Spectra_Cu}
+\end{figure}
+
+
+% figure Spectra_Mo.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../eds-analysis/plots/spectra_plots/Mo_everything.png}
+    \caption{
+        The spectra of the Mo sample part.
+        The Mo K$\alpha$ peak at 17.47 keV is barely visible at the 30 kV spectrum, and has a high noise level.
+        The high dobble peak is Mo L$\alpha$ at 2.29 keV and Mo L$\beta$ at 2.39 keV.
+        In the Mo spectra the Si K$\alpha$ line is just barely visible as a very small peak, and is thus not annotated.
+        The peak at 2.01 keV is the Mo Ll peak, with name and energy from the HyperSpy database.
+        The peak at 2.83 keV is the Mo M$\gamma$3 peak, with name and energy from the HyperSpy database.
+        Mo Ll and Mo M$\gamma$3 have weights at 0.041 and 0.011, respectively.
+        The Mo L$\beta$1 peak at 2.49 keV has the weight 0.327.
+    }
+    \label{fig:results:Spectra_Mo}
+\end{figure}
+% The Mo spectra
+\cref{fig:results:Spectra_Mo} shows the spectra taken from the Mo-disk sample part.
+The four spectra have a zero peak, a C K$\alpha$, a O K$\alpha$ peak.
+The Si K$\alpha$ give a very small signal, and is visible as the tiny peak before Mo Ll.
+The background of the 5 kV spectrum is very high, but that is due do its lower signal on the Mo L$\alpha$, making the 0.18 keV peak the talles and thus scaling up the background.
+The tallest peak in the 5 kV spectrum is the 0.18 keV peak, which is also visible in the other three spectra.
+The energy of 0.18 keV only match with the B K$\alpha$ line at 0.1833 keV. % discuss, it is really this peak? The accuracy is low at low E, use the talbe which show that C Ka miss a lot.
+The tallest peak in the 10, 15 adn 30 kV spectra is the Mo L$\alpha$ peak at 2.29 keV, which is contrubuted by the Mo L$\beta$1 peak at 2.39 keV.
+The HyperSpy database have the energy and weight of two other Mo peaks visible in the spectrum, which are the Mo Ll and Mo L$\gamma$3 peaks at 2.01 keV and 2.83 keV.
+The X-ray Booklet does not include these lines, but include some other lines which are not visible in these spectra.
+Only the 30 kV spectra have a signal at the Mo K$\alpha$ and Mo K$\beta$ peaks at 17.46 and 19.62 keV. % discuss: as expected
+The peak at 4.6 keV is the sum peak of Mo L$\alpha$ and Mo L$\beta$1.
+As in the other spectra, the background drops down significantly after the tallest peak.
+
+
+
+
+% the GaAs spectra, with two plots
+\cref{fig:results:Spectra_GaAs} shows the spectra taken from the GaAs sample part, and \cref{fig:results:Spectra_GaAs_bg_and_sum_peaks} shows a zoomed in part of the spectra to enlargen the background and the sum peaks.
+All the spectra have a zero peak, a C K$\alpha$ peak, and an O K$\alpha$ peak.
+The Ga Ll peak at 0.96 keV is visible in all four spectra.
+The Si K$\alpha$ peak is small in all the spectra, but strongest in the 30 kV spectrum and weakest in the 5 kV spectrum.
+The tallest peak in all four spectra is the Ga L$\alpha$ peak at 1.1 keV.
+The As L$\alpha$ peak has a decreasing relative intensity from 5 to 30 kV.
+For the first 2 keV the background is relatively highest in the 5 kV spectrum and decreases with increasing voltage.
+After 2 keV this trend reverses, and the background is highest in the 30 kV spectrum. % discussion: overvoltage, singal to noise ?
+The K peaks are visible in the 15 and 30 kV spectra.
+The sum peaks of the L peaks are visible in the 5, 10 and 15 kV spectra, but not in the 30 kV spectrum.
+The sum peaks of the K peaks are only visible in the 30 kV spectrum. % discuss: no sum peaks in the 15 kV spectrum even though the K-peaks are there. Or, the counts go from ~2 til ~6 in the area of the peaks.
+
+
+% figure Spectra_GaAs.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../eds-analysis/plots/spectra_plots/GaAs_everything.png}
+    \caption{
+        The spectra of the GaAs-wafer sample part.
+        This is bulk GaAs, where the ratio of Ga to As is 1:1.
+        Both the K-peaks and the L-peaks of Ga and As are visible.
+        There is a peak at 0.51 keV, which is the O K$\alpha$ peak.
+        There is a peak at 0.24 keV, which is the C K$\alpha$ peak.
+    }
+    \label{fig:results:Spectra_GaAs}
+\end{figure}
+
+
+% figure Spectra_GaAs.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../eds-analysis/plots/spectra_plots/GaAs_bg_and_sum_peaks.png}
+    \caption{
+        A zoomed in view of the GaAs sample part.
+        The background is easier to see, and the sum peaks are visible.
+        The sum peaks are the sum of the K$\alpha$ and peaks, and the L$\alpha$ peaks.
+    }
+    \label{fig:results:Spectra_GaAs_bg_and_sum_peaks}
+\end{figure}
+
+
+% The NW spectra
+\cref{fig:results:Spectra_NW} shows the spectra of the nanowire sample part.
+This is the sample part with the most peaks, and contains signal from C, O, Ni, Cu, Ga, As, Si, Mo and Sb.
+One of the peaks is at 0.389 keV, which could be N K$\alpha$ peak, but it could also be other elements. % Ti Ll, but no Ti K$\alpha$ peak
+The Ni signal is both from the L$\alpha$ at 0.85 keV and the K$\alpha$ at 7.49 keV.
+The Sb signal is from the L$\alpha$ at 3.6 keV, L$\beta$1 at 3.8 keV, and Sb L$\beta$1 at 4.1 keV. % discuss: the 3.6 peak could be smt else like ??, but the peak series show that is is Sb
+The Mo singnal is both from the L$\alpha$ at 2.29 keV and the K$\alpha$ at 17.47 keV, but the K peak is very weak and thus not included in the plot.
+The Cu signal is both from the L$\alpha$ at 0.92 keV and the K$\alpha$ at 8.05 keV.
+The tallest peak in all four spectra is the Ga L$\alpha$ peak at 1.1 keV.
+In the 5 kV spectrum the C K$\alpha$ peak at 0.26 keV is equally high as the Ga L$\alpha$ peak.
+The As and Ga singals and their ratios are very similar to the GaAs spectrum signal, but the sum peaks are not visible in the NW spectra.
+The Ga and As L$\alpha$ sum peaks could have been visible, but the sum peak signal conincides with the Mo L$\alpha$ peak at 2.2 keV. % discussion: the sum peaks could be missing due to lower DT.
+The 10, 15 and 30 kV signal have an un-annotated and un-identified peak at 2.00 keV.
+The un-identified peak could be a sum peak or another artifact.
+\ton{Any ideas for the 2.00 keV peak? It does not match well with any peaks that I've found.}
+
+% figure Spectra_NW.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{../eds-analysis/plots/spectra_plots/NW_everything.png}
+    \caption{
+        The spectra of the nanowire sample part.
+        This spectrum have the most peaks, and contains  C, O, Ni, Cu, Ga, As, Si, Mo and Sb, and maybe N.
+        The line at 0.389 keV could be N K$\alpha$ peak, but it could also be other elements. % Ti Ll, but no Ti K$\alpha$ peak. discussion: what is this peak?
+        The peak at 0.92 keV which is labeled as Cu K$\alpha$ is also getting a contribution from the Ga Ll peak, at 0.95 keV. % True???
+        The 30 kV spectrum had a small singal from the Mo K$\alpha$ peak at 17.47 keV, but that signal was weak.
+        The 10, 15 and 30 kV signal have an un-annotated and un-identified peak at 2.00 keV. % what is this ???
+    }
+    \label{fig:results:Spectra_NW}
+\end{figure}
+
+
+\subsection{REWRITE THIS PART!: Peaks and background}
 \label{sec:results:qualitative:peaks}
 % Peaks, 
 % zero peak
@@ -81,7 +275,7 @@ Even though the Cu spectra at 30 kV has the Cu K$\alpha$ peak, the Cu L$\alpha$ 
 \brynjar{add transition sentence.}
 
 % double peaks, ie peaks which are overlapping
-Some of the peaks in the spectras are overlapping, which shifts the shape of the peaks.
+Some of the peaks in the spectra are overlapping, which shifts the shape of the peaks.
 An example of this is the As K$\alpha$ peak and the Ga K$\beta$ peak in the GaAs bulk wafer spectra.
 These peaks are overlapping, but also far enough apart that the peaks are still distinguishable.
 Another example of overlapping peaks is the Mo L$\alpha$ peak and the Mo L$\beta_1$, which are overlapping so much that they are hard to distinguish.
