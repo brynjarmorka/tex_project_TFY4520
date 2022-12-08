@@ -1,2 +1,3 @@
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThe manufacturer of EDS sensors, like EDAX(?), Hitatchi, Thermo Fisher Scientific, and Oxford Instruments \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, provide software for analyzing EDS data.\\E$"}
 {"rule":"LIGATURES","sentence":"^\\QImproving EDS Brynjar Morka Mæhlum\\E$"}
+{"rule":"PHRASE_REPETITION","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q AZtec HyperSpy Ga As Ga As 5 kV 50 % 50 % 50 % 50 % 10 kV 50 % 50 % 50 % 50 % 15 kV 50 % 50 % 50 % 50 % 30 kV 50 % 50 % 50 % 50 %\\E$"}

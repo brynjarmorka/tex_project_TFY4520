@@ -1,10 +1,6 @@
 \chapter{Discussion}
 \label{chap:discussion}
 
-
-
-
-
 % \section{Calibration}
 % \label{sec:discussion:calibration}
 
@@ -20,13 +16,10 @@
 % The take away from this is that the empirical view tends to be good enough for EDS analysis.
 
 
-%%%%%% below is directly copied from results
-
-
-\section{Introduction}
-\label{sec:discussion:intro}
+% \section{Introduction}
+% \label{sec:discussion:intro}
 The discussion is presented in this chapter.
-Producing code from scratch is a time consuming process, but it is also a learning process.
+Producing code from scratch is a time-consuming process, but it is also a learning process.
 While developing the code, the author learned a lot about EDS analysis and new ideas emerged.
 The sections below follow the structure of the sub-problems of the main problem statement formulated in \cref{chap:introduction}.
 
@@ -37,19 +30,25 @@ The sections below follow the structure of the sub-problems of the main problem 
 %
 %
 \section{Analysis steps in HyperSpy}
-\label{sec:results:steps}
+\label{sec:discussion:steps}
 % What are done with the data at the different steps in the analysis when using HyperSpy?
 \ton{Is this interesting to write about? The problem here is that the text is both method, some results and kind of discussion. What do I do with that? I want to keep it, but also restructuring it.}
 
-The next sub-problem was to find out what is done with the data at the different steps in the analysis when using HyperSpy.
-In these steps it is assumed that the user have done qualitative analysis and want to do quantitative analysis on a set of elements.
-The analysis in AZtec is done as a black box, so it is not possible to see what is done with the data at the different steps.
-All variables inside croccodile need to be set by the user, e.g. \verb|<element_list>| would be set to \verb|['Ga', 'As']| for the GaAs wafer.
+\hyperref[subproblem1]{Sub-problem~\ref*{subproblem1}} was to do qualitative analysis of the GaAs wafer in AZtec and HyperSpy.
+The analysis was done as an out-of-the-box analysis, i.e. just following the steps in the documentation.
+AZtec has a GUI for analysis, but it is not possible to see what is done with the data at the different steps.
+HyperSpy have documentation online, and the following subsections explain how the analysis was done in HyperSpy.
+
+% The next sub-problem was to find out what is done with the data at the different steps in the analysis when using HyperSpy.
+% In these steps it is assumed that the user have done qualitative analysis and want to do quantitative analysis on a set of elements.
+% The analysis in AZtec is done as a black box, so it is not possible to see what is done with the data at the different steps.
+Each subsection starts with some code lines, followed by an explanation of what the lines do.
+All variables inside crocodile need to be set by the user, e.g. \verb|<element_list>| would be set to \verb|['Ga', 'As']| for the GaAs wafer.
 An example notebook with quantification of the GaAs wafer is attached in APPENDIX.
 \brynjar{Make a notebook with GaAs quantification in HyperSpy, with the data somehow.}
 
 \subsection{Loading the data and specifying the elements}
-\label{sec:results:steps:load}
+\label{sec:discussion:steps:load}
 \begin{quote}
     \verb|s = hs.load(<filepath>, signal="EDS_TEM")|
 
@@ -64,8 +63,41 @@ The information relevant later in this project is:
 acceleration voltage, dispersion, zero offset, energy resolution Mn $K\alpha$,
 After loading, it is possible to plot the data with \verb|s.plot()|.
 
+Already at this point there is a big problem with using HyperSpy on the acquired data: the analysis methods are not implemented for SEM but for TEM.
+As explained by Skomedal in her master's thesis \cite{skomedal_improving_2022}, the quantification with the Cliff-Lorimer method of TEM EDS data use approximations which are valid for thin samples.
+The approximation is that the sample is thin enough to ignore absorption and fluorescence, which is a very crude approximation to use on bulk SEM EDS data.
+Still, the results show that it is possible to quantify the elements in the GaAs wafer with the Cliff-Lorimer method and get plausible results, but also that the analysis breaks down occasionally. % CoPilot: but the results should be taken with a grain of salt.
+Implementing quantification from the SEM type signal in HyperSpy have been discussed on the repositories GitHub issues page\footnote{\url{https://github.com/hyperspy/hyperspy/issues/2332}}.
+The topic have been discussed in 2020, 2017 and 2015.
+People have been working on quantification of SEM EDS data, but the work have not been finished yet.
+
+The quantification done with the CL method in HyperSpy on the three different calibrations in \cref{tab:results:calibration-quantification} are all within 10\% of the expected composition.
+Carter and Williams \cite[p. 612 and 648]{carter2016transmission} state that the accuracy of EDS is at best $\pm$ 3-5\%, but that it could be reduced to around $\pm$ 1.7\% with very long acquisition times and a careful analysis.
+Carter and Williams claim that quantitative errors less than $\pm$ 5-10\% takes a lot of time and effort, and compositions with error below 5\% should be regarded extra carefully and with suspicion.
+The best result, i.e. the result closest to 50\%, from the HyperSpy CL quantification is strangely from the AZtec calibration with a 6.25\% error.
+It is strange that the AZtec calibration is the best, because that is the calibration which misses most on the line accuracy in \cref{tab:results:calibration-peak-accuracy}.
+This implies that the calibration is not the most important factor for the quantification, at least not when the calibration is around $\pm$ 1\%.
+The different calibrations are discussed further in \cref{sec:discussion:calibration}.
+In the 30 kV GaAs sample the signal-to-noise ratio is good, the sample time was long and the peaks are well resolved, which make the input data good and allows for better quantification.
+The CL method is known to work on SEM data, but normally one would also do the ZAF correction, which is described in chapter 19.10.3 of Goldstein \cite{goldstein_scanning_2018}.
+The ZAF correction adjust the signal for the atomic number effect, the absorption in the bulk of the sample and the X-ray fluorescence of new lines with lower energy than the initial characteristic X-ray.
+Since Ga and As are number 31 and 33 in the periodic table, it could be that the ZAF corrections are small and would not have a big effect on the results.
+When doing the quantification it was tested to include O and C, but that changed the results from plausible to completely wrong.
+The quantification analysis also broke down when using the 10 and 15 kV spectra, but the reason for that was not clear.
+The breaking down of the analysis is discussed further in \cref{sec:discussion:failure}.
+
+
+Results in this project show that the CL method in HyperSpy for TEM EDS data sometimes yield plausible results on SEM EDS data and sometimes break down, thus the method should be used with caution.
+The goal of this project was not to do or to implement cutting edge quantification of EDS data from a SEM sample, but rather to understand the analysis steps and what factors that could affect the results.
+Thus, using the quantification method from the TEM signal type was regarded as good enough for this project.
+
+\ton{Ok argumentation here?}
+
+
+
+
 \subsection{Removing the background linearly}
-\label{sec:results:steps:background}
+\label{sec:discussion:steps:background}
 \begin{quote}
     \verb|bw = s1.estimate_background_windows(windows_width=<number>)|
 
@@ -73,10 +105,10 @@ After loading, it is possible to plot the data with \verb|s.plot()|.
 \end{quote}
 
 The next step is to remove the background, which with the above code is done by a linear fit.
-The background can be removed through model fitting, which is covered in \cref{sec:results:steps:model_fitting}.
+The background can be removed through model fitting, which is covered in \cref{sec:discussion:steps:model_fitting}.
 The variable \verb|windows_width| sets how wide the windows are for the background and integration, measured in FWHMs.
 A good starting value for \verb|windows_width| is 2, but it should be tested by the user with a plot to see if the background will be removed correctly.
-The estimated windows can be plottet with:
+The estimated windows can be plotted with:
 
 \begin{quote}
     \verb|s.plot(xray_lines=True, background_windows=bw, integration_windows=iw)|
@@ -84,7 +116,7 @@ The estimated windows can be plottet with:
 
 
 \subsection{Quantification after linear background removal}
-\label{sec:results:steps:quantification:linear}
+\label{sec:discussion:steps:quantification:linear}
 
 \begin{quote}
     \verb|s_i = s.get_lines_intensity(background_windows=bw, integration_windows=iw)|
@@ -105,13 +137,13 @@ The k-factors in this project have been the one from AZtec, which are theoretica
 The third line does the quantification, where the method is specified.
 The method is the Cliff-Lorimer method, described in detail in Mari Skomedal's master thesis \cite[Sec. 2.2.3]{skomedal_improving_2022}.
 HyperSpy has a method for quantification with the zeta factor method.
-The zeta method requires the value for the beam current, which was not measured in this project. \footnote{Results from the zeta methon can be converted to the cross section method, see the "EDS Quantification" documentation in HyperSpy.}
+The zeta method requires the value for the beam current, which was not measured in this project. \footnote{Results from the zeta method can be converted to the cross section method, see the "EDS Quantification" documentation in HyperSpy.}
 % \footnote{Results from the zeta methon can be converted to the cross section method, see \url{http://hyperspy.org/hyperspy-doc/current/user_guide/eds.html#eds-quantification}.}
 
 
 
 \subsection{Removing the background with model fitting}
-\label{sec:results:steps:model_fitting}
+\label{sec:discussion:steps:model_fitting}
 Another way to remove the background is to fit a model to the data.
 This step would be done right after loading the data.
 If the raw data contains a zero peak, as is the case for most Oxford instrument EDS detectors, the zero peak needs to be removed before fitting the model.
@@ -135,7 +167,7 @@ The lines above removes the zero peak, create a model from the \verb|signal| s, 
 This model is not fitted, it is just a generated spectrum with the lines of the elements.
 Eventually, the method \verb|create_model()| can take the boolean argument \verb|auto_add_lines=True|, which will automatically detect the elements in the sample.
 The model consists of a number of components, which can be accessed with \verb|m.components|.
-The components are all the gaussian peaks in the spectrum, in addition to the background as a 12th order polynomial.
+The components are all the Gaussian peaks in the spectrum, in addition to the background as a 12th order polynomial.
 The order of the polynomial can be changed, but it should be tested by the user to see if it is a good fit.
 Further, the model must be fitted.
 
@@ -148,12 +180,12 @@ Further, the model must be fitted.
 \end{quote}
 
 The first line fits the model to the data to the components and the second line plots the model.
-HyperSpy have a own option for fitting only the background.
-Since the background is one of the components in m, it is fittet with the code line above.
+HyperSpy have an own option for fitting only the background.
+Since the background is one of the components in m, it is fitted with the code line above.
 
 
 \subsection{Quantification after model fitting}
-\label{sec:results:steps:quantification:model}
+\label{sec:discussion:steps:quantification:model}
 
 \begin{quote}
     \verb|m_i = m.get_lines_intensity()|
@@ -166,13 +198,13 @@ Since the background is one of the components in m, it is fittet with the code l
 
 \end{quote}
 
-The quantification after model fitting is done in the same way as in \cref{sec:results:steps:quantification:linear}, but with intensity from the model instead of the signal.
+The quantification after model fitting is done in the same way as in \cref{sec:discussion:steps:quantification:linear}, but with intensity from the model instead of the signal.
 When modelling GaAs, the model can add the intensity from both K-lines and L-lines.
 Since AZtec only gives the k-factors for either the K-lines or the L-lines, the user must remove the lines without k-factors before quantification.
 
 
 \subsection{Calibrating the spectrum with the HyperSpy model}
-\label{sec:results:steps:HyperSpycalibration}
+\label{sec:discussion:steps:HyperSpycalibration}
 
 \begin{quote}
 
@@ -194,7 +226,7 @@ Thus, doing the previous step with quantification after model fitting can give a
 %
 %
 \section{Peak and background modelling}
-\label{sec:results:modelling}
+\label{sec:discussion:modelling}
 % How can the peaks and the background be modelled in a way that is easy to understand?
 
 The next sub-problem was to find out how the peaks and the background are modelled in a way that is easy to understand.
@@ -208,47 +240,47 @@ The model could be used to quantify the elements in the sample, but this was not
 % problem: double peaks, eg. Mo
 % problem: includes zero peak. Is that an issue?
 The first step in creating a model is to identify the peaks.
-The peaks are assumed to be gaussian curves.
-The initial way of identifying peaks was that the user manualy identified the peaks.
+The peaks are assumed to be Gaussian curves.
+The initial way of identifying peaks was that the user manually identified the peaks.
 Later the peaks were identified with the function \verb|find_peaks()| from the \verb|scipy.signal| package.
 Different peak prominence were tested, and the peak prominence of 0.01 gave the best results.
 
 
-% make gaussian and a polynomial
+% make Gaussian and a polynomial
 % problem: initial background guess. Solution: clip out the peaks with linear interpolation and fit a polynomial to the rest.
 % problem: normalized data. initial guesses are hard on counts, and fitting is slower.
-% early problem, now solved: some gaussians would be put as the background. solution: fit both gaussians and polynomial
-The second step is to make a gaussian in each peak and one polynomial for the background.
+% early problem, now solved: some Gaussians would be put as the background. solution: fit both Gaussians and polynomial
+The second step is to make a Gaussian in each peak and one polynomial for the background.
 To do the fitting, the components need an initial guess.
 The background needs a coefficient for each order of the polynomial.
-Each gaussian need to have a mean, a standard deviation, and a height.
+Each Gaussian need to have a mean, a standard deviation, and a height.
 The mean is the peak position.
-The standard deviation is the width of the peak, where $\textnormal{FWHM} = \textnormal{std}*2*\sqrt{2*\ln{2}}$ \footnote{FWHM defined at: \url{https://en.wikipedia.org/wiki/Full_width_at_half_maximum}}.
+The standard deviation is the width of the peak, where $\textnormal{FWHM} = \textnormal{std}*2*\sqrt{2*\ln{2}}$\footnote{FWHM defined at: \url{https://en.wikipedia.org/wiki/Full_width_at_half_maximum}}.
 The height is the amplitude of the peak.
-The easiest way to get the initial guesses for the gaussians is to normalize the data and set all three parameters to 1.
+The easiest way to get the initial guesses for the Gaussians is to normalize the data and set all three parameters to 1.
 In the normalization the highest peak was set to 1, and the rest of the peaks were scaled accordingly.
 The best way to get the initial guesses for the background is to clip out the peaks with linear interpolation and fit a polynomial.
-The initial guesses for the background is then the coefficients of the polynomial.
+The initial guesses for the background are then the coefficients of the polynomial.
 With the initial guesses, the whole model is ready to be fitted.
 
 % curve fit
 % problem: sometimes fails
 The third step is to fit the model to the data.
 Using the \verb|curve_fit()| function from the \verb|scipy.optimize| package, the model is fitted to the data.
-The function \verb|curve_fit()| uses the Levenberg-Marquardt algorithm to fit the model to the data.
+The function \verb|curve_fit()| uses the Levenberg–Marquardt algorithm to fit the model to the data.
 The function \verb|curve_fit()| returns the optimal parameters for the model.
-Fitting both the gaussians and the background at the same time makes the fitting more stable.
+Fitting both the Gaussians and the background at the same time makes the fitting more stable.
 One of the first iterations, where the user manually inputted the peaks, the fitting tended to partially fail.
 The issue was that the fitting only was done on the peaks.
-To minimize the error in the fitting, one of the gaussian curves with a low amplitude was moved and got a huge standard deviation, which compensated the background.
-This was fixed by fitting both the gaussians and the background at the same time.
-Doing this made the fitting both better and it failed less often.
+To minimize the error in the fitting, one of the Gaussian curves with a low amplitude was moved and got a huge standard deviation, which compensated the background.
+This was fixed by fitting both the Gaussians and the background at the same time.
+Doing this made the fitting both better, and it failed less often.
 
 \brynjar{Issue: fitting e.g. Mo with two clear peaks, but not with enough prominence to be found by the peak finder.}
 %
 %
 \section{Calibration}
-\label{sec:results:calibration}
+\label{sec:discussion:calibration}
 % How is the spectrum calibrated, and is AZtec different than HyperSpy?
 
 The next sub-problem was to calibrate the data with a self produced Python script.
@@ -263,7 +295,7 @@ Table \cref{tab:results:calibrations} shows calibration from AZtec, HyperSpy, an
 %
 %
 \section{Background models}
-\label{sec:results:background}
+\label{sec:discussion:background}
 % How does different background models affect the quantitative analysis done in HyperSpy?
 
 The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy, and how well different order polynomials fit the background.
@@ -271,11 +303,11 @@ The background models were tested on the spectrum of GaAs, and later also on \br
 The background was modelled as a polynomial of different orders.
 To quantify the different background models, the residuals were calculated.
 The residuals are the difference between the data and the model.
-\brynjar{use root-mean-square error?}
+\brynjar{Use root-mean-square error?}
 The TABLE XXXX \brynjar{make table} shows the residuals for the different order background models.
 The best orders were visually inspected.
-A later idea was to model the background as a spline, which is a piecewise polynomial.
-The spline is a piecewise polynomial with a smooth transition between the pieces.
+A later idea was to model the background as a spline, which is a piece wise polynomial.
+The spline is a piece wise polynomial with a smooth transition between the pieces.
 The spline was not tested in this project, but it could be a good alternative to the polynomial background model.
 
 % TODO: Try the background as a spline, which is a piecewise polynomials.
@@ -283,7 +315,7 @@ The spline was not tested in this project, but it could be a good alternative to
 %
 %
 \section{Analysis failure}
-\label{sec:results:failure}
+\label{sec:discussion:failure}
 % When does the analysis fail, both in AZtec and HyperSpy?
 
 The next sub-problem was to find out when the analysis fails, both in AZtec and HyperSpy.
@@ -298,20 +330,25 @@ The next sub-problem was to find out when the analysis fails, both in AZtec and 
 
 \section{Calibration decision}
 
-Why I selected the Ga La and As Ka peaks for calibration.
-Less extrapolation. PEaks are far apart.
-The peaks need a good Gaussian fit.
-Need a nice curve.
-High peak to background.
-Should be a sample that is easily available. Cu tape wpuld be nice, since it is in all labs and samples.
-Mo is far apart, but looks bad.
-Mo is also harder to fit automatically, because of the close double peak.
+% Why I selected the Ga La and As Ka peaks for calibration.
+% Less extrapolation. Peaks are far apart.
+% The peaks need a good Gaussian fit.
+% Need a nice curve.
+% High peak to background.
+% Should be a sample that is easily available. Cu tape would be nice, since it is in all labs and samples.
+% Mo is far apart, but looks bad.
+% Mo is also harder to fit automatically, because of the close double peak.
 
 
 
-\section{Choises in HyperSpy}
+\section{Choices in HyperSpy}
 
 % Using EDS_TEM since EDS_SEM does not have all these functions.
-Commersial packages does quantify SEM signal, and they are kinda good at it.
-Should be more accurate on NW sample, but is it?
-Reference the discussion on GitHub?
+% Commercial packages do quantify SEM signal, and they are kinda good at it.
+% Should be more accurate on NW sample, but is it?
+% Reference the discussion on GitHub?
+
+
+
+
+

@@ -167,7 +167,8 @@ Atoms with higher Z have more possible transitions, because they have more  elec
 
 %selection rules
 The selection rules, which govern the allowed transitions for the formation of characteristic X-rays, are based on the Pauli exclusion principle and the spin-orbit coupling.
-See \cref{fig:theory:theoreticalxray:energyintensity:quantumnumbers} for illustration of the quantum number $n$ and $l$ which are relevant for the selection rules, while the quantum number $l$ is dependent on the non-geomertically dependent spin and $l$.
+See \cref{fig:theory:theoreticalxray:energyintensity:quantumnumbers} for illustration of the quantum number $n$ and $l$ which are relevant for the selection rules.
+Quantum number $j$ is the total angular momentum, which is the sum of the orbital angular momentum $l$ and the spin angular momentum $s$.
 The selection rules in \cref{eq:theory:theoreticalxray:energyintensity:selectionrules} is for the electron which relaxes to the vacancy in the core orbital of atom A \cite[Sec. 8.2.2.2]{hollas_modern_2004}.
 
 \begin{equation}
@@ -280,6 +281,7 @@ The broadening of the lines is due to \dots \ton{What is the cause of the broade
 \cref{fig:theory:GaAs30kV-whole} shows that lower energy lines are narrower than higher energy lines.
 This increase in broadening with higher energy is due to \dots \ton{What is the cause of the broadening with higher E again?}
 
+\brynjar{Write more here.}
 A Gaussian peak is a curve defined by the following equation:
 
 \begin{equation}
@@ -287,7 +289,7 @@ A Gaussian peak is a curve defined by the following equation:
     g(x) = \frac{1}{\sigma \sqrt{2\pi}} exp({-\frac{(x-\mu)^2}{2\sigma^2}})
 \end{equation}
 
-where $\mu$ is the center of the peak, $\sigma$ is the standard deviation, and $x$ is the energy.
+In the equation $\mu$ is the center of the peak, $\sigma$ is the standard deviation, and $x$ is the energy.
 When doing peak fitting, the first term is treated as the amplitude and is a parameter which is fitted, i.e. $1/\sigma\sqrt{2\pi}$ is swapped with a parameter $A$.
 $\mu$ and $\sigma$ are also fitted parameters, where $\mu$ is the center of the peak and $\sigma$ is the width of the peak.
 $x$ is the energy, i.e. the x-axis in the EDS spectrum.
@@ -357,11 +359,11 @@ The amount of ionization with varying energy above $E_C$ is dependent on the ion
 The solution to this is empirically estimations and using k-factors where all factors like this is either cancelled out or included in the k-factor correction.
 
 % Ionization cross section and overvoltage
-\ton{Is this good enough? If not, what do I write about the ionization cross section and overvoltage? What Mari wrote is for thin samples, I think. Why include it if I'm not going to use any equations about the ionization cross section or overvoltage? You said something about just write that intensity it is lower for low energy because of many reasons (absorption, efficiency), with the same reason that background is lower for low energy. But I kinda need to explain some of the reasons to use them in the discussion. Another question: in the k-factor all these other factors fall out, so EDS-people does not use these equations. Am I wrong?}
+\ton{Is this good enough? If not, what do I write about the ionization cross section and overvoltage? What Mari wrote is for thin samples, I think. Why include it if I'm not going to use any equations about the ionization cross section or overvoltage? You said something about just write that intensity it is lower for low energy because of many reasons (absorption, efficiency), with the same reason that background is lower for low energy. But I kinda need to explain some reasons to use them in the discussion. Another question: in the k-factor all these other factors fall out, so EDS-people does not use these equations. Am I wrong?}
 
 % empirical weights in HyperSpy
 HyperSpy have an integrated list of the characteristic X-rays, with both the energy and the weight of the lines.
-\brynjar{I guess the weights are empirically estimated, but I have not found any information about how they are estimated. In addition: I'm not sure if HyperSpy adjust the line height to the spectrum, or if it knows that Ga Ka are higher than As Ka as in \cref{fig:theory:GaAs30keV-8-12-keV}.}
+\brynjar{I guess the weights are empirically estimated, but I have not found any information about how they are estimated. In addition: I'm not sure if HyperSpy adjust the line height to the spectrum, or if it knows that Ga K$\alpha$ are higher than As K$\alpha$ as in \cref{fig:theory:GaAs30keV-8-12-keV}.}
 Goldstein uses different intensity weights for isolated atoms, thin foils and bulk samples \cite[Ch. 4.2.6]{goldstein_scanning_2018}, and all are dependent on the atomic number and ionized shell.
 One could venture down the rabbit hole of finding the theoretical weights for different lines, but that will not be done in this thesis.
 Examples of the weights from HyperSpy are given in \cref{tab:theory:Ga-lines}.
@@ -409,7 +411,7 @@ Thin vs bulk samples.
 %
 \subsection{Bremsstrahlung - the background radiation}
 \label{sec:theory:empirical:background}
-Why linear and why sixt order polynomial. Which are better.
+Why linear and why sixth order polynomial. Which are better.
 \brynjar{I might use background removal as some results, but I'm not sure. That would be comparing the different methods, and looking at smoothing of the data before removing the background.}
 
 
@@ -430,8 +432,8 @@ $E_1$ and $E_2$ is the energy of the two characteristic X-rays, and $c_1$ and $c
     \textnormal{Dispersion} = \frac{E_2 - E_1}{C_2 - C_1}
 \end{equation}
 
-Get as little extrapolation as possible by selecting the longest possible distance between the two characteristic X-rays, while still using peaks with good signal to noise ratio.
-\brynjar{Quantify signal to noise ratio?}
+Get as little extrapolation as possible by selecting the longest possible distance between the two characteristic X-rays, while still using peaks with good signal-to-noise ratio.
+\brynjar{Quantify signal-to-noise ratio?}
 Assume calibration on one spectrum and use it on all spectra for the same instrument.
 
 

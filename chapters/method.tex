@@ -79,7 +79,7 @@ The SEM is equipped with a BSE and a SE detector.
 The data collection was done on 5, 10, 15, and 30 kV.
 The beam current was 0.2, 0.4, 0.8, or 1.6 nA, depending on the dead time of the detector, trying to get the dead time around 30\%.
 Dead time at around 30\% was recommended by the supervisor of this project, Antonius T. J. von Helvoort, and is well below the problematic dead time of >60\%.
-The dead time on the nano wire area was closer to 20\%, which is what Goldstein \cite[page 223]{goldstein_scanning_2018} recommends.
+The dead time on the nanowire area was closer to 20\%, which is what Goldstein \cite[page 223]{goldstein_scanning_2018} recommends.
 All samples were collected on 2048 channels ranging from 0 to 20 keV.
 Working distance was 10 mm.
 Processing time was set to 5 and each spectrum was collected with 2 minutes time live.
@@ -115,8 +115,8 @@ All the quantitative analysis was done with the k-factors from AZtec.
 The first way was to use the area under the peaks in the raw spectra, where the background was removed linearly.
 The second way was to make a fitted model of the background and the peaks as Gaussian curves, and use the area under the peaks in the model.
 Then the x-axis spectrum was calibrated, and the two ways of quantification was used again.
-The different calibrations used was a model fitted calibration from HyperSpy, a self made calibration and the calibration from AZtec.
-The calibration values from AZtec is reffered to as uncalibrated.
+The different calibrations used was a model fit calibration in HyperSpy, a self-made calibration and the calibration from AZtec.
+% The calibration values from AZtec is referred to as uncalibrated. % Not true
 \brynjar{Uncertainties from HyperSpy?}
 
 
@@ -148,16 +148,16 @@ Whatever normalization method is used, the quantitative results would be the sam
 % Gaussian fitting and peak finding
 \subsection{Gaussian fitting and peak finding}
 \label{sec:method:treatment:fitting}
-The fitting of a model to the spectra was done progessively more and more advanced.
+The fitting of a model to the spectra was done progressively more and more advanced.
 All the peaks was fitted as Gaussian curves, and the fitting itself was done with the SciPy function \verb|curve_fit|.
 The first model fitting was just making a Gaussian at two specified peaks.
 The second model was fitting a Gaussian at all the peaks in the spectrum, but still with a user input of the peak positions.
 The third model was fitting a Gaussian at all the peaks in the spectrum, but with the peak positions found by the SciPy function \verb|find_peaks|.
 The problem with these models was that one of the peaks was usually moved to compensate for the background.
-Thus the forth model was made, where the background was fitted as a sixth order polynomial.
+Thus, the forth model was made, where the background was fitted as a sixth order polynomial.
 The background was fitted after removing the peaks, and then the peaks were fitted on top of the background.
 The fifth and final model was fitting the peaks and background in one go.
-The background was fitted as a n-th order polynomial, and different orders were tested.
+The background was fitted as an n-order polynomial, and different orders were tested.
 
 
 
@@ -166,7 +166,7 @@ The background was fitted as a n-th order polynomial, and different orders were 
 \label{sec:method:treatment:calibration}
 A third repository, "spectroscopy-channel-calibration"\footnote{\url{https://github.com/brynjarmorka/spectroscopy-channel-calibration}}, was made specifically for calibration of spectra, which was used in the course "TFY4255 - Materials Physics" at NTNU, October 2022.
 The model used in this calibration is the first model from \ref{sec:method:treatment:fitting}, and thus is not as advanced as the model used in the final code.
-The calibration is done with a spectrum of known elements, where the user inputs the energy of the peaks.
+The calibration is done with a spectrum of known elements where the user inputs the energy of the peaks.
 The user further specifies the channel value of two peaks.
 The energy of the peaks are available through HyperSpy, or can be set manually from e.g. the X-ray booklet.
 The code makes a Gaussian fit to the two peaks, to find the true peak center.
