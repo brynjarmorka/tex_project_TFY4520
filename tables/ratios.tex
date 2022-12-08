@@ -2,42 +2,43 @@
     \centering
     \caption{
         Ratios of Ga and As on the GaAs wafer.
-        The spectrum was calibrated with GaAs 30 kV, but different calibrations did not change the ratios significantly. \brynjar{Delete?}
+        The spectrum was calibrated with GaAs 30 kV, but different calibrations did not change the ratios significantly.
         K$\beta$ at 15 kV was too low to be detected and is therefore not included in the table.
+        The ratio column is Ga sum divided by As sum.
+        The ratio * k column is the ratio multiplied by the respective k-factor in \cref{tab:results:k-factors}.
+        The empty cells are for peaks where the was no k-factor or for the sum of the peaks, which have no center and no FWHM.
     }
     \label{tab:results:ratios}
-    \begin{tabular}{cccccccc}
+    \begin{tabular}{ccccccccc}
 
-        Peak                         & Ratio & Ga value [keV] & As value [keV] & Ga FWHM [eV] & As FWHM [eV] & Ga sum  & As sum \\
+        Peak                         & Peak*k & Ratio & Ga value & As value & Ga FWHM & As FWHM & Ga sum  & As sum \\
+                                     &        &       & [keV]    & [keV]    & [eV]    & [eV]    &         &        \\
         \hline
-                                     &       &                &                &              &              &         &        \\
+                                     &        &       &          &          &         &         &         &        \\
 
-        5 kV                         &       &                &                &              &              &         &        \\
-        L$\alpha$                    & 1.282 & 1.101          & 1.288          & 74.010       & 80.921       & 75.462  & 58.844 \\
+        5 kV                         &        &       &          &          &         &         &         &        \\
+        L$\alpha$                    & 1.151  & 1.282 & 1.101    & 1.288    & 74.010  & 80.921  & 75.462  & 58.844 \\
         \hline
-                                     &       &                &                &              &              &         &        \\
-        10 kV                        &       &                &                &              &              &         &        \\
-        % Peak     & Ratio & Ga value [keV] & As value [keV] & Ga FWHM [eV] & As FWHM [eV] & Ga sum  & As sum \\
-        L$\alpha$                    & 1.444 & 1.100          & 1.287          & 73.841       & 80.827       & 76.222  & 52.770 \\
+                                     &        &       &          &          &         &         &         &        \\
+        10 kV                        &        &       &          &          &         &         &         &        \\
+        L$\alpha$                    & 1.349  & 1.444 & 1.100    & 1.287    & 73.841  & 80.827  & 76.222  & 52.770 \\
 
         \hline
-                                     &       &                &                &              &              &         &        \\
-        15 kV                        &       &                &                &              &              &         &        \\
-        % Peak     & Ratio & Ga value [keV] & As value [keV] & Ga FWHM [eV] & As FWHM [eV] & Ga sum  & As sum \\
-        L$\alpha$                    & 1.669 & 1.100          & 1.287          & 73.830       & 81.137       & 77.001  & 46.146 \\
-        K$\alpha$                    & 2.445 & 9.253          & 10.536         & 155.080      & 181.951      & 6.013   & 2.459  \\
+                                     &        &       &          &          &         &         &         &        \\
+        15 kV                        &        &       &          &          &         &         &         &        \\
+        L$\alpha$                    & 1.579  & 1.669 & 1.100    & 1.287    & 73.830  & 81.137  & 77.001  & 46.146 \\
+        K$\alpha$                    &        & 2.445 & 9.253    & 10.536   & 155.080 & 181.951 & 6.013   & 2.459  \\
         % K$\beta$       & 1.000 & 10.536         & 10.536         & 181.951      & 181.951      & 2.459   & 2.459  \\
-        L$\alpha$+K$\alpha$          & 1.708 & -              & -              & -            & -            & 83.014  & 48.605 \\
-        % L$\alpha$+K$\alpha$+K$\beta$ & 1.674 & -              & -              & -            & -            & 85.473  & 51.065 \\
+        L$\alpha$+K$\alpha$          &        & 1.708 &          &          &         &         & 83.014  & 48.605 \\
+        % L$\alpha$+K$\alpha$+K$\beta$ & 1.674 &            &            &          &          & 85.473  & 51.065 \\
 
         \hline
-                                     &       &                &                &              &              &         &        \\
-        30 kV                        &       &                &                &              &              &         &        \\
-        % Peak     & Ratio & Ga value [keV] & As value [keV] & Ga FWHM [eV] & As FWHM [eV] & Ga sum  & As sum \\
-        L$\alpha$                    & 2.279 & 1.098          & 1.287          & 72.309       & 80.849       & 76.465  & 33.546 \\
-        K$\alpha$                    & 1.678 & 9.253          & 10.542         & 157.799      & 168.238      & 58.718  & 34.994 \\
-        K$\beta$                     & 1.603 & 10.276         & 11.736         & 171.804      & 185.034      & 8.821   & 5.503  \\
-        L$\alpha$+K$\alpha$          & 1.972 & -              & -              & -            & -            & 135.184 & 68.540 \\
-        L$\alpha$+K$\alpha$+K$\beta$ & 1.945 & -              & -              & -            & -            & 144.004 & 74.042
+                                     &        &       &          &          &         &         &         &        \\
+        30 kV                        &        &       &          &          &         &         &         &        \\
+        L$\alpha$                    &        & 2.279 & 1.098    & 1.287    & 72.309  & 80.849  & 76.465  & 33.546 \\
+        K$\alpha$                    & 1.301  & 1.678 & 9.253    & 10.542   & 157.799 & 168.238 & 58.718  & 34.994 \\
+        K$\beta$                     &        & 1.603 & 10.276   & 11.736   & 171.804 & 185.034 & 8.821   & 5.503  \\
+        L$\alpha$+K$\alpha$          &        & 1.972 &          &          &         &         & 135.184 & 68.540 \\
+        L$\alpha$+K$\alpha$+K$\beta$ &        & 1.945 &          &          &         &         & 144.004 & 74.042
     \end{tabular}
 \end{table}

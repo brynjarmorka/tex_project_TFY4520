@@ -32,7 +32,6 @@ The sections below follow the structure of the sub-problems of the main problem 
 \section{Analysis steps in HyperSpy}
 \label{sec:discussion:steps}
 % What are done with the data at the different steps in the analysis when using HyperSpy?
-\ton{Is this interesting to write about? The problem here is that the text is both method, some results and kind of discussion. What do I do with that? I want to keep it, but also restructuring it.}
 
 \hyperref[subproblem1]{Sub-problem~\ref*{subproblem1}} was to do qualitative analysis of the GaAs wafer in AZtec and HyperSpy.
 The analysis was done as an out-of-the-box analysis, i.e. just following the steps in the documentation.
@@ -91,7 +90,7 @@ Results in this project show that the CL method in HyperSpy for TEM EDS data som
 The goal of this project was not to do or to implement cutting edge quantification of EDS data from a SEM sample, but rather to understand the analysis steps and what factors that could affect the results.
 Thus, using the quantification method from the TEM signal type was regarded as good enough for this project.
 
-\ton{Ok argumentation here?}
+\ton{I am happy with this first part of the discussion (08.12.22). How would you rate it?}
 
 
 
@@ -113,6 +112,27 @@ The estimated windows can be plotted with:
 \begin{quote}
     \verb|s.plot(xray_lines=True, background_windows=bw, integration_windows=iw)|
 \end{quote}
+
+
+Plotting has proven to be a very useful tool for understanding what the different steps in the analysis do.
+Unfortunately, the implemented plotting in HyperSpy is limited.
+For example, when plotting a modelled spectrum with Ga and As, the model contains all the peaks in the HyperSpy library and all the peaks are plotted, but it is not possible to see what the different peaks are.
+In other words, the plot of a model can show all the independent components, but adding a legend is not an option.
+Another limitation of the plotting is the interactivity when saving the plot.
+Matplotlib requires the code to run in the background for it to be interactive, while Plotly can save the plot as an interactive HTML file for later inspection.
+One of the advantages with the plotting in HyperSpy is how accesable it is to plot in the different steps, which the user can use to understand and verify the analysis.
+The HyperSpy plotting was probably not made with the intention of being used for publication, but rather for quick and easy plotting of the data.
+If that is the case, the plotting serves its purpose well and has proven to be very useful for this project.
+% CoPilot did this: One of the authors of HyperSpy, Tomas Ostasevicius, has been working on a new plotting library for HyperSpy, which will be released in the next major release of HyperSpy.
+
+One of the more helpful insights from plotting in this project was that removing the background is not trivial.
+This is especially true for background signals modelled as a polynomial.
+Linear background removal works well for some peaks, for example the K-lines of Ga and As, but not for the L-lines.
+The background around the K-lines are more linear, because of the exponential decay of the background.
+Around the L-lines the background is affected by the absorption of the Bremsstrahlung lower than ~2 keV and the observation of higher background levels below the highest peak in the spectrum.
+The background removal is discussed further in \cref{sec:discussion:background}.
+
+
 
 
 \subsection{Quantification after linear background removal}
@@ -137,9 +157,27 @@ The k-factors in this project have been the one from AZtec, which are theoretica
 The third line does the quantification, where the method is specified.
 The method is the Cliff-Lorimer method, described in detail in Mari Skomedal's master thesis \cite[Sec. 2.2.3]{skomedal_improving_2022}.
 HyperSpy has a method for quantification with the zeta factor method.
-The zeta method requires the value for the beam current, which was not measured in this project. \footnote{Results from the zeta method can be converted to the cross section method, see the "EDS Quantification" documentation in HyperSpy.}
+The zeta method requires the value for the beam current, which was not measured in this project. \footnote{Results from the zeta method can be converted to the cross section method, see the page "EDS Quantification" in the HyperSpy documentation.}
 % \footnote{Results from the zeta methon can be converted to the cross section method, see \url{http://hyperspy.org/hyperspy-doc/current/user_guide/eds.html#eds-quantification}.}
 
+
+% k-factors
+The k-factors are essential for the Cliff-Lorimer quantification, and the k-factors listed in \cref{tab:results:k-factors} give some insight into how AZtec calculates the k-factors.
+From the results it is clear that AZtec at least adjust the k-factor for element and for voltage.
+It could be that factors like the beam current and time live could affect the k-factor, but this was not investigated in this project.
+The L-line k-factors are start at 1.1 for 5 kV and increase to 1.2 for 15 kV.
+The As k-factor for the L-line at 5, 10 ad 15 kV is 11\%, 7\% and 6\% greaten than for Ga.
+The K-line k-factor are 3.3 for Ga and 4.2 for As, implying either a high sensitivity for higher voltages or two different models for calculating the k-factors.
+Another possibility is that the K-lines and L-lines have a seperate model for calculating the k-factors.
+This can be tested by extracting the k-factors for the K-lines from the 15 kV spectrum, as the 15 kV spectrum do have peaks for both the K-lines and L-lines.
+The k-factors for Ga are in all four cases higher than for As, which makes sense, as all the Ga lines are higher and have more counts than the As lines.
+Quantification of the ratio between the Ga and As peaks are dont in \cref{tab:results:ratios}, where it is clear that the k-factor push the ratio towards 1.
+The peak ratio times the k-factor for 5 kV is 1.1, and the next closest to 1 is 1.3 for 30 kV.
+This result imply that the theoretically calculated k-factors could be better for high and low voltages.
+
+
+
+% double peaks in sum, why to use modeled peaks and not raw counts.
 
 
 \subsection{Removing the background with model fitting}
@@ -311,6 +349,8 @@ The spline is a piece wise polynomial with a smooth transition between the piece
 The spline was not tested in this project, but it could be a good alternative to the polynomial background model.
 
 % TODO: Try the background as a spline, which is a piecewise polynomials.
+
+% conclusion: try splines, but then what to do under the peak?
 
 %
 %

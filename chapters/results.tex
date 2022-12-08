@@ -6,7 +6,7 @@
 % 	- one plot for all
 % 	- Look at energy scale for all results. How does the peaks deviate with the Ga As calibration?
 % 	- Cu tape (give type) is not good as a Cu reference.
-% 	- The stub is not Fe as expected, but Al. Makes sence, since steel is alloys and is magnetic.
+% 	- The stub is not Fe as expected, but Al. Makes sense, since steel is alloys and is magnetic.
 
 % Quantitative
 % 	- initial
@@ -430,21 +430,17 @@ These k-factors are from the GaAs bulk wafer, and HyperSpy have estimated them t
         AZtec provides either the k-factor for the L$\alpha$ or the K$\alpha$ line, and selects automatically based on the energy of the incident electrons.
     }
     \label{tab:results:k-factors}
-    \begin{tabular}{cccc}
-        V$_\textnormal{acc}$ [kV] & Element & Line      & K-factor \\
+    \begin{tabular}{ccccc}
+        V$_\textnormal{acc}$ [kV] & Line      & Ga k-factor & As k-factor & Ga / As \\
         \hline
-        5                         & Ga      & L$\alpha$ & 1.086    \\
-        5                         & As      & L$\alpha$ & 1.210    \\
-        10                        & Ga      & L$\alpha$ & 1.223    \\
-        10                        & As      & L$\alpha$ & 1.310    \\
-        15                        & Ga      & L$\alpha$ & 1.259    \\
-        15                        & Ga      & L$\alpha$ & 1.331    \\
-        30                        & Ga      & K$\alpha$ & 3.268    \\
-        30                        & As      & K$\alpha$ & 4.191
+        5                         & L$\alpha$ & 1.21        & 1.086       & 0.898   \\
+        10                        & L$\alpha$ & 1.31        & 1.223       & 0.934   \\
+        15                        & L$\alpha$ & 1.331       & 1.259       & 0.946   \\
+        30                        & K$\alpha$ & 4.191       & 3.268       & 0.780
     \end{tabular}
 \end{table}
 
-The initial quantification was done on the data from the GaAs wafer in AZtec and in HyperSpy as out-of-the-box as possible.
+The initial quantification was done on the data from the GaAs wafer in AZtec.
 The results are presented in \cref{tab:initial_quantification}.
 The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and As should be 50\% and 50\% respectively.
 
@@ -454,17 +450,16 @@ The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and
     \caption{
         Initial quantification of the GaAs wafer.
         The ratio in the wafer is 1:1, so the correct ratio is 50\% and 50\%, because the results are in atomic percent.
-        \brynjar{Put in the actual results here. Use both HyperSpy linear and model fitted results?}
+        \brynjar{The idea was to use both AZtec and HyperSpy, but it did not make sense to use HyperSpy with the discussion I have now. Thus it is only AZtec.}
     }
     \label{tab:initial_quantification}
-    \begin{tabular}{m{1.5cm} m{1.5cm} m{1.5cm} m{1.5cm} m{1.5cm}}
-        $V_\textnormal{acc}$ & AZtec &       & HyperSpy &       \\
-                             & Ga    & As    & Ga       & As    \\
+    \begin{tabular}{ccc}
+        $V_\textnormal{acc}$ & Ga    & As    \\
         \hline
-        5 kV                 & 50 \% & 50 \% & 50 \%    & 50 \% \\
-        10 kV                & 50 \% & 50 \% & 50 \%    & 50 \% \\
-        15 kV                & 50 \% & 50 \% & 50 \%    & 50 \% \\
-        30 kV                & 50 \% & 50 \% & 50 \%    & 50 \%
+        5 kV                 & 50 \% & 50 \% \\
+        10 kV                & 50 \% & 50 \% \\
+        15 kV                & 50 \% & 50 \% \\
+        30 kV                & 50 \% & 50 \%
     \end{tabular}
 \end{table}
 
@@ -477,10 +472,9 @@ The table also lists the FWHM of the peaks.
 
 
 One of the adjustments explored was the affect of the calibration on the quantification.
-Using different the calibrations in \cref{tab:results:calibrations} gave different quantification results when using Cliff-Lorimer in HyperSpy. % discussion: Issue with using Clif-Lorimer since I have bulk and not thin sample.
+Using different the calibrations in \cref{tab:results:calibrations} gave different quantification results when using CL in HyperSpy. % discussion: Issue with using Clif-Lorimer since I have bulk and not thin sample.
 The results are presented in \cref{tab:results:calibration-quantification}.
-The quantification on 10 and 15 kV are obviously wrong, but the same method was used for all the quantifications.
-
+The same method was used on all spectra, but the quantification on 10 and 15 kV are obviously wrong.
 \input{tables/calibration-quantification.tex}
 
 % affect of calibration
