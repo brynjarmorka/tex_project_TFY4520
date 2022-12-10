@@ -1,8 +1,6 @@
 \chapter{Discussion}
 \label{chap:discussion}
 
-% \section{Calibration}
-% \label{sec:discussion:calibration}
 
 % % Ga Ka where Ka2 is not visible
 % % point of the paragraph: empirical view is good enough
@@ -16,15 +14,144 @@
 % The take away from this is that the empirical view tends to be good enough for EDS analysis.
 
 
-% \section{Introduction}
-% \label{sec:discussion:intro}
 The discussion is presented in this chapter.
-Producing code from scratch is a time-consuming process, but it is also a learning process.
-While developing the code, the author learned a lot about EDS analysis and new ideas emerged.
-The sections below follow the structure of the sub-problems of the main problem statement formulated in \cref{chap:introduction}.
+Producing code from scratch is both a time-consuming process and a learning process.
+While developing the code, the author learned a lot about EDS analysis and  ideas emerged for how EDS analysis could be improved.
+This chapter begins with an initial discussion of the qualitative results, and then it connects the sub-problems to the results and work done in the project.
+The order of the sub-problems is the same as in \cref{chap:introduction}, which is based on the work process.
+The chapter ends with a discussion of the \hyperref[mainproblem]{Main problem~\ref*{mainproblem}}.
 
-%
-%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Pasted from the results:
+
+\subsection{General results from the spectra}
+\label{sec:discussion:qualitative:general}
+
+All the spectra have peaks with high peak-to-background ratio. %discuss: sampling good enough? I do not know if i miss some peaks, but the ones i have are nice for qualitative analysis at least.
+% The zero peak from the Oxford detector is visible in all the spectra as the first peak, with a center at 0.00924 keV.
+In all the spectra, the highest peak is below 5 keV. % discussion: what peaks give the highest counts, with theory and empirical data. detector efficiency? Absorption? Overvoltage? etc
+The zero peak starts before 0 keV and has its maximum at 0.008 keV. % discuss: could this be part of the calibration error in AZtec?
+The GaAs, NW and Mo spectra show clearly that the peaks broaden with higher E, since they have peaks at low and middle to high energy. % discuss why this happens.
+The width of the peaks are quantified with FWHM in the quantitative section below.
+When doing the qualitative analysis, it became clear that the FIB stub was not made of Fe as expected, but rather of Al with a peak at 1.48 keV.
+All the 5 kV spectra decrease more or less linearly from 1 to 5 keV. % discussion: overvoltage
+% Another discovery was that the Cu-tape does not give a good Cu signal.
+% The high peak in the Cu-tape spectra at 0.260 keV are from C and not the Cu L$\alpha$ peak.
+% Only the Cu-tape taken at 30 kV has a Cu peak, but it is very small.
+Even though the Cu spectra at 30 kV has the Cu K$\alpha$ peak, the Cu L$\alpha$ peak is completely missing. % this is very, very strange. ! TODO: Discuss
+\brynjar{Add transition sentence.}
+
+% double peaks, ie peaks which are overlapping
+Some peaks in the spectra are overlapping, which shifts the shape of the peaks.
+An example of this is the As K$\alpha$ peak and the Ga K$\beta$ peak in the NW and the GaAs bulk wafer spectra.
+These peaks are overlapping, but also far enough apart that the peaks are still distinguishable.
+Another example of overlapping peaks is the Mo L$\alpha$ peak and the Mo L$\beta_1$, which are overlapping so much that they are hard to distinguish.
+Since they are harder to distinguish, the peak fitting makes one Gaussian for the two peaks, which is off on both peak centers. % for discussu\ion: which is why the deviation of the Mo L$\alpha$ peak is off in the calibration accuracy table, \cref{tab:results:calibration-peak-accuracy}.
+Overlapping peaks makes counting the signal from specific peaks harder.
+\brynjar{Figure of double peaks?}
+
+% background, 
+% bg increase with lower kV, 
+% bg shape, 
+The signal from the background is another factor which makes counting more difficult.
+% TON comment: 
+%   Need to account for or fit the background, to be able to substract it and get right peak counts.
+%   Could keep these comments here, but more clear to split results and discussion/interpretation.
+%   Think how this representation and later discussion will link to set aim of the work ("better EDX").
+In general, background in the acquired spectra is low, but with different shapes.
+In the GaAs, Si and Mo the height of the background decrease with higher acceleration voltage.
+The background in the Cu spectra increase with higher acceleration voltage.
+The most similar background signal over different voltages are in the NW spectra. % discuss: thin sample -> less background?
+The values of the background radiation is in general very low and almost flat above the highest peak in the spectra. % discussion: nothing to reduce the speed of the e-
+% For example, the Cu 10 kV spectrum have its highest peak at 0.5 keV, and the background is almost zero above 0.5 keV. not the best example
+The Al spectrum background is high before the high Al K$\alpha$ peak, and much lower after the high peak.
+Both the value and the shape of the background is different before and after the peak.
+The same behavior is clearly true in the Si spectra.
+% TON comment:
+% yes, it is absorption at that energy.
+The peak where the background change is the highest peak, Si K$\alpha$.
+The background values in Si 30 kV are 10 times higher before than after the highest peak.
+The background shape in Si 30 kV is almost linear from 0.6 to 1.6 keV, drops to 10\% height from 1.6 to 1.9 keV, and then follows the expected background shape from 1.9 keV.
+The expected background shape is illustrated in \brynjar{Make a drawing of the background.} % discussion: explain that the bg is dependent on a peak (ie material) being present. This makes fiting hard, since there are some peak-dependency which is hard to predict.
+%discussion: model the peak as more than one polygon added together, since the shape changes. For further works. That is called spline.
+All the other spectra show the same behavior with their highest peak and the peaks effect on the background as the Al and Si spectra.
+In general, the background signals are low, but their different shapes and heights makes it harder to fit the peaks of the characteristic X-ray lines.
+\brynjar{Figure of background? And figure of fit of background before and after a tall peak?}
+% \ton{The last sentence is meant to be a transition/finishing sentence, but might be too much discussion.} 
+% TON Answer, when this was results:
+% OK overall summary of results. OK for me. Discussion would be on why shapes are different and not follow the formula that describes the background so well..
+% discussion: make the background as a spline. But then, what to do under the peak?
+
+
+
+% discussion: understanding the strays properly is actually helpful for the qualitative analysis, since some elements can be excluded based on the strays and some strays are only present in certain materials.
+% Si stray in all spectra
+% stray in NW outside beam, Mo, Cu and Sb
+
+
+% TON There are many different strays. SOme were mentioned above. This paragraph is short. Maybe better to have it as a header in discussion?
+
+
+In addition to the characteristic peaks and the background, there are also artifacts and strays in the spectra. % discussion: lower peaks are super important, eg in the Al spectra where it is small amounts of Mg and Mn, probably. Asserting what is a stray and what is characteristic is important for quantification.
+All the spectra have signal from the K$\alpha$ line of C and O, which could be contamination and oxide layers. % discussion: this is contamination. Carbon deposited from the beam, visisble on the Cu-tape images. Oxide layers? If yes, look at material properties.
+The C and O signal is higher at lower acceleration voltage.
+All the spectra have a Si peak at 1.74 keV. % This is the Si escape peak for some spectra, but not all.
+For all but the Si spectra, the Si K$\alpha$ peak at 1.74 keV is a stray from outside the beam or the Si escape peak from the detector.
+Some spectra have additional signals from elements outside the area of the main beam, like the Mo, Sb and Cu peak in the NW spectra. % pretty sure it is Sb, because of the series of peaks at 3.6, 3.8, 4.1 and 4.3. 
+% discuss both interactin volume and bonus peaks from X-ray strays in the chamber/sample.
+The Sb peaks in the NW spectra are at 3.60, 3.85, 4.10 and 4.35 keV, being the L$\alpha_1$, L$\beta_1$, L$\beta_2$ and L$\gamma_1$ peaks.
+All four Mo spectra have a peak at 0.175 keV, which match best with B K$\alpha$ at 0.183 keV.
+\brynjar{Figure of strays?}
+\brynjar{Finishing sentence for the general observations.}
+
+
+% Sum peaks, to discussion
+% The Si spectra have a sum peak at 3.49 keV, which is the sum of Si K$\alpha$ at 1.74 keV. % discussion: this could be Sb, but not like NW where Sb is a series of peaks. Also say something about the resolution of the detector, which is higher at lower E. And also that Sb cannot be excluded bc. of the K peak. And also that the sum peaks can be tested with low DT. And something here about the bad calibration in AZtec which might make this sum peak as a Sb peak, but I now know that it is a Si peak sum peak and not a Sb peak.
+% The Al spectrum have its highest peak at 1.48 keV and a sum peak at 2.98 keV
+% The Mo spectrum have a sum peak at 4.65 keV, which is the sum of Mo L$\alpha$ at 2.293 keV and Mo L$\beta_1$ at 2.395 keV. % same shape as Mo La  Mo Lb1, i.e. also Mo La+MoLa sum
+% The GaAs spectrum at 30 kV have two small sum peak signals at 18.5 and 19.5 keV, while the NW spectrum at 30 kV with lower DT does not have these peaks. % discussion: results show that sum peaks are lower with lower DT
+
+% Mo double peak
+% GaAs double peak
+% Si stray on Cu
+% also a sum peak at Al 30 kV spectrum (look at DT)
+% Si double count at 3.4 keV which could be Sn (but the E resolution could seperate them Ton thinks at this low keV and Sn would have multiple peaks, cannot exclude bc of the K peak could count with low DT to minimize double counts consequence of AZtecs bad calibration)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 %
