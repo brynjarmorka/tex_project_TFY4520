@@ -103,7 +103,6 @@ SE and BSE imaging was used for locating areas of interest, and SE images were s
 % Counts per second in and out was noted down, but not used in this project.
 See table \cref{tab:method:detector:settings} for the settings used for the different spectra.
 
-\input{tables/detector-settings.tex}
 
 %
 %
@@ -154,6 +153,7 @@ The end goal of this code is to improve understanding of the analysis process, a
 The code is written in Python \cite{python} and uses Jupyter lab 3.4.5 \cite{jupyter}.
 HyperSpy 1.7.1 \cite{hyperspy_1.7.1} was used for the analysis.
 NumPy 1.22. \cite{numpy} is used for calculations, SciPy 1.9.0 \cite{2020SciPy} for fitting and peak finding, and Plotly 5.10.0 \cite{plotly} for plotting.
+All packages are installed with Mamba on Python 3.8.13.
 The repository "eds-analysis"\footnote{\url{https://github.com/brynjarmorka/eds-analysis/}} contains the code developed throughout the semester, and the repository "eds-analysis-final"\footnote{\url{https://github.com/brynjarmorka/eds-analysis-final}} contains the final code.
 The final code is the code which is intended to enhance a users understanding of the analysis steps.
 \brynjar{Make the "eds-analysis-final" repository public.}
@@ -242,3 +242,5 @@ The author started to look at implementation of a factorless quantification meth
 % \section{Data from Mari?}
 % \label{sec:method:mar}
 % \ton{Do I need this? Is it to compare with my results? Or did you mean to use Maris code to get additional results?}
+
+\input{tables/detector-settings.tex}

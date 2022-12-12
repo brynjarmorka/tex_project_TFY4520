@@ -19,69 +19,191 @@ Producing code from scratch is both a time-consuming process and a learning proc
 While developing the code, the author learned a lot about EDS analysis and  ideas emerged for how EDS analysis could be improved.
 This chapter begins with an initial discussion of the qualitative results, and then it connects the sub-problems to the results and work done in the project.
 The order of the sub-problems is the same as in \cref{chap:introduction}, which is based on the work process.
-The chapter ends with a discussion of the \hyperref[mainproblem]{Main problem~\ref*{mainproblem}}.
+The chapter ends with a discussion of the \hyperref[mainproblem]{Main problem}.
 
 
 
+\section{General results from the spectra}
+\label{sec:discussion:general}
+
+This section starts with peak intensities, then the background, and finally some of the strays observed.
 
 
+\subsection{Peak intensities}
+\label{sec:discussion:general:intensities}
+
+% singal-to-noise ratio
+All the spectra have peaks with high peak-to-background ratio, at least for the main peaks. %discuss: sampling good enough? I do not know if i miss some peaks, but the ones i have are nice for qualitative analysis at least.
+Good sampling settings give a high signal-to-noise ratio, which is important for analysis.
+The high peaks in the spectrum are well defined and fit the Gaussian curves well.
+These peaks are good enough for qualitative analysis, but there are some smaller singals which have been harder to interpret.
+A small signal can in some cases be interpreted in a qualitative analysis but is hard to use properly in a quantitative analysis.
+However, interpreting every samll signal as radiation from a specific element is not always correct.
+The small signal of Fe K$\alpha$ in the FIB stub spectrum is an example of this, where there is a 20\% increase of counts to the right of the Mn K$\alpha$ peak.
+It might be that this signal is from Fe, but it might also just be noise or an artifact.
+\cref{tab:theory:Ga-lines} list the Ga-lines and their weights, and it is clear that some lines have very low weights.
+In this project it was decided not to use a hard threshold for the signal-to-noise ratio, which can be helpful in some cases.
+Setting a hard threshold should be based on both litterature and empirical data for the specific detector setup.
+A danger with setting a hard threshold is that it can be too strict, which can lead to missing peaks of elements which are low in concentration.
+If the sampling settings were not good enough, some peaks can be missing in the spectra.
+One example of this is in the NW spectrum: the low As K$\beta$ peak in the 15 kV spectrum has an overvoltage of ~3 keV and is visible, but the Cu K$\alpha$ peak in the 10 kV spectrum with overvoltage of ~2 keV is not visible.
+Multiple data sets on the same area can be used to verify the sampling settings, since missing peaks in one data set can be visible in another data set.
+In general, the signals in the spectra are best in the 30 kV spectra.
+In conclusion, it is assumed that the sampling settings were good enough.
 
 
-
-
-
-
-
-\subsection{Settings?}
-
-Idk, discuss the setup alone or as you go.
-Dead time at around 30\% was recommended by the supervisor of this project, Antonius T. J. von Helvoort, and is well below the problematic dead time of >60\%.
-The dead time on the nanowire area was closer to 20\%, which is what Goldstein \cite[page 223]{goldstein_scanning_2018} recommends.
-
-
-
-
-
-% Pasted from the results:
-
-\subsection{General results from the spectra}
-\label{sec:discussion:qualitative:general}
-
-All the spectra have peaks with high peak-to-background ratio. %discuss: sampling good enough? I do not know if i miss some peaks, but the ones i have are nice for qualitative analysis at least.
 % The zero peak from the Oxford detector is visible in all the spectra as the first peak, with a center at 0.00924 keV.
-In all the spectra, the highest peak is below 5 keV. % discussion: what peaks give the highest counts, with theory and empirical data. detector efficiency? Absorption? Overvoltage? etc
-The zero peak starts before 0 keV and has its maximum at 0.008 keV. % discuss: could this be part of the calibration error in AZtec?
-The GaAs, NW and Mo spectra show clearly that the peaks broaden with higher E, since they have peaks at low and middle to high energy. % discuss why this happens.
-The width of the peaks are quantified with FWHM in the quantitative section below.
-When doing the qualitative analysis, it became clear that the FIB stub was not made of Fe as expected, but rather of Al with a peak at 1.48 keV.
-All the 5 kV spectra decrease more or less linearly from 1 to 5 keV. % discussion: overvoltage
-% Another discovery was that the Cu-tape does not give a good Cu signal.
-% The high peak in the Cu-tape spectra at 0.260 keV are from C and not the Cu L$\alpha$ peak.
-% Only the Cu-tape taken at 30 kV has a Cu peak, but it is very small.
-Even though the Cu spectra at 30 kV has the Cu K$\alpha$ peak, the Cu L$\alpha$ peak is completely missing. % this is very, very strange. ! TODO: Discuss
-\brynjar{Add transition sentence.}
 
-% double peaks, ie peaks which are overlapping
-Some peaks in the spectra are overlapping, which shifts the shape of the peaks.
-An example of this is the As K$\alpha$ peak and the Ga K$\beta$ peak in the NW and the GaAs bulk wafer spectra.
-These peaks are overlapping, but also far enough apart that the peaks are still distinguishable.
-Another example of overlapping peaks is the Mo L$\alpha$ peak and the Mo L$\beta_1$, which are overlapping so much that they are hard to distinguish.
-Since they are harder to distinguish, the peak fitting makes one Gaussian for the two peaks, which is off on both peak centers. % for discussu\ion: which is why the deviation of the Mo L$\alpha$ peak is off in the calibration accuracy table, \cref{tab:results:calibration-peak-accuracy}.
-Overlapping peaks makes counting the signal from specific peaks harder.
-\brynjar{Figure of double peaks?}
+% height of the peaks in relation to the settings
+The heights, or intensities, of the peaks are varying a lot.
+The plots of the spectra in \cref{fig:results:Spectra_Al,fig:results:Spectra_NW} are normalized, but the total counts and maximum counts are inlcuded in \cref{tab:method:detector:settings}.
+No direct pattern between the amount of counts and the settings are apparent.
+Trends observed are that higher counts are obtained by increasing the current or the acceleration voltage, but this also increases the dead time.
+To figure out a pattern, fewer variables should be changed at the same time.
+This was done for the nanowire sample, where the I$_{beam}$ and live time was kept constant.
+Still, a direct pattern is not apparent.
+As stated in Goldstein, "high counts and stable peak structures are critical for successful peak intensity measurements", especially to identify minor and trace constituents \cite[page 318]{goldstein_scanning_2018}.
+The relation between the cound and settings could be further investigate to figure out which settings yield the best spectra in terms of good count statistics.
+
+% the highest peaks, 
+The peak with the highest count is in all the spectra below 5 keV.
+For the spectra with strong K and L peaks from the same element, i.e. the lines of Ga, As, and Mo, the L-peaks are more intense than the K-peaks.
+In the Mo 30 kV spectrum, the K$\alpha$ peak is only 2\% the height of the L$\alpha$ peak.
+This low intensity of the K$\alpha$ peak is partially due to lower overvoltage, since the peak is above U/2.
+For the Ga and As the relative intensity of the 30 kV spectra in the bulk and nanowire is not similar.
+The K-lines in the bulk sample is around 2 times as intense as the K-lines in the nanowire sample.
+Both spectra are normalized to the L-line og Ga.
+It was expected that the nanowire would give lower intensity, which is why the
+Using \cref{tab:results:ratios} with the ratios of the K-lines to the L-lines, it is clear that even the ratios of Ga and As lines change in the different spectra.
+When applting the theoretically estimated k-factor for the respective spectrum, the ratios get closer to 1, but there is still a spread.
+This implies that the settings for acquiering spectras is important for the intensity of the peaks, which again is important for the quantitative analysis.
+Investigation of which settings yield better spectra should improve the accuracy of the quantitative analysis.
+
+
+% Missing Cu La peak
+Even though most of the spectra appear to have good intensities and good signal-to-noise ratio, there are some strange results.
+From the results it is apparent that the Cu-tape is giving a bad Cu signal and should not be used as a Cu reference.
+The strongest signal from the Cu-tape is from C, which is probably from the sticky tape material.
+Regardless, the strange result is the completely missing signal from Cu L$\alpha$ in the Cu-tape 30 kV spectrum.
+This spectrum have a clear signal from Cu K$\alpha$ and Cu K$\beta$, but no signal from Cu L$\alpha$ at all.
+In general the L-peaks are stronger than the K-peaks.
+In the 30 kV NW spectrum, Mo is giving a low but clear signal at the L$\alpha$ line, and even a small signal at the L$\beta$ and Ll lines, but no singal from the Mo K$\alpha$ line.
+This is not strange as even the K-line signal from pure Mo is quite low.
+The missing Cu L$\alpha$ signal is still strange when comparing to the NW spectra, because the Cu signal in the NW spectra all have a clear signal from Cu L$\alpha$ which is around 30\% stronger than the Cu K$\alpha$ signal.
+When taking the Cu spectra, the Cu-tape got visually deformed by the beam, which can be part of the explaination of the missing signal.
+Finding both K-lines and L-lines is an important aspect of qualitative EDS analysis, because a present K-line without a L-line indicate that the identified element is not the correct one.
+The result with the missing L-line show that, unfortunately, it is possible to acquire spectra where a K-line is present, but the L-line is missing.
+Further investigating this could reveal if this is a issue with the Cu-tape, the detector, the settings, or an artifact that can appear in other spectra.
+
+
+% width of the peaks
+From the spectra shown and \cref{tab:results:ratios} including the FWHM, it is clear that the peaks broaden with higher E.
+Increase of the FWHM with E is expected, as explained in subsection 16.1.1 in Goldstein \cite{goldstein_scanning_2018}.
+From the FWHM the resolution of the detector can be calculated with a conversion factor, since the resolution of EDS is defined as the FWHM of Mn K$\alpha$.
+This was done by Skomedal, and was considered to be a part of this project too.
+However, other parts of the project was prioritized.
+
+
+One of the prioritized parts was to do calibrations, and it was quantified that the AZtec calibration was off, which might be connected to the center of the zero peak.
+With the most accurate calibration, the zero peak did not have its center at 0 keV.
+In the spectra the zero peak start before 0 keV and has its maximum at 0.008 keV.
+Since AZtec is a black box, it is not known how the calibration is done.
+If AZtec is using the zero peak to calibrate, this could be the reason for less accurate calibration.
+Another possibility is that the calibration was done on installation, and that the detector has not been calibrated since then.
+\ton{This paragraph it intended to say something about the zero peak and connect it to AZtec. Do you find it useful?}
+
+
+%  overlapping peaks
+A challenge which is unnafected by poor calibration is overlapping peaks.
+Section 20.3 in Goldstein explains how to deal with overlapping peaks \cite{goldstein_scanning_2018}.
+Dealing with overlapping peaks in model fitting is just modelling two Gaussians on top of each other.
+In the self produced fitting, the Gaussians have three parameters: center, standard deviation and height.
+Model fitting in HyperSpy is done with fixed centers, which means that the peak centers cannot change.
+Calibration can affect the result if fitting is done with a model where the peak centers cannot change.
+If the center of the smaller peak is off, larger peak will dominate the fitting and the smaller peak will get a lower intensity than it should.
+This problem is not present in the self produced fitting, since the peak centers are free parameters.
+An example of slightly overlapping peaks is the As K$\alpha$ and Ga K$\beta$ peaks in the NW and bulk spectra.
+An example of severely overlapping peaks is the Mo L$\alpha$ and Mo L$\beta_1$ peaks in the Mo spectra.
+The Mo L$\alpha$ peak has one of the highest error in the peak accuracy in \cref{tab:results:calibration-peak-accuracy}, where the calibrations are compared. The reason for this is that the Mo L$\alpha$ peak is overlapping with the Mo L$\beta_1$ peak, and the automatic peak finder used to find the peaks here cannot distinguish between the two peaks.
+Thus, the severely overlapping peak is modelled as a single peak which has its center shifted slightly to the left.
+That is why all the calibrations miss the Mo L$\alpha$ peak with 20 eV.
+This issue was fixed manually when making the Mo L$\alpha$ and Mo K$\alpha$ calibration, and can with more time be fixed in the automatic peak finder.
+\brynjar{Figure of overlapping peaks?}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{The background}
+\label{sec:discussion:general:background}
+% the background with shape and intensity
+Another problem in the self produced code that can imporve with more time is fitting the background.
+An idea that emerged towards the end of the project was to model the background as a spline.
+A spline is a piecewise polynomial function connected in knots.
+The fit of the background was observed to be bad at lower energies, where the background fit is more crucial for finding the right intensity of a peak.
+It is more crucial, because the background change more with energy at lower energies.
+The first iteration of the spline background would be to have the knot at the highest peak, because of the observation that the background decrease to around 50-10\% after the highest peak.
+
+
+% highest peak effect on the background
+All the spectra show the same behavior that the background is higher before the highest peak than after it.
+In the 30 kV GaAs spectrum the background is at 2200 counts before the overlapping L-line peaks, and falls to 500 counts after the peaks.
+In the 30 kV Si spectrum the background falls from 2000 to 200 counts after the main peak.
+The background shape in Si 30 kV is almost linear from 0.6 to 1.6 keV ending at 2000 counts, then it drops to 200 after the peak at 1.6-1.9 keV.
+After the drop the peak follow the expected shape, illustrated in \cref{fig:theory:background_illustration}.
+In the 5 and 10 kV Si spectra the background falls from 2500 to 1000 counts after the main peak.
+In the Mo 10 kV spectrum, which is the spectrum with overall most background counts, the background falls from 5400 to 2900 counts after the main peak.
+In the nanowire spectra, which in general have the lower background counts, the background falls around 50\% after the high L-peaks.
+The reason for the higher background to the left of the highest peak is that the X-rays formed with energy above the highest peak can be absorbed and re-emitted with the energy of the line in the highest peak.
+When the code for the background was written, the effect of the highest peak was not considered, which resulted in visible bad background fits at the lower energies.
+This is shown in \cref{fig:results:fitting_gaas}.
+This effect is changing the value of the background, and also its shape.
+
+
+% background shape
+The shape of the background is varying between the spectra, and is affected by the peaks and the acceleration voltage.
+All the 5 kV spectra decrease more or less linearly from 1 to 5 keV.
+This is due to the overvoltage, which lowers the possible background radiation to zero after 5 keV in the 5 kV spectra.
+In the GaAs, Si and Mo the relative height of the background decrease with higher acceleration voltage.
+The background in the Cu spectra increase with higher acceleration voltage.
+The most similar background signal over different voltages are in the NW spectra. % discuss: thin sample -> less background?
+This similarity is due to the fact that thin samples produce less background radiation than bulk samples.
+
+% There is nothing to "break" on??? Cu 5 kV and 10 kV with almost no background
+
 
 % background, 
 % bg increase with lower kV, 
 % bg shape, 
-The signal from the background is another factor which makes counting more difficult.
 % TON comment: 
 %   Need to account for or fit the background, to be able to substract it and get right peak counts.
 %   Could keep these comments here, but more clear to split results and discussion/interpretation.
 %   Think how this representation and later discussion will link to set aim of the work ("better EDX").
 In general, background in the acquired spectra is low, but with different shapes.
-In the GaAs, Si and Mo the height of the background decrease with higher acceleration voltage.
-The background in the Cu spectra increase with higher acceleration voltage.
-The most similar background signal over different voltages are in the NW spectra. % discuss: thin sample -> less background?
+
 The values of the background radiation is in general very low and almost flat above the highest peak in the spectra. % discussion: nothing to reduce the speed of the e-
 % For example, the Cu 10 kV spectrum have its highest peak at 0.5 keV, and the background is almost zero above 0.5 keV. not the best example
 The Al spectrum background is high before the high Al K$\alpha$ peak, and much lower after the high peak.
@@ -91,7 +213,7 @@ The same behavior is clearly true in the Si spectra.
 % yes, it is absorption at that energy.
 The peak where the background change is the highest peak, Si K$\alpha$.
 The background values in Si 30 kV are 10 times higher before than after the highest peak.
-The background shape in Si 30 kV is almost linear from 0.6 to 1.6 keV, drops to 10\% height from 1.6 to 1.9 keV, and then follows the expected background shape from 1.9 keV.
+
 The expected background shape is illustrated in \brynjar{Make a drawing of the background.} % discussion: explain that the bg is dependent on a peak (ie material) being present. This makes fiting hard, since there are some peak-dependency which is hard to predict.
 %discussion: model the peak as more than one polygon added together, since the shape changes. For further works. That is called spline.
 All the other spectra show the same behavior with their highest peak and the peaks effect on the background as the Al and Si spectra.
@@ -104,9 +226,42 @@ In general, the background signals are low, but their different shapes and heigh
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{The strays and artifacts}
+\label{sec:discussion:general:strays}
 % discussion: understanding the strays properly is actually helpful for the qualitative analysis, since some elements can be excluded based on the strays and some strays are only present in certain materials.
 % Si stray in all spectra
 % stray in NW outside beam, Mo, Cu and Sb
+
+
+% TODO: include unknown peaks here
+
+
+% TODO: Log-scale plots show strays better. Not used in the thesis, but could be used in the future. Is common.
+
+
+% getting counts, but not coincidence peaks. Use:
+% Dead time at around 30\% was recommended by the supervisor of this project, Antonius T. J. von Helvoort, and is well below the problematic dead time of >60\%.
+% The dead time on the nanowire area was closer to 20\%, which is what Goldstein \cite[page 223]{goldstein_scanning_2018} recommends.
 
 
 % TON There are many different strays. SOme were mentioned above. This paragraph is short. Maybe better to have it as a header in discussion?
@@ -122,7 +277,6 @@ Some spectra have additional signals from elements outside the area of the main 
 The Sb peaks in the NW spectra are at 3.60, 3.85, 4.10 and 4.35 keV, being the L$\alpha_1$, L$\beta_1$, L$\beta_2$ and L$\gamma_1$ peaks.
 All four Mo spectra have a peak at 0.175 keV, which match best with B K$\alpha$ at 0.183 keV.
 \brynjar{Figure of strays?}
-\brynjar{Finishing sentence for the general observations.}
 
 
 % Sum peaks, to discussion
@@ -131,13 +285,12 @@ All four Mo spectra have a peak at 0.175 keV, which match best with B K$\alpha$ 
 % The Mo spectrum have a sum peak at 4.65 keV, which is the sum of Mo L$\alpha$ at 2.293 keV and Mo L$\beta_1$ at 2.395 keV. % same shape as Mo La  Mo Lb1, i.e. also Mo La+MoLa sum
 % The GaAs spectrum at 30 kV have two small sum peak signals at 18.5 and 19.5 keV, while the NW spectrum at 30 kV with lower DT does not have these peaks. % discussion: results show that sum peaks are lower with lower DT
 
-% Mo double peak
-% GaAs double peak
 % Si stray on Cu
 % also a sum peak at Al 30 kV spectrum (look at DT)
 % Si double count at 3.4 keV which could be Sn (but the E resolution could seperate them Ton thinks at this low keV and Sn would have multiple peaks, cannot exclude bc of the K peak could count with low DT to minimize double counts consequence of AZtecs bad calibration)
 
 
+% Cu 10 kV is almost only noise. Scaled badly?
 
 
 
@@ -309,7 +462,7 @@ This result imply that the theoretically calculated k-factors could be better fo
 \ton{I am happy with the discussion untill this point (08.12.22). How would you rate it?}
 
 
-% double peaks in sum, why to use modeled peaks and not raw counts.
+% overlapping peaks in sum, why to use modeled peaks and not raw counts.
 
 
 \subsection{Removing the background with model fitting}
@@ -407,7 +560,7 @@ The model could be used to quantify the elements in the sample, but this was not
 \brynjar{Do I want to do this?}
 
 % identyfy peaks with peak finder
-% problem: double peaks, eg. Mo
+% problem: overlapping peaks, eg. Mo
 % problem: includes zero peak. Is that an issue?
 The first step in creating a model is to identify the peaks.
 The peaks are assumed to be Gaussian curves.
@@ -509,7 +662,7 @@ The next sub-problem was to find out when the analysis fails, both in AZtec and 
 % High peak to background.
 % Should be a sample that is easily available. Cu tape would be nice, since it is in all labs and samples.
 % Mo is far apart, but looks bad.
-% Mo is also harder to fit automatically, because of the close double peak.
+% Mo is also harder to fit automatically, because of the overlapping peak.
 
 
 

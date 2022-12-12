@@ -133,7 +133,7 @@ The initial calibration is the one from AZtec, and is the one used in the spectr
 The AZtec calibration has a left shift for the L-peaks and a right shift for the K-peaks.
 The second type of calibration is the one given by the model fit in HyperSpy.
 The third type is from the self-made model fit, using the distance between two high intensity and far apart peaks to calibrate the energy scale.
-The third type is both calculated with the Ga L$\alpha$ and As K$\alpha$ peaks in the GaAs 30 kV spectrum, and with Mo L$\alpha$ and Mo K$\alpha$ peaks in the Mo 30 kV spectrum.
+The third type use Ga L$\alpha$ and As K$\alpha$ peaks in the GaAs 30 kV spectrum, and use Mo L$\alpha$ and Mo K$\alpha$ peaks in the Mo 30 kV spectrum.
 
 % the values
 Values for the four calibrations are given in \cref{tab:results:calibrations}, i.e. the dispersion and the offset.
@@ -182,7 +182,7 @@ The order are: Al, Si, Cu, Mo, GaAs bulk, GaAs NW.
 % Al alloy is normally with Mg and Si, while Mn is not that common. Can discuss if Si is stray or in the alloy.
 
 % figure Spectra_Al.png
-\begin{figure}[h!]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.90\textwidth]{figures/each_spectra/Al_everything.png}
     \caption{
@@ -317,7 +317,7 @@ The peak heights look dependent on the acceleration voltage, but the plot hides 
         The background of the 5 kV spectrum is higher than the other spectra, which is due to the normalization to the tallest peak, because the tallest peak in the 5 kV spectrum is not Mo L$\alpha$, but the peak at 0.18 keV.
         % 
         % The Mo K$\alpha$ peak at 17.47 keV is the 30 kV spectrum, with a high noise level.
-        % The high double peak is Mo L$\alpha$ at 2.29 keV and Mo L$\beta$ at 2.39 keV.
+        % The high overlapping peak is Mo L$\alpha$ at 2.29 keV and Mo L$\beta$ at 2.39 keV.
         % The Mo L$\beta$1 peak at 2.49 keV has the weight 0.327.
         % In the Mo spectra the Si K$\alpha$ line is just barely visible as a very small peak, and is not annotated.
         % The peak at 2.01 keV is the Mo Ll and the peak at 2.83 keV is the Mo M$\gamma$3.
@@ -336,7 +336,7 @@ In other words, the 5 kV spectrum is scaled to another peak, because the Mo L$\a
 The tallest peak in the 5 kV spectrum is the 0.18 keV peak, which is also visible in the other three spectra.
 The energy of 0.18 keV only match with the B K$\alpha$ line at 0.1833 keV. % discuss, it is really this peak? The accuracy is low at low E, use the talbe which show that C Ka miss a lot.
 The tallest peak in the 10, 15 and 30 kV spectra is the Mo L$\alpha$ peak at 2.29 keV, which is contributed by the Mo L$\beta$1 peak at 2.39 keV.
-This peak is a double peak, i.e. a peak with two overlapping Gaussian which is barely distinguishable.
+This one peak consists of two overlapping Gaussian, which are barely distinguishable.
 The HyperSpy database have the energy and weight of two other Mo peaks visible in the spectrum, which are the Mo Ll and Mo L$\gamma$3 peaks at 2.01 keV and 2.83 keV.
 %
 % TODO: write about the Mo Ll and Mo L$\gamma$3 peaks in the teory section.
@@ -409,7 +409,7 @@ The sum peaks of the K peaks are only visible in the 30 kV spectrum. % discuss: 
         The spectra from the nanowire, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
         % What the sample is. The legen colors, What is annotated. Special features present are peaks, sum peaks and eventually unknown peaks. Spectra taken ... 
         The peaks are annotated with the theoretical energy.
-        The two unknown peaks and zero peak are annotated with an asterisk, as they do not have a known theoretical value.
+        The unknown peak is annotated with an asterisk, as it does not have a known theoretical value.
         The dashed lines mark Ga L$\alpha$ and As L$\alpha$, with relative intensities in the 30 kV spectrum at 1 and 0.82.
         % The spectra of the nanowire sample part.
         % This spectrum has the most peaks, and contains  C, O, Ni, Cu, Ga, As, Si, Mo and Sb, and maybe N.
@@ -430,6 +430,7 @@ One of the peaks is at 0.389 keV, which could be N K$\alpha$ peak, but it could 
 The Ni signal is both from the L$\alpha$ at 0.85 keV and the K$\alpha$ at 7.49 keV.
 The Sb signal is from the L$\alpha$ at 3.6 keV, L$\beta$1 at 3.8 keV, and Sb L$\beta$1 at 4.1 keV. % discuss: the 3.6 peak could be smt else like ??, but the peak series show that is is Sb
 The Mo signal is both from the L$\alpha$ at 2.29 keV and the K$\alpha$ at 17.47 keV, but the K peak is very weak and thus not included in the plot.
+Mo is also giving a small signal at 2.02 keV, which is the Ll line.
 The Cu signal is both from the L$\alpha$ at 0.92 keV and the K$\alpha$ at 8.05 keV.
 The tallest peak in all four spectra is the Ga L$\alpha$ peak at 1.1 keV.
 In the 5 kV spectrum the C K$\alpha$ peak at 0.26 keV is equally high as the Ga L$\alpha$ peak.
