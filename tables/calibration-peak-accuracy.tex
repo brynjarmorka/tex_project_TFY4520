@@ -3,15 +3,14 @@
 \begin{table}[p]
     \centering
     \caption{
-        % TODO: give the peak accuracy in ev, not percent. Or eV and percent?
-        Peak accuracy of the different calibration methods on 30 kV spectra: NW, Mo, Si, Al, Cu. % TODO: reformulate
-        The other acceleration voltages gave similar results.
-        The accuracy here is the deviation from the theoretical peak to the measured peak.
+        % Comment in this: The other acceleration voltages gave similar results.
+        Peak accuracy in the different calibration methods on 30 kV spectra: NW, Mo, Si, Al, Cu. % TODO: reformulate
+        The accuracy here is the measured peaks deviation in eV from the theoretical peak.
         The percentage deviation is also given.
-        The measured peak is the fitted center of the peak.
+        % The measured peak is the fitted center of the peak.
         % discussion: The Mo L$\alpha$ deviates much because the peak is not well fitted.
         % The C K$\alpha$ is fitted well, but deviates much more than all the other peaks.
-        The self-made calibration was done on two spectra: GaAs and Mo. % discussion: Mo is more far apart than GaAs.
+        The self-made calibration was done on two 30 kV spectra: GaAs and Mo. % discussion: Mo is more far apart than GaAs.
         % One was done on Ga L$\alpha$ and As K$\alpha$ from the 30 kV measurement on the GaAs wafer.
         % The other was done on the more far apart peaks Mo L$\alpha$ and Mo K$\alpha$ from the 30 kV measurement on the Mo wafer.
         The HyperSpy calibration was done on the GaAs spectrum.
@@ -19,22 +18,22 @@
     }
     \label{tab:results:calibration-peak-accuracy}
     \begin{tabular}{cccccc}
-        Peak         & Theoretical & AZtec                 & HyperSpy              & Ga L$\alpha$ \& As K$\alpha$ & Mo L$\alpha$ \& Mo K$\alpha$ \\
-                     & [keV]       & [eV]                  & [eV]                  & [eV]                         & [eV]                         \\
+        Peak         & Theoretical [keV] & AZtec  [eV]           & HyperSpy [eV]         & GaAs bulk 30 kV [eV]  & Mo 30 kV [eV]         \\ %Ga L$\alpha$ \& As K$\alpha$ & Mo L$\alpha$ \& Mo K$\alpha$ \\
+        %  & [keV]       & [eV]                  & [eV]                  & [eV]                         & [eV]                         \\
         \hline
-        As L$\alpha$ & 1.2819      & 12.8,\,\,\,    1.0\%  & 5.6,\,\,\,    0.4\%   & 5.4,\,\,\,    0.4\%          & 7.2,\,\,\,    0.6\%          \\
-        As K$\alpha$ & 10.5436     & -21.3,\,\,\,   -0.2\% & -2.7,\,\,\,   -0.0\%  & -1.1,\,\,\,   -0.0\%         & 9.8,\,\,\,    0.1\%          \\
-        Ga L$\alpha$ & 1.098       & 11.5,\,\,\,    1.0\%  & 3.8,\,\,\,    0.3\%   & 3.5,\,\,\,    0.3\%          & 5.1,\,\,\,    0.5\%          \\
-        Ga K$\alpha$ & 9.2517      & -14.2,\,\,\,   -0.2\% & 0.9,\,\,\,    0.0\%   & 2.2,\,\,\,    0.0\%          & 11.9,\,\,\,    0.1\%         \\
-        Cu L$\alpha$ & 0.9295      & 16.4,\,\,\,    1.8\%  & 8.3,\,\,\,    0.9\%   & 8.0,\,\,\,    0.9\%          & 9.4,\,\,\,    1.0\%          \\
-        Cu K$\alpha$ & 8.0478      & -9.2,\,\,\,   -0.1\%  & 2.5,\,\,\,    0.0\%   & 3.7,\,\,\,    0.0\%          & 12.1,\,\,\,    0.2\%         \\
-        Mo K$\alpha$ & 17.4793     & -56.8,\,\,\,   -0.3\% & -18.8,\,\,\,   -0.1\% & -15.8,\,\,\,   -0.1\%        & 1.9,\,\,\,    0.0\%          \\
-        Mo L$\alpha$ & 2.2932      & 24.0,\,\,\,    1.0\%  & 19.7,\,\,\,    0.9\%  & 19.7,\,\,\,    0.9\%         & 22.5,\,\,\,    1.0\%         \\
-        Si K$\alpha$ & 1.7397      & 2.9,\,\,\,    0.2\%   & -3.0,\,\,\,   -0.2\%  & -3.2,\,\,\,   -0.2\%         & -1.0,\,\,\,   -0.1\%         \\
-        Al K$\alpha$ & 1.4865      & 3.0,\,\,\,    0.2\%   & -3.7,\,\,\,   -0.2\%  & -3.9,\,\,\,   -0.3\%         & -1.9,\,\,\,   -0.1\%         \\
-        Cu K$\alpha$ & 8.0478      & -9.3,\,\,\,   -0.1\%  & 2.4,\,\,\,    0.0\%   & 3.5,\,\,\,    0.0\%          & 11.9,\,\,\,    0.1\%         \\
-        C K$\alpha$  & 0.2774      & -8.2,\,\,\,   -3.0\%  & -18.3,\,\,\,   -6.6\% & -18.7,\,\,\,   -6.7\%        & -17.9,\,\,\,   -6.5\%        \\
+        As L$\alpha$ & 1.2819            & 12.8,\,\,\,    1.0\%  & 5.6,\,\,\,    0.4\%   & 5.4,\,\,\,    0.4\%   & 7.2,\,\,\,    0.6\%   \\
+        As K$\alpha$ & 10.5436           & -21.3,\,\,\,   -0.2\% & -2.7,\,\,\,   -0.0\%  & -1.1,\,\,\,   -0.0\%  & 9.8,\,\,\,    0.1\%   \\
+        Ga L$\alpha$ & 1.098             & 11.5,\,\,\,    1.0\%  & 3.8,\,\,\,    0.3\%   & 3.5,\,\,\,    0.3\%   & 5.1,\,\,\,    0.5\%   \\
+        Ga K$\alpha$ & 9.2517            & -14.2,\,\,\,   -0.2\% & 0.9,\,\,\,    0.0\%   & 2.2,\,\,\,    0.0\%   & 11.9,\,\,\,    0.1\%  \\
+        Cu L$\alpha$ & 0.9295            & 16.4,\,\,\,    1.8\%  & 8.3,\,\,\,    0.9\%   & 8.0,\,\,\,    0.9\%   & 9.4,\,\,\,    1.0\%   \\
+        Cu K$\alpha$ & 8.0478            & -9.2,\,\,\,   -0.1\%  & 2.5,\,\,\,    0.0\%   & 3.7,\,\,\,    0.0\%   & 12.1,\,\,\,    0.2\%  \\
+        Mo K$\alpha$ & 17.4793           & -56.8,\,\,\,   -0.3\% & -18.8,\,\,\,   -0.1\% & -15.8,\,\,\,   -0.1\% & 1.9,\,\,\,    0.0\%   \\
+        Mo L$\alpha$ & 2.2932            & 24.0,\,\,\,    1.0\%  & 19.7,\,\,\,    0.9\%  & 19.7,\,\,\,    0.9\%  & 22.5,\,\,\,    1.0\%  \\
+        Si K$\alpha$ & 1.7397            & 2.9,\,\,\,    0.2\%   & -3.0,\,\,\,   -0.2\%  & -3.2,\,\,\,   -0.2\%  & -1.0,\,\,\,   -0.1\%  \\
+        Al K$\alpha$ & 1.4865            & 3.0,\,\,\,    0.2\%   & -3.7,\,\,\,   -0.2\%  & -3.9,\,\,\,   -0.3\%  & -1.9,\,\,\,   -0.1\%  \\
+        Cu K$\alpha$ & 8.0478            & -9.3,\,\,\,   -0.1\%  & 2.4,\,\,\,    0.0\%   & 3.5,\,\,\,    0.0\%   & 11.9,\,\,\,    0.1\%  \\
+        C K$\alpha$  & 0.2774            & -8.2,\,\,\,   -3.0\%  & -18.3,\,\,\,   -6.6\% & -18.7,\,\,\,   -6.7\% & -17.9,\,\,\,   -6.5\% \\
         \hline
-        RMS  [eV]    &             & 14.75                 & 4.62                  & 4.55                         & 9.57
+        RMS  [eV]    &                   & 14.75                 & 4.62                  & 4.55                  & 9.57
     \end{tabular}
 \end{table}

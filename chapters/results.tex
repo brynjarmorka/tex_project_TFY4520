@@ -16,13 +16,12 @@
 
 % \section{Introduction}
 % \label{sec:results:intro}
-The results are presented in this chapter.
-The results are presented as plots and tables, and explained in the text.
+The results are presented in this chapter as plots and tables, and explained in the text.
 First qualitative then quantitative results are presented.
 All the spectra taken were qualitatively analyzed.
 Only the GaAs bulk spectra was quantitatively analyzed.
 The qualitative analysis starts with the calibration of the spectra, and then the spectra from the six sampled areas are presented.
-The quantitative analysis starts with analysis done in AZtec, then show how the ratio of Ga to As singal is connected to the k-factors, and finally a quantitative analysis is done with the CL method in HyperSpy of the GaAs bulk spectrum.
+The quantitative analysis shows analysis done in AZtec, then quantify Ga and As with the CL ratio, and finally use the CL method in HyperSpy.
 
 
 % Ton: flytte figuren under til 4.1
@@ -84,39 +83,50 @@ The spectra are presented as plots and the calibrations are presented in tables.
 \subsection{Initial plot}
 \label{sec:results:qualitative:initial_plot}
 
-The initial plots are only showing the GaAs 30 kV spectrum, while all the spectra are plotted in \cref{sec:results:qualitative:each_sample_area}.
-These two plots use the same calibration, which is the one from AZtec.
-
-
-% AZtec
-
-\brynjar{Take a screenshot of the AZtec plot of GaAs 30 kV.}
-
-% HyperSpy
-The spectrum from the GaAs bulk wafer taken on 30 kV is shown in \cref{fig:GaAs30kV_HS}.
-This plot was made with HyperSpy, which utilize Matplotlib for plotting.
+% AZtec and HyperSpy
+The initial plots are \cref{fig:GaAs30kV_AZ} and \cref{fig:GaAs30kV_HS}, showing the GaAs 30 kV spectrum.
+In \cref{sec:results:qualitative:each_sample_area} all the spectra are presented.
+The initial two plots use the calibration from AZtec.
+The first figure is two sceen shots from the AZtec software, and the second figure is a plot from HyperSpy.
+In the upper AZtec plot, Ga and As are annotated.
+In the lower AZtec plot, Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
+AZtec also give the atomic percent of the elements in these plots.
+The HyperSpy plot utilize the Python package Matplotlib for plotting.
 The plotting in HyperSpy can add the theoretical peak centers as vertical lines, which is done in the plot for Ga and As.
 The height of the line show an estimate of the weight of the peak.
 In the plot it is clear that the calibration is somewhat off, since the line positions does not match the center of the peaks.
-In the following section, the spectrum is recalibrated with self produced code using Scipy, and plotted with Plotly to more clearly visualize the spectra details.
+In the following section, the spectrum is calibrated using Scipy, and plotted with Plotly to more clearly visualize the spectra details.
+
+% AZtec figure
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_lin.PNG}
+    \\[2em]
+    \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_lin_scaled.PNG}
+    \caption{
+        The spectrum of the GaAs bulk at 30 kV, from AZtec.
+        The figure shows the whole spectrum with Ga and As annotated, and a cropped version to show the smaller peaks where Si, O and C also are annotated.
+    }
+    \label{fig:GaAs30kV_AZ}
+\end{figure}
+
 
 % add figure figures/GaAs30kV_HS.png
-\begin{figure}[h]
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.70\textwidth]{figures/GaAs30kV_HS.png}
+    \includegraphics[width=0.95\textwidth]{figures/GaAs30kV_HS.png}
     \caption{
-        The GaAs bulk spectrum taken at 30 kV.
-        The vertical lines are the theoretical peak centers, with weights as heights.
+        The GaAs bulk spectrum taken at 30 kV, plotted with HyperSpy.
+        The vertical lines are the theoretical peak centers.%, with weights as heights.
         (a) whole spectrum.
         (b) cropped to the L-peaks.
         (c) cropped to the K-peaks.
         (d) Ga K$\alpha$ peak.
-        This plot has the calibration from AZtec, and it is clear that the line position is deviating from the center of the peaks.
-        This plot was made with HyperSpy, which utilize Matplotlib.
+        % This plot has the calibration from AZtec, and it is clear that the line position is deviating from the center of the peaks.
+        % This plot was made with HyperSpy, which utilize Matplotlib.
     }
     \label{fig:GaAs30kV_HS}
 \end{figure}
-
 
 
 
@@ -154,10 +164,39 @@ In the qualitative section, the effect of the different calibrations on the spec
 \input{tables/calibration-peak-accuracy.tex}
 
 
+% Peak finding and fitting
+For the third type of calibration, the peaks were located and fitted to Gaussians, and the background was fitted as a polynomial.
+The fit of the 30 kV GaAs spectrum is shown in \cref{fig:results:fit_GaAs30kV}.
+The fit was done with a background polynomial of order 6 and 12, and both the fit and the background is plotted.
+Some of the peaks had too low prominence to be detected by \verb|scipy.signal.find_peaks|, like the Si K$\alpha$ peak.
+The accuracy of the fit was quantified as the root mean square error (RMSE) between the fitted curve and the data, and the RMSE is given in the subplots.
+
+% discuss: the fit is best at 12th order. The fit is quite good, but two things to improve are the peak finder and the shape of the background.
+
+% make figure with 4 subfigures.
+% fit_GaAs30kV_whole.png
+% fit_GaAs30kV_K.png
+% fit_GaAs30kV_L.png
+% fit_GaAs30kV_bg.png
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_whole.png}
+    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_K.png}
+    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_L.png}
+    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_bg.png}
+    \caption{
+        The fit of the 30 kV GaAs spectrum.
+        The plots show the raw data (blue markers), the fit (green and orange) and he background (red and purple).
+        The two different fits and backgrounds are with background polynomial of order 6 and 12, respectively.
+        The RMSE for the area of each plot is given on the figures.
+    }
+    \label{fig:results:fit_GaAs30kV}
+\end{figure}
 
 
-
-
+% newpage before next section
+\newpage
 
 \subsection{Spectra from the studied materials}
 \label{sec:results:qualitative:each_sample_area}
@@ -165,7 +204,7 @@ In the qualitative section, the effect of the different calibrations on the spec
 % The goal of this section/the qualitative analysis is ... 
 \cref{fig:results:Spectra_Al} to \cref{fig:results:Spectra_NW} shows the spectra for the six different areas of the sample plotted with Plotly.
 The plots are available as an interactive HTML plots on the GitHub repository
-\brynjar{Upload the HTML files to the GitHub repository.}.
+% \brynjar{Upload the HTML files to the GitHub repository.}.
 The calibration used in these spectra is one with the lowest RMSD, which is the one from the self-made model fit on GaAs.
 The y-axis is normalized to the highest peak value in each spectrum, i.e. the highest peak is always 1. % discuss: why normalize.
 The spectra are cropped to show the region of interest for the different materials.
@@ -181,8 +220,9 @@ The order are: Al, Si, Cu, Mo, GaAs bulk, GaAs NW.
 
 % Al alloy is normally with Mg and Si, while Mn is not that common. Can discuss if Si is stray or in the alloy.
 
+
 % figure Spectra_Al.png
-\begin{figure}[h]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=0.90\textwidth]{figures/each_spectra/Al_everything.png}
     \caption{
@@ -191,7 +231,6 @@ The order are: Al, Si, Cu, Mo, GaAs bulk, GaAs NW.
         The peaks are annotated with the theoretical energy.
         The sum peak and zero peak are annotated with an asterisk, as they do not have a theoretical value.
         The dashed lines mark Al K$\alpha$ and K$\beta$, which together form one peak with relative intensity 1.
-        \ton{Should I write SEM APREO in the figure text?}
         % The tallest peak is at 1.49 keV, and it is the Al K$\alpha$ peak with some signal at the K$\beta$ peak at 1.56 keV.
         % The relative weight for Al K$\beta$ to K$\alpha$ is 0.013 (from HyperSpy).
         % Fe K$\alpha$ at 6.40 keV has a question mark, because the FIB stub was initially expected to be Fe.
@@ -199,7 +238,6 @@ The order are: Al, Si, Cu, Mo, GaAs bulk, GaAs NW.
     }
     \label{fig:results:Spectra_Al}
 \end{figure}
-
 % The Al spectra
 The Al spectrum from the FIB stub is shown in \cref{fig:results:Spectra_Al}.
 As all the other spectra, this spectrum have a zero peak, a C K$\alpha$ peak at 0.260 keV and a O K$\alpha$ peak at 0.51 keV.
@@ -214,41 +252,9 @@ The peaks at 1.25 keV and 5.9 keV indicate that there was Mg and Mn in the sampl
 % discussion: Mn not common, says Ton, but Mg and Si is common in Al alloy.
 The last peak in the spectrum is the Al K$\alpha$ sum peak at 2.97 keV. % discussion: what other peaks could this be.
 The background is increase rapidly and almost linearly from C K$\alpha$ to Al K$\alpha$, and drops to 10\% after the Al K$\alpha$ peak.
-The figure also show that the Al K$\alpha$ absorbes some of the background signal right after the peak.
+The figure also show that the Al K$\alpha$ absorbes part of the background to the right of the peak.
 
 
-%
-%
-%
-% Something more about the shift of the background too, as Ton mentioned in the meeting?
-%
-%
-%
-
-
-
-
-% figure Spectra_Si.png
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.90\textwidth]{figures/each_spectra/Si_everything.png}
-    \caption{
-        The spectra of the pure Si wafer, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
-        % What the sample is. The legen colors, What is annotated. Special features present are peaks, sum peaks and eventually unknown peaks. Spectra taken ... 
-        \ton{Isn't repeating the legend in the figure text a bit redundant?}
-        The peaks are annotated with the theoretical energy.
-        The sum peak, unknown peak and zero peak are annotated with an asterisk, as they do not have a (known) theoretical value.
-        The dashed lines mark Si K$\alpha$ and K$\beta$, which together form one peak with relative intensity 1.
-        %
-        %
-        % All four spectra have one large peak at 1.73 keV, which is the Si K$\alpha$ peak with some signal at the K$\beta$ peak at 1.83 keV.
-        % The relative weight for Si K$\beta$ to K$\alpha$ is 0.028.
-        % The zero peak is marked at 0.008 keV.
-        % After the zero peak there is another sharp peak at 0.080 keV, which is not identified.
-        % The energies annotated are the end of the annotation line, which can deviate a few percent from the actual peak energy.
-    }
-    \label{fig:results:Spectra_Si}
-\end{figure}
 
 % The Si spectra
 The Si spectra from the pure Si wafer sample area is shown in \cref{fig:results:Spectra_Si}.
@@ -264,30 +270,20 @@ The plot show that the background level is dependent og the acceleration voltage
 % Discussion: normalization/sum peaks/DT: can mention the "odd" ratios of the Si sum peak, where 10 kV is tallest, then 30, then 5 and 15 at the same level. This is due to normalization and the fact that the DT was not equal. Use table in methods to show the DT.
 
 
-
-
-% figure Spectra_Cu.png
-\begin{figure}[h]
+% figure Spectra_Si.png
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=0.90\textwidth]{figures/each_spectra/Cu_everything.png}
+    \includegraphics[width=0.90\textwidth]{figures/each_spectra/Si_everything.png}
     \caption{
-        The spectra of the Cu-tape, taken at 5 (blue), 10 (red), and 30 (purple) kV.
-        % What the sample is. The legen colors, What is annotated. Special features present are peaks, sum peaks and eventually unknown peaks. Spectra taken ... 
+        The spectra of the Si wafer, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
         The peaks are annotated with the theoretical energy.
-        The zero peak is annotated with an asterisk, as is does not have a theoretical value.
-        The dashed line mark the C K$\alpha$ peak.
-        The expected, but missing, Cu L$\alpha$ peak is marked.
-        %
-        %
-        % The purple line is 30 kV, the green line is 15 kV, the red line is 10 kV and the blue line is 5 kV.
-        % The Cu sample was Cu-tape from the lab, but the Cu K$\beta$ peak is only barely visible at the 30 kV spectrum.
-        % The highest peak in all three spectra is at 0.260 keV, which is the C K$\alpha$ peak, slightly off from the expected 0.277 keV.
-        % The plot is limited to 9.5 keV, because there are no peaks above that energy.
-        % The Mo L$\alpha$ peak at 2.29 keV is only visible in the 30 kV spectrum.
-        % The Mo L$\alpha$ is marked with a question mark, because there are no Mo K$\alpha$ signal.
+        The sum, unknown and zero peak are annotated with an asterisk, as they do not have a theoretical value.
+        The dashed lines mark Si K$\alpha$ and K$\beta$, which together form one peak with relative intensity 1.
     }
-    \label{fig:results:Spectra_Cu}
+    \label{fig:results:Spectra_Si}
 \end{figure}
+
+
 
 % The Cu spectra
 The Cu spectra from the Cu-tape is shown in \cref{fig:results:Spectra_Cu}.
@@ -303,29 +299,35 @@ The peak heights look dependent on the acceleration voltage, but the plot hides 
 % Discussion: what makes the peaks high and low? This is to be able to get good data, but at the same time not getting biased data by forcing some special stuff.
 
 
-
+% figure Spectra_Cu.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{figures/each_spectra/Cu_everything.png}
+    \caption{
+        The spectra of the Cu-tape, taken at 5 (blue), 10 (red), and 30 (purple) kV.
+        The peaks are annotated with the theoretical energy.
+        The zero peak is annotated with an asterisk, as is does not have a theoretical value.
+        The dashed line mark the C K$\alpha$ peak.
+        The expected, but missing, Cu L$\alpha$ peak is marked.
+    }
+    \label{fig:results:Spectra_Cu}
+\end{figure}
 
 % figure Spectra_Mo.png
-\begin{figure}[h]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=0.90\textwidth]{figures/each_spectra/Mo_everything.png}
     \caption{
         The spectra of the Mo disk, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
         The peaks are annotated with the theoretical energy.
-        The sum peak, unknown peak and zero peak are annotated with an asterisk, as they do not have a (known) theoretical value.
-        The dashed lines mark Mo L$\alpha$ and Mo L$\beta$1, which are barely distinguishable and have a relative intensity in the 30 kV spectrum of 1 and 0.45, respectively.
-        The background of the 5 kV spectrum is higher than the other spectra, which is due to the normalization to the tallest peak, because the tallest peak in the 5 kV spectrum is not Mo L$\alpha$, but the peak at 0.18 keV.
-        % 
-        % The Mo K$\alpha$ peak at 17.47 keV is the 30 kV spectrum, with a high noise level.
-        % The high overlapping peak is Mo L$\alpha$ at 2.29 keV and Mo L$\beta$ at 2.39 keV.
-        % The Mo L$\beta$1 peak at 2.49 keV has the weight 0.327.
-        % In the Mo spectra the Si K$\alpha$ line is just barely visible as a very small peak, and is not annotated.
-        % The peak at 2.01 keV is the Mo Ll and the peak at 2.83 keV is the Mo M$\gamma$3.
-        % Both are with name and energy from the HyperSpy database.
-        % Mo Ll and Mo L$\gamma$3 have weights at 0.041 and 0.011, respectively.
+        The sum, unknown and zero are annotated with an asterisk, as they do not have a theoretical value.
+        The dashed lines mark Mo L$\alpha$ and Mo L$\beta$1. %, which are barely distinguishable and have a relative intensity in the 30 kV spectrum of 1 and 0.45, respectively.
+        The background of the 5 kV spectrum is higher than the other spectra, which is due to the normalization to the tallest peak. %, because the tallest peak in the 5 kV spectrum is not Mo L$\alpha$, but the peak at 0.18 keV.
     }
     \label{fig:results:Spectra_Mo}
 \end{figure}
+
+
 
 % The Mo spectra
 The Mo spectra from the Mo disk is shown in \cref{fig:results:Spectra_Mo}.
@@ -351,38 +353,6 @@ As in the other spectra, the background drops significantly after the tallest pe
 
 
 
-% figure Spectra_GaAs.png
-\begin{figure}[p] % p is to get their own page for floats
-    \centering
-    \includegraphics[width=0.90\textwidth]{figures/each_spectra/GaAs_everything.png}
-    \caption{
-        The spectra of the GaAs bulk, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
-        This is a GaAs wafer, where the ratio of Ga to As is 1:1.
-        The peaks are annotated with the theoretical energy.
-        The sum peak, unknown peak and zero peak are annotated with an asterisk, as they do not have a (known) theoretical value.
-        The dashed lines mark Ga L$\alpha$, As L$\alpha$, Ga K$\alpha$, and As K$\alpha$, with relative intensities in the 30 kV spectrum at 1, 0.41, 0.36, and 0.20, respectively.
-        %
-        %
-        % Both the K-peaks and the L-peaks of Ga and As are visible.
-        % There is a peak at 0.51 keV, which is the O K$\alpha$ peak.
-        % There is a peak at 0.24 keV, which is the C K$\alpha$ peak.
-    }
-    \label{fig:results:Spectra_GaAs}
-\end{figure}
-
-
-% figure Spectra_GaAs.png
-\begin{figure}[p]
-    \centering
-    \includegraphics[width=0.90\textwidth]{figures/each_spectra/GaAs_bg_and_sum_peaks.png}
-    \caption{
-        A cropped in view of the GaAs bulk spectra in \cref{fig:results:Spectra_GaAs}, but with the whole x-axis to show the K-line sum peaks.
-        This plot is to better visualize the background and sum peaks.
-    }
-    \label{fig:results:Spectra_GaAs_bg_and_sum_peaks}
-\end{figure}
-
-
 % the GaAs spectra, with two plots
 The GaAs spectra is shown in \cref{fig:results:Spectra_GaAs} and \cref{fig:results:Spectra_GaAs_bg_and_sum_peaks}.
 The second figure is the same data with a lower y-axis and wider x-axis intervall, to better visualize the background and sum peaks, and also show the K-line sum peaks.
@@ -399,24 +369,44 @@ The sum peaks of the L peaks are visible in the 5, 10 and 15 kV spectra, but not
 The sum peaks of the K peaks are only visible in the 30 kV spectrum. % discuss: no sum peaks in the 15 kV spectrum even though the K-peaks are there. Or, the counts go from around 2 til around 6 in the area of the peaks, but that is super low.
 
 
+% figure Spectra_GaAs.png
+\begin{figure}[h] % p is to get their own page for floats
+    \centering
+    \includegraphics[width=0.90\textwidth]{figures/each_spectra/GaAs_everything.png}
+    \caption{
+        The spectra of the GaAs bulk, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
+        This is a GaAs wafer, where the ratio of Ga to As is 1:1.
+        The peaks are annotated with the theoretical energy.
+        The sum peak, unknown peak and zero peak are annotated with an asterisk, as they do not have a (known) theoretical value.
+        The dashed lines mark Ga L$\alpha$, As L$\alpha$, Ga K$\alpha$, and As K$\alpha$, with relative intensities in the 30 kV spectrum at 1, 0.41, 0.36, and 0.20, respectively.
+    }
+    \label{fig:results:Spectra_GaAs}
+\end{figure}
+
+
+% figure Spectra_GaAs.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{figures/each_spectra/GaAs_bg_and_sum_peaks.png}
+    \caption{
+        A cropped in view of the GaAs bulk spectra in \cref{fig:results:Spectra_GaAs}, but with the whole x-axis to show the K-line sum peaks.
+        This plot is to better visualize the background and sum peaks.
+    }
+    \label{fig:results:Spectra_GaAs_bg_and_sum_peaks}
+\end{figure}
+
+
 
 
 % figure Spectra_NW.png
-\begin{figure}[h]
+\begin{figure}[hb!]
     \centering
     \includegraphics[width=0.90\textwidth]{figures/each_spectra/NW_everything.png}
     \caption{
         The spectra from the nanowire, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
-        % What the sample is. The legen colors, What is annotated. Special features present are peaks, sum peaks and eventually unknown peaks. Spectra taken ... 
         The peaks are annotated with the theoretical energy.
         The unknown peak is annotated with an asterisk, as it does not have a known theoretical value.
         The dashed lines mark Ga L$\alpha$ and As L$\alpha$, with relative intensities in the 30 kV spectrum at 1 and 0.82.
-        % The spectra of the nanowire sample part.
-        % This spectrum has the most peaks, and contains  C, O, Ni, Cu, Ga, As, Si, Mo and Sb, and maybe N.
-        % The line at 0.389 keV could be N K$\alpha$ peak, but it could also be other elements. % Ti Ll, but no Ti K$\alpha$ peak. discussion: what is this peak?
-        % The peak at 0.92 keV which is labeled as Cu K$\alpha$ is also getting a contribution from the Ga Ll peak, at 0.95 keV. % True???
-        % The 30 kV spectrum had a small signal from the Mo K$\alpha$ peak at 17.47 keV, but that signal was weak.
-        % The 10, 15 and 30 kV signal have an unidentified peak at 2.00 keV. % what is this ???
     }
     \label{fig:results:Spectra_NW}
 \end{figure}
@@ -436,7 +426,7 @@ The tallest peak in all four spectra is the Ga L$\alpha$ peak at 1.1 keV.
 In the 5 kV spectrum the C K$\alpha$ peak at 0.26 keV is equally high as the Ga L$\alpha$ peak.
 The As and Ga signals and their ratios are very similar to the GaAs spectrum signal, but the sum peaks are not visible in the NW spectra.
 The Ga and As L$\alpha$ sum peaks could have been visible, but the sum peak signal coincides with the Mo L$\alpha$ peak at 2.2 keV. % discussion: the sum peaks could be missing due to lower DT.
-The 10, 15 and 30 kV signal have and unidentified peak at 2.00 keV, between Si K$\alpha$ and Mo L$\alpha$. % discussion: what is this? Sum peak? No elemet match well. or escape peak (Line - Si Ka)?
+The 10, 15 and 30 kV signal have Mo Ll peak at 2.02 keV, between Si K$\alpha$ and Mo L$\alpha$. % discussion: what is this? Sum peak? No elemet match well. or escape peak (Line - Si Ka)? Figured it was Mo Ll, but can discuss
 
 
 % discussion: se most sum peaks. No escape peak, even though the Si peak from the detector is present.
@@ -485,36 +475,111 @@ The 10, 15 and 30 kV signal have and unidentified peak at 2.00 keV, between Si K
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % initial quantification table
 \begin{table}[h]
     \centering
     \caption{
-        Initial quantification of the GaAs wafer dones in AZtec.
-        The quantification is done with both SEM and TEM methods.
-        % The ratio in the wafer is 1:1, so the correct ratio is 50\% and 50\%, because the results are in atomic percent.
-        \brynjar{The idea was to use both AZtec and HyperSpy, but it did not make sense to use HyperSpy with the discussion I have now. Thus it is only AZtec.}
+        Initial quantification of the GaAs wafer dones in AZtec, treating the data as both a SEM and a TEM signal.
+        The ratio in the wafer is 1:1, so the correct ratio is 50\% and 50\%, because the results are in atomic percent.
     }
     \label{tab:initial_quantification}
     \begin{tabular}{ccccc}
-        $V_\textnormal{acc}$ & SEM   &       & TEM   &       \\
-                             & Ga    & As    & Ga    & As    \\
+        $V_\textnormal{acc}$ & SEM      & SEM      & TEM      & TEM      \\
+                             & Ga       & As       & Ga       & As       \\
         \hline
-        5 kV                 & 50 \% & 50 \% & 50 \% & 50 \% \\
-        10 kV                & 50 \% & 50 \% & 50 \% & 50 \% \\
-        15 kV                & 50 \% & 50 \% & 50 \% & 50 \% \\
-        30 kV                & 50 \% & 50 \% & 50 \% & 50 \%
+        5 kV                 & 46.26 \% & 53.74 \% & 54.22 \% & 45.78 \% \\
+        10 kV                & 48.43 \% & 51.57 \% & 58.23 \% & 41.77 \% \\
+        15 kV                & 49.32 \% & 50.68 \% & 62.13 \% & 37.87 \% \\
+        30 kV                & 51.74 \% & 48.26 \% & 58.11 \% & 41.89 \%
     \end{tabular}
 \end{table}
 
 To do the quantitative analysis, HyperSpy needs k-factors from AZtec.
 The k-factors for Ga and As are given in \cref{tab:results:k-factors}.
 These k-factors are from the GaAs bulk wafer, and AZtec have estimated them theoretically.
-\ton{Shall I list the other k-factors for the other sample areas? I do not think I will use them, since I've only quantified the GaAs bulk wafer. But the other k-factors are results too. Eventually including NW data too, but I do not know that ratio.}
+% \ton{Shall I list the other k-factors for the other sample areas? I do not think I will use them, since I've only quantified the GaAs bulk wafer. But the other k-factors are results too. Eventually including NW data too, but I do not know that ratio.}
 % TON answer:
 % Ok to stick to GaAs.
 % This is pre info and can be in methods.
 % It is crucial point in quantification. The main problem and issues: need to use right k, HT dependent. Is for thin sample, prerequest, but HS let you use it anyhow.
 % Conclusion could be to find a way that the user can verify k-factors or use own k-factors based on standards, like can verify calibrations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 % k-factors table
 \begin{table}[h]
@@ -526,11 +591,11 @@ These k-factors are from the GaAs bulk wafer, and AZtec have estimated them theo
     }
     \label{tab:results:k-factors}
     \begin{tabular}{ccccc}
-        V$_\textnormal{acc}$ [kV] & Line      & Ga k-factor & As k-factor & Ga / As k-factor ratio \\
+        V$_\textnormal{acc}$ [kV] & Line      & Ga k-factor & As k-factor & $k_\textnormal{GaAs} = k_\textnormal{Ga}/k_\textnormal{As}$ \\ %Ga / As k-factor ratio \\
         \hline
-        5                         & L$\alpha$ & 1.21        & 1.086       & 0.898                  \\
-        10                        & L$\alpha$ & 1.31        & 1.223       & 0.934                  \\
-        15                        & L$\alpha$ & 1.331       & 1.259       & 0.946                  \\
+        5                         & L$\alpha$ & 1.21        & 1.086       & 0.898                                                       \\
+        10                        & L$\alpha$ & 1.31        & 1.223       & 0.934                                                       \\
+        15                        & L$\alpha$ & 1.331       & 1.259       & 0.946                                                       \\
         30                        & K$\alpha$ & 4.191       & 3.268       & 0.780
     \end{tabular}
 \end{table}
@@ -545,12 +610,13 @@ To better understand the ratios between Ga and As, the areas under the peaks in 
 Table \cref{tab:results:ratios} gives the ratios between the areas under the peaks for 5, 10, 15 and 30 kV.
 The table compares L$\alpha$ peaks, K$\alpha$ peaks, K$\beta$ peaks and the sum of the peaks.
 The table also lists the FWHM of the peaks.
+The ratios are multiplied with the k-factors from AZtec to get the Cliff-Lorimer quantification results as a ratio.
 
 \input{tables/ratios.tex}
 
 
 One of the adjustments explored was the affect of the calibration on the quantification.
-Using different the calibrations in \cref{tab:results:calibrations} gave different quantification results when using CL in HyperSpy. % discussion: Issue with using Clif-Lorimer since I have bulk and not thin sample.
+Using different the calibrations in \cref{tab:results:calibrations} gave different quantification results when using CL in HyperSpy. % discussion: Issue with using Clif-Lorimer since I have bulk and not thin sample. But the own produced CL just misses harder, it does not break down completely.
 The results are presented in \cref{tab:results:calibration-quantification}.
 The same method was used on all spectra, but the quantification on 10 and 15 kV are obviously wrong.
 

@@ -179,7 +179,7 @@ In the Mo 10 kV spectrum, which is the spectrum with overall most background cou
 In the nanowire spectra, which in general have the lower background counts, the background falls around 50\% after the high L-peaks.
 The reason for the higher background to the left of the highest peak is that the X-rays formed with energy above the highest peak can be absorbed and re-emitted with the energy of the line in the highest peak.
 When the code for the background was written, the effect of the highest peak was not considered, which resulted in visible bad background fits at the lower energies.
-This is shown in \cref{fig:results:fitting_gaas}.
+This is shown in \cref{fig:results:fit_GaAs30kV}, where the fit in general is good but misses on the background between 0 and 2.5 keV.
 This effect is changing the value of the background, and also its shape.
 
 
@@ -191,56 +191,23 @@ In the GaAs, Si and Mo the relative height of the background decrease with highe
 The background in the Cu spectra increase with higher acceleration voltage.
 The most similar background signal over different voltages are in the NW spectra. % discuss: thin sample -> less background?
 This similarity is due to the fact that thin samples produce less background radiation than bulk samples.
+In general, backgrounds in the acquired spectra are low, but with different shapes.
 
 % There is nothing to "break" on??? Cu 5 kV and 10 kV with almost no background
+% discussion: explain that the bg is dependent on a peak (ie material) being present. This makes fiting hard, since there are some peak-dependency which is hard to predict.
+% discussion: nothing to reduce the speed of the e-
 
 
-% background, 
-% bg increase with lower kV, 
-% bg shape, 
-% TON comment: 
 %   Need to account for or fit the background, to be able to substract it and get right peak counts.
-%   Could keep these comments here, but more clear to split results and discussion/interpretation.
 %   Think how this representation and later discussion will link to set aim of the work ("better EDX").
-In general, background in the acquired spectra is low, but with different shapes.
 
-The values of the background radiation is in general very low and almost flat above the highest peak in the spectra. % discussion: nothing to reduce the speed of the e-
+
 % For example, the Cu 10 kV spectrum have its highest peak at 0.5 keV, and the background is almost zero above 0.5 keV. not the best example
-The Al spectrum background is high before the high Al K$\alpha$ peak, and much lower after the high peak.
-Both the value and the shape of the background is different before and after the peak.
-The same behavior is clearly true in the Si spectra.
+% The Al spectrum background is high before the high Al K$\alpha$ peak, and much lower after the high peak.
+% Both the value and the shape of the background is different before and after the peak.
+% The same behavior is clearly true in the Si spectra.
 % TON comment:
 % yes, it is absorption at that energy.
-The peak where the background change is the highest peak, Si K$\alpha$.
-The background values in Si 30 kV are 10 times higher before than after the highest peak.
-
-The expected background shape is illustrated in \brynjar{Make a drawing of the background.} % discussion: explain that the bg is dependent on a peak (ie material) being present. This makes fiting hard, since there are some peak-dependency which is hard to predict.
-%discussion: model the peak as more than one polygon added together, since the shape changes. For further works. That is called spline.
-All the other spectra show the same behavior with their highest peak and the peaks effect on the background as the Al and Si spectra.
-In general, the background signals are low, but their different shapes and heights makes it harder to fit the peaks of the characteristic X-ray lines.
-\brynjar{Figure of background? And figure of fit of background before and after a tall peak?}
-% \ton{The last sentence is meant to be a transition/finishing sentence, but might be too much discussion.} 
-% TON Answer, when this was results:
-% OK overall summary of results. OK for me. Discussion would be on why shapes are different and not follow the formula that describes the background so well..
-% discussion: make the background as a spline. But then, what to do under the peak?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -248,12 +215,14 @@ In general, the background signals are low, but their different shapes and heigh
 
 \subsection{The strays and artifacts}
 \label{sec:discussion:general:strays}
+
+\brynjar{This subsection about stray are not finished.}
 % discussion: understanding the strays properly is actually helpful for the qualitative analysis, since some elements can be excluded based on the strays and some strays are only present in certain materials.
 % Si stray in all spectra
 % stray in NW outside beam, Mo, Cu and Sb
 
 
-% TODO: include unknown peaks here
+TODO: include unknown peaks here
 
 
 % TODO: Log-scale plots show strays better. Not used in the thesis, but could be used in the future. Is common.
@@ -290,7 +259,7 @@ All four Mo spectra have a peak at 0.175 keV, which match best with B K$\alpha$ 
 % Si double count at 3.4 keV which could be Sn (but the E resolution could seperate them Ton thinks at this low keV and Sn would have multiple peaks, cannot exclude bc of the K peak could count with low DT to minimize double counts consequence of AZtecs bad calibration)
 
 
-% Cu 10 kV is almost only noise. Scaled badly?
+Cu 10 kV is almost only noise. Scaled badly?
 
 
 
@@ -556,8 +525,11 @@ The next sub-problem was to find out how the peaks and the background are modell
 The model was built without HyperSpy, with the idea of making every step easier to understand.
 The model was used to be able to remove the background and be able to calibrate the spectrum.
 The model was compared to the HyperSpy model.
-The model could be used to quantify the elements in the sample, but this was not done in this project.
-\brynjar{Do I want to do this?}
+The model was used to quantify the elements with the Cliff-Lorimer method, applying the k-factors from AZtec.
+The quantification was done by comparing the peak ratios, i.e. comparing the area under the peaks, and these results are in \cref{tab:results:ratios}.
+In the table the ratio is also multiplied with the respective k-factors, to get the Cliff-Lorimer quantification.
+\brynjar{Check that you do not explain two different things. This is actually the CL method, when using the k-factors.}
+
 
 % identyfy peaks with peak finder
 % problem: overlapping peaks, eg. Mo
@@ -646,8 +618,6 @@ The spline was not tested in this project, but it could be a good alternative to
 The next sub-problem was to find out when the analysis fails, both in AZtec and HyperSpy.
 % quantification with 
 
-
-\ton{Section about normalization too?}
 
 
 
