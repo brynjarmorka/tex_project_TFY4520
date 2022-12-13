@@ -428,7 +428,6 @@ The peak ratio times the k-factor for 5 kV is 1.1, and the next closest to 1 is 
 This result imply that the theoretically calculated k-factors could be better for high and low voltages.
 
 
-\ton{I am happy with the discussion untill this point (08.12.22). How would you rate it?}
 
 
 % overlapping peaks in sum, why to use modeled peaks and not raw counts.
@@ -439,11 +438,13 @@ This result imply that the theoretically calculated k-factors could be better fo
 Another way to remove the background is to fit a model to the data.
 This step would be done right after loading the data.
 If the raw data contains a zero peak, as is the case for most Oxford instrument EDS detectors, the zero peak needs to be removed before fitting the model.
+This requirement can easily cause problems and confusions, as this step is not very clear in the HyperSpy documentation.
+The reason for this being not that clear, is probably that different detectors have different zero peaks, and the zero peak is not always at the same place.
 The zero peak is removed by skipping the first n channels, where n=30 works well with the data from the GaAs wafer.
 The model fitting is done with the following code:
 
 \begin{quote}
-    \verb|s = s.isig[<zero_peak>:]|
+    \verb|s = s.isig[<zero_peak_last_index>:]|
 
     \verb|m = s.create_model(auto_background=False)|
 
@@ -460,7 +461,10 @@ This model is not fitted, it is just a generated spectrum with the lines of the 
 Eventually, the method \verb|create_model()| can take the boolean argument \verb|auto_add_lines=True|, which will automatically detect the elements in the sample.
 The model consists of a number of components, which can be accessed with \verb|m.components|.
 The components are all the Gaussian peaks in the spectrum, in addition to the background as a 12th order polynomial.
+The Gaussian components are based on the lines that the added elements in \verb|<element_list>| have.
+If \verb|auto_background| is not set to false, HyperSpy will add a 6th order polynomial.
 The order of the polynomial can be changed, but it should be tested by the user to see if it is a good fit.
+6th order polynomials work, but as shown in \cref{fig:results:fit_GaAs30kV}, the 12th order polynomial has a lower RMS error and is thus preferred.
 Further, the model must be fitted.
 
 \begin{quote}
@@ -493,6 +497,7 @@ Since the background is one of the components in m, it is fitted with the code l
 The quantification after model fitting is done in the same way as in \cref{sec:discussion:steps:quantification:linear}, but with intensity from the model instead of the signal.
 When modelling GaAs, the model can add the intensity from both K-lines and L-lines.
 Since AZtec only gives the k-factors for either the K-lines or the L-lines, the user must remove the lines without k-factors before quantification.
+As explained in \cref{sec:discussion:general:intensities}, overlapping peaks need to be modelled to get the correct intensities.
 
 
 \subsection{Calibrating the spectrum with the HyperSpy model}
@@ -509,61 +514,73 @@ Since AZtec only gives the k-factors for either the K-lines or the L-lines, the 
 The two lines above calibrates the spectrum with the HyperSpy model and updates the dispersion and zero offset.
 The metadata in the \verb|signal| s is updated with the new calibration.
 Thus, doing the previous step with quantification after model fitting can give a more correct quantification.
-%%% THE Calibration gave 1% better result, i think. I need to look at it again.
-%
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This is the HyperSpy calibration that is used in \cref{tab:results:calibration-quantification}.
 
-%
-%
 \section{Peak and background modelling}
 \label{sec:discussion:modelling}
 % How can the peaks and the background be modelled in a way that is easy to understand?
 
 The next sub-problem was to find out how the peaks and the background are modelled in a way that is easy to understand.
-The model was built without HyperSpy, with the idea of making every step easier to understand.
-The model was used to be able to remove the background and be able to calibrate the spectrum.
-The model was compared to the HyperSpy model.
-The model was used to quantify the elements with the Cliff-Lorimer method, applying the k-factors from AZtec.
-The quantification was done by comparing the peak ratios, i.e. comparing the area under the peaks, and these results are in \cref{tab:results:ratios}.
-In the table the ratio is also multiplied with the respective k-factors, to get the Cliff-Lorimer quantification.
-\brynjar{Check that you do not explain two different things. This is actually the CL method, when using the k-factors.}
-
+The model was built without HyperSpy, with the idea of making alle the steps clear for a user.
+Once the model is fitted to the data, it can be used to calibrate and quantify the peaks and background.
+This can be done by comparing the peak ratios, i.e. the relative areas under the peaks, and using these ratios to calculate the Cliff-Lorimer quantification, as shown in \cref{tab:results:ratios}.
+In the table the ratio is also multiplied with their respective k-factors, to get the Cliff-Lorimer quantification.
 
 % identyfy peaks with peak finder
 % problem: overlapping peaks, eg. Mo
 % problem: includes zero peak. Is that an issue?
 The first step in creating a model is to identify the peaks.
 The peaks are assumed to be Gaussian curves.
+Other possible shapes are Lorentzian curves, but that has not been a part of this project.
 The initial way of identifying peaks was that the user manually identified the peaks.
-Later the peaks were identified with the function \verb|find_peaks()| from the \verb|scipy.signal| package.
-Different peak prominence were tested, and the peak prominence of 0.01 gave the best results.
+Later the peaks were identified with the function \verb|scipy.signal.find_peaks()|, using the argument \verb|prominence=0.01|\footnote{\url{https://en.wikipedia.org/wiki/Topographic_prominence}}.
+The prominence is the height of the peak above the background.
+As seen in \cref{fig:results:fit_GaAs30kV}, the given prominence identifies many but not all the peaks.
+Further work on the peak finder is needed to find a good and robust way of identifying the peaks.
+The figure also shows that the peaks are well-fitted by the model, while the background is fitted fairly well.
+
 
 
 % make Gaussian and a polynomial
 % problem: initial background guess. Solution: clip out the peaks with linear interpolation and fit a polynomial to the rest.
 % problem: normalized data. initial guesses are hard on counts, and fitting is slower.
 % early problem, now solved: some Gaussians would be put as the background. solution: fit both Gaussians and polynomial
-The second step is to make a Gaussian in each peak and one polynomial for the background.
-To do the fitting, the components need an initial guess.
-The background needs a coefficient for each order of the polynomial.
-Each Gaussian need to have a mean, a standard deviation, and a height.
-The mean is the peak position.
+Once the peaks have been identified in the data, the next step in creating a model is to fit a Gaussian curve to each peak and a polynomial to the background.
+In order to do this, the model components need initial guesses for their parameters.
+For the background, this means providing initial guesses for the coefficients of the polynomial.
+A good way to do this is to remove the peaks from the data using linear interpolation, and then fit a polynomial to the remaining data.
+The coefficients of the initial fitted polynomial can then be used as the initial guesses for the background in the model.
+Each Gaussian is described by its mean, standard deviation, and height, as shown in \cref{eq:theory:empirical:gaussian}.
+The mean is the peak position, which has its initial guess from the peak finder.
 The standard deviation is the width of the peak, where $\textnormal{FWHM} = \textnormal{std}*2*\sqrt{2*\ln{2}}$\footnote{FWHM defined at: \url{https://en.wikipedia.org/wiki/Full_width_at_half_maximum}}.
 The height is the amplitude of the peak.
-The easiest way to get the initial guesses for the Gaussians is to normalize the data and set all three parameters to 1.
+The easiest way to get the initial guesses for the standard deviation and the height is to normalize the spectrum and set both parameters to 1.
 In the normalization the highest peak was set to 1, and the rest of the peaks were scaled accordingly.
-The best way to get the initial guesses for the background is to clip out the peaks with linear interpolation and fit a polynomial.
-The initial guesses for the background are then the coefficients of the polynomial.
 With the initial guesses, the whole model is ready to be fitted.
+
+% why normalize
+Normalization is a technique that is often used in data analysis to make the fitting process faster and more stable.
+In the case of this project, it was found that normalizing the data was necessary in order to avoid failure of the SciPy fitting algorithm.
+This failure is likely due to the fact that \verb|scipy.optimize.curve_fit()| is optimized for certain types or ranges of data, and normalizing the data allows it to handle the data more effectively.
+It is important to note that although the data is normalized for the purpose of fitting, the quantification of the peaks is based on the ratios between the peaks, which are not affected by the normalization.
+This means that the normalization does not affect the accuracy of the quantification, but only the speed and stability of the fitting process.
+However, the percieved spectrum is affected by the normalization, which is important in the qualitative analysis.
+In this project, different normalization techniques were explored in order to find the one that provided stable results with SciPy, while still allowing the qualitative analysis to be performed.
+
+% the selected normalization
+The normalization that was used in the end was to set the highest peak to 1, and scale the rest of the peaks accordingly.
+This normalization, with some scaling and cropping of the figure, allowed the peaks to be visible and comparable, while still allowing the qualitative analysis to be performed.
+No special features were observed to be lost by using this normalization.
+Some EDS users and textbooks prefer to use the logarithmic scale on the y-axis insted of normalizing the data.
+The logarithmic scale is a good way to make the spectrum easier to read, but it does not affect the fitting process.
+In addition, plotting with a logarithmic scale was tested while doing the qualitative analysis, but it was found that the logarithmic scale provided less detailed information on the smaller peaks and strays than the linear scale.
+Thus, the linear scale with normalization was chosen as the best way to visualize the spectrum for the qualitative analysis, and as the best input for the fitting process.
+
 
 % curve fit
 % problem: sometimes fails
-The third step is to fit the model to the data.
-Using the \verb|curve_fit()| function from the \verb|scipy.optimize| package, the model is fitted to the data.
-The function \verb|curve_fit()| uses the Levenberg–Marquardt algorithm to fit the model to the data.
-The function \verb|curve_fit()| returns the optimal parameters for the model.
+With the model components ready and the data normalized, the model can be fitted to the data.
+The function \verb|curve_fit()| uses the Levenberg–Marquardt algorithm to fit the model to the data, and returns the optimal fitted parameters.
 Fitting both the Gaussians and the background at the same time makes the fitting more stable.
 One of the first iterations, where the user manually inputted the peaks, the fitting tended to partially fail.
 The issue was that the fitting only was done on the peaks.
@@ -571,12 +588,20 @@ To minimize the error in the fitting, one of the Gaussian curves with a low ampl
 This was fixed by fitting both the Gaussians and the background at the same time.
 Doing this made the fitting both better, and it failed less often.
 
-\brynjar{Issue: fitting e.g. Mo with two clear peaks, but not with enough prominence to be found by the peak finder.}
-%
+% problem with severely overlapping peaks
+The issue of severely overlapping peaks was encountered when fitting the Mo spectrum.
+The Mo L$\alpha$ and L$\beta$ peaks are very close to each other, and even though the fitting algorithm would handle this, the peak finder would not recognize the overlapping peaks as two separate peaks.
+This problem can be fixed manually, but with the limited time in this project it was categorized as a edge case that would not be handled.
+
+\ton{Now I am happy with the discussion untill this point (13.12.22). How would you rate it? Any suggestions on the bigger picture of the discussion? I do need to wrap it up soon, because I still need to fill in some theory, fix the conclusion and the introductions.}
+
+
 %
 \section{Calibration}
 \label{sec:discussion:calibration}
 % How is the spectrum calibrated, and is AZtec different than HyperSpy?
+
+\brynjar{Try not to repeat the same things as earlier.}
 
 The next sub-problem was to calibrate the data with a self produced Python script.
 With a fitted model of the spectrum, the calibration can be done.
@@ -592,6 +617,9 @@ Table \cref{tab:results:calibrations} shows calibration from AZtec, HyperSpy, an
 \section{Background models}
 \label{sec:discussion:background}
 % How does different background models affect the quantitative analysis done in HyperSpy?
+
+\brynjar{Try not to repeat the same things as earlier.}
+
 
 The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy, and how well different order polynomials fit the background.
 The background models were tested on the spectrum of GaAs, and later also on \brynjar{TODO: other spectra. Also make a table here with results}.
