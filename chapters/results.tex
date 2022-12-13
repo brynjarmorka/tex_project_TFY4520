@@ -351,7 +351,19 @@ The peak at 4.6 keV is the sum peak of Mo L$\alpha$ and Mo L$\beta$1.
 As in the other spectra, the background drops significantly after the tallest peak.
 
 
-
+% figure Spectra_GaAs.png
+\begin{figure}[b!] % p is to get their own page for floats
+    \centering
+    \includegraphics[width=0.90\textwidth]{figures/each_spectra/GaAs_everything.png}
+    \caption{
+        The spectra of the GaAs bulk, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
+        This is a GaAs wafer, where the ratio of Ga to As is 1:1.
+        The peaks are annotated with the theoretical energy.
+        The sum peak, unknown peak and zero peak are annotated with an asterisk, as they do not have a (known) theoretical value.
+        The dashed lines mark Ga L$\alpha$, As L$\alpha$, Ga K$\alpha$, and As K$\alpha$, with relative intensities in the 30 kV spectrum at 1, 0.41, 0.36, and 0.20, respectively.
+    }
+    \label{fig:results:Spectra_GaAs}
+\end{figure}
 
 % the GaAs spectra, with two plots
 The GaAs spectra is shown in \cref{fig:results:Spectra_GaAs} and \cref{fig:results:Spectra_GaAs_bg_and_sum_peaks}.
@@ -369,19 +381,7 @@ The sum peaks of the L peaks are visible in the 5, 10 and 15 kV spectra, but not
 The sum peaks of the K peaks are only visible in the 30 kV spectrum. % discuss: no sum peaks in the 15 kV spectrum even though the K-peaks are there. Or, the counts go from around 2 til around 6 in the area of the peaks, but that is super low.
 
 
-% figure Spectra_GaAs.png
-\begin{figure}[h] % p is to get their own page for floats
-    \centering
-    \includegraphics[width=0.90\textwidth]{figures/each_spectra/GaAs_everything.png}
-    \caption{
-        The spectra of the GaAs bulk, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
-        This is a GaAs wafer, where the ratio of Ga to As is 1:1.
-        The peaks are annotated with the theoretical energy.
-        The sum peak, unknown peak and zero peak are annotated with an asterisk, as they do not have a (known) theoretical value.
-        The dashed lines mark Ga L$\alpha$, As L$\alpha$, Ga K$\alpha$, and As K$\alpha$, with relative intensities in the 30 kV spectrum at 1, 0.41, 0.36, and 0.20, respectively.
-    }
-    \label{fig:results:Spectra_GaAs}
-\end{figure}
+
 
 
 % figure Spectra_GaAs.png
@@ -398,18 +398,6 @@ The sum peaks of the K peaks are only visible in the 30 kV spectrum. % discuss: 
 
 
 
-% figure Spectra_NW.png
-\begin{figure}[hb!]
-    \centering
-    \includegraphics[width=0.90\textwidth]{figures/each_spectra/NW_everything.png}
-    \caption{
-        The spectra from the nanowire, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
-        The peaks are annotated with the theoretical energy.
-        The unknown peak is annotated with an asterisk, as it does not have a known theoretical value.
-        The dashed lines mark Ga L$\alpha$ and As L$\alpha$, with relative intensities in the 30 kV spectrum at 1 and 0.82.
-    }
-    \label{fig:results:Spectra_NW}
-\end{figure}
 
 
 
@@ -431,87 +419,31 @@ The 10, 15 and 30 kV signal have Mo Ll peak at 2.02 keV, between Si K$\alpha$ an
 
 % discussion: se most sum peaks. No escape peak, even though the Si peak from the detector is present.
 
+% figure Spectra_NW.png
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.90\textwidth]{figures/each_spectra/NW_everything.png}
+    \caption{
+        The spectra from the nanowire, taken at 5 (blue), 10 (red), 15 (green), and 30 (purple) kV.
+        The peaks are annotated with the theoretical energy.
+        The unknown peak is annotated with an asterisk, as it does not have a known theoretical value.
+        The dashed lines mark Ga L$\alpha$ and As L$\alpha$, with relative intensities in the 30 kV spectrum at 1 and 0.82.
+    }
+    \label{fig:results:Spectra_NW}
+\end{figure}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\newpage
 
 \section{Quantitative results}
 \label{sec:results:quantification}
 
-% from intro paragraph:
-% The different methods are using AZtec and two approaches in HyperSpy.
-% The different adjustments are results with different calibrations, different background models, \brynjar{"and different peak models"?}
 
-
-% \subsection{Quantification methods}
-% \label{sec:results:quantification_methods}
-% How accurate it the out-of-the-box quantification in AZtec and HyperSpy?
-
-% Its okay to only do the GaAs here.
-% Could also look at NW, but not nessesary.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The initial quantification was done on the data from the GaAs wafer in AZtec.
+The results are presented in \cref{tab:initial_quantification}.
+AZtec can treat the data as both TEM and SEM data, and the results were quantified with both methods.
+The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and As should be 50\% and 50\%.
 
 
 % initial quantification table
@@ -543,44 +475,6 @@ These k-factors are from the GaAs bulk wafer, and AZtec have estimated them theo
 % It is crucial point in quantification. The main problem and issues: need to use right k, HT dependent. Is for thin sample, prerequest, but HS let you use it anyhow.
 % Conclusion could be to find a way that the user can verify k-factors or use own k-factors based on standards, like can verify calibrations.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % k-factors table
 \begin{table}[h]
     \centering
@@ -591,7 +485,7 @@ These k-factors are from the GaAs bulk wafer, and AZtec have estimated them theo
     }
     \label{tab:results:k-factors}
     \begin{tabular}{ccccc}
-        V$_\textnormal{acc}$ [kV] & Line      & Ga k-factor & As k-factor & $k_\textnormal{GaAs} = k_\textnormal{Ga}/k_\textnormal{As}$ \\ %Ga / As k-factor ratio \\
+        $V_\textnormal{acc}$ [kV] & Line      & Ga k-factor & As k-factor & $k_\textnormal{GaAs} = k_\textnormal{Ga}/k_\textnormal{As}$ \\ %Ga / As k-factor ratio \\
         \hline
         5                         & L$\alpha$ & 1.21        & 1.086       & 0.898                                                       \\
         10                        & L$\alpha$ & 1.31        & 1.223       & 0.934                                                       \\
@@ -599,11 +493,6 @@ These k-factors are from the GaAs bulk wafer, and AZtec have estimated them theo
         30                        & K$\alpha$ & 4.191       & 3.268       & 0.780
     \end{tabular}
 \end{table}
-
-The initial quantification was done on the data from the GaAs wafer in AZtec.
-The results are presented in \cref{tab:initial_quantification}.
-AZtec can treat the data as both TEM and SEM data, and the results were quantified with both methods.
-The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and As should be 50\% and 50\% respectively.
 
 
 To better understand the ratios between Ga and As, the areas under the peaks in the spectra were counted.
@@ -613,7 +502,6 @@ The table also lists the FWHM of the peaks.
 The ratios are multiplied with the k-factors from AZtec to get the Cliff-Lorimer quantification results as a ratio.
 
 \input{tables/ratios.tex}
-
 
 One of the adjustments explored was the affect of the calibration on the quantification.
 Using different the calibrations in \cref{tab:results:calibrations} gave different quantification results when using CL in HyperSpy. % discussion: Issue with using Clif-Lorimer since I have bulk and not thin sample. But the own produced CL just misses harder, it does not break down completely.

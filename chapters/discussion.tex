@@ -4,13 +4,13 @@
 
 % % Ga Ka where Ka2 is not visible
 % % point of the paragraph: empirical view is good enough
-% In \cref{fig:theory:GaAs30keV-K-lines} the calibrated peak of Ga $K\alpha$ is directly on $K\alpha_1$ and the $K\alpha_\textnormal{HyperSpy}$, the emission from $K\alpha_2$ is missing.
-% The energy difference is too small to differentiate the two peaks in EDS, but the peak has no left-shift, implying that the peak is not a mixture of $K\alpha_1$ and $K\alpha_2$.
+% In \cref{fig:theory:GaAs30keV-K-lines} the calibrated peak of Ga K$\alpha$ is directly on K$\alpha_1$ and the K$\alpha_\textnormal{HyperSpy}$, the emission from K$\alpha_2$ is missing.
+% The energy difference is too small to differentiate the two peaks in EDS, but the peak has no left-shift, implying that the peak is not a mixture of K$\alpha_1$ and K$\alpha_2$.
 % The peak shape is \brynjar{calculate the shape}, which is close to a perfect Gaussian.
-% There are possible theoretical explainations for the lacking emission from $K\alpha_2$.
+% There are possible theoretical explainations for the lacking emission from K$\alpha_2$.
 % One explaination is the quantum mechanical effect called \dots, where two close lines appear as one stronger line.
 % This effect is not only present in EDS, but also in \dots.
-% Another explaination is that Ga $K\alpha_2$ could also be weaker than $K\alpha_1$, but there is no reason for this to be the case.
+% Another explaination is that Ga K$\alpha_2$ could also be weaker than K$\alpha_1$, but there is no reason for this to be the case.
 % The take away from this is that the empirical view tends to be good enough for EDS analysis.
 
 
@@ -312,7 +312,7 @@ The \verb|signal| type is a class in HyperSpy that contains the data and the met
 The \verb|signal| type must be specified as TEM, because the \verb|signal| type for SEM is very limited and does not have a method for quantification.
 When using .emsa files from AZtec, as is done in this project, the metadata contains some relevant and some irrelevant information.
 The information relevant later in this project is:
-acceleration voltage, dispersion, zero offset, energy resolution Mn $K\alpha$,
+acceleration voltage, dispersion, zero offset, energy resolution Mn K$\alpha$,
 After loading, it is possible to plot the data with \verb|s.plot()|.
 
 Already at this point there is a big problem with using HyperSpy on the acquired data: the analysis methods are not implemented for SEM but for TEM.
@@ -585,7 +585,7 @@ The dispersion is calculated with \cref{eq:theory:calibration:dispersion}.
 Table \cref{tab:results:calibrations} shows calibration from AZtec, HyperSpy, and the self produced Python script.
 
 
-% Something about how the calibrated peak of Ga $K\alpha$ is directly on $K\alpha_1$.
+% Something about how the calibrated peak of Ga K$\alpha$ is directly on K$\alpha_1$.
 
 %
 %

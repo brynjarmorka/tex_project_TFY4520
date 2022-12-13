@@ -52,34 +52,34 @@ It covers the theoretical physics behind creation of characteristic X-rays.
 \label{sec:theory:theoreticalxray:formation}
 The formation of characteristic X-rays is an inelastic quantum mechanical scattering process in two steps.
 In the following four equations the subscripts are referring to specific electrons in order to distinguish between them, which is also used in FIGURE XX \brynjar{make this figure}.
-In the first step described in \cref{eq:theory:theoreticalxray:formation:step1} electron $e^-_{1}$ from the incident electron beam eject electron $e^-_{2}$ from the core orbital of atom A \cite[Eq. (8.12)]{hollas_modern_2004}.
+In the first step described in \cref{eq:theory:theoreticalxray:formation:step1} electron e$^-_{1}$ from the incident electron beam eject electron $\textnormal{e}^-_{2}$ from the core orbital of atom A \cite[Eq. (8.12)]{hollas_modern_2004}.
 
 % ionize the atom
 \begin{equation}
     \label{eq:theory:theoreticalxray:formation:step1}
-    e^-_{1_{\textnormal{incident}}} + A \rightarrow e^-_{1_{\textnormal{outgoing}}} + A^+ + e^-_{2_{\textnormal{ejected}}}
+    \textnormal{e}^-_{1 \textnormal{, incident}} + A \rightarrow \textnormal{e}^-_{1 \textnormal{, outgoing}} + A^+ + \textnormal{e}^-_{2 \textnormal{, ejected}}
 \end{equation}
 
 
 % the energy of ionization, Goldstein eq 4.1
 The incident electron from the beam loose energy to both breaking the binding energy of the core orbital and to the kinetic energy of the ejected electron.
 The energy is given by \cref{eq:theory:theoreticalxray:formation:step1:energy}.
-The user can control the incident electron energy $E_{1_{\textnormal{incident}}}$ by the acceleration voltage $V_{\textnormal{acc}}$ of the electron gun (and the current $I_{\textnormal{beam}}$ of the electron beam).
-The energy of the characteristic X-ray is dependent on the binding energy of the core orbital, $E_{2_{\textnormal{core shell, binding}}}$.
-In EDS $E_{1_{\textnormal{outgoing}}}$ and $E_{2_{\textnormal{kinetic}}}$ serve no purpose \cite[Eq. (4.1)]{goldstein_scanning_2018}.
+The user can control the incident electron energy $E_{1 {\textnormal{, incident}}}$ by the acceleration voltage $V_{\textnormal{acc}}$ of the electron gun (and the current $I_{\textnormal{beam}}$ of the electron beam).
+The energy of the characteristic X-ray is dependent on the binding energy of the core orbital, $E_{2 {\textnormal{, core shell, binding}}}$.
+In EDS $E_{1 {\textnormal{, outgoing}}}$ and $E_{2 {\textnormal{, kinetic}}}$ serve no purpose \cite[Eq. (4.1)]{goldstein_scanning_2018}.
 
 \begin{equation}
     \label{eq:theory:theoreticalxray:formation:step1:energy}
-    E_{1_{\textnormal{incident}}} = E_{1_{\textnormal{outgoing}}} + E_{2_{\textnormal{core shell, binding}}} + E_{2_{\textnormal{kinetic}}}
+    E_{1 {\textnormal{, incident}}} = E_{1 {\textnormal{, outgoing}}} + E_{2 {\textnormal{, core shell, binding}}} + E_{2 {\textnormal{, kinetic}}}
 \end{equation}
 
 % relax the electron
-In the second step electron $e^-_{3}$ from a higher energy orbital relaxes to the hole in the core orbital of atom A, and the difference in energy is emitted as a photon with a specific energy $h\nu$ called the characteristic X-ray \cite[Eq. (8.12)]{hollas_modern_2004}.
+In the second step electron $\textnormal{e}^-_{3}$ from a higher energy orbital relaxes to the hole in the core orbital of atom A, and the difference in energy is emitted as a photon with a specific energy $h\nu$ called the characteristic X-ray \cite[Eq. (8.12)]{hollas_modern_2004}.
 
 % outer orbital relaxation
 \begin{equation}
     \label{eq:theory:theoreticalxray:formation:step2}
-    e^-_{3_{\textnormal{outer shell}}} \rightarrow e^-_{3_{\textnormal{inner shell}}} + h\nu_{\textnormal{X-ray}}
+    \textnormal{e}^-_{3 {\textnormal{, outer shell}}} \rightarrow \textnormal{e}^-_{3 {\textnormal{, inner shell}}} + h\nu_{\textnormal{X-ray}}
 \end{equation}
 
 The energy of the characteristic X-ray is the difference in energy between the ionized orbital and the orbital filling the hole, shown in \cref{eq:theory:theoreticalxray:formation:step2:energy}.
@@ -88,7 +88,7 @@ The equation specifies the energy of the X-ray as $h\nu$, but \cref{sec:theory:e
 % the energy of the relaxation
 \begin{equation}
     \label{eq:theory:theoreticalxray:formation:step2:energy}
-    h\nu_{\textnormal{X-ray}} = E_{2_{\textnormal{core shell, binding}}} - E_{3_{\textnormal{outer shell, binding}}}
+    h\nu_{\textnormal{X-ray}} = E_{2 {\textnormal{, core shell, binding}}} - E_{3 {\textnormal{, outer shell, binding}}}
 \end{equation}
 
 
@@ -127,10 +127,10 @@ The X-rays are first named by which shell in the Bohr model the vacancy is in, i
 Relaxations to the innermost shell $n=1$ is named K-transitions, relaxations to $n=2$ is L-transitions, relaxations to $n=3$ is M-transitions.
 
 % alpha, beta, gamma
-The X-rays are further grouped with Greek letters in families. % $e^-_{3}$ % need to mention families?
+The X-rays are further grouped with Greek letters in families. % $\textnormal{e}^-_{3}$ % need to mention families?
 Orbitals close in energy are usually in the same group, which means that electrons in the same shell usually are in the same family.
 This naming is non-systematic, but tends to follow a pattern where the transitions labeled $\alpha$ are the lower energy transitions corresponding to the $n+1$ orbitals, and the transitions labeled $\beta$ are the higher energy transitions corresponding to the $n+2$ orbitals.
-For example, $L \rightarrow K$ are $\alpha$-transitions.
+For example, $\textnormal{L} \rightarrow \textnormal{K}$ are $\alpha$-transitions.
 
 % subscript
 In addition, the lines in an X-ray group are labeled with subscript numbers which generally start with the highest intensity. % not always!
@@ -140,9 +140,9 @@ The spin-orbit coupling increase with increased Z, which separates the lines mor
 The splitting of the $\alpha$ family to $\alpha_1$ and $\alpha_2$ are usually first resolvable in EDS for elements heavier than tin with $ Z = 50$ \cite[Ch. 8.2.2.3]{hollas_modern_2004}. %, where the $\Delta E = 227.3$ eV.
 
 % total naming with example
-Putting these three naming conventions together, we name the transition $L_3 \rightarrow K_1$ as $K\alpha_1$, and $L_2 \rightarrow K_1$ as $K\alpha_2$, with more examples in \cref{fig:theory:theoreticalxray:naming:lines}.
-The transition $L_1 \rightarrow K_1$ has $\Delta l = 0$ and is thus forbidden by the selection rules, see \cref{eq:theory:theoreticalxray:energyintensity:selectionrules}.
-In gallium the $K\alpha_1 = 9251.74$ eV and $K\alpha_2 = 9224.82$ eV \cite{thompson_x-ray_2004} are coupled, but as shown in \cref{fig:theory:GaAs30keV-K-lines} this energy difference of $\Delta E = 26.92$ eV is too low to be resolved in EDS.
+Putting these three naming conventions together, we name the transition $\textnormal{L}_3 \rightarrow \textnormal{K}_1$ as K$\alpha_1$, and $\textnormal{L}_2 \rightarrow \textnormal{K}_1$ as K$\alpha_2$, with more examples in \cref{fig:theory:theoreticalxray:naming:lines}.
+The transition $\textnormal{L}_1 \rightarrow \textnormal{K}_1$ has $\Delta l = 0$ and is thus forbidden by the selection rules, see \cref{eq:theory:theoreticalxray:energyintensity:selectionrules}.
+In gallium the K$\alpha_1 = 9251.74$ eV and K$\alpha_2 = 9224.82$ eV \cite{thompson_x-ray_2004} are coupled, but as shown in \cref{fig:theory:GaAs30keV-K-lines} this energy difference of $\Delta E = 26.92$ eV is too low to be resolved in EDS.
 
 % figure with the naming convention
 \begin{figure}
@@ -161,7 +161,7 @@ In gallium the $K\alpha_1 = 9251.74$ eV and $K\alpha_2 = 9224.82$ eV \cite{thomp
 \label{sec:theory:theoreticalxray:energyintensity}
 
 % short about the energy of the characteristic X-rays
-The energy of the characteristic X-ray depends on which orbital the vacancy is in, which orbital the electron is relaxed from, and the amount of protons in the core of atom A. % $e^-_{3}$ 
+The energy of the characteristic X-ray depends on which orbital the vacancy is in, which orbital the electron is relaxed from, and the amount of protons in the core of atom A. % $\textnormal{e}^-_{3}$ 
 Higher Z means higher energy of the characteristic X-ray line, because the energy difference between the relaxation orbital and the ionized orbital is larger.
 Atoms with higher Z have more possible transitions, because they have more  electrons and orbitals.
 
@@ -238,9 +238,9 @@ However, there are many factors which affect the intensity of the lines, which a
     \centering
     \includegraphics[width=0.9\textwidth]{figures/GaAs30kV-Ga-K-lines.png}
     \caption{
-        The theoretical lines $K\alpha_1 = 9.25174$ and $K\alpha_2 = 9.22482$ from the X-ray booklet with $K\alpha = 9.251$ from HyperSpy and the fitted peak $K\alpha$.
-        The spectrum is calibrated to Ga $L\alpha$ and As $K\alpha$, where the energy of the peaks is taken from HyperSpy.
-        HyperSpy gives Ga $K\alpha$ almost directly on top of the theoretical $K\alpha_1$.
+        The theoretical lines K$\alpha_1 = 9.25174$ and K$\alpha_2 = 9.22482$ from the X-ray booklet with K$\alpha = 9.251$ from HyperSpy and the fitted peak K$\alpha$.
+        The spectrum is calibrated to Ga $L\alpha$ and As K$\alpha$, where the energy of the peaks is taken from HyperSpy.
+        HyperSpy gives Ga K$\alpha$ almost directly on top of the theoretical K$\alpha_1$.
         This figure show that the lines which are separated with small energy differences are so close that they make one single peak in the EDS spectrum.
         Data from the SEM Apreo at NTNU NanoLab, 30kV.
         \ton{This is more results than theory I would say. But I do remember you saying something about having this in the theory section.}
@@ -275,7 +275,7 @@ This approach includes empirical equations to deal with the imperfect beam, scat
 \subsection{From lines to peaks}
 \label{sec:theory:empirical:peaks}
 A striking difference between the theoretical and the empirical view is that the lines are not lines, but peaks with a varying width.
-This is illustrated both in \cref{fig:theory:GaAs30keV-8-12-keV} and in \cref{fig:theory:GaAs30keV-K-lines}, where we see that the two $K\alpha$ lines of Ga is merged into one broad peak.
+This is illustrated both in \cref{fig:theory:GaAs30keV-8-12-keV} and in \cref{fig:theory:GaAs30keV-K-lines}, where we see that the two K$\alpha$ lines of Ga is merged into one broad peak.
 The peaks in the EDS spectrums have a Gaussian shape, which is a result of the broadening of the lines.
 The broadening of the lines is due to \dots \ton{What is the cause of the broadening? And why is it Gaussian?}. % count statistics!
 \cref{fig:theory:GaAs30kV-whole} shows that lower energy lines are narrower than higher energy lines.
@@ -327,7 +327,12 @@ The intensity, or weight, of a line is dependent on multiple empirical and physi
 This subsection will briefly cover fluorescent yield, critical ionization energy, and empirical weights in HyperSpy.
 In practice, the weight of the lines are included as a part of the k-factors or k-ratios, which are presented in \cref{sec:theory:empirical:kfactors}.
 Only the strongest lines are listed in the X-ray booklet, where the theoretical values of the characteristic X-ray lines are listed.
-The list include: $K\alpha_1$, $K\alpha_2$, $K\beta_2$, $L\alpha_1$, $L\alpha_2$, $L\beta_1$, $L\beta_2$, $L\gamma_1$, $M\alpha_1$ \cite{thompson_x-ray_2004}.
+The list include: K$\alpha_1$, K$\alpha_2$, K$\beta_2$, L$\alpha_1$, L$\alpha_2$, L$\beta_1$, L$\beta_2$, L$\gamma_1$, M$\alpha_1$ \cite{thompson_x-ray_2004}.
+HyperSpy operates with a different list of lines, which might be more empirically influenced.
+The lines for Ga is for instance:
+The lines for Mo is:
+The lines for a heavy element like Sb(?) is:
+\brynjar{Fyll inn disse.}
 
 
 %%%%% TODO %%%%%
@@ -368,12 +373,12 @@ The two key takeaways from this formula is that $\omega$ is dependent on $Z$, bu
 \end{equation}
 
 % critical ionization energy
-The critical ionization energy, $E_C$, is the energy the incident beam need to ionize a core electron in an atom.
-If the energy of the incident beam is lower than $E_C$, the core electron is not ionized and no peak can be detected.
+The critical ionization energy, $E_\textnormal{C}$, is the energy the incident beam need to ionize a core electron in an atom.
+If the energy of the incident beam is lower than $E_\textnormal{C}$, the core electron is not ionized and no peak can be detected.
 The critical ionization energy is dependent on the atomic number, $Z$, of the atom.
-Higher $Z$ means higher $E_C$, because the core electrons are bound stronger to the nucleus.
-When the incident beam has an energy higher than $E_C$ and continues to increase, the amount of ionization is not constant and not linear.
-The amount of ionization with varying energy above $E_C$ is dependent on the ionization cross section and the overvoltage, which again are dependent on what shell the ionization happens in.
+Higher $Z$ means higher $E_\textnormal{C}$, because the core electrons are bound stronger to the nucleus.
+When the incident beam has an energy higher than $E_\textnormal{C}$ and continues to increase, the amount of ionization is not constant and not linear.
+The amount of ionization with varying energy above $E_\textnormal{C}$ is dependent on the ionization cross section and the overvoltage, which again are dependent on what shell the ionization happens in.
 The solution to this is empirically estimations and using k-factors where all factors like this is either cancelled out or included in the k-factor correction.
 
 % Ionization cross section and overvoltage
@@ -403,13 +408,13 @@ Explain the equations and where they come from.
 Castaings model:
 
 \begin{equation}
-    \frac{C_i}{C_{(i)}} = K \frac{I_i}{I_{(i)}}
+    \frac{C_\textnormal{i}}{C_\textnormal{(i)}} = K \frac{I_\textnormal{i}}{I_\textnormal{(i)}}
 \end{equation}
 
 Cliff and Lorimer took it further and swapped the standard for the ratios of intensities from two elements measured in the same spectrum:
 
 \begin{equation}
-    \frac{C_a}{C_b} = \frac{k_a I_a}{k_b I_b} = k_{ab}  \frac{I_a}{I_b}
+    \frac{C_\textnormal{a}}{C_\textnormal{b}} = \frac{k_\textnormal{a} I_\textnormal{a}}{k_\textnormal{b} I_\textnormal{b}} = k_\textnormal{ab}  \frac{I_\textnormal{a}}{I_\textnormal{b}}
 \end{equation}
 
 
