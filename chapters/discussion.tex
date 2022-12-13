@@ -26,7 +26,7 @@ The chapter ends with a discussion of the \hyperref[mainproblem]{Main problem}.
 \section{General results from the spectra}
 \label{sec:discussion:general}
 
-This section starts with peak intensities, then the background, and finally some of the strays observed.
+This section starts with peak intensities, then the background, and finally some strays observed.
 
 
 \subsection{Peak intensities}
@@ -35,15 +35,15 @@ This section starts with peak intensities, then the background, and finally some
 % singal-to-noise ratio
 All the spectra have peaks with high peak-to-background ratio, at least for the main peaks. %discuss: sampling good enough? I do not know if i miss some peaks, but the ones i have are nice for qualitative analysis at least.
 Good sampling settings give a high signal-to-noise ratio, which is important for analysis.
-The high peaks in the spectrum are well defined and fit the Gaussian curves well.
-These peaks are good enough for qualitative analysis, but there are some smaller singals which have been harder to interpret.
+The high peaks in the spectrum are well-defined and fit the Gaussian curves well.
+These peaks are good enough for qualitative analysis, but there are some smaller signals which have been harder to interpret.
 A small signal can in some cases be interpreted in a qualitative analysis but is hard to use properly in a quantitative analysis.
-However, interpreting every samll signal as radiation from a specific element is not always correct.
+However, interpreting every small signal as radiation from a specific element is not always correct.
 The small signal of Fe K$\alpha$ in the FIB stub spectrum is an example of this, where there is a 20\% increase of counts to the right of the Mn K$\alpha$ peak.
 It might be that this signal is from Fe, but it might also just be noise or an artifact.
 \cref{tab:theory:Ga-lines} list the Ga-lines and their weights, and it is clear that some lines have very low weights.
 In this project it was decided not to use a hard threshold for the signal-to-noise ratio, which can be helpful in some cases.
-Setting a hard threshold should be based on both litterature and empirical data for the specific detector setup.
+Setting a hard threshold should be based on both literature and empirical data for the specific detector setup.
 A danger with setting a hard threshold is that it can be too strict, which can lead to missing peaks of elements which are low in concentration.
 If the sampling settings were not good enough, some peaks can be missing in the spectra.
 One example of this is in the NW spectrum: the low As K$\beta$ peak in the 15 kV spectrum has an overvoltage of ~3 keV and is visible, but the Cu K$\alpha$ peak in the 10 kV spectrum with overvoltage of ~2 keV is not visible.
@@ -56,14 +56,14 @@ In conclusion, it is assumed that the sampling settings were good enough.
 
 % height of the peaks in relation to the settings
 The heights, or intensities, of the peaks are varying a lot.
-The plots of the spectra in \cref{fig:results:Spectra_Al,fig:results:Spectra_NW} are normalized, but the total counts and maximum counts are inlcuded in \cref{tab:method:detector:settings}.
+The plots of the spectra in \cref{fig:results:Spectra_Al,fig:results:Spectra_NW} are normalized, but the total counts and maximum counts are included in \cref{tab:method:detector:settings}.
 No direct pattern between the amount of counts and the settings are apparent.
 Trends observed are that higher counts are obtained by increasing the current or the acceleration voltage, but this also increases the dead time.
 To figure out a pattern, fewer variables should be changed at the same time.
 This was done for the nanowire sample, where the I$_{beam}$ and live time was kept constant.
 Still, a direct pattern is not apparent.
 As stated in Goldstein, "high counts and stable peak structures are critical for successful peak intensity measurements", especially to identify minor and trace constituents \cite[page 318]{goldstein_scanning_2018}.
-The relation between the cound and settings could be further investigate to figure out which settings yield the best spectra in terms of good count statistics.
+The relation between the counts and settings could be further investigated to figure out which settings yield the best spectra in terms of good count statistics.
 
 % the highest peaks, 
 The peak with the highest count is in all the spectra below 5 keV.
@@ -72,11 +72,11 @@ In the Mo 30 kV spectrum, the K$\alpha$ peak is only 2\% the height of the L$\al
 This low intensity of the K$\alpha$ peak is partially due to lower overvoltage, since the peak is above U/2.
 For the Ga and As the relative intensity of the 30 kV spectra in the bulk and nanowire is not similar.
 The K-lines in the bulk sample is around 2 times as intense as the K-lines in the nanowire sample.
-Both spectra are normalized to the L-line og Ga.
+Both spectra are normalized to the L-line of Ga.
 It was expected that the nanowire would give lower intensity, which is why the
 Using \cref{tab:results:ratios} with the ratios of the K-lines to the L-lines, it is clear that even the ratios of Ga and As lines change in the different spectra.
-When applting the theoretically estimated k-factor for the respective spectrum, the ratios get closer to 1, but there is still a spread.
-This implies that the settings for acquiering spectras is important for the intensity of the peaks, which again is important for the quantitative analysis.
+When applying the theoretically estimated k-factor for the respective spectrum, the ratios get closer to 1, but there is still a spread.
+This implies that the settings for acquiring spectra is important for the intensity of the peaks, which again is important for the quantitative analysis.
 Investigation of which settings yield better spectra should improve the accuracy of the quantitative analysis.
 
 
@@ -85,15 +85,15 @@ Even though most of the spectra appear to have good intensities and good signal-
 From the results it is apparent that the Cu-tape is giving a bad Cu signal and should not be used as a Cu reference.
 The strongest signal from the Cu-tape is from C, which is probably from the sticky tape material.
 Regardless, the strange result is the completely missing signal from Cu L$\alpha$ in the Cu-tape 30 kV spectrum.
-This spectrum have a clear signal from Cu K$\alpha$ and Cu K$\beta$, but no signal from Cu L$\alpha$ at all.
+This spectrum has a clear signal from Cu K$\alpha$ and Cu K$\beta$, but no signal from Cu L$\alpha$ at all.
 In general the L-peaks are stronger than the K-peaks.
-In the 30 kV NW spectrum, Mo is giving a low but clear signal at the L$\alpha$ line, and even a small signal at the L$\beta$ and Ll lines, but no singal from the Mo K$\alpha$ line.
+In the 30 kV NW spectrum, Mo is giving a low but clear signal at the L$\alpha$ line, and even a small signal at the L$\beta$ and Ll lines, but no signal from the Mo K$\alpha$ line.
 This is not strange as even the K-line signal from pure Mo is quite low.
 The missing Cu L$\alpha$ signal is still strange when comparing to the NW spectra, because the Cu signal in the NW spectra all have a clear signal from Cu L$\alpha$ which is around 30\% stronger than the Cu K$\alpha$ signal.
-When taking the Cu spectra, the Cu-tape got visually deformed by the beam, which can be part of the explaination of the missing signal.
-Finding both K-lines and L-lines is an important aspect of qualitative EDS analysis, because a present K-line without a L-line indicate that the identified element is not the correct one.
+When taking the Cu spectra, the Cu-tape got visually deformed by the beam, which can be part of the explanation of the missing signal.
+Finding both K-lines and L-lines is an important aspect of qualitative EDS analysis, because a present K-line without an L-line indicate that the identified element is not the correct one.
 The result with the missing L-line show that, unfortunately, it is possible to acquire spectra where a K-line is present, but the L-line is missing.
-Further investigating this could reveal if this is a issue with the Cu-tape, the detector, the settings, or an artifact that can appear in other spectra.
+Further, investigating this could reveal if this is an issue with the Cu-tape, the detector, the settings, or an artifact that can appear in other spectra.
 
 
 % width of the peaks
@@ -114,9 +114,9 @@ Another possibility is that the calibration was done on installation, and that t
 
 
 %  overlapping peaks
-A challenge which is unnafected by poor calibration is overlapping peaks.
+A challenge which is unaffected by poor calibration is overlapping peaks.
 Section 20.3 in Goldstein explains how to deal with overlapping peaks \cite{goldstein_scanning_2018}.
-Dealing with overlapping peaks in model fitting is just modelling two Gaussians on top of each other.
+Dealing with overlapping peaks in model fitting is just modelling two Gaussian curves on top of each other.
 In the self produced fitting, the Gaussians have three parameters: center, standard deviation and height.
 Model fitting in HyperSpy is done with fixed centers, which means that the peak centers cannot change.
 Calibration can affect the result if fitting is done with a model where the peak centers cannot change.
@@ -160,9 +160,9 @@ This issue was fixed manually when making the Mo L$\alpha$ and Mo K$\alpha$ cali
 \subsection{The background}
 \label{sec:discussion:general:background}
 % the background with shape and intensity
-Another problem in the self produced code that can imporve with more time is fitting the background.
+Another problem in the self produced code that can improve with more time is fitting the background.
 An idea that emerged towards the end of the project was to model the background as a spline.
-A spline is a piecewise polynomial function connected in knots.
+A spline is a piece wise polynomial function connected in knots.
 The fit of the background was observed to be bad at lower energies, where the background fit is more crucial for finding the right intensity of a peak.
 It is more crucial, because the background change more with energy at lower energies.
 The first iteration of the spline background would be to have the knot at the highest peak, because of the observation that the background decrease to around 50-10\% after the highest peak.
@@ -175,7 +175,7 @@ In the 30 kV Si spectrum the background falls from 2000 to 200 counts after the 
 The background shape in Si 30 kV is almost linear from 0.6 to 1.6 keV ending at 2000 counts, then it drops to 200 after the peak at 1.6-1.9 keV.
 After the drop the peak follow the expected shape, illustrated in \cref{fig:theory:background_illustration}.
 In the 5 and 10 kV Si spectra the background falls from 2500 to 1000 counts after the main peak.
-In the Mo 10 kV spectrum, which is the spectrum with overall most background counts, the background falls from 5400 to 2900 counts after the main peak.
+The Mo 10 kV spectrum, which is the spectrum with overall most background counts, has a background signal which falls from 5400 to 2900 counts after the main peak.
 In the nanowire spectra, which in general have the lower background counts, the background falls around 50\% after the high L-peaks.
 The reason for the higher background to the left of the highest peak is that the X-rays formed with energy above the highest peak can be absorbed and re-emitted with the energy of the line in the highest peak.
 When the code for the background was written, the effect of the highest peak was not considered, which resulted in visible bad background fits at the lower energies.
@@ -372,7 +372,7 @@ For example, when plotting a modelled spectrum with Ga and As, the model contain
 In other words, the plot of a model can show all the independent components, but adding a legend is not an option.
 Another limitation of the plotting is the interactivity when saving the plot.
 Matplotlib requires the code to run in the background for it to be interactive, while Plotly can save the plot as an interactive HTML file for later inspection.
-One of the advantages with the plotting in HyperSpy is how accesable it is to plot in the different steps, which the user can use to understand and verify the analysis.
+One of the advantages with the plotting in HyperSpy is how accessible it is to plot in the different steps, which the user can use to understand and verify the analysis.
 The HyperSpy plotting was probably not made with the intention of being used for publication, but rather for quick and easy plotting of the data.
 If that is the case, the plotting serves its purpose well and has proven to be very useful for this project.
 % Copilot did this: One of the authors of HyperSpy, Tomas Ostasevicius, has been working on a new plotting library for HyperSpy, which will be released in the next major release of HyperSpy.
@@ -418,14 +418,14 @@ The k-factors are essential for the Cliff-Lorimer quantification, and the k-fact
 From the results it is clear that AZtec at least adjust the k-factor for element and for voltage.
 It could be that factors like the beam current and time live could affect the k-factor, but this was not investigated in this project.
 The L-line k-factors are start at 1.1 for 5 kV and increase to 1.2 for 15 kV.
-The As k-factor for the L-line at 5, 10 ad 15 kV is 11\%, 7\% and 6\% greaten than for Ga.
+The As k-factor for the L-line at 5, 10 ad 15 kV is 11\%, 7\% and 6\% greater than for Ga.
 The K-line k-factor are 3.3 for Ga and 4.2 for As, implying either a high sensitivity for higher voltages or two different models for calculating the k-factors.
-Another possibility is that the K-lines and L-lines have a seperate model for calculating the k-factors.
+Another possibility is that the K-lines and L-lines have a separate model for calculating the k-factors.
 This can be tested by extracting the k-factors for the K-lines from the 15 kV spectrum, as the 15 kV spectrum do have peaks for both the K-lines and L-lines.
 The k-factors for Ga are in all four cases higher than for As, which makes sense, as all the Ga lines are higher and have more counts than the As lines.
-Quantification of the ratio between the Ga and As peaks are dont in \cref{tab:results:ratios}, where it is clear that the k-factor push the ratio towards 1.
+Quantification of the ratio between the Ga and As peaks are shown in \cref{tab:results:ratios}, where it is clear that the k-factor push the ratio towards 1.
 The peak ratio times the k-factor for 5 kV is 1.1, and the next closest to 1 is 1.3 for 30 kV.
-This result imply that the theoretically calculated k-factors could be better for high and low voltages.
+This result implies that the theoretically calculated k-factors could be better for high and low voltages.
 
 
 
@@ -521,7 +521,7 @@ This is the HyperSpy calibration that is used in \cref{tab:results:calibration-q
 % How can the peaks and the background be modelled in a way that is easy to understand?
 
 The next sub-problem was to find out how the peaks and the background are modelled in a way that is easy to understand.
-The model was built without HyperSpy, with the idea of making alle the steps clear for a user.
+The model was built without HyperSpy, with the idea of making the steps clear for a user.
 Once the model is fitted to the data, it can be used to calibrate and quantify the peaks and background.
 This can be done by comparing the peak ratios, i.e. the relative areas under the peaks, and using these ratios to calculate the Cliff-Lorimer quantification, as shown in \cref{tab:results:ratios}.
 In the table the ratio is also multiplied with their respective k-factors, to get the Cliff-Lorimer quantification.
@@ -564,14 +564,14 @@ In the case of this project, it was found that normalizing the data was necessar
 This failure is likely due to the fact that \verb|scipy.optimize.curve_fit()| is optimized for certain types or ranges of data, and normalizing the data allows it to handle the data more effectively.
 It is important to note that although the data is normalized for the purpose of fitting, the quantification of the peaks is based on the ratios between the peaks, which are not affected by the normalization.
 This means that the normalization does not affect the accuracy of the quantification, but only the speed and stability of the fitting process.
-However, the percieved spectrum is affected by the normalization, which is important in the qualitative analysis.
+However, the perceived spectrum is affected by the normalization, which is important in the qualitative analysis.
 In this project, different normalization techniques were explored in order to find the one that provided stable results with SciPy, while still allowing the qualitative analysis to be performed.
 
 % the selected normalization
 The normalization that was used in the end was to set the highest peak to 1, and scale the rest of the peaks accordingly.
 This normalization, with some scaling and cropping of the figure, allowed the peaks to be visible and comparable, while still allowing the qualitative analysis to be performed.
 No special features were observed to be lost by using this normalization.
-Some EDS users and textbooks prefer to use the logarithmic scale on the y-axis insted of normalizing the data.
+Some EDS users and textbooks prefer to use the logarithmic scale on the y-axis instead of normalizing the data.
 The logarithmic scale is a good way to make the spectrum easier to read, but it does not affect the fitting process.
 In addition, plotting with a logarithmic scale was tested while doing the qualitative analysis, but it was found that the logarithmic scale provided less detailed information on the smaller peaks and strays than the linear scale.
 Thus, the linear scale with normalization was chosen as the best way to visualize the spectrum for the qualitative analysis, and as the best input for the fitting process.
@@ -591,9 +591,9 @@ Doing this made the fitting both better, and it failed less often.
 % problem with severely overlapping peaks
 The issue of severely overlapping peaks was encountered when fitting the Mo spectrum.
 The Mo L$\alpha$ and L$\beta$ peaks are very close to each other, and even though the fitting algorithm would handle this, the peak finder would not recognize the overlapping peaks as two separate peaks.
-This problem can be fixed manually, but with the limited time in this project it was categorized as a edge case that would not be handled.
+This problem can be fixed manually, but with the limited time in this project it was categorized as an edge case that would not be handled.
 
-\ton{Now I am happy with the discussion untill this point (13.12.22). How would you rate it? Any suggestions on the bigger picture of the discussion? I do need to wrap it up soon, because I still need to fill in some theory, fix the conclusion and the introductions.}
+\ton{Now I am happy with the discussion until this point (13.12.22). How would you rate it? Any suggestions on the bigger picture of the discussion? I do need to wrap it up soon, because I still need to fill in some theory, fix the conclusion and the introductions.}
 
 
 %

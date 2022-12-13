@@ -39,11 +39,10 @@ The TEM grid had GaAs nanowires on it, and the grid was made of Mo with C film.
 Growth of the GaAs nanowires is described in \cite[Ch. 3]{skomedal_improving_2022}.
 A schematic of the sample is shown in \cref{fig:method:materials:sample1}.
 
-Six areas on the specimen was sampled, and ther respective spectra are named: GaAs, Mo, (GaAs) NW, Si, Cu and Al.
+Six areas on the specimen was sampled, and their respective spectra are named: GaAs, Mo, (GaAs) NW, Si, Cu and Al.
 GaAs is a piece of a GaAs wafer, where the Ga and As are 1:1.
 Mo is a Mo disk.
 (GaAs) NW is a Cu TEM 300 mesh grid with holey C film, where GaAs nanowires were grown by Au droplets, sometimes referred to as NW and sometimes as GaAs NW.
-\ton{Is the sentence above correct abou the NW? Is it "holey" with captial H?}
 Si is the Si wafer.
 Cu is the Cu-tape.
 Al is the Al FIB stub.
@@ -109,12 +108,15 @@ See table \cref{tab:method:detector:settings} for the settings used for the diff
 \section{Data processing}
 \label{sec:method:data_processing}
 
+This data processing section is divided into two parts.
+First it is explained what was done in AZtec and HyperSpy.
+Secondly it is explained how the data was processed in Python.
 
 \subsection{AZtec and HyperSpy}
 \label{sec:method:data_processing:aztec_hyperspy}
 
 % AZtec
-The data from AZtec was extraxted as described in Appendix A of Lundeby's master thesis \cite{lundeby_improving_2019}.
+The data from AZtec was extracted as described in Appendix A of Lundeby's master thesis \cite{lundeby_improving_2019}.
 Thanks to Mari Skomedal \cite{skomedal_improving_2022} and Martin Lundeby \cite{lundeby_improving_2019} who made manuals for extracting data from AZtec.
 Both qualitative and quantitative results were acquired.
 The quantitative results were acquired after selecting the elements in the sample and noted as atomic percent.
@@ -143,13 +145,13 @@ The different calibrations used was a model fit calibration in HyperSpy, a self-
 %
 %
 
-\subsection{Self made data processing}
+\subsection{Self-made data processing}
 \label{sec:method:data_processing:self_made}
 
 % TODO: look at this paragraph again
 This subsection describes the data processing done by the author.
 In this project the data was analyzed with new code, which is available on the GitHub profile of the author, \url{https://github.com/brynjarmorka/}.
-The end goal of this code is to improve understanding of the analysis process, and show how some of the steps can be done in different ways, e.g. calibration, peak finding and background estimation.
+The end goal of this code is to improve understanding of the analysis process, and show how some steps can be done in different ways, e.g. calibration, peak finding and background estimation.
 The code is written in Python \cite{python} and uses Jupyter lab 3.4.5 \cite{jupyter}.
 HyperSpy 1.7.1 \cite{hyperspy_1.7.1} was used for the analysis.
 NumPy 1.22. \cite{numpy} is used for calculations, SciPy 1.9.0 \cite{2020SciPy} for fitting and peak finding, and Plotly 5.10.0 \cite{plotly} for plotting.

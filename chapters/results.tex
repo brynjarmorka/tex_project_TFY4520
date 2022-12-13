@@ -75,7 +75,7 @@ The quantitative analysis shows analysis done in AZtec, then quantify Ga and As 
 %%% TODO %%%
 % comment on not log-scaled
 
-This qualitative section presents first the initial plots of the spectra done in AZtec and with HyperSpy, then the different calibrations and how well they match the theoretical vaules, and finally the spectra from the studied materials.
+This qualitative section presents first the initial plots of the spectra done in AZtec and with HyperSpy, then the different calibrations and how well they match the theoretical values, and finally the spectra from the studied materials.
 The spectra are presented as plots and the calibrations are presented in tables.
 
 
@@ -87,7 +87,7 @@ The spectra are presented as plots and the calibrations are presented in tables.
 The initial plots are \cref{fig:GaAs30kV_AZ} and \cref{fig:GaAs30kV_HS}, showing the GaAs 30 kV spectrum.
 In \cref{sec:results:qualitative:each_sample_area} all the spectra are presented.
 The initial two plots use the calibration from AZtec.
-The first figure is two sceen shots from the AZtec software, and the second figure is a plot from HyperSpy.
+The first figure is two screen shots from the AZtec software, and the second figure is a plot from HyperSpy.
 In the upper AZtec plot, Ga and As are annotated.
 In the lower AZtec plot, Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
 AZtec also give the atomic percent of the elements in these plots.
@@ -150,7 +150,7 @@ Values for the four calibrations are given in \cref{tab:results:calibrations}, i
 The deviations are a some eV, and the accuracy of the different calibrations give on specific peaks are given in \cref{tab:results:calibration-peak-accuracy}.
 Here accuracy is the difference between the theoretical peak position and the peak center in the spectrum, given in eV.
 The percentage deviation is also given.
-At the bottom of the table the root mean square deviation (RMSD) is given.
+At the bottom of the table the root-mean-square deviation (RMSD) is given.
 For almost all the peaks, the deviation is greatest for the AZtec calibration.
 One exception is the C K$\alpha$ peak, which deviates a lot less for the AZtec calibration. %discussion: Aztec might use the zero peak to calibrate, but that is just speculation.
 The difference between the HyperSpy calibration and the self-made calibration on the GaAs is small.
@@ -168,8 +168,8 @@ In the qualitative section, the effect of the different calibrations on the spec
 For the third type of calibration, the peaks were located and fitted to Gaussians, and the background was fitted as a polynomial.
 The fit of the 30 kV GaAs spectrum is shown in \cref{fig:results:fit_GaAs30kV}.
 The fit was done with a background polynomial of order 6 and 12, and both the fit and the background is plotted.
-Some of the peaks had too low prominence to be detected by \verb|scipy.signal.find_peaks|, like the Si K$\alpha$ peak.
-The accuracy of the fit was quantified as the root mean square error (RMSE) between the fitted curve and the data, and the RMSE is given in the subplots.
+Some peaks had too low prominence to be detected by \verb|scipy.signal.find_peaks|, like the Si K$\alpha$ peak.
+The accuracy of the fit was quantified as the root-mean-square error (RMSE) between the fitted curve and the data, and the RMSE is given in the subplots.
 
 % discuss: the fit is best at 12th order. The fit is quite good, but two things to improve are the peak finder and the shape of the background.
 
@@ -210,8 +210,8 @@ The y-axis is normalized to the highest peak value in each spectrum, i.e. the hi
 The spectra are cropped to show the region of interest for the different materials.
 Peaks which are taller than the y-axis are marked with a gray dashed line.
 The annotated energy on the plots is the theoretical energy of the peak, and not the fitted peak center.
-Some of the black annotation lines are visually offcenter on the peaks, which is due to the peak deviation previously shown in \cref{tab:results:calibration-peak-accuracy}.
-The terms peak and signal is used to differentiate between well defined peaks and singals with low signal-to-noise ratio.
+Some black annotation lines are visually off center on the peaks, which is due to the peak deviation previously shown in \cref{tab:results:calibration-peak-accuracy}.
+The terms peak and signal is used to differentiate between well-defined peaks and signals with low signal-to-noise ratio.
 The differentiation between peak and signal is not quantified with a threshold in this work. % discuss: could be done, but needs to be tested. Might be able to determine certain peaks from stray peaks, idk.
 The annotations with an asterisk (*) are the peaks which have not theoretical value, e.g. a sum peak.
 First the spectra from the pure samples are presented, then the GaAs bulk wafer, and finally the GaAs NW.
@@ -252,7 +252,7 @@ The peaks at 1.25 keV and 5.9 keV indicate that there was Mg and Mn in the sampl
 % discussion: Mn not common, says Ton, but Mg and Si is common in Al alloy.
 The last peak in the spectrum is the Al K$\alpha$ sum peak at 2.97 keV. % discussion: what other peaks could this be.
 The background is increase rapidly and almost linearly from C K$\alpha$ to Al K$\alpha$, and drops to 10\% after the Al K$\alpha$ peak.
-The figure also show that the Al K$\alpha$ absorbes part of the background to the right of the peak.
+The figure also show that the Al K$\alpha$ absorbs part of the background to the right of the peak.
 
 
 
@@ -266,7 +266,7 @@ As in the Ai spectrum, the Si spectra have a sum peak from the tallest peak.
 The sum peak is at 3.48 keV, which is the sum peak of the Si K$\alpha$.
 In all four spectra the background drops significantly after the Si K$\alpha$ peak.
 The relative drop down is biggest in the 30 kV spectrum.
-The plot show that the background level is dependent og the acceleration voltage, at least when the spectrum is normalized to the tallest peak.
+The plot show that the background level is dependent on the acceleration voltage, at least when the spectrum is normalized to the tallest peak.
 % Discussion: normalization/sum peaks/DT: can mention the "odd" ratios of the Si sum peak, where 10 kV is tallest, then 30, then 5 and 15 at the same level. This is due to normalization and the fact that the DT was not equal. Use table in methods to show the DT.
 
 
@@ -294,7 +294,7 @@ The height of the Cu K$\alpha$ peak is 0.017, which means that the C K$\alpha$ p
 None of the spectra have a Cu L$\alpha$ peak, which should have been at 0.93 keV.
 The 30 kV spectrum have a signal at 2.29 keV, which could be from Mo L$\alpha$, but no Mo K$\alpha$ signal is visible.
 % discussion: The other spectra show that the L peaks are taller. No singal except noise at all at 17.48 keV. But the Mo La peak is low, so it makes sense.
-In these spectra the background is highest at the 30 kV spectrum, which is the oposite as for the Si spectra.
+In these spectra the background is highest at the 30 kV spectrum, which is the opposite as for the Si spectra.
 The peak heights look dependent on the acceleration voltage, but the plot hides the fact that the DT is not equal for all spectra.
 % Discussion: what makes the peaks high and low? This is to be able to get good data, but at the same time not getting biased data by forcing some special stuff.
 
@@ -306,7 +306,7 @@ The peak heights look dependent on the acceleration voltage, but the plot hides 
     \caption{
         The spectra of the Cu-tape, taken at 5 (blue), 10 (red), and 30 (purple) kV.
         The peaks are annotated with the theoretical energy.
-        The zero peak is annotated with an asterisk, as is does not have a theoretical value.
+        The zero peak is annotated with an asterisk, as it does not have a theoretical value.
         The dashed line mark the C K$\alpha$ peak.
         The expected, but missing, Cu L$\alpha$ peak is marked.
     }
@@ -330,7 +330,7 @@ The peak heights look dependent on the acceleration voltage, but the plot hides 
 
 
 % The Mo spectra
-The Mo spectra from the Mo disk is shown in \cref{fig:results:Spectra_Mo}.
+The Mo spectra from the Mo disk are shown in \cref{fig:results:Spectra_Mo}.
 The four spectra have a zero peak, a C K$\alpha$, a O K$\alpha$ peak.
 The Si K$\alpha$ give a very small signal, and is visible as the tiny peak before Mo Ll.
 The background of the 5 kV spectrum is very high, but that is due do its lower signal on the Mo L$\alpha$, making the 0.18 keV peak the tallest and thus scaling up the background.
@@ -367,7 +367,7 @@ As in the other spectra, the background drops significantly after the tallest pe
 
 % the GaAs spectra, with two plots
 The GaAs spectra is shown in \cref{fig:results:Spectra_GaAs} and \cref{fig:results:Spectra_GaAs_bg_and_sum_peaks}.
-The second figure is the same data with a lower y-axis and wider x-axis intervall, to better visualize the background and sum peaks, and also show the K-line sum peaks.
+The second figure is the same data with a lower y-axis and wider x-axis interval, to better visualize the background and sum peaks, and also show the K-line sum peaks.
 Compared to \cref{fig:GaAs30kV_HS}, the peaks fit better with the theoretical values, which is quantified in \cref{tab:results:calibration-quantification}. % discuss: how much does this matter? Is it crucial for quanlitative analysis or just nice to have?
 All the spectra have a zero peak, a C K$\alpha$ peak, and an O K$\alpha$ peak.
 The Ga Ll peak at 0.96 keV is visible in all four spectra.
@@ -450,7 +450,7 @@ The wafer is a 1:1 alloy of gallium and arsenic, so the atomic percent of Ga and
 \begin{table}[h]
     \centering
     \caption{
-        Initial quantification of the GaAs wafer dones in AZtec, treating the data as both a SEM and a TEM signal.
+        Initial quantification of the GaAs wafer done in AZtec, treating the data as both a SEM and a TEM signal.
         The ratio in the wafer is 1:1, so the correct ratio is 50\% and 50\%, because the results are in atomic percent.
     }
     \label{tab:initial_quantification}
