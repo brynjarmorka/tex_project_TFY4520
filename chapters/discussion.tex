@@ -269,8 +269,30 @@ Cu 10 kV is almost only noise. Scaled badly?
 
 
 
+\section{Quantification in AZtec}
+\label{sec:discussion:az_quantification}
+%How accurate is the out-of-the-box quantification in AZtec?
 
+\hyperref[subproblem1]{Sub-problem~\ref*{subproblem1}} was to do quantification in AZtec.
+The analysis in AZtec was done on the GaAs bulk data, and are given in \cref{tab:initial_quantification}.
+The data was treated as both a SEM and a TEM signal, because of the limitations in HyperSpy, which are discussed in \cref{sec:discussion:steps}.
+AZtec has a GUI for analysis, but it is not possible to see what is done with the data at the different steps.
 
+For all four spectra the quantification was most accurate when treating the data as a SEM singal.
+This was not unexpected, since the spectra in fact are SEM spectra.
+It is interesting that the most accurate SEM quantification at 15 kV, while the most unaccurate TEM quantification at 15 kV.
+In general, the quantification as SEM signals are very accurate, all withing 5\% of the correct value for Ga and As.
+The AZtec and HyperSpy quantification on the 5 and 30 kV spectra are very similar, which could imply that they use the same method, i.e. the CL method.
+However, the quantification on the 10 and 15 kV spectra are very different, because the HyperSpy quantification breaks down.
+This break down in covered more in \cref{sec:discussion:failure}.
+
+In general the quantification done on the correct type of signal is quite accurate in AZtec, but the problem is that the quantification is done as a black box.
+Adjusting the parameters of for example the background fitting or the peak finder is not possible, and the user cannot see what is done with the data at the different steps.
+A issue with this is visible in the initial AZtec plot in \cref{fig:GaAs30kV_AZ}, where the Ga K$\beta$ peak is not identified.
+The peak is clearly visible in the unscaled spectrum, but the peak finder in AZtec does not find it.
+Clicking on the peak opens a windows where the user can select what peak this would correspond to, but the only options are a selection of elements where the peak is obviously wrong.
+Not being able to identify the peak that big should raise concern, especially since the peak is overlapping with the As K$\alpha$ peak and thus would affect the quantification.
+Since the quantification process is hidden, the user does not know if AZtec deals with the overlapping peaks correctly.
 
 
 
@@ -286,9 +308,7 @@ Cu 10 kV is almost only noise. Scaled badly?
 \label{sec:discussion:steps}
 % What are done with the data at the different steps in the analysis when using HyperSpy?
 
-\hyperref[subproblem1]{Sub-problem~\ref*{subproblem1}} was to do qualitative analysis of the GaAs wafer in AZtec and HyperSpy.
-The analysis was done as an out-of-the-box analysis, i.e. just following the steps in the documentation.
-AZtec has a GUI for analysis, but it is not possible to see what is done with the data at the different steps.
+\hyperref[subproblem2]{Sub-problem~\ref*{subproblem2}} was to fiugre out what the steps are doing in the qualitative analysis in HyperSpy.
 HyperSpy have documentation online, and the following subsections explain how the analysis was done in HyperSpy.
 
 % The next sub-problem was to find out what is done with the data at the different steps in the analysis when using HyperSpy.
@@ -574,13 +594,15 @@ No special features were observed to be lost by using this normalization.
 Some EDS users and textbooks prefer to use the logarithmic scale on the y-axis instead of normalizing the data.
 The logarithmic scale is a good way to make the spectrum easier to read, but it does not affect the fitting process.
 In addition, plotting with a logarithmic scale was tested while doing the qualitative analysis, but it was found that the logarithmic scale provided less detailed information on the smaller peaks and strays than the linear scale.
+In the initial AZtec plot in \cref{fig:GaAs30kV_AZ} the spectrum is plotted both with a linear and a logarithmic scale.
+Using the logarithmic scale is in the end a user preference.
 Thus, the linear scale with normalization was chosen as the best way to visualize the spectrum for the qualitative analysis, and as the best input for the fitting process.
 
 
 % curve fit
 % problem: sometimes fails
 With the model components ready and the data normalized, the model can be fitted to the data.
-The function \verb|curve_fit()| uses the Levenberg–Marquardt algorithm to fit the model to the data, and returns the optimal fitted parameters.
+The \verb|curve_fit()| function uses the Levenberg–Marquardt algorithm to fit the model to the data, and returns the optimal fitted parameters.
 Fitting both the Gaussians and the background at the same time makes the fitting more stable.
 One of the first iterations, where the user manually inputted the peaks, the fitting tended to partially fail.
 The issue was that the fitting only was done on the peaks.
@@ -594,6 +616,12 @@ The Mo L$\alpha$ and L$\beta$ peaks are very close to each other, and even thoug
 This problem can be fixed manually, but with the limited time in this project it was categorized as an edge case that would not be handled.
 
 \ton{Now I am happy with the discussion until this point (13.12.22). How would you rate it? Any suggestions on the bigger picture of the discussion? I do need to wrap it up soon, because I still need to fill in some theory, fix the conclusion and the introductions.}
+
+
+
+
+
+
 
 
 %
@@ -611,6 +639,20 @@ Table \cref{tab:results:calibrations} shows calibration from AZtec, HyperSpy, an
 
 
 % Something about how the calibrated peak of Ga K$\alpha$ is directly on K$\alpha_1$.
+
+
+
+
+% Why I selected the Ga La and As Ka peaks for calibration.
+% Less extrapolation. Peaks are far apart.
+% The peaks need a good Gaussian fit.
+% Need a nice curve.
+% High peak to background.
+% Should be a sample that is easily available. Cu tape would be nice, since it is in all labs and samples.
+% Mo is far apart, but looks bad.
+% Mo is also harder to fit automatically, because of the overlapping peak.
+
+
 
 %
 %
@@ -650,17 +692,6 @@ The next sub-problem was to find out when the analysis fails, both in AZtec and 
 
 
 
-
-\section{Calibration decision}
-
-% Why I selected the Ga La and As Ka peaks for calibration.
-% Less extrapolation. Peaks are far apart.
-% The peaks need a good Gaussian fit.
-% Need a nice curve.
-% High peak to background.
-% Should be a sample that is easily available. Cu tape would be nice, since it is in all labs and samples.
-% Mo is far apart, but looks bad.
-% Mo is also harder to fit automatically, because of the overlapping peak.
 
 
 

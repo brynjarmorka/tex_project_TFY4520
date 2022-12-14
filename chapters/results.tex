@@ -89,10 +89,11 @@ In \cref{sec:results:qualitative:each_sample_area} all the spectra are presented
 The initial two plots use the calibration from AZtec.
 The first figure is two screen shots from the AZtec software, and the second figure is a plot from HyperSpy.
 In the upper AZtec plot, Ga and As are annotated.
-In the lower AZtec plot, Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
+In the middle AZtec plot, Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
+The lower AZtec plot has a logarithmic scale on the y-axis.
 AZtec also give the atomic percent of the elements in these plots.
-The HyperSpy plot utilize the Python package Matplotlib for plotting.
-The plotting in HyperSpy can add the theoretical peak centers as vertical lines, which is done in the plot for Ga and As.
+The HyperSpy plot utilize the Python package Matplotlib for plotting, and it has the theoretical line values annotated.
+% The plotting in HyperSpy can add the theoretical peak centers as vertical lines, which is done in the plot for Ga and As.
 The height of the line show an estimate of the weight of the peak.
 In the plot it is clear that the calibration is somewhat off, since the line positions does not match the center of the peaks.
 In the following section, the spectrum is calibrated using SciPy, and plotted with Plotly to more clearly visualize the spectra details.
@@ -103,9 +104,12 @@ In the following section, the spectrum is calibrated using SciPy, and plotted wi
     \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_lin.PNG}
     \\[2em]
     \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_lin_scaled.PNG}
+    \\[2em]
+    \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_log.PNG}
     \caption{
         The spectrum of the GaAs bulk at 30 kV, from AZtec.
         The figure shows the whole spectrum with Ga and As annotated, and a cropped version to show the smaller peaks where Si, O and C also are annotated.
+        The bottom plot is the whole spectrum with a logarithmic scale on the y-axis.
     }
     \label{fig:GaAs30kV_AZ}
 \end{figure}

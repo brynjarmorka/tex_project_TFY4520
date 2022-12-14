@@ -390,7 +390,50 @@ HyperSpy have an integrated list of the characteristic X-rays, with both the ene
 Goldstein uses different intensity weights for isolated atoms, thin foils and bulk samples \cite[Ch. 4.2.6]{goldstein_scanning_2018}, and all are dependent on the atomic number and ionized shell.
 One could venture down the rabbit hole of finding the theoretical weights for different lines, but that will not be done in this thesis.
 Examples of the weights from HyperSpy are given in \cref{tab:theory:Ga-lines}.
-\ton{OK?}
+
+
+
+% %   - energy issues
+% %   - overvoltage (deviations from q-mec, something in my notes)
+
+
+%
+%
+\subsection{Bremsstrahlung - the background radiation}
+\label{sec:theory:empirical:background}
+Why linear and why sixth order polynomial. Which are better.
+\brynjar{I might use background removal as some results, but I'm not sure. That would be comparing the different methods, and looking at smoothing of the data before removing the background.}
+
+\brynjar{TODO: Include a illustration of background. } % label fig:theory:background_illustration
+
+
+
+% does this fit here?
+\subsection{Sample thickness}
+\label{sec:theory:empirical:samplethickness}
+Thin vs bulk samples.
+%   - thin and bulk samples
+
+
+
+
+
+
+
+
+\section{Data processing}
+\label{sec:theory:data}
+
+This section on data processing covers what HyperSpy is, quantification with Cliff-Lorimer and calibration of a spectrum.
+
+
+\subsection{HyperSpy}
+\label{sec:theory:data:hyperspy}
+
+
+% what HyperSpy is
+
+% how to use HyperSpy, which is explained in detail in discussion
 
 
 %
@@ -419,49 +462,13 @@ Cliff and Lorimer took it further and swapped the standard for the ratios of int
 
 
 
-
-% %   - energy issues
-% %     - overvoltage (deviations from q-mec, something in my notes)
-% \subsection{Energy}
-% \label{sec:theory:empirical:energy}
-% \brynjar{Do I have something here? Can't recall what I wanted to include, which is not covered in other subsections.}
-
-
-
-%   - the detection system
-%     - detector efficiency
-%     - detector resolution
-%     - dead time
-%     - angle/placement of detector
-%     - beam issues
-%     - stray: secondary excitations in the sample
-%     - Si stray
-%     - holder / chamber stray detection
-\subsection{Detection system}
-\label{sec:theory:empirical:detectionsystem}
-Detector efficiency, detector resolution, dead time, angle/placement of detector, beam issues, stray: secondary excitations in the sample, Si stray, holder / chamber stray detection.
-
-\subsection{Sample thickness}
-\label{sec:theory:empirical:samplethickness}
-Thin vs bulk samples.
-%   - thin and bulk samples
-
-
-
-%
-%
-\subsection{Bremsstrahlung - the background radiation}
-\label{sec:theory:empirical:background}
-Why linear and why sixth order polynomial. Which are better.
-\brynjar{I might use background removal as some results, but I'm not sure. That would be comparing the different methods, and looking at smoothing of the data before removing the background.}
-
-\brynjar{TODO: Include a illustration of background. } % label fig:theory:background_illustration
-
-%
 %
 % calibration of the spectrum
-\section{Calibration of the spectrum}
+\subsection{Calibration of the spectrum}
 \label{sec:theory:calibration}
+
+% General calibration, which needs peak centers. Just mention fitting.
+
 % my notebook
 
 % equation dispersion = e2 - e1 / c2 - c1
@@ -488,12 +495,53 @@ Zero-offset in channels is:
 % zero-offset
 
 
-\section{SEM}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Detection system}
+\label{sec:theory:detectionsystem}
+
+This section covers briefly the EDS detector and the SEM.
+
+
+\subsection{EDS detector}
+\label{sec:theory:edsdetector}
+
+Detector efficiency, detector resolution, dead time, angle/placement of detector, beam issues, stray: secondary excitations in the sample, Si stray, holder / chamber stray detection.
+
+
+%   - the detection system
+%     - detector efficiency
+%     - detector resolution
+%     - dead time
+%     - angle/placement of detector
+%     - beam issues
+%     - stray: secondary excitations in the sample
+%     - Si stray
+%     - holder / chamber stray detection
+
+
+
+\subsection{SEM}
 \label{sec:theory:sem}
 
 
 - how (e-beam, vacuum, ...)
+
+
 - hardware (scanning coils, astigmatism)
+
+
 - imaging (contrast, SE, BSE)
 
 
