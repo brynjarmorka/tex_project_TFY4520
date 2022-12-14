@@ -1,0 +1,29 @@
+% table listing the Mo lines, both from Hyperspy and from the X-ray Data Booklet
+
+\begin{table}[tbp]
+    \centering
+    \caption{
+        Mo lines from the HyperSpy library \cite{hyperspy_1.7.1} and X-ray Data Booklet (XRB) \cite[Table 1.2 and 1.3]{thompson_x-ray_2004}.
+        HyperSpy lists a single line for K$\alpha$, while the XRB lists two lines.
+        The weights are relative to the strongest line in each shell for each element.
+        HyperSpy include a line at 2.83 keV for Mo L$\gamma$3, which is not listed in the XRB.
+        HyperSpy also include a line at 2.47 keV for Mo L$\beta$3, which is not listed in the XRB.
+    }
+    \label{tab:theory:Mo-lines}
+    \begin{tabular}{cccccc}
+        Line       & XRB          & XRB    & HyperSpy     & HyperSpy \\
+                   & Energy [keV] & Weight & Energy [keV] & Weight   \\
+        \hline
+        L$\beta$1  & 2.3948       & 0.53   & 2.3948       & 0.33     \\
+        K$\beta$   & 19.608       & 0.15   & 19.6072      & 0.15     \\
+        K$\alpha$  & 17.4793      & 1.0    & 17.4793      & 1.0      \\
+        K$\alpha$2 & 17.3743      & 0.52   &              &          \\
+        L$\beta$2  & 2.5183       & 0.05   & 2.5184       & 0.05     \\
+        L$\alpha$  & 2.2932       & 1.0    & 2.2932       & 1.0      \\
+        % Ln         &              &        & 2.1205       & 0.01     \\
+        Ll         & 2.0157       & 0.05   & 2.0156       & 0.04     \\
+        L$\beta$3  &              &        & 2.4732       & 0.06     \\
+        L$\gamma$3 &              &        & 2.8307       & 0.01     \\
+        L$\gamma$1 & 2.6235       & 0.03   & 2.6233       & 0.01
+    \end{tabular}
+\end{table}

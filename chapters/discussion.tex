@@ -321,6 +321,7 @@ An example notebook with quantification of the GaAs wafer is attached in APPENDI
 
 \subsection{Loading the data and specifying the elements}
 \label{sec:discussion:steps:load}
+
 \begin{quote}
     \verb|s = hs.load(<filepath>, signal="EDS_TEM")|
 
@@ -342,6 +343,13 @@ Still, the results show that it is possible to quantify the elements in the GaAs
 Implementing quantification from the SEM type signal in HyperSpy have been discussed on the repositories GitHub issues page\footnote{\url{https://github.com/hyperspy/hyperspy/issues/2332}}.
 The topic have been discussed in 2020, 2017 and 2015.
 People have been working on quantification of SEM EDS data, but the work have not been finished yet.
+
+
+% Using EDS_TEM since EDS_SEM does not have all these functions.
+% Commercial packages do quantify SEM signal, and they are kinda good at it.
+% Should be more accurate on NW sample, but is it?
+% Reference the discussion on GitHub?
+
 
 The quantification done with the CL method in HyperSpy on the three different calibrations in \cref{tab:results:calibration-quantification} are all within 10\% of the expected composition.
 Carter and Williams \cite[p. 612 and 648]{carter2016transmission} state that the accuracy of EDS is at best $\pm$ 3-5\%, but that it could be reduced to around $\pm$ 1.7\% with very long acquisition times and a careful analysis.
@@ -402,7 +410,7 @@ This is especially true for background signals modelled as a polynomial.
 Linear background removal works well for some peaks, for example the K-lines of Ga and As, but not for the L-lines.
 The background around the K-lines are more linear, because of the exponential decay of the background.
 Around the L-lines the background is affected by the absorption of the Bremsstrahlung lower than ~2 keV and the observation of higher background levels below the highest peak in the spectrum.
-The background removal is discussed further in \cref{sec:discussion:background}.
+The background removal is discussed further in \cref{sec:discussion:modelling}.
 
 
 
@@ -535,14 +543,28 @@ The two lines above calibrates the spectrum with the HyperSpy model and updates 
 The metadata in the \verb|signal| s is updated with the new calibration.
 Thus, doing the previous step with quantification after model fitting can give a more correct quantification.
 This is the HyperSpy calibration that is used in \cref{tab:results:calibration-quantification}.
+As shown in the table, the HyperSpy calibration gives a better peak accuracy than the calibration from AZtec, and it is about as accurate as the self produced calibration done on the GaAs 30 kV spectrum.
+This self produced calibration is discussed in \cref{sec:discussion:calibration}, after a discussion of the peak and background modelling in the next section.
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Peak and background modelling}
 \label{sec:discussion:modelling}
-% How can the peaks and the background be modelled in a way that is easy to understand?
+% How can the peaks and the background be modelled?
 
-The next sub-problem was to find out how the peaks and the background are modelled in a way that is easy to understand.
+
+\hyperref[subproblem3]{Sub-problem~\ref*{subproblem3}} was to find out how the peaks and the background can be modelled.
 The model was built without HyperSpy, with the idea of making the steps clear for a user.
-Once the model is fitted to the data, it can be used to calibrate and quantify the peaks and background.
+Once the model is fitted to the data, it can be used to calibrate and quantify the peaks and background, which is discussed in \cref{sec:discussion:calibration}.
 This can be done by comparing the peak ratios, i.e. the relative areas under the peaks, and using these ratios to calculate the Cliff-Lorimer quantification, as shown in \cref{tab:results:ratios}.
 In the table the ratio is also multiplied with their respective k-factors, to get the Cliff-Lorimer quantification.
 
@@ -553,8 +575,8 @@ The first step in creating a model is to identify the peaks.
 The peaks are assumed to be Gaussian curves.
 Other possible shapes are Lorentzian curves, but that has not been a part of this project.
 The initial way of identifying peaks was that the user manually identified the peaks.
-Later the peaks were identified with the function \verb|scipy.signal.find_peaks()|, using the argument \verb|prominence=0.01|\footnote{\url{https://en.wikipedia.org/wiki/Topographic_prominence}}.
-The prominence is the height of the peak above the background.
+Later the peaks were identified with the function \verb|scipy.signal.find_peaks()|, using the argument \verb|prominence=0.01|.
+The prominence is the height of the peak above the background\footnote{\url{https://en.wikipedia.org/wiki/Topographic_prominence}}.
 As seen in \cref{fig:results:fit_GaAs30kV}, the given prominence identifies many but not all the peaks.
 Further work on the peak finder is needed to find a good and robust way of identifying the peaks.
 The figure also shows that the peaks are well-fitted by the model, while the background is fitted fairly well.
@@ -618,6 +640,34 @@ This problem can be fixed manually, but with the limited time in this project it
 \ton{Now I am happy with the discussion until this point (13.12.22). How would you rate it? Any suggestions on the bigger picture of the discussion? I do need to wrap it up soon, because I still need to fill in some theory, fix the conclusion and the introductions.}
 
 
+% % Is this now redundant with the previous section?
+% The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy, and how well different order polynomials fit the background.
+% The background models were tested on the spectrum of GaAs, and later also on \brynjar{TODO: other spectra. Also make a table here with results}.
+% The background was modelled as a polynomial of different orders.
+% To quantify the different background models, the residuals were calculated.
+% The residuals are the difference between the data and the model.
+% \brynjar{Use root-mean-square error?}
+% The TABLE XXXX \brynjar{make table} shows the residuals for the different order background models.
+% The best orders were visually inspected.
+% A later idea was to model the background as a spline, which is a piece wise polynomial.
+% The spline is a piece wise polynomial with a smooth transition between the pieces.
+% The spline was not tested in this project, but it could be a good alternative to the polynomial background model.
+
+% % TODO: Try the background as a spline, which is a piecewise polynomials.
+% % conclusion: try splines, but then what to do under the peak?
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -627,65 +677,113 @@ This problem can be fixed manually, but with the limited time in this project it
 %
 \section{Calibration}
 \label{sec:discussion:calibration}
-% How is the spectrum calibrated, and is AZtec different than HyperSpy?
+%     How good is the calibration in AZtec and HyperSpy?
+
 
 \brynjar{Try not to repeat the same things as earlier.}
 
-The next sub-problem was to calibrate the data with a self produced Python script.
-With a fitted model of the spectrum, the calibration can be done.
-Calibration can both be done on raw data with channels on the x-axis and on poorly calibrated data with energy on the x-axis.
-The dispersion is calculated with \cref{eq:theory:calibration:dispersion}.
-Table \cref{tab:results:calibrations} shows calibration from AZtec, HyperSpy, and the self produced Python script.
+\hyperref[subproblem4]{Sub-problem~\ref*{subproblem4}} was to figure out how good the calibration is in AZtec and HyperSpy, which lead to making a new calibration in Python.
+The calibration has been discussed some in \cref{sec:discussion:general:intensities,sec:discussion:steps:load,sec:discussion:steps:HyperSpycalibration}, and is here discussed more in depth.
+
+% importance of calibration
+Calibration is an important step in the analysis, as it ensures that the results obtained from the analysis are accurate and reliable.
+If the dispersion is a few percent off, the error in the analysis could be significant as the error is accumulates with higher energies.
+In general, calibration involves the comparison of the measured values with a known reference standard, in order to determine the accuracy and precision of the measurement system.
+In this project, the reference was two known peaks.
+Calibration process is important because it allows the user to account for biases or errors in the measurement system, and to correct for them in order to obtain more accurate results.
+Additionally, calibration can also help to identify any potential problems or issues with the measurement system, allowing the user to take appropriate action to address these issues.
+A well calibrated system is important in high accuracy measurements.
+
+% calibration in AZtec
+When working with AZtec, the data is read with a built-in calibration.
+It might be an option to calibrate the data in AZtec, but this was not investigated in this project.
+One thing is sure, and that is that AZtec does not calibrate the spectrum automatically, as all the spectra were extracted with the same calibration.
+It might be that the calibration of the SEM APREO EDS detector was set e.g. upon installation, and have not beed changed since then.
+Since the AZtec calibration had the worst peak accuracy, it would be interesting to see if changing the calibration of the instrument would change the black box quantification in AZtec.
+This step was not included in the scope of this project.
 
 
-% Something about how the calibrated peak of Ga K$\alpha$ is directly on K$\alpha_1$.
+% calibration in HS
+A step that was included in the scope of this project was to calibrate the data in HyperSpy.
+The calibration is described in \cref{sec:discussion:steps:HyperSpycalibration}, which gave a dispersion 2.8\% higher than the calibration in AZtec and one more channel in the zero offset.
+The higher dispersion is shifting the whole spectrum to the right, because the energy per channel is higher.
+The higher zero offset is shifting the spectrum to the left, as more channel values are negative, which does not have a real life interpretation.
+This left and right shift is making the whole spectrum fit the peaks better, as quantified in \cref{tab:results:calibration-peak-accuracy}.
+The HS calibration was done on GaAs, and gave very similar results as the self-made calibration.
+
+
+% why doing the self calibration. understand and verify the calibration in HS
+The self-made calibration was made with two goals in mind: to understand the calibration process better and to verify the calibration in HyperSpy.
+HyperSpy is open-source software, but reading the source code is not the most efficient way to understand how the calibration is done.
+The calibration in HyperSpy is done with a model of the spectrum, which is fitted to the data.
+Thus, the self-made calibration was based on the same principle.
+A model was made and fitted, and two far apart peaks were used for calibration.
+Which peaks to use is discussed below.
+The self-made calibration was done on two spectra, GaAs and Mo.
+The Mo spectrum gave a dispersion 4.0\% higher than the calibration in AZtec, and it was probably too high, based on the poorer peak accuracy.
+The Ga spectrum gave a dispersion 3.0\% higher than the calibration in AZtec, and the peak accuracy was similar to the calibration in HyperSpy.
+Quantified with the RMSD, the self-made calibration is better than the HS calibration, but too few spectra have been tested to make a final decision of which calibration is better.
+The HS and self-made calibration preform quite bad at C K$\alpha$, but this peak is not as useful.
+Carbon is often an impurity in EDS samples, both present in the chamber and potentially on the sample.
+
+% Selecting peaks for calibration
+The peaks used for calibration should be far apart and have a good signal-to-noise ratio.
+The channels between the peaks are interpolated, while the channels outside the peaks are extrapolated.
+Extrapolated channels can potentially get a larger error, as error in the dispersion accumulates.
+The peaks need a good signal-to-noise ratio, becasue the fit needs to be good to find the correct peak position.
+The problem with the Mo spectrum, where the peaks are further apart, was probably that the Mo K$\alpha$ peak was not good enough to fit, because the signal was low.
+The value of the Mo K$\alpha$ peak is around 2\% of the Mo L$\alpha$ peak, while the lower calibration peak in the GaAs spectrum is 20\% of the higher peak.
+The problem with the Mo spectrum could have been a poor fit of the Mo L$\alpha$ peak, which is overlapping with the Mo K$\alpha$ peak, because the peak finder struggles with this severely overlapping peak.
+However, the overlapping problem was solved manually for the calibration on the Mo spectrum.
+If the problem was lower singal-to-noise ratio of Mo K$\alpha$, the problem could have been solved by using a longer counting time.
+This could be investigated in the future, to try to optimize the calibration of the detector.
+
+
+% Selecting the correct theoretical value, and the difference between XRB and HS
+% fig:results:Ga-K
+% Something about how the calibrated peak of Ga K$\alpha$ is directly on XRB K$\alpha_1$.
+One last, but important, aspect is the theoretical value of the peaks.
+To get the calibration right, the reference peaks need to be at the correct energy.
+In this work, it was discovered that the theoretical values in the X-ray Data Booklet are slightly deviating from the HyperSpy values.
+The first thing to note is that the lines listed in the XRB and in HS deviate somewhat, as seen in \cref{tab:theory:Ga-lines,tab:theory:Mo-lines}.
+Not all the lines in the table are visible in the spectra in \cref{fig:results:Spectra_Mo,fig:results:Spectra_GaAs}.
+The XRB differentiates between K$\alpha$1 and K$\alpha$2, and states that the weight of Ga K$\alpha$2 is 0.51 relative to Ga K$\alpha$1.
+If this woud be true, the Ga K$\alpha$ peak would be a overlapping peak with a broadening at the right side, but as seen in \cref{fig:results:Ga-K}, this is not the case.
+The figure show that the peak fit exactly one Gaussian curve, with its center directly on the K$\alpha$ line from HS, which is the K$\alpha$1 line in the XRB.
+The XRB claim that the listed lines are the strongest lines \cite[P. 33, Sec. 1.2]{thompson_x-ray_2004}, but it is missing the Mo L$\gamma$3 line, which is visible in the Mo spectrum.
+In general, the weights of the lines listed in the XRB and HS seem to be slightly off from the data collected in this project, because some lines are not visible and some are, but this cannot be explained solely by the weights.
+It could be that the listed weights would be correct when collecting the data in a different way or with different materials.
+
+
+% The author have not been able to find the source of the lines in the HyperSpy liberary, but it might be the NIST database, as this is one of the references in HyperSpy\footnote{link??}.%\url{http://hyperspy.org/hyperspy-doc/current/user_guide/bibliography.html#chantler2005}}.
+% Both the XRB and HS include the strongest lines in the spectra, i.e. the K$\alpha$ and L$\alpha$ lines.
+% Both lists lines which are not visible in the acquired spectra, but the extra lines in the XRB are not present at all, while some of the extra lines in the HS are visible.
+% For example in the Mo spectra a Ll and a L$\gamma$3 line are visible and are listed with matching energies in the HS liberary, but not in the XRB.
+% Based on the acquired spectra, a possible explaination for the difference is that the HS lines are based more on empirical data and the XRB lines are based on theoretical calculations.
+% This is purely speculation, and should have been investigated further as it have been a source of confusion, but it was not prioritized.
 
 
 
-
-% Why I selected the Ga La and As Ka peaks for calibration.
-% Less extrapolation. Peaks are far apart.
-% The peaks need a good Gaussian fit.
-% Need a nice curve.
-% High peak to background.
+% conclude
+% Selecting a calibration material which is both stable, give good signal and is easily available.
 % Should be a sample that is easily available. Cu tape would be nice, since it is in all labs and samples.
-% Mo is far apart, but looks bad.
-% Mo is also harder to fit automatically, because of the overlapping peak.
+
+
 
 
 
 %
 %
-\section{Background models}
-\label{sec:discussion:background}
-% How does different background models affect the quantitative analysis done in HyperSpy?
-
-\brynjar{Try not to repeat the same things as earlier.}
 
 
-The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy, and how well different order polynomials fit the background.
-The background models were tested on the spectrum of GaAs, and later also on \brynjar{TODO: other spectra. Also make a table here with results}.
-The background was modelled as a polynomial of different orders.
-To quantify the different background models, the residuals were calculated.
-The residuals are the difference between the data and the model.
-\brynjar{Use root-mean-square error?}
-The TABLE XXXX \brynjar{make table} shows the residuals for the different order background models.
-The best orders were visually inspected.
-A later idea was to model the background as a spline, which is a piece wise polynomial.
-The spline is a piece wise polynomial with a smooth transition between the pieces.
-The spline was not tested in this project, but it could be a good alternative to the polynomial background model.
 
-% TODO: Try the background as a spline, which is a piecewise polynomials.
-
-% conclusion: try splines, but then what to do under the peak?
 
 %
 %
 \section{Analysis failure}
 \label{sec:discussion:failure}
 % When does the analysis fail, both in AZtec and HyperSpy?
-
-The next sub-problem was to find out when the analysis fails, both in AZtec and HyperSpy.
+\hyperref[subproblem5]{Sub-problem~\ref*{subproblem5}} was to find out when the analysis fails, both in AZtec and HyperSpy.
 % quantification with 
 
 
@@ -693,14 +791,19 @@ The next sub-problem was to find out when the analysis fails, both in AZtec and 
 
 
 
+\section{Main problem discussion}
+\label{sec:discussion:mainproblem}
+
+% How do different spectroscopy data processing influence the qualitative analysis, and how do they affect the quantitative Cliff-Lorimer analysis in HyperSpy?
+
+This last section is a direct discussion of the \hyperref[mainproblem]{Main problem statement}, connecting the findings to how EDS analysis could be improved.
+The main problem is how data processing in EDS analysis affects both the qualitative and quantitative analysis.
+The qualitative effects are discussed first, then the quantitative.
+
+% TODO: wirte here
 
 
-\section{Choices in HyperSpy}
 
-% Using EDS_TEM since EDS_SEM does not have all these functions.
-% Commercial packages do quantify SEM signal, and they are kinda good at it.
-% Should be more accurate on NW sample, but is it?
-% Reference the discussion on GitHub?
 
 
 

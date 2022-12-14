@@ -175,7 +175,14 @@ The fit was done with a background polynomial of order 6 and 12, and both the fi
 Some peaks had too low prominence to be detected by \verb|scipy.signal.find_peaks|, like the Si K$\alpha$ peak.
 The accuracy of the fit was quantified as the root-mean-square error (RMSE) between the fitted curve and the data, and the RMSE is given in the subplots.
 
-% discuss: the fit is best at 12th order. The fit is quite good, but two things to improve are the peak finder and the shape of the background.
+
+% the figure with calibration and the theoretical lines for Ga Ka
+The Ga K$\alpha$ peak is shown in \cref{fig:results:Ga-K}, with the theoretical peak position from the X-ray Data Booklet \cite{thompson_x-ray_2004} (XRB) and HyperSpy, and also where the peak would be with the HS, Mo and AZ calibration.
+The plot is calibrated with the GaAs spectrum, using Ga L$\alpha$ and As K$\alpha$ peaks.
+The theoretical lines and other calibration peak centers are marked with dashed lines.
+In accordance with the results in \cref{tab:results:calibration-peak-accuracy}, the AZtec calibration is most inaccurate.
+The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ peak, while the XRB gives two lines, K$\alpha_1$ and K$\alpha_2$.
+% discussion: The XRB Ka2 are so off, that it is probably not there. Could have broadended the peak, but not
 
 % make figure with 4 subfigures.
 % fit_GaAs30kV_whole.png
@@ -185,22 +192,38 @@ The accuracy of the fit was quantified as the root-mean-square error (RMSE) betw
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_whole.png}
-    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_K.png}
-    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_L.png}
-    \includegraphics[width=0.48\textwidth]{figures/fit/fit_GaAs30kV_bg.png}
+    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_whole.png}
+    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_K.png}
+    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_L.png}
+    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_bg.png}
     \caption{
         The fit of the 30 kV GaAs spectrum.
-        The plots show the raw data (blue markers), the fit (green and orange) and he background (red and purple).
+        The plots show the raw data (blue markers), the fit (green and orange) and the background (red and purple).
         The two different fits and backgrounds are with background polynomial of order 6 and 12, respectively.
         The RMSE for the area of each plot is given on the figures.
     }
     \label{fig:results:fit_GaAs30kV}
 \end{figure}
 
+% insert figure Ga-K.png
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/Ga-K.png}
+    \caption{
+        The Ga K$\alpha$ peak in the 30 kV GaAs spectrum, calibrated on Ga L$\alpha$ and As K$\alpha$ peaks.
+        The raw data (red markers) and the fit (blue line) are plotted.
+        The vertical dashed lines are the different values for Ga K$\alpha$.
+        The HS, Mo and AZ calibrated K$\alpha$ lines are the shift the peak would have if those calibrations were used.
+        The XRB K$\alpha$1 and XRB K$\alpha$2 are the theoretical peak positions from the X-ray Data Booklet.
+        The HS K$\alpha$ is the peak position from HyperSpy.
+        Annotated in the upper right corner are the deviations from the dashed lines to the fitted peak position.
+    }
+    \label{fig:results:Ga-K}
+\end{figure}
 
-% newpage before next section
-\newpage
+
+% newpage and place all floats before the next section (clearpage)
+\clearpage
 
 \subsection{Spectra from the studied materials}
 \label{sec:results:qualitative:each_sample_area}
@@ -347,8 +370,8 @@ The HyperSpy database have the energy and weight of two other Mo peaks visible i
 %
 % TODO: write about the Mo Ll and Mo L$\gamma$3 peaks in the teory section.
 %
-The X-ray Booklet does not include these lines, but include some other lines which are not visible in these spectra.
-This difference between the listed lines in the X-ray Booklet and the lines in the HyperSpy database can be confusing and is part of the discussion in \cref{chap:discussion}. % discuss: the difference might be that HS is more empirical while the X-ray Booklet is more theoretical.
+The X-ray Data Booklet only have the Mo Ll peak, but not the L$\gamma$3 peak.
+This difference between the listed lines in the X-ray Data Booklet and the lines in the HyperSpy database can be confusing and is part of the discussion in \cref{sec:discussion:calibration}. % discuss: the difference might be that HS is more empirical while the X-ray Data Booklet is more theoretical?
 % also give the cref a more direct reference
 Only the 30 kV spectra have a signal at the Mo K$\alpha$ and Mo K$\beta$ peaks at 17.46 and 19.62 keV. % discuss: as expected
 The peak at 4.6 keV is the sum peak of Mo L$\alpha$ and Mo L$\beta$1.

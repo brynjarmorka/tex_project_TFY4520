@@ -120,7 +120,7 @@ The fluorescent yield is heavily dependent on the experimental setup and can be 
 The transition lines are grouped and named semi-systematic, based on the orbital the vacancy is in, and the orbital the electron is relaxed from.
 The naming convention is semi-systematic because it is the original empirical system published in Nature by the Swedish physicist Siegbahn in 1916 \cite{siegbahn_relations_1916}, when they did not have the knowledge we have today.
 The International Union of Pure and Applied Chemistry made a more systematic naming convention for X-ray lines which is supposed to be the official one \cite[Ch. 4.2.4]{goldstein_scanning_2018}.
-However, the Siegbahn notation is used in the X-ray booklet, in HyperSpy, and by the TEM group at NTNU, and thus is used in this thesis.
+However, the Siegbahn notation is used in the X-ray Data Booklet, in HyperSpy, and by the TEM group at NTNU, and thus is used in this thesis.
 
 % K, L, M
 The X-rays are first named by which shell in the Bohr model the vacancy is in, i.e. the principal quantum number $n$ of the vacancy orbital.
@@ -145,10 +145,13 @@ The transition $\textnormal{L}_1 \rightarrow \textnormal{K}_1$ has $\Delta l = 0
 In gallium the K$\alpha_1 = 9251.74$ eV and K$\alpha_2 = 9224.82$ eV \cite{thompson_x-ray_2004} are coupled, but as shown in \cref{fig:theory:GaAs30keV-K-lines} this energy difference of $\Delta E = 26.92$ eV is too low to be resolved in EDS.
 
 % figure with the naming convention
-\begin{figure}
+\begin{figure}[htp]
     \centering
-    \includegraphics[width=0.5\linewidth]{figures/mari2.9-naming-lines.jpg}
-    \caption{Direct copy if Maris Figure 2.9. I will make my own.}
+    \includegraphics[width=0.7\linewidth]{figures/transition_lines.png}
+    \caption{
+        Schematic of the electron relaxations relavant for this thesis, with their naming convention.
+        When the lines are not resolvable, K$\alpha$1 and K$\alpha$2 are refered to as only K$\alpha$.
+    }
     \label{fig:theory:theoreticalxray:naming:lines}
 \end{figure}
 
@@ -206,51 +209,91 @@ In theory, the ratio of the atomic concentration between two elements are propor
 However, there are many factors which affect the intensity of the lines, which are covered in \cref{sec:theory:empirical}.
 
 
-% figure with the whole GaAs spectrum
-% figure placeholder-GaAs30kV-whole-spectrum.png
-\begin{figure}
+% TODO: comment the four figures below in the text
+
+
+% figure figures/expected_lines.png
+\begin{figure}[p]
     \centering
-    \includegraphics[width=1\linewidth]{figures/placeholder-GaAs30kV-whole-spectrum.png}
+    \includegraphics[width=0.9\textwidth]{figures/expected_lines.png}
     \caption{
-        The whole GaAs spectrum.
-        The next two figures zoom in on different parts of this plot.
-        Data from the SEM Apreo at NTNU NanoLab, 30 kV.
+        Theoretical lines in a spectrum.
+        The lines have different energy and intensity, and does not have any spread.
     }
-    \label{fig:theory:GaAs30kV-whole}
+    \label{fig:theory:expected_lines}
+\end{figure}
+
+% figure/expected_spectrum_Skomedal.png
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/expected_spectrum_Skomedal.png}
+    \caption{
+        An Illustration of a theoretical spectrum with characteristic X-rays and background radiation.
+        The background radiation is being generated exponentially, but is being absorbed at lower energies and thus then detected background get the illustrated shape.
+        The figure is borrowed from Skomedal \cite[Fig. 2.8]{skomedal_eds_2018}.
+    }
+    \label{fig:theory:expected_spectrum_Skomedal}
 \end{figure}
 
 
-
-\begin{figure}
+% figure/acutal_peaks.png
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/GaAs30kV-8-12keV.png}
+    \includegraphics[width=0.9\textwidth]{figures/actual_peaks.png}
     \caption{
-        Plot produced by HyperSpy of the X-ray lines in GaAs from 8 to 12.5 keV.
-        The theoretical lines are marked with black lines, but in reality the lines become peaks with Gaussian shapes.
-        The height of the black lines are empirically estimated and are available in HyperSpy.
-        Notice also how the center of the peak and the black line are slightly right shifted, which can be solved by calibrating the energy scale, see \cref{sec:theory:calibration}.
-        Data from the SEM Apreo at NTNU NanoLab, 30kV.
+        Actual lines, or peaks, in a spectrum.
+        The lines have different energy and intensity, and they have a spread.
+        The peaks have Gaussian shapes, as the formation of characteristic X-rays is a probability process.
+        This is a real spectrum with a background, but it is low and do not show.
+        A typical background is plotted in \cref{fig:theory:expected_background}.
     }
-    \label{fig:theory:GaAs30keV-8-12-keV}
+    \label{fig:theory:actual_peaks}
 \end{figure}
 
-\begin{figure}
+
+% figure/expected_bacground.png
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/GaAs30kV-Ga-K-lines.png}
+    \includegraphics[width=0.9\textwidth]{figures/expected_background.png}
     \caption{
-        The theoretical lines K$\alpha_1 = 9.25174$ and K$\alpha_2 = 9.22482$ from the X-ray booklet with K$\alpha = 9.251$ from HyperSpy and the fitted peak K$\alpha$.
-        The spectrum is calibrated to Ga $L\alpha$ and As K$\alpha$, where the energy of the peaks is taken from HyperSpy.
-        HyperSpy gives Ga K$\alpha$ almost directly on top of the theoretical K$\alpha_1$.
-        This figure show that the lines which are separated with small energy differences are so close that they make one single peak in the EDS spectrum.
-        Data from the SEM Apreo at NTNU NanoLab, 30kV.
-        \ton{This is more results than theory I would say. But I do remember you saying something about having this in the theory section.}
+        Expected background in a spectrum.
+        This is a fit of a real background spectrum, but the exact numbers are not important.
+        The background radiation is being generated exponentially, but at lower engergies it is being absorbed.
+        The figure is meant to illustrate the shape of the background.
     }
-    \label{fig:theory:GaAs30keV-K-lines}
+    \label{fig:theory:expected_background}
 \end{figure}
+
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{figures/GaAs30kV-Ga-K-lines.png}
+%     \caption{
+%         The theoretical lines K$\alpha_1 = 9.25174$ and K$\alpha_2 = 9.22482$ from the X-ray Data Booklet with K$\alpha = 9.251$ from HyperSpy and the fitted peak K$\alpha$.
+%         The spectrum is calibrated to Ga $L\alpha$ and As K$\alpha$, where the energy of the peaks is taken from HyperSpy.
+%         HyperSpy gives Ga K$\alpha$ almost directly on top of the theoretical K$\alpha_1$.
+%         This figure show that the lines which are separated with small energy differences are so close that they make one single peak in the EDS spectrum.
+%         Data from the SEM Apreo at NTNU NanoLab, 30kV.
+%         \ton{This is more results than theory I would say. But I do remember you saying something about having this in the theory section.}
+%     }
+%     \label{fig:theory:GaAs30keV-K-lines}
+% \end{figure}
+
+
 
 % theoretical values of the lines
+Theoretical values of characteristic X-ray lines are available in the X-ray Data Booklet \cite{thompson_x-ray_2004} and in HyperSpy \cite{hyperspy_1.7.1}.
+These include the energy and the weight of the lines.
+All the lines for Ga and Mo are listed in \cref{tab:theory:Ga-lines} and \cref{tab:theory:Mo-lines}.
+There are minor differences in the energies and weights from the XRB and HS.
+One bigger difference between the two tables is that HyperSpy have a line for Mo L$\gamma$3, which is not in the X-ray Data Booklet.
+Another difference is that the X-ray Data Booklet splits the K$\alpha$ line into two lines, while HyperSpy have one line for the K$\alpha$ line.
+In addition, the XRB list Mo L$\alpha$ as two lines and Mo K$\beta$ as three lines.
+These additional lines are very close in energy and only one of the lines have a higher weight, so these line separations are excluded from the tables.
 % include the table in table/Ga-lines.tex
 \input{tables/Ga-lines.tex}
+
+\input{tables/Mo-lines.tex}
 
 
 
@@ -326,7 +369,7 @@ The FWHM can be calculated from the standard deviation, $\sigma$, with:
 The intensity, or weight, of a line is dependent on multiple empirical and physical factors.
 This subsection will briefly cover fluorescent yield, critical ionization energy, and empirical weights in HyperSpy.
 In practice, the weight of the lines are included as a part of the k-factors or k-ratios, which are presented in \cref{sec:theory:empirical:kfactors}.
-Only the strongest lines are listed in the X-ray booklet, where the theoretical values of the characteristic X-ray lines are listed.
+Only the strongest lines are listed in the X-ray Data Booklet, where the theoretical values of the characteristic X-ray lines are listed.
 The list include: K$\alpha_1$, K$\alpha_2$, K$\beta_2$, L$\alpha_1$, L$\alpha_2$, L$\beta_1$, L$\beta_2$, L$\gamma_1$, M$\alpha_1$ \cite{thompson_x-ray_2004}.
 HyperSpy operates with a different list of lines, which might be more empirically influenced.
 The lines for Ga is for instance:
@@ -338,7 +381,7 @@ The lines for a heavy element like Sb(?) is:
 %%%%% TODO %%%%%
 % write about the Mo Ll and Mo L$\gamma$3 peaks in the teory section.
 
-% HYperSpy and X-ray booklet are not the same. HS more empirical?
+% HYperSpy and X-ray Data Booklet are not the same. HS more empirical?
 
 
 
@@ -386,10 +429,13 @@ The solution to this is empirically estimations and using k-factors where all fa
 
 % empirical weights in HyperSpy
 HyperSpy have an integrated list of the characteristic X-rays, with both the energy and the weight of the lines.
-\brynjar{I guess the weights are empirically estimated, but I have not found any information about how they are estimated. In addition: I'm not sure if HyperSpy adjust the line height to the spectrum, or if it knows that Ga K$\alpha$ are higher than As K$\alpha$ as in \cref{fig:theory:GaAs30keV-8-12-keV}.}
+% \brynjar{I guess the weights are empirically estimated, but I have not found any information about how they are estimated. In addition: I'm not sure if HyperSpy adjust the line height to the spectrum, or if it knows that Ga K$\alpha$ are higher than As K$\alpha$ as in \cref{fig:theory:GaAs30keV-8-12-keV}.}
 Goldstein uses different intensity weights for isolated atoms, thin foils and bulk samples \cite[Ch. 4.2.6]{goldstein_scanning_2018}, and all are dependent on the atomic number and ionized shell.
 One could venture down the rabbit hole of finding the theoretical weights for different lines, but that will not be done in this thesis.
-Examples of the weights from HyperSpy are given in \cref{tab:theory:Ga-lines}.
+
+
+% Mo L$\alpha$ a, but its weight is 0.11 and its is just -3 eV from the L$\alpha$ line. 
+% XRB list Mo K$\beta$ as three lines, with energies 19.59, 19.61, and 19.97 keV, and the weights are 0.08, 0.15, and 0.03, respectively.
 
 
 
