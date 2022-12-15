@@ -1,21 +1,6 @@
 \chapter{Results}
 \label{chap:results}
 
-% Qualitative first, as is the way in EDS.
-% 	- spectrum calibrated, 5-30 kV
-% 	- one plot for all
-% 	- Look at energy scale for all results. How does the peaks deviate with the Ga As calibration?
-% 	- Cu tape (give type) is not good as a Cu reference.
-% 	- The stub is not Fe as expected, but Al. Makes sense, since steel is alloys and is magnetic.
-
-% Quantitative
-% 	- initial
-% 	- background
-% 	- peak fitting
-
-
-% \section{Introduction}
-% \label{sec:results:intro}
 The results are presented in this chapter as plots and tables, and explained in the text.
 First qualitative then quantitative results are presented.
 All the spectra taken were qualitatively analyzed.
@@ -24,42 +9,15 @@ The qualitative analysis starts with the calibration of the spectra, and then th
 The quantitative analysis shows analysis done in AZtec, then quantify Ga and As with the CL ratio, and finally use the CL method in HyperSpy.
 
 
-% Ton: flytte figuren under til 4.1
-% Ton: legge inn AZtec plott, så får jeg HS AZ og min
-
-
-% Results:
-% calibration
-% qualitative results
-% (peak finding will be a part of the qualitative results)
-
-% TODO: put calibration above the section with each spectrum
-
-% DONE: fix figure annotations, either theoretical values or fitted peak centers.
-% Idea: if peak finding, annotate with a star the ones which are manually annotated?
-
+\input{tables/detector-settings.tex}
 
 % TODO: Have a similar caption on all figures. Shorter and no interpretation of the results.
-
 % What the sample is. The legen colors, What is annotated. Special features present are peaks, sum peaks and eventually unknown peaks. Spectra taken ... 
 % Caption: do not say what peaks are in the figure. 
-% Annotations: remove Fe Ka, and just drop all the stuff about the FIB stub might being Fe. But do comment in the text that there is a signal at Fe Ka which is 20% bigger than the background.
-
-% What is a peak and what is "just a signal"? What does AZ say, and why choose prominence=0.01 in my peak finding?
-
-% Comment that the zero peak is tallest at 0.008 and not 0.0
 
 
-% The background falling down after a high peak:
-% Tons idea: the background is absorbed by the peak transition right above the peak. This is true, and it shifts the bg-peak from 2 keV to eg 3.7 keV in Al.
-% On the background: the shape is much more important in the low E region, and is almost linear in the high E region.
 
 
-% Order of the plots: write it out in the intro text that it is pure samples and then GaAs and NW in the end.
-% Si, Mo, Al, Cu, GaAs, NW
-
-
-% Remember to discuss thin vs bulk spectra.
 
 
 
@@ -72,12 +30,8 @@ The quantitative analysis shows analysis done in AZtec, then quantify Ga and As 
 % Use time on this to show that I have results and that I know what I am doing.
 % It will help to point at errors in AZtec.
 
-%%% TODO %%%
-% comment on not log-scaled
-
 This qualitative section presents first the initial plots of the spectra done in AZtec and with HyperSpy, then the different calibrations and how well they match the theoretical values, and finally the spectra from the studied materials.
-The spectra are presented as plots and the calibrations are presented in tables.
-
+The spectra are presented as plots and the calibrations are presented in tables, with their settings and counts in \cref{tab:results:detector:settings}.
 
 
 \subsection{Initial plot}
@@ -88,9 +42,9 @@ The initial plots are \cref{fig:GaAs30kV_AZ} and \cref{fig:GaAs30kV_HS}, showing
 In \cref{sec:results:qualitative:each_sample_area} all the spectra are presented.
 The initial two plots use the calibration from AZtec.
 The first figure is two screen shots from the AZtec software, and the second figure is a plot from HyperSpy.
-In the upper AZtec plot, Ga and As are annotated.
-In the middle AZtec plot, Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
-The lower AZtec plot has a logarithmic scale on the y-axis.
+In (a) Ga and As are annotated.
+In (b) Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
+(c) has a logarithmic scale on the y-axis, which is another way to show the smaller peaks.
 AZtec also give the atomic percent of the elements in these plots.
 The HyperSpy plot utilize the Python package Matplotlib for plotting, and it has the theoretical line values annotated.
 % The plotting in HyperSpy can add the theoretical peak centers as vertical lines, which is done in the plot for Ga and As.
@@ -101,15 +55,22 @@ In the following section, the spectrum is calibrated using SciPy, and plotted wi
 % AZtec figure
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_lin.PNG}
-    \\[2em]
-    \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_lin_scaled.PNG}
-    \\[2em]
-    \includegraphics[width=0.95\textwidth]{figures/GaAs_30kV_SEM_log.PNG}
+    \includegraphics[width=0.8\textwidth]{figures/GaAs_30kV_SEM_lin.PNG}
+    \\[1em]
+    (a)
+    \\[1em]
+    \includegraphics[width=0.8\textwidth]{figures/GaAs_30kV_SEM_lin_scaled.PNG}
+    \\[1em]
+    (b)
+    \\[1em]
+    \includegraphics[width=0.8\textwidth]{figures/GaAs_30kV_SEM_log.PNG}
+    \\[1em]
+    (c)
     \caption{
         The spectrum of the GaAs bulk at 30 kV, from AZtec.
-        The figure shows the whole spectrum with Ga and As annotated, and a cropped version to show the smaller peaks where Si, O and C also are annotated.
-        The bottom plot is the whole spectrum with a logarithmic scale on the y-axis.
+        (a) whole spectrum with Ga and As annotated.
+        (b) cropped to the weaker signals with Ga, As, Si, O and C annotated.
+        (c) whole spectrum with a logarithmic scale on the y-axis, which can make weak signals clearer.
     }
     \label{fig:GaAs30kV_AZ}
 \end{figure}
@@ -126,8 +87,9 @@ In the following section, the spectrum is calibrated using SciPy, and plotted wi
         (b) cropped to the L-peaks.
         (c) cropped to the K-peaks.
         (d) Ga K$\alpha$ peak.
-        % This plot has the calibration from AZtec, and it is clear that the line position is deviating from the center of the peaks.
-        % This plot was made with HyperSpy, which utilize Matplotlib.
+        This plot has the calibration from AZtec, and it is clear that the line position is deviating from the center of the peaks.
+        This plot was made with HyperSpy, which utilize Matplotlib.
+        Fixing the labeling was not trivial, as the functionalities in HyperSpy which makes plotting accessible is hiding away the normal Matplotlib functionalities.
     }
     \label{fig:GaAs30kV_HS}
 \end{figure}
@@ -192,10 +154,10 @@ The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ pe
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_whole.png}
-    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_K.png}
-    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_L.png}
-    \includegraphics[width=0.6\textwidth]{figures/fit/fit_GaAs30kV_bg.png}
+    \includegraphics[width=0.9\textwidth]{figures/fit/fit_GaAs30kV_whole.png}
+    \includegraphics[width=0.45\textwidth]{figures/fit/fit_GaAs30kV_L.png}
+    \includegraphics[width=0.45\textwidth]{figures/fit/fit_GaAs30kV_K.png}
+    \includegraphics[width=0.9\textwidth]{figures/fit/fit_GaAs30kV_bg.png}
     \caption{
         The fit of the 30 kV GaAs spectrum.
         The plots show the raw data (blue markers), the fit (green and orange) and the background (red and purple).
@@ -217,6 +179,7 @@ The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ pe
         The XRB K$\alpha$1 and XRB K$\alpha$2 are the theoretical peak positions from the X-ray Data Booklet.
         The HS K$\alpha$ is the peak position from HyperSpy.
         Annotated in the upper right corner are the deviations from the dashed lines to the fitted peak position.
+        Given the energy resolution of 130 eV, the deviations are small.
     }
     \label{fig:results:Ga-K}
 \end{figure}
@@ -230,10 +193,11 @@ The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ pe
 
 % The goal of this section/the qualitative analysis is ... 
 \cref{fig:results:Spectra_Al} to \cref{fig:results:Spectra_NW} shows the spectra for the six different areas of the sample plotted with Plotly.
+The parameters and settings for each spectra are given in \cref{tab:results:detector:settings}, which does include, accelerating voltage, beam current, dead time, live time, maximum counts registered in one channel and the total counts.
 The plots are available as an interactive HTML plots on the GitHub repository
 % \brynjar{Upload the HTML files to the GitHub repository.}.
 The calibration used in these spectra is one with the lowest RMSD, which is the one from the self-made model fit on GaAs.
-The y-axis is normalized to the highest peak value in each spectrum, i.e. the highest peak is always 1. % discuss: why normalize.
+The y-axis is normalized to the highest peak value in each spectrum, i.e. the highest peak is always 1.
 The spectra are cropped to show the region of interest for the different materials.
 Peaks which are taller than the y-axis are marked with a gray dashed line.
 The annotated energy on the plots is the theoretical energy of the peak, and not the fitted peak center.

@@ -427,6 +427,25 @@ The solution to this is empirically estimations and using k-factors where all fa
 % Ionization cross section and overvoltage
 \ton{Is this good enough? If not, what do I write about the ionization cross section and overvoltage? What Mari wrote is for thin samples, I think. Why include it if I'm not going to use any equations about the ionization cross section or overvoltage? You said something about just write that intensity it is lower for low energy because of many reasons (absorption, efficiency), with the same reason that background is lower for low energy. But I kinda need to explain some reasons to use them in the discussion. Another question: in the k-factor all these other factors fall out, so EDS-people does not use these equations. Am I wrong?}
 
+% TODO with comment from Ton:
+% Cross sections are at the heart of explaining interactions and tabulate behaviour for different elements.
+
+% You make a good point regarding thin samples, but that is a simplification. Mari used it to limit calculatiuons. If thick, need ZAF corrections (based on many models and assumptions, running a loop until converged). Aztek is not clear on this in default mode, and then the results becomes unsure. HyperSpy use thin film, but let you analyse spectra from bulk. The user must understand the background and the limitations. In this theory part, you address aspects that can possible play a part.
+% In discussion can address what aspects can be better in the analysis, nothing that there are many. For future work, can say limit to thin or develop open-source for bulk.?
+
+% Maybe the DTSA-II gives some hints what matters, see Goldstein or file:///C:/Users/helvoort/Downloads/getting-started-with-nist-dtsa-ii.pdf
+
+
+
+
+
+
+
+
+
+
+
+
 % empirical weights in HyperSpy
 HyperSpy have an integrated list of the characteristic X-rays, with both the energy and the weight of the lines.
 % \brynjar{I guess the weights are empirically estimated, but I have not found any information about how they are estimated. In addition: I'm not sure if HyperSpy adjust the line height to the spectrum, or if it knows that Ga K$\alpha$ are higher than As K$\alpha$ as in \cref{fig:theory:GaAs30keV-8-12-keV}.}
@@ -565,6 +584,10 @@ This section covers briefly the EDS detector and the SEM.
 
 Detector efficiency, detector resolution, dead time, angle/placement of detector, beam issues, stray: secondary excitations in the sample, Si stray, holder / chamber stray detection.
 
+% Ton:
+% here are several things to write out
+% file:///C:/Users/helvoort/Downloads/getting-started-with-nist-dtsa-ii.pdf
+% has also some comments on detector calibration, I believe Goldstein as well.
 
 %   - the detection system
 %     - detector efficiency

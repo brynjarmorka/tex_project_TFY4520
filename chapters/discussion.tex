@@ -19,7 +19,7 @@ Producing code from scratch is both a time-consuming process and a learning proc
 While developing the code, the author learned a lot about EDS analysis and  ideas emerged for how EDS analysis could be improved.
 This chapter begins with an initial discussion of the qualitative results, and then it connects the sub-problems to the results and work done in the project.
 The order of the sub-problems is the same as in \cref{chap:introduction}, which is based on the work process.
-The chapter ends with a discussion of the \hyperref[mainproblem]{Main problem}.
+% The chapter ends with a discussion of the \hyperref[mainproblem]{Main problem}.
 
 
 
@@ -38,67 +38,81 @@ Good sampling settings give a high signal-to-noise ratio, which is important for
 The high peaks in the spectrum are well-defined and fit the Gaussian curves well.
 These peaks are good enough for qualitative analysis, but there are some smaller signals which have been harder to interpret.
 A small signal can in some cases be interpreted in a qualitative analysis but is hard to use properly in a quantitative analysis.
-However, interpreting every small signal as radiation from a specific element is not always correct.
-The small signal of Fe K$\alpha$ in the FIB stub spectrum is an example of this, where there is a 20\% increase of counts to the right of the Mn K$\alpha$ peak.
+Interpreting every small signal as radiation from a specific element is not always correct.
+The small signal of Fe K$\alpha$ at 6.4 keV in the FIB stub spectrum is an example of this, where there is a 20\% increase of counts compared to the background.
 It might be that this signal is from Fe, but it might also just be noise or an artifact.
 \cref{tab:theory:Ga-lines} list the Ga-lines and their weights, and it is clear that some lines have very low weights.
 In this project it was decided not to use a hard threshold for the signal-to-noise ratio, which can be helpful in some cases.
 Setting a hard threshold should be based on both literature and empirical data for the specific detector setup.
-A danger with setting a hard threshold is that it can be too strict, which can lead to missing peaks of elements which are low in concentration.
+A issue with setting a hard threshold is that it can be too strict, which can lead to missing peaks of elements which are low in concentration.
 If the sampling settings were not good enough, some peaks can be missing in the spectra.
 One example of this is in the NW spectrum: the low As K$\beta$ peak in the 15 kV spectrum has an overvoltage of ~3 keV and is visible, but the Cu K$\alpha$ peak in the 10 kV spectrum with overvoltage of ~2 keV is not visible.
 Multiple data sets on the same area can be used to verify the sampling settings, since missing peaks in one data set can be visible in another data set.
 In general, the signals in the spectra are best in the 30 kV spectra.
-In conclusion, it is assumed that the sampling settings were good enough.
+In conclusion, it is assumed that the sampling settings were good, at lest when it is considered that there are multiple spectra from the same area.
 
 
-% The zero peak from the Oxford detector is visible in all the spectra as the first peak, with a center at 0.00924 keV.
+% Peak intensities in relation to the element
+Different elements do give different peak intensities, as expected.
+The intensity is dependent on the atomic number, which affects both the fluorescenct yield and ionization cross section.
+In the GaAs spectrum, with Ga ($Z=31$) and As ($Z=33$), the Ga peaks have both higher max counts and higher sum counts, given in \cref{tab:results:detector:settings} and \cref{tab:results:ratios}.
+From the theory of fluorescenct yield and \cref{eq:empirical:fluorescentyieldapprox}, one would expect the As peaks to be more intense than the Ga peaks, but this is not the case.
+For the K-peaks this could be an effect of the overvoltage, but that would not explain the difference in the L-peaks.
+Another factor affected by the atomic number is the absorption, which is higher for heavier elements.
+In the k-factor approach with TEM thin samples the absorption is assumed to be negligible, which is not the case for bulk samples.
+Thus, some correction for the absorption should be done for bulk samples, which would be Z-depentent.
+In addition, X-rays with lower energies are more absorbed than X-rays with higher energies.
+The ZAF matrix correction for SEM EDS data would correct for the absorption, but that have not been done in this project.
+Looking into the ZAF matrix correction would be a good next step for this project.
+In general, the generation of characteristic X-rays is a complex process, which is why much of the work done in EDS analysis is empirical.
+
 
 % height of the peaks in relation to the settings
 The heights, or intensities, of the peaks are varying a lot.
-The plots of the spectra in \cref{fig:results:Spectra_Al,fig:results:Spectra_NW} are normalized, but the total counts and maximum counts are included in \cref{tab:method:detector:settings}.
+The plots of the spectra in \cref{fig:results:Spectra_Al} to \cref{fig:results:Spectra_NW} are normalized, and the total counts and maximum counts are included in \cref{tab:results:detector:settings}.
 No direct pattern between the amount of counts and the settings are apparent.
 Trends observed are that higher counts are obtained by increasing the current or the acceleration voltage, but this also increases the dead time.
 To figure out a pattern, fewer variables should be changed at the same time.
-This was done for the nanowire sample, where the I$_{beam}$ and live time was kept constant.
+This was done for the nanowire sample, where the $I_\textnormal{beam}$ and live time was kept constant.
 Still, a direct pattern is not apparent.
 As stated in Goldstein, "high counts and stable peak structures are critical for successful peak intensity measurements", especially to identify minor and trace constituents \cite[page 318]{goldstein_scanning_2018}.
 The relation between the counts and settings could be further investigated to figure out which settings yield the best spectra in terms of good count statistics.
 
 % the highest peaks, 
-The peak with the highest count is in all the spectra below 5 keV.
+The main peaks have good count statistics, and the peak with the highest count is below 5 keV in all the spectra.
 For the spectra with strong K and L peaks from the same element, i.e. the lines of Ga, As, and Mo, the L-peaks are more intense than the K-peaks.
 In the Mo 30 kV spectrum, the K$\alpha$ peak is only 2\% the height of the L$\alpha$ peak.
 This low intensity of the K$\alpha$ peak is partially due to lower overvoltage, since the peak is above U/2.
 For the Ga and As the relative intensity of the 30 kV spectra in the bulk and nanowire is not similar.
 The K-lines in the bulk sample is around 2 times as intense as the K-lines in the nanowire sample.
 Both spectra are normalized to the L-line of Ga.
-It was expected that the nanowire would give lower intensity, which is why the
-Using \cref{tab:results:ratios} with the ratios of the K-lines to the L-lines, it is clear that even the ratios of Ga and As lines change in the different spectra.
+It was expected that the nanowire would give lower relative intensity for K-lines, because it is a thin sample where less of the lower level X-rays are absorbed, and thus getting lower relative intensity of higher energy peaks.
+Using \cref{tab:results:ratios} with the ratios of the K-lines to the L-lines, it is clear that even the ratios of Ga and As lines change in the spectra with different $V_\textnormal{acc}$.
 When applying the theoretically estimated k-factor for the respective spectrum, the ratios get closer to 1, but there is still a spread.
 This implies that the settings for acquiring spectra is important for the intensity of the peaks, which again is important for the quantitative analysis.
-Investigation of which settings yield better spectra should improve the accuracy of the quantitative analysis.
+Investigation of which settings yield better spectra should improve the accuracy of the quantitative analysis, and can be done in future projects.
 
 
 % Missing Cu La peak
 Even though most of the spectra appear to have good intensities and good signal-to-noise ratio, there are some strange results.
-From the results it is apparent that the Cu-tape is giving a bad Cu signal and should not be used as a Cu reference.
+From the results it is clear that the Cu-tape is giving a bad Cu signal and should not be used as a Cu reference.
 The strongest signal from the Cu-tape is from C, which is probably from the sticky tape material.
-Regardless, the strange result is the completely missing signal from Cu L$\alpha$ in the Cu-tape 30 kV spectrum.
+Regardless, the strangest Cu-tape result is the completely missing signal from Cu L$\alpha$ in the Cu-tape 30 kV spectrum.
 This spectrum has a clear signal from Cu K$\alpha$ and Cu K$\beta$, but no signal from Cu L$\alpha$ at all.
 In general the L-peaks are stronger than the K-peaks.
 In the 30 kV NW spectrum, Mo is giving a low but clear signal at the L$\alpha$ line, and even a small signal at the L$\beta$ and Ll lines, but no signal from the Mo K$\alpha$ line.
-This is not strange as even the K-line signal from pure Mo is quite low.
-The missing Cu L$\alpha$ signal is still strange when comparing to the NW spectra, because the Cu signal in the NW spectra all have a clear signal from Cu L$\alpha$ which is around 30\% stronger than the Cu K$\alpha$ signal.
-When taking the Cu spectra, the Cu-tape got visually deformed by the beam, which can be part of the explanation of the missing signal.
+This is not strange as even the K-line signal from pure Mo is quite low, which is probably due to low overvoltage of the high K-peak.
+The missing Cu L$\alpha$ signal is even stranger when comparing it to the NW spectra, because the Cu signal in the NW spectra all have a clear signal from Cu L$\alpha$ which is around 30\% stronger than the Cu K$\alpha$ signal.
+When the spectra on the Cu-tape sample area was taken, beam made visible damages on the surface, which can be part of the explanation of the missing signal.
+In the end, the spectra from the Cu-tape are regarded as unreliable.
 Finding both K-lines and L-lines is an important aspect of qualitative EDS analysis, because a present K-line without an L-line indicate that the identified element is not the correct one.
 The result with the missing L-line show that, unfortunately, it is possible to acquire spectra where a K-line is present, but the L-line is missing.
-Further, investigating this could reveal if this is an issue with the Cu-tape, the detector, the settings, or an artifact that can appear in other spectra.
+Further investigating this could reveal if this is an issue with the Cu-tape, the detector, the settings, or an artifact that can appear in other spectra.
 
 
 % width of the peaks
-From the spectra shown and \cref{tab:results:ratios} including the FWHM, it is clear that the peaks broaden with higher E.
-Increase of the FWHM with E is expected, as explained in subsection 16.1.1 in Goldstein \cite{goldstein_scanning_2018}.
+From the spectra shown and \cref{tab:results:ratios} including the FWHM, it is clear that the peaks broaden with higher energy.
+Increase of the FWHM with energy is expected, as explained in subsection 16.1.1 in Goldstein \cite{goldstein_scanning_2018}.
 From the FWHM the resolution of the detector can be calculated with a conversion factor, since the resolution of EDS is defined as the FWHM of Mn K$\alpha$.
 This was done by Skomedal, and was considered to be a part of this project too.
 However, other parts of the project was prioritized.
@@ -110,7 +124,6 @@ In the spectra the zero peak start before 0 keV and has its maximum at 0.008 keV
 Since AZtec is a black box, it is not known how the calibration is done.
 If AZtec is using the zero peak to calibrate, this could be the reason for less accurate calibration.
 Another possibility is that the calibration was done on installation, and that the detector has not been calibrated since then.
-\ton{This paragraph it intended to say something about the zero peak and connect it to AZtec. Do you find it useful?}
 
 
 %  overlapping peaks
@@ -122,13 +135,14 @@ Model fitting in HyperSpy is done with fixed centers, which means that the peak 
 Calibration can affect the result if fitting is done with a model where the peak centers cannot change.
 If the center of the smaller peak is off, larger peak will dominate the fitting and the smaller peak will get a lower intensity than it should.
 This problem is not present in the self produced fitting, since the peak centers are free parameters.
-An example of slightly overlapping peaks is the As K$\alpha$ and Ga K$\beta$ peaks in the NW and bulk spectra.
+An example of slightly overlapping peaks is the As K$\alpha$ and Ga K$\beta$ peaks in the GaAs bulk and NW spectra.
 An example of severely overlapping peaks is the Mo L$\alpha$ and Mo L$\beta_1$ peaks in the Mo spectra.
-The Mo L$\alpha$ peak has one of the highest error in the peak accuracy in \cref{tab:results:calibration-peak-accuracy}, where the calibrations are compared. The reason for this is that the Mo L$\alpha$ peak is overlapping with the Mo L$\beta_1$ peak, and the automatic peak finder used to find the peaks here cannot distinguish between the two peaks.
-Thus, the severely overlapping peak is modelled as a single peak which has its center shifted slightly to the left.
+The Mo L$\alpha$ peak has one of the highest error in the peak accuracy in \cref{tab:results:calibration-peak-accuracy}, where the calibrations are compared.
+The reason for this is that the overlapping Mo L-peaks are identified as just one peak by the automatic peak finder.
+Thus, the severely overlapping peak is modelled as one single peak which has its center shifted towards the middle of the two peaks.
 That is why all the calibrations miss the Mo L$\alpha$ peak with 20 eV.
 This issue was fixed manually when making the Mo L$\alpha$ and Mo K$\alpha$ calibration, and can with more time be fixed in the automatic peak finder.
-\brynjar{Figure of overlapping peaks?}
+% \brynjar{Figure of Mo overlapping peaks?}
 
 
 
@@ -173,56 +187,37 @@ All the spectra show the same behavior that the background is higher before the 
 In the 30 kV GaAs spectrum the background is at 2200 counts before the overlapping L-line peaks, and falls to 500 counts after the peaks.
 In the 30 kV Si spectrum the background falls from 2000 to 200 counts after the main peak.
 The background shape in Si 30 kV is almost linear from 0.6 to 1.6 keV ending at 2000 counts, then it drops to 200 after the peak at 1.6-1.9 keV.
-After the drop the peak follow the expected shape, illustrated in \cref{fig:theory:background_illustration}.
+After the drop the peak follow the expected shape, illustrated in \cref{fig:theory:expected_spectrum_Skomedal} and \cref{fig:theory:expected_background}.
 In the 5 and 10 kV Si spectra the background falls from 2500 to 1000 counts after the main peak.
 The Mo 10 kV spectrum, which is the spectrum with overall most background counts, has a background signal which falls from 5400 to 2900 counts after the main peak.
 In the nanowire spectra, which in general have the lower background counts, the background falls around 50\% after the high L-peaks.
 The reason for the higher background to the left of the highest peak is that the X-rays formed with energy above the highest peak can be absorbed and re-emitted with the energy of the line in the highest peak.
 When the code for the background was written, the effect of the highest peak was not considered, which resulted in visible bad background fits at the lower energies.
 This is shown in \cref{fig:results:fit_GaAs30kV}, where the fit in general is good but misses on the background between 0 and 2.5 keV.
-This effect is changing the value of the background, and also its shape.
+The main peak effect on the background is changing both the value and the shape of the background.
 
 
 % background shape
 The shape of the background is varying between the spectra, and is affected by the peaks and the acceleration voltage.
 All the 5 kV spectra decrease more or less linearly from 1 to 5 keV.
 This is due to the overvoltage, which lowers the possible background radiation to zero after 5 keV in the 5 kV spectra.
+When the acceleration voltage is just 5 kV, the critical ionization energy it not higher than 5 keV.
 In the GaAs, Si and Mo the relative height of the background decrease with higher acceleration voltage.
 The background in the Cu spectra increase with higher acceleration voltage.
 The most similar background signal over different voltages are in the NW spectra. % discuss: thin sample -> less background?
 This similarity is due to the fact that thin samples produce less background radiation than bulk samples.
 In general, backgrounds in the acquired spectra are low, but with different shapes.
 
-% There is nothing to "break" on??? Cu 5 kV and 10 kV with almost no background
-% discussion: explain that the bg is dependent on a peak (ie material) being present. This makes fiting hard, since there are some peak-dependency which is hard to predict.
-% discussion: nothing to reduce the speed of the e-
-
-
-%   Need to account for or fit the background, to be able to substract it and get right peak counts.
-%   Think how this representation and later discussion will link to set aim of the work ("better EDX").
-
-
-% For example, the Cu 10 kV spectrum have its highest peak at 0.5 keV, and the background is almost zero above 0.5 keV. not the best example
-% The Al spectrum background is high before the high Al K$\alpha$ peak, and much lower after the high peak.
-% Both the value and the shape of the background is different before and after the peak.
-% The same behavior is clearly true in the Si spectra.
-% TON comment:
-% yes, it is absorption at that energy.
-
-
-
 
 
 \subsection{The strays and artifacts}
 \label{sec:discussion:general:strays}
 
-% Si stray in all spectra
-
 In addition to the characteristic peaks and the background, there are also artifacts and strays in the spectra. % discussion: lower peaks are super important, eg in the Al spectra where it is small amounts of Mg and Mn, probably. 
 The background is an artifact which already have been discussed.
-An artifact that will be discussed below is X-rays generated outside the area of the beam.
+One of the artifacts that will be discussed below is X-rays generated outside the area of the beam.
 Understanding the details in a spectrum is key for the qualitative analysis, which is the foundation for the quantitative analysis.
-Identifying peaks as strays or artifacts can be used to exclude certain elements, as well as being more certain of what elements are present.
+Identifying peaks as strays or artifacts can be used to exclude certain elements, as well as making the anaøyst more certain of what elements are present.
 Lower peaks are central for the analysis.
 One example of this is the Al spectra, where two lower peaks match with the energies of Mg and Mn.
 Asserting what is a stray or artifact and what is a characteristic peak can be challenging, as they can be very similar to the characteristic peaks.
@@ -232,6 +227,7 @@ Generally, labeling peaks as strays or artifacts takes time, but it is a crucial
 
 % Si Ka as internal fluorescence peak, and O Ka and C Ka
 All the spectra share some common strays and artifacts.
+All the strays and artifacts explained are described in detail in Goldstein \cite{goldstein_scanning_2018}.
 The bremsstrahlung background radiation is present in all spectra, but with different shapes and intensities.
 The internal fluorescence peak present in all but the Si spectra, which is the Si K$\alpha$ peak at 1.74 keV coming from the excitation of Si inside the dead layer of the detector.
 In the Si spectra, the Si K$\alpha$ peak is from the Si wafer.
@@ -243,11 +239,12 @@ Carbon coating on the sample by the beam was visible on the Cu-tape images, show
 % Sum peaks
 Another artifact present in almost all spectra is sum peaks, or coincidence peaks.
 No sum peak is visible in the NW spectrum, except for the possibility of the sum peaks of the L-lines of Ga and As overlapping with the Mo L-peaks.
-There are no sum peaks in the Cu spectra, but these spectra are as explained earlier spurious.
+There are no sum peaks in the Cu spectra, but these spectra are as explained earlier questionable.
 Sum peaks are a peak where two X-rays are counted as one, giving a peak at the sum of the energies of the two X-rays.
-This occurs because the detector can only count one X-ray at a time, and is thus affected by the counting time.
+This occurs because the detector can only count one X-ray at a time, and since the counting does take some time, two X-rays can be registered as one.
+The process is depentent on the counting, which takes a certain amount of time, and this time is the dead time.
 In other words, a higher dead time will result in more signal in the sum peaks.
-A good example of this is the GaAs spectra, where the 5 and 30 kV spectra have DT at 33 and 30\% and show almost no L-line sum peaks, while the 10 and 15 kV spectra have DT at 65 and 58\% and show the L-line sum peaks.
+A good example of this is the GaAs spectra, where the 5 and 30 kV spectra have DT at 33 and 30\% and show almost no L-line sum peaks, while the 10 and 15 kV spectra have DT at 65 and 58\% and clearly show the L-line sum peaks.
 The NW spectra have the lowest dead time, which might be why there are no sum peaks in the NW spectra, which fit well with the difference in the GaAs bulk spectra.
 Another explanation is that the NW spectra is the only one with a thin sample, which could result in less sum peaks.
 Labeling a sum peak correctly is important, else the signal can be mistaken for a characteristic peak.
@@ -261,26 +258,27 @@ An even more reliable, but more time-consuming solution, could be to acquire mul
 Dead time at around 30\% was recommended by the supervisor of this project, Antonius T. J. von Helvoort, and is well below the problematic dead time of >60\%.
 The dead time on the nanowire area was closer to 20\%, which is what Goldstein \cite[page 223]{goldstein_scanning_2018} recommends.
 An issue with the sum peaks when doing quantitative analysis, is that the signal in the sum peaks are supposed to be a part of the signal in the characteristic peaks.
-When looking at the Fe spectrum, with DT at 22\%, the sum peak is in the same size range as the other lower peak, which would clutter the quantification of the potential alloy.
+When looking at the Al spectrum, with DT at 22\%, the sum peak is in the same size range as the other lower peak, which would clutter the quantification of the potential alloy.
 
 
 % Al alloy
-The Al spectrum of the FIB stub are labeled with three peaks in the same size order as the AL K$\alpha$ sum peak.
+The Al spectrum of the FIB stub are labeled with three peaks in the same size order as the Al K$\alpha$ sum peak.
 These three peaks are from Mg, Si and Mn, which could be present in the FIB stub.
 An Al alloy with Mg and Si is quite common, according to the supervisor of this project.
-An Al alloy of Al, Mg, Mn, Si, Fe and Cu is analyzed in an article by Razzaghi \cite{al_alloy}.
+An Al alloy of Al, Mg, Mn, Si, Fe and Cu is analyzed in an article by Wojciech \cite{al_alloy}, and could thus be another possibility, explaing all the peaks and the very low but barely visible singal from Fe K$\alpha$.
 Another possible explanation for the Mn peak is that the FIB stub used had some contamination, which could be tested by taking spectra of other FIB stubs.
 Determining how much of the Si peak is from the alloy and how much is the internal fluorescence peak could be done by taking spectra at different DT.
 
 
 % Ni in NW, and short on escape peaks
-Another curious peak is the Ni K$\alpha$ peak in the NW spectra.
-The projects' supervisor claim that it is unlikely to be a Ni peak, as this have not been observed in the NW sample before.
-The energy of the peak match well with the Ni K$\alpha$ peak at 7.5 keV, but the peak might be an escape peak.
+Another peculiar peak is the Ni K$\alpha$ peak in the NW spectra.
+The projects' supervisor claim that it is unlikely to be a Ni peak, as this have not been observed in the NW sample earlier.
+Making the nanowire sample was not a part of this thesis, only analyzing it with SEM EDS.
+The energy of the peculiar peak match well with the Ni K$\alpha$ energy at 7.50 keV, but the peak might be an escape peak from Gs K$\alpha$ at 9.24 keV.
 An escape peak is an X-ray that excites Si in the detector, and thus loose 1.74 keV energy before being detected.
 However, an issue with this explanation is the peak at 0.85 keV, which would be the Ni L$\alpha$ peak.
 The peak is not very well-defined, as it overlaps much with the Cu L$\alpha$  and partly Ga L$\alpha$ peaks.
-Other escape peaks in the rest of the spectra are hard to identify, as the E-1.74 keV of the main peaks usually falls below 0.
+Other escape peaks in the rest of the spectra are hard to identify, as the E-1.74 keV of the main peaks usually falls below zero.
 One exception is the Mo L$\alpha$ peak, where a potential escape peak align with O K$\alpha$.
 In conclusion, it is not possible to determine certainly if the peak is an escape peak or a real Ni peak, but it could be a real Ni peak.
 
@@ -292,17 +290,19 @@ These signals come both from electrons which scatter in the beam and hit other p
 The last one is what happens in the detector with the Si K$\alpha$ internal fluorescence peak.
 The secondary X-rays, i.e. X-rays generated from X-rays, are also emitted from the whole interaction volume.
 The interaction volume of X-rays is large, since the X-rays are emitted in all directions and do penetrate deep into the sample, as stated in \cref{sec:theory:theoreticalxray:formation}.
-Examples of this type of artifact is the Mo and Cu signal in the NW spectra
+Examples of this type of artifact is the Mo and Cu signal in the NW spectra.
 The grid is made of Cu, but the nanowire sampled is far from the grid.
-The Mo signal is from the Mo dish, which also is far from the sampled area.
+The Mo signal is from the Mo disk, which also is far from the sampled area.
 Signals from outside the sampled area can both be confusing and clutter the quantification, for example in the NW spectra where the sampled area is just the nanowire but the spectrum show signals from a larger area.
 
 
 One last artifact to be discussed is the unknown peaks, which for instance is present in the NW spectrum at 0.38 keV.
+This energy is close to N K$\alpha$ at 0.392 keV.
 The Si spectra have an unknown at 0.08 keV, and this peak is very high in the 5 keV spectrum.
+If it is from a characteristic line, it could be Li K$\alpha$ at 0.054 keV or Be K$\alpha$ at 0.108 keV.
 Another unknown peak is present in the Mo spectra at 0.18 keV.
 The Mo unknown match best with B K$\alpha$ at 0.183 keV.
-Making conclusions about the unknown peaks is unreliable, as all the unknown peaks are low in energy, and it is shown that the low energy peak accuracy is not very good.
+Making conclusions about the unknown peaks would be unreliable conclusions, as all the unknown peaks are low in energy, and it is shown in \cref{tab:results:calibration-peak-accuracy} that the low energy peak accuracy is not very good.
 In addition, the EDS system is not well-designed for the low energy peaks.
 This is partly because of the high absorption of the low energy X-rays, making detection difficult.
 The conclusion for the unknown peaks is that they stay unknown, and could be investigated further by experimenting with e.g. low acceleration voltages.
@@ -361,13 +361,17 @@ Since the quantification process is hidden, the user does not know if AZtec deal
 \hyperref[subproblem2]{Sub-problem~\ref*{subproblem2}} was to figure out what the steps are doing in the qualitative analysis in HyperSpy.
 HyperSpy have documentation online, and the following subsections explain how the analysis was done in HyperSpy.
 
-% The next sub-problem was to find out what is done with the data at the different steps in the analysis when using HyperSpy.
-% In these steps it is assumed that the user have done qualitative analysis and want to do quantitative analysis on a set of elements.
-% The analysis in AZtec is done as a black box, so it is not possible to see what is done with the data at the different steps.
+
 Each subsection starts with some code lines, followed by an explanation of what the lines do.
 All variables inside crocodile need to be set by the user, e.g. \verb|<element_list>| would be set to \verb|['Ga', 'As']| for the GaAs wafer.
 An example notebook with quantification of the GaAs wafer is attached in APPENDIX.
 \brynjar{Make a notebook with GaAs quantification in HyperSpy, with the data somehow.}
+
+
+
+
+
+
 
 \subsection{Loading the data and specifying the elements}
 \label{sec:discussion:steps:load}
@@ -388,7 +392,7 @@ After loading, it is possible to plot the data with \verb|s.plot()|.
 
 Already at this point there is a big problem with using HyperSpy on the acquired data: the analysis methods are not implemented for SEM but for TEM.
 As explained by Skomedal in her master's thesis \cite{skomedal_improving_2022}, the quantification with the Cliff-Lorimer method of TEM EDS data use approximations which are valid for thin samples.
-The approximation is that the sample is thin enough to ignore absorption and fluorescence, which is a very crude approximation to use on bulk SEM EDS data.
+The approximation is that the sample is thin enough to ignore absorption and fluorescence, which is a bad approximation to use on bulk SEM EDS data.
 Still, the results show that it is possible to quantify the elements in the GaAs wafer with the Cliff-Lorimer method and get plausible results, but also that the analysis breaks down occasionally. % Copilot: but the results should be taken with a grain of salt.
 Implementing quantification from the SEM type signal in HyperSpy have been discussed on the repositories GitHub issues page\footnote{\url{https://github.com/hyperspy/hyperspy/issues/2332}}.
 The topic have been discussed in 2020, 2017 and 2015.
@@ -420,6 +424,10 @@ The breaking down of the analysis is discussed further in \cref{sec:discussion:f
 Results in this project show that the CL method in HyperSpy for TEM EDS data sometimes yield plausible results on SEM EDS data and sometimes break down, thus the method should be used with caution.
 The goal of this project was not to do or to implement cutting edge quantification of EDS data from a SEM sample, but rather to understand the analysis steps and what factors that could affect the results.
 Thus, using the quantification method from the TEM signal type was regarded as good enough for this project.
+
+
+
+
 
 
 
@@ -461,6 +469,10 @@ Linear background removal works well for some peaks, for example the K-lines of 
 The background around the K-lines are more linear, because of the exponential decay of the background.
 Around the L-lines the background is affected by the absorption of the Bremsstrahlung lower than ~2 keV and the observation of higher background levels below the highest peak in the spectrum.
 The background removal is discussed further in \cref{sec:discussion:modelling}.
+
+
+
+
 
 
 
@@ -508,9 +520,11 @@ This result implies that the theoretically calculated k-factors could be better 
 
 
 
+
+
+
+
 % overlapping peaks in sum, why to use modeled peaks and not raw counts.
-
-
 \subsection{Removing the background with model fitting}
 \label{sec:discussion:steps:model_fitting}
 Another way to remove the background is to fit a model to the data.
@@ -558,6 +572,10 @@ HyperSpy have an own option for fitting only the background.
 Since the background is one of the components in m, it is fitted with the code line above.
 
 
+
+
+
+
 \subsection{Quantification after model fitting}
 \label{sec:discussion:steps:quantification:model}
 
@@ -576,6 +594,10 @@ The quantification after model fitting is done in the same way as in \cref{sec:d
 When modelling GaAs, the model can add the intensity from both K-lines and L-lines.
 Since AZtec only gives the k-factors for either the K-lines or the L-lines, the user must remove the lines without k-factors before quantification.
 As explained in \cref{sec:discussion:general:intensities}, overlapping peaks need to be modelled to get the correct intensities.
+
+
+
+
 
 
 \subsection{Calibrating the spectrum with the HyperSpy model}
@@ -687,27 +709,15 @@ The issue of severely overlapping peaks was encountered when fitting the Mo spec
 The Mo L$\alpha$ and L$\beta$ peaks are very close to each other, and even though the fitting algorithm would handle this, the peak finder would not recognize the overlapping peaks as two separate peaks.
 This problem can be fixed manually, but with the limited time in this project it was categorized as an edge case that would not be handled.
 
-\ton{Now I am happy with the discussion until this point (13.12.22). How would you rate it? Any suggestions on the bigger picture of the discussion? I do need to wrap it up soon, because I still need to fill in some theory, fix the conclusion and the introductions.}
-
-
-% % Is this now redundant with the previous section?
-% The next sub-problem was to find out how different background models affect the quantitative analysis done in HyperSpy, and how well different order polynomials fit the background.
-% The background models were tested on the spectrum of GaAs, and later also on \brynjar{TODO: other spectra. Also make a table here with results}.
-% The background was modelled as a polynomial of different orders.
-% To quantify the different background models, the residuals were calculated.
-% The residuals are the difference between the data and the model.
-% \brynjar{Use root-mean-square error?}
-% The TABLE XXXX \brynjar{make table} shows the residuals for the different order background models.
-% The best orders were visually inspected.
-% A later idea was to model the background as a spline, which is a piece wise polynomial.
-% The spline is a piece wise polynomial with a smooth transition between the pieces.
-% The spline was not tested in this project, but it could be a good alternative to the polynomial background model.
-
-% % TODO: Try the background as a spline, which is a piecewise polynomials.
-% % conclusion: try splines, but then what to do under the peak?
 
 
 
+% \ton{Now I am happy with the discussion until this point (13.12.22). How would you rate it? Any suggestions on the bigger picture of the discussion? I do need to wrap it up soon, because I still need to fill in some theory, fix the conclusion and the introductions.}
+% Reply:
+%%%%%%%%%%% Good you are happy, it is your text. I have scrolled through fast. It is a good length, you alert to general and specific observation. Ok.
+%%%%%%%%%%% How code formulation is, works less well in a long text.
+%%%%%%%%%%% If you can break up the text with a few figures, visulaizing the discussion that would be fine, if possible.
+%%%%%%%%%%% But for now focus on finishing the other parts.
 
 
 
@@ -728,9 +738,6 @@ This problem can be fixed manually, but with the limited time in this project it
 \section{Calibration}
 \label{sec:discussion:calibration}
 %     How good is the calibration in AZtec and HyperSpy?
-
-
-\brynjar{Try not to repeat the same things as earlier.}
 
 \hyperref[subproblem4]{Sub-problem~\ref*{subproblem4}} was to figure out how good the calibration is in AZtec and HyperSpy, which lead to making a new calibration in Python.
 The calibration has been discussed some in \cref{sec:discussion:general:intensities,sec:discussion:steps:load,sec:discussion:steps:HyperSpycalibration}, and is here discussed more in depth.
@@ -834,23 +841,49 @@ It could be that the listed weights would be correct when collecting the data in
 \label{sec:discussion:failure}
 % When does the analysis fail, both in AZtec and HyperSpy?
 \hyperref[subproblem5]{Sub-problem~\ref*{subproblem5}} was to find out when the analysis fails, both in AZtec and HyperSpy.
-% quantification with 
+The time spent on this sub-problem was limited compared to what would have been preferred to get a clearer understanding of both when and why the analysis fails.
+The observations done are mostly on when the analysis fails, and not why.
+Why the analysis fail would be a good starting point to improve the EDS analysis.
+
+% treating SEM data as TEM data
+The fact that the quantification fails when the SEM EDS data is treated as TEM data was expected.
+As stated earlier, when doing TEM analysis there are some key assumptions which are not valid for SEM data.
+When analyzing SEM EDS data it is neccessary to do the ZAF correction, which was described briefly in \cref{sec:discussion:steps:load}.
+Implementing the ZAF matrix correction in HyperSpy for the SEM signal would be a helpful contribution to the HyperSpy project, as this has been mentioned as one key missing feature to do SEM EDS quantification with HyperSpy in the GitHub discussion threads.
+
+
+
+
+% HS breakdown at 10 and 15 kV
+One of the strangest results in this project was that the quantification failed at 10 and 15 kV in HyperSpy.
+The excact same CL quantification code was used on the 5, 10, 15 and 30 kV spectra, but only the 5 and 30 kV spectra gave a reasonable result.
+The most puzzling thing is that the code gives results on the 5 and 30 kV spectra which looks similar to the TEM quantification results in AZtec, so the code described above in \cref{sec:discussion:steps} is not completely wrong.
+The four spectra look quite similar.
+One difference is that the 10 and 15 kV spectra have a dead time which was around twice as long as the 5 and 30 kV spectra.
+The different DT is not a sufficient explaination, it is just an observed difference.
+The author did not have time to dig deep enough into the source code of HyperSpy to find the reason for the failure.
+Possible explainations are the selection of lines to use in the quantification, an error in the code or the extracted data, a bug in HyperSpy for certain settings, something with the data treatment as TEM data, or something else.
+The suggestions are not really helpful, but could be a starting point for further investigation.
 
 
 
 
 
 
-\section{Main problem discussion}
-\label{sec:discussion:mainproblem}
 
-% How do different spectroscopy data processing influence the qualitative analysis, and how do they affect the quantitative Cliff-Lorimer analysis in HyperSpy?
 
-This last section is a direct discussion of the \hyperref[mainproblem]{Main problem statement}, connecting the findings to how EDS analysis could be improved.
-The main problem is how data processing in EDS analysis affects both the qualitative and quantitative analysis.
-The qualitative effects are discussed first, then the quantitative.
+% Moved to conclusion?
 
-% TODO: wirte here
+% \section{Main problem discussion}
+% \label{sec:discussion:mainproblem}
+
+% % How do different spectroscopy data processing influence the qualitative analysis, and how do they affect the quantitative Cliff-Lorimer analysis in HyperSpy?
+
+% This last section is a direct discussion of the \hyperref[mainproblem]{Main problem statement}, connecting the findings to how EDS analysis could be improved.
+% The main problem is how data processing in EDS analysis affects both the qualitative and quantitative analysis.
+% The qualitative effects are discussed first, then the quantitative.
+
+% % TODO: wirte here
 
 
 
