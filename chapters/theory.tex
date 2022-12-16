@@ -1,32 +1,6 @@
 \chapter{Theory}
 \label{chap:theory}
 
-%%%%%%% notater
-
-% Teorien skriver jeg for å vise hva jeg kan (sier Ton).
-
-
-% \section{Energy dispersive X-ray spectroscopy}
-% \label{sec:theory:eds}
-% \begin{itemize}
-%     \item characteristic X-rays (mekanisme for hvordan blir de laget, formler [sannsynlighet, overvoltage, fluorescent yield], theoretical values1)
-%     \item vis spektrum GaAs (artefacts: background [modell for bg, hva den er avhengig av, formler], strays, Si-escape peaks, broadening, peak width vs nr channels,  [større z -> bredere], overlap)
-%     \item quantification (bulk2, thin film approximations for Cliff Lormier, corrections3 )[absorption: hspy har correction factors for intensity]
-%     \item detection (dead time, processing time, efficiency of the detector, shadowing(?), ...)
-%     \item data processing (fitting, gaussian, background substraction, ...)
-%     \item existing software: black box og tilgjengelig open source -> i kap 1?
-% \end{itemize}
-
-% OBS! Forklar eksplisitt minst fem artifacts, ikke bare henvis.
-
-% lag en tabell med theoretical values og ha et av mine spektrum ved sidenav.
-% Kan da peke på feks i Ga at Ka1 og Ka2 ikke er mulig å skille
-
-% a2 Goldstein har greier om: k-ratio (bulk), standardless analysis.
-
-% a3 correction: For tykke prøver er fremgangsmåten å optimalisere parameterne, i the full ZEF-correction
-
-%%%%% notater slutt
 
 % intro to the section
 Energy dispersive X-ray spectroscopy (EDS) is a technique for analyzing the elemental composition of a sample with a spatial resolution, used in SEM and TEM.
@@ -34,9 +8,13 @@ The technique is based on excitation of core shell electrons, which are bound to
 EDS can be used to determine both the qualitative and quantitative composition of a sample.
 This chapter will cover the theoretical formation of characteristic X-rays, the empirical adjustments done due to creation and detection issues, explain quantitative calculations, cover the parameters of a quality control program, and briefly explain the basics of a SEM.
 
-% When an outer shell electron is relaxed to a hole produced in the core shell, the atom emits a photon with a specific energy called the characteristic X-ray.
-% The energy of the characteristic X-ray are quantum mechanically computed and does not change, which makes it possible to identify the elements in a sample.
-% The intensity of the characteristic X-rays are dependent on the amount of the element in the sample, which makes it possible to quantify the elements in a sample.
+
+
+
+
+
+
+
 
 
 \section{Theoretical view on characteristic X-rays}
@@ -46,13 +24,28 @@ This chapter will cover the theoretical formation of characteristic X-rays, the 
 This section is primarily based on Hollas \cite[Ch. 8.2]{hollas_modern_2004} and Goldstein \cite[Ch. 4.2]{goldstein_scanning_2018}.
 It covers the theoretical physics behind creation of characteristic X-rays.
 
-%
-%
+
+
+
+
+
+
+
+
+
 \subsection{Formation of characteristic X-rays}
 \label{sec:theory:theoreticalxray:formation}
 The formation of characteristic X-rays is an inelastic quantum mechanical scattering process in two steps.
-In the following four equations the subscripts are referring to specific electrons in order to distinguish between them, which is also used in FIGURE XX \brynjar{make this figure}.
-In the first step described in \cref{eq:theory:theoreticalxray:formation:step1} electron e$^-_{1}$ from the incident electron beam eject electron $\textnormal{e}^-_{2}$ from the core orbital of atom A \cite[Eq. (8.12)]{hollas_modern_2004}.
+In the following four equations the subscripts are referring to specific electrons in order to distinguish between them, which is also used in \cref{fig:theory:theoreticalxray:formation}
+The figure shows the formation of characteristic X-rays with the atom as in the Bohr model, where ionization and relaxation is divided into two steps.
+The three relaxations showed produce three characteristic X-rays with different energies.
+The naming of the X-rays are covered in \cref{sec:theory:theoreticalxray:naming}, and illustrated in \cref{fig:theory:theoreticalxray:naming:lines}.
+Only the relevant electrons are shown in the figure.
+In the ionization step, the electron from the beam ionize the atom which ejects an electron from the core orbital.
+In the relaxation step an electron from a higher orbital relaxes to the hole left by the ejected electron, and the figure shows the three possible relaxations.
+The first step is described in \cref{eq:theory:theoreticalxray:formation:step1}, where electron e$^-_{1}$ from the incident electron beam eject electron $\textnormal{e}^-_{2}$ from the core orbital of atom A \cite[Eq. (8.12)]{hollas_modern_2004}.
+
+
 
 % ionize the atom
 \begin{equation}
@@ -61,9 +54,22 @@ In the first step described in \cref{eq:theory:theoreticalxray:formation:step1} 
 \end{equation}
 
 
+% figures/formation_of_xrays_bohr.png
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/formation_of_xrays_bohr.png}
+    \caption{
+        The formation of characteristic X-rays with the atom as in the Bohr model, where ionization and relaxation is divided into two steps.
+        The three relaxations showed produce three characteristic X-rays with different energies.
+        Increased energy is illustrated as X-rays with shorter wavelengths.
+    }
+    \label{fig:theory:theoreticalxray:formation}
+\end{figure}
+
+
 % the energy of ionization, Goldstein eq 4.1
 The incident electron from the beam loose energy to both breaking the binding energy of the core orbital and to the kinetic energy of the ejected electron.
-The energy is given by \cref{eq:theory:theoreticalxray:formation:step1:energy}.
+The energy is given by \cref{eq:theory:theoreticalxray:formation:step1:energy}, and illustrated as the difference in energy level between the orbitals in \cref{fig:theory:theoreticalxray:naming:lines}.
 The user can control the incident electron energy $E_{1 {\textnormal{, incident}}}$ by the acceleration voltage $V_{\textnormal{acc}}$ of the electron gun (and the current $I_{\textnormal{beam}}$ of the electron beam).
 The energy of the characteristic X-ray is dependent on the binding energy of the core orbital, $E_{2 {\textnormal{, core shell, binding}}}$.
 In EDS $E_{1 {\textnormal{, outgoing}}}$ and $E_{2 {\textnormal{, kinetic}}}$ serve no purpose \cite[Eq. (4.1)]{goldstein_scanning_2018}.
@@ -111,6 +117,15 @@ The ratio between the characteristic X-ray photons and Auger electrons are known
 The fluorescent yield is heavily dependent on the experimental setup and can be approximated, which is covered as one of the empirical factors in \cref{sec:theory:empirical}.
 
 
+
+
+
+
+
+
+
+
+
 %
 %
 \subsection{Naming convention}
@@ -121,6 +136,24 @@ The transition lines are grouped and named semi-systematic, based on the orbital
 The naming convention is semi-systematic because it is the original empirical system published in Nature by the Swedish physicist Siegbahn in 1916 \cite{siegbahn_relations_1916}, when they did not have the knowledge we have today.
 The International Union of Pure and Applied Chemistry made a more systematic naming convention for X-ray lines which is supposed to be the official one \cite[Ch. 4.2.4]{goldstein_scanning_2018}.
 However, the Siegbahn notation is used in the X-ray Data Booklet, in HyperSpy, and by the TEM group at NTNU, and thus is used in this thesis.
+\cref{fig:theory:theoreticalxray:naming:lines} shows some orbitals and the corresponding X-ray lines with the Siegbahn notation.
+These lines are the ones which are identified in EDS analysis in this project.
+
+% figure with the naming convention
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/transition_lines.png}
+    \caption{
+        Schematic of the electron relaxations relevant for this thesis, with their naming convention.
+        The lines are the orbitals in the different shells, and the arrows are the relaxations.
+        Quantum number $n$ and $l$ are shown on the right side of the figure.
+        The figure also show one forbidden line.
+        The distance between the orbitals are increasing with the Z number.
+        When the energy of two lines are to close that they are unresolvable, they are referred to as one line, e.g. K$\alpha$1 and K$\alpha$2 are together forming K$\alpha$.
+        For Ga, K$\alpha$ = 9.25 keV, K$\beta$ = 10.26 keV and L$\alpha$ = 1.01 keV.
+    }
+    \label{fig:theory:theoreticalxray:naming:lines}
+\end{figure}
 
 % K, L, M
 The X-rays are first named by which shell in the Bohr model the vacancy is in, i.e. the principal quantum number $n$ of the vacancy orbital.
@@ -142,23 +175,21 @@ The splitting of the $\alpha$ family to $\alpha_1$ and $\alpha_2$ are usually fi
 % total naming with example
 Putting these three naming conventions together, we name the transition $\textnormal{L}_3 \rightarrow \textnormal{K}_1$ as K$\alpha_1$, and $\textnormal{L}_2 \rightarrow \textnormal{K}_1$ as K$\alpha_2$, with more examples in \cref{fig:theory:theoreticalxray:naming:lines}.
 The transition $\textnormal{L}_1 \rightarrow \textnormal{K}_1$ has $\Delta l = 0$ and is thus forbidden by the selection rules, see \cref{eq:theory:theoreticalxray:energyintensity:selectionrules}.
-In gallium the K$\alpha_1 = 9251.74$ eV and K$\alpha_2 = 9224.82$ eV \cite{thompson_x-ray_2004} are coupled, but as shown in \cref{fig:theory:GaAs30keV-K-lines} this energy difference of $\Delta E = 26.92$ eV is too low to be resolved in EDS.
-
-% figure with the naming convention
-\begin{figure}[htp]
-    \centering
-    \includegraphics[width=0.7\linewidth]{figures/transition_lines.png}
-    \caption{
-        Schematic of the electron relaxations relavant for this thesis, with their naming convention.
-        When the lines are not resolvable, K$\alpha$1 and K$\alpha$2 are refered to as only K$\alpha$.
-    }
-    \label{fig:theory:theoreticalxray:naming:lines}
-\end{figure}
+In gallium the K$\alpha_1 = 9251.74$ eV and K$\alpha_2 = 9224.82$ eV \cite{thompson_x-ray_2004} are coupled, but as shown in \cref{fig:results:Ga-K} this energy difference of $\Delta E = 26.92$ eV is too low to be resolved in EDS.
 
 
 
-%
-%
+
+
+
+
+
+
+
+
+
+
+
 % energy and intensity
 \subsection{Energy and intensity}
 \label{sec:theory:theoreticalxray:energyintensity}
@@ -181,19 +212,19 @@ The selection rules in \cref{eq:theory:theoreticalxray:energyintensity:selection
 
 % figure from wikipedia showing n, l, j
 % file: wikipedia-quantum-numbers-n-l-j.png
-\begin{figure}
+\begin{figure}[p]
     \centering
     % \captionsetup{0.8\linewidth}
     % remove \colorbox to get the figure transparent again
-    \colorbox{white}{\includegraphics[width=0.5\linewidth]{figures/wikipedia-quantum-numbers-n-l-j.png}}
+    \includegraphics[width=0.8\linewidth]{figures/wikipedia-quantum-numbers-n-l-j.png}
     \caption{
         The quantum numbers $n$, $l$, and $m$ in a hydrogen-like atom.
         The principal quantum number is shown as the block with values $n= 1, 2, 3$.
-        The Azimuthal quantum number is the rows as $l = s, p, d$.
+        The Azimuthal quantum number is the rows as $l = s, p, d$, where their numbers are 0, 1 and 2.
         The magnetic quantum number is the columns as $m = -2, -1, 0, 1, 2 $.
-        The spin quantum number, $s$, is not geometrically dependent and thus not shown.
-        The total angular momentum quantum, $l$ number is the sum of $l$ and $s$.
-        The figure is copied from the article "Quantum number" on Wikipedia, made by Geek3 - Own work, Created with hydrogen 1.1, CC BY-SA 4.0, \url{https://commons.wikimedia.org/w/index.php?curid=67681892}.
+        The spin quantum number, $s$, is not geometrically independent.
+        The total angular momentum quantum number $j = l + s$, and since $s$ is geometrically independent it is not possible to visualize $j$ here.
+        The figure is an altered version of a figure from the article "Quantum number" on Wikipedia, made by Geek3 - Own work, Created with hydrogen 1.1, CC BY-SA 4.0, \url{https://commons.wikimedia.org/w/index.php?curid=67681892}.
     }
     \label{fig:theory:theoreticalxray:energyintensity:quantumnumbers}
 \end{figure}
@@ -207,9 +238,14 @@ The counts in EDS the number of X-ray photons detected in a specific energy rang
 The energy range is typically around 10 eV.
 In theory, the ratio of the atomic concentration between two elements are proportional to the ratio of the corresponding lines from the elements.
 However, there are many factors which affect the intensity of the lines, which are covered in \cref{sec:theory:empirical}.
-
-
-% TODO: comment the four figures below in the text
+A theoretical spectrum with just lines are shown in \cref{fig:theory:expected_lines}.
+The lines are not spread, and have different energy and intensity.
+Am other illustration of a theoretical spectrum, but with a background radiation, is shown in \cref{fig:theory:expected_spectrum_Skomedal}.
+The background radiation is generated exponentially, but at lower energies the background radiation is absorbed and thus get the illustrated shape.
+A real spectrum is shown in \cref{fig:theory:actual_peaks}.
+In this figure the lines are spread, and there is a background present which is low.
+The shape of a real background is shown in \cref{fig:theory:expected_background}.
+Both \cref{fig:theory:actual_peaks,fig:theory:expected_background} have counts on the y-axis.
 
 
 % figure figures/expected_lines.png
@@ -218,7 +254,7 @@ However, there are many factors which affect the intensity of the lines, which a
     \includegraphics[width=0.9\textwidth]{figures/expected_lines.png}
     \caption{
         Theoretical lines in a spectrum.
-        The lines have different energy and intensity, and does not have any spread.
+        The lines have different energy and intensity.
     }
     \label{fig:theory:expected_lines}
 \end{figure}
@@ -228,9 +264,9 @@ However, there are many factors which affect the intensity of the lines, which a
     \centering
     \includegraphics[width=0.9\textwidth]{figures/expected_spectrum_Skomedal.png}
     \caption{
-        An Illustration of a theoretical spectrum with characteristic X-rays and background radiation.
-        The background radiation is being generated exponentially, but is being absorbed at lower energies and thus then detected background get the illustrated shape.
-        The figure is borrowed from Skomedal \cite[Fig. 2.8]{skomedal_eds_2018}.
+        An illustration of a theoretical spectrum with characteristic X-rays and background radiation.
+        The background radiation is being generated exponentially, but lower energies the X-rays are absorbed, and thus the detected background get the illustrated shape.
+        The figure is borrowed from Skomedal \cite[Fig. 2.8]{skomedal_improving_2022}.
     }
     \label{fig:theory:expected_spectrum_Skomedal}
 \end{figure}
@@ -258,7 +294,7 @@ However, there are many factors which affect the intensity of the lines, which a
     \caption{
         Expected background in a spectrum.
         This is a fit of a real background spectrum, but the exact numbers are not important.
-        The background radiation is being generated exponentially, but at lower engergies it is being absorbed.
+        The background radiation is being generated exponentially, but at lower energies it is being absorbed.
         The figure is meant to illustrate the shape of the background.
     }
     \label{fig:theory:expected_background}
@@ -295,20 +331,30 @@ These additional lines are very close in energy and only one of the lines have a
 
 \input{tables/Mo-lines.tex}
 
+\clearpage
 
 
 
-%
-%
-%
-%
+
+
+
+
+
+
+
+
 \section{Empirical view on characteristic X-rays}
 \label{sec:theory:empirical}
 On top of the theoretical physics there are many experimental processes affecting both the creation and the detection of characteristic X-rays.
 The scientific community uses an empirically influenced approach in EDS analysis.
-This approach includes empirical equations to deal with the imperfect beam, scattering in the chamber, secondary scattering (?), imperfect detectors, \dots
+This approach includes empirical equations to deal with atomic number effects, absorption in the sample, secondary scattering or fluorescence, the imperfect beam, scattering in the chamber, several cross sections and the imperfect detector.
+There are many processes that can and do happen which complicates the physics.
+The easy view is just to analyze the signal and do not worry too much about the physics behind it.
+This is the empirical way.
 
-\ton{What do I do with the thin film assumptions? How do I mention it?}
+% \ton{What do I do with the thin film assumptions? How do I mention it?}
+% this is related to quantification, that absorption and eventual fluorescence can be ignored as they are not significant. That makes analysis easier. Not relevant for formation, there want that probe is absorbed, so thick.
+% Could say that there are many processes that can happen (several cross sections). The easy view is just look at what comes out at end.
 
 %
 %
@@ -318,13 +364,12 @@ This approach includes empirical equations to deal with the imperfect beam, scat
 \subsection{From lines to peaks}
 \label{sec:theory:empirical:peaks}
 A striking difference between the theoretical and the empirical view is that the lines are not lines, but peaks with a varying width.
-This is illustrated both in \cref{fig:theory:GaAs30keV-8-12-keV} and in \cref{fig:theory:GaAs30keV-K-lines}, where we see that the two K$\alpha$ lines of Ga is merged into one broad peak.
-The peaks in the EDS spectrums have a Gaussian shape, which is a result of the broadening of the lines.
-The broadening of the lines is due to \dots \ton{What is the cause of the broadening? And why is it Gaussian?}. % count statistics!
-\cref{fig:theory:GaAs30kV-whole} shows that lower energy lines are narrower than higher energy lines.
-This increase in broadening with higher energy is due to \dots \ton{What is the cause of the broadening with higher E again?}
+This is illustrated in \cref{fig:theory:expected_lines} and \cref{fig:theory:actual_peaks}.
+The peaks in the EDS spectrums have a Gaussian shape, which is a result of the signal being a statistical distribution of the electronically detected X-rays.
+\cref{fig:theory:actual_peaks} shows that lower energy lines are narrower than higher energy lines.
+The electronics in the detector are broadening the lines, and each detector has its own broadening function \cite{broadening_broduscha}.
 
-\brynjar{Write more here.}
+As the peaks are broadened, every peak in the spectrum can be fitted with a Gaussian function.
 A Gaussian peak is a curve defined by the following equation:
 
 \begin{equation}
@@ -334,7 +379,7 @@ A Gaussian peak is a curve defined by the following equation:
 
 In the equation $\mu$ is the center of the peak, $\sigma$ is the standard deviation, and $x$ is the energy.
 When doing peak fitting, the first term is treated as the amplitude and is a parameter which is fitted, i.e. $1/\sigma\sqrt{2\pi}$ is swapped with a parameter $A$.
-$\mu$ and $\sigma$ are also fitted parameters, where $\mu$ is the center of the peak and $\sigma$ is the width of the peak.
+The three fitted parameters are $\mu$ (center of the peak), $\sigma$ (standard deviation) and $A$ (amplitude).
 $x$ is the energy, i.e. the x-axis in the EDS spectrum.
 
 The width of the peak is a measure of the broadening of the line, and is usually given as the FWHM in EDS analysis. The FWHM is connected to the standard deviation of the Gaussian distribution, which is given by \cref{eq:theory:empirical:gaussian}.
@@ -371,18 +416,8 @@ This subsection will briefly cover fluorescent yield, critical ionization energy
 In practice, the weight of the lines are included as a part of the k-factors or k-ratios, which are presented in \cref{sec:theory:empirical:kfactors}.
 Only the strongest lines are listed in the X-ray Data Booklet, where the theoretical values of the characteristic X-ray lines are listed.
 The list include: K$\alpha_1$, K$\alpha_2$, K$\beta_2$, L$\alpha_1$, L$\alpha_2$, L$\beta_1$, L$\beta_2$, L$\gamma_1$, M$\alpha_1$ \cite{thompson_x-ray_2004}.
-HyperSpy operates with a different list of lines, which might be more empirically influenced.
-The lines for Ga is for instance:
-The lines for Mo is:
-The lines for a heavy element like Sb(?) is:
-\brynjar{Fyll inn disse.}
-
-
-%%%%% TODO %%%%%
-% write about the Mo Ll and Mo L$\gamma$3 peaks in the teory section.
-
-% HYperSpy and X-ray Data Booklet are not the same. HS more empirical?
-
+HyperSpy have a library of the X-ray lines of the elements too.
+The X-ray lines which were identified in this project are illustrated in \cref{fig:theory:theoreticalxray:naming:lines}.
 
 
 
@@ -396,19 +431,27 @@ The lines for a heavy element like Sb(?) is:
 
 
 % fluorescent yield
-\brynjar{This info about fluorescent yield is interesting, but will I actually use it?}
 The fluorescent yield $\omega$ is non-linearly dependent on $Z$.
-Figure (4.3)  in Goldstein \cite{goldstein_scanning_2018} \ton{Reproduce the figure? Would take like 2h to use the Crawford data properly I guess} shows the fluorescent yield for the first 90 elements (which is based on Crawford 2011).
+Figure (4.3) in Goldstein \cite{goldstein_scanning_2018} is copied in \cref{fig:theory:fluorescence_yield}, which shows that the fluorescent yield for the first 90 elements is mostly increasing with $Z$.
 For K- and L-shell fluorescent yield, $\omega$ is strictly increasing.
 For M-shell fluorescent yield, $\omega$ is strictly increasing till around $Z=80$, and then it starts to decrease.
-The figure also show that for the same element $\omega_{\textnormal{K}}  > \omega_{\textnormal{L}} > \omega_{\textnormal{M}}$ \brynjar{But L-peaks are higher in the spectra. Explain this in the discussion?}.
+The figure also show that for the same element $\omega_{\textnormal{K}}  > \omega_{\textnormal{L}} > \omega_{\textnormal{M}}$.
 When dealing with thin samples, the fluorescent yield can be approximated by an empirical formula based on tin.
-The formula is given in \cref{eq:empirical:fluorescentyieldapprox}, where $a=10^6$ for K-shell. \brynjar{What is it for L and M? Also, is it really relevant here?}
+The formula is given in \cref{eq:empirical:fluorescentyieldapprox}, where $a=10^6$ for K-shell.
 The two key takeaways from this formula is that $\omega$ is dependent on $Z$, but kinda similar for close elements like Ga $Z = 31$ and As $Z = 33$.
 
-\brynjar{Find the source for this formula. Ton said it is from Williams and Carter. Is it valid for bulk? The K-shell have the same shape as Figure 4.3 in Goldstein.}
+% figure/fluorescence_yield_Goldstein_Fig4.3.d.png
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/fluorescence_yield_Goldstein_Fig4-3-d.png}
+    \caption{
+        Fluorescent yield for K-, L- and M-shell, as a function of atomic number $Z$.
+        The figure is copied from Goldstein \cite[Fig. 4.3 (d)]{goldstein_scanning_2018}.
+    }
+    \label{fig:theory:fluorescence_yield}
+\end{figure}
 
-\ton{I'm not sure if I will actually use this formula, should I just remove it? And I don't get how this formula just becomes a part of the k-factor. Except from the key takeaways mention above.}
+
 
 \begin{equation}
     \label{eq:empirical:fluorescentyieldapprox}
@@ -425,19 +468,14 @@ The amount of ionization with varying energy above $E_\textnormal{C}$ is depende
 The solution to this is empirically estimations and using k-factors where all factors like this is either cancelled out or included in the k-factor correction.
 
 % Ionization cross section and overvoltage
-\ton{Is this good enough? If not, what do I write about the ionization cross section and overvoltage? What Mari wrote is for thin samples, I think. Why include it if I'm not going to use any equations about the ionization cross section or overvoltage? You said something about just write that intensity it is lower for low energy because of many reasons (absorption, efficiency), with the same reason that background is lower for low energy. But I kinda need to explain some reasons to use them in the discussion. Another question: in the k-factor all these other factors fall out, so EDS-people does not use these equations. Am I wrong?}
+% \ton{Is this good enough? If not, what do I write about the ionization cross section and overvoltage? What Mari wrote is for thin samples, I think. Why include it if I'm not going to use any equations about the ionization cross section or overvoltage? You said something about just write that intensity it is lower for low energy because of many reasons (absorption, efficiency), with the same reason that background is lower for low energy. But I kinda need to explain some reasons to use them in the discussion. Another question: in the k-factor all these other factors fall out, so EDS-people does not use these equations. Am I wrong?}
 
 % TODO with comment from Ton:
 % Cross sections are at the heart of explaining interactions and tabulate behaviour for different elements.
-
 % You make a good point regarding thin samples, but that is a simplification. Mari used it to limit calculatiuons. If thick, need ZAF corrections (based on many models and assumptions, running a loop until converged). Aztek is not clear on this in default mode, and then the results becomes unsure. HyperSpy use thin film, but let you analyse spectra from bulk. The user must understand the background and the limitations. In this theory part, you address aspects that can possible play a part.
 % In discussion can address what aspects can be better in the analysis, nothing that there are many. For future work, can say limit to thin or develop open-source for bulk.?
 
 % Maybe the DTSA-II gives some hints what matters, see Goldstein or file:///C:/Users/helvoort/Downloads/getting-started-with-nist-dtsa-ii.pdf
-
-
-
-
 
 
 
@@ -453,31 +491,10 @@ Goldstein uses different intensity weights for isolated atoms, thin foils and bu
 One could venture down the rabbit hole of finding the theoretical weights for different lines, but that will not be done in this thesis.
 
 
-% Mo L$\alpha$ a, but its weight is 0.11 and its is just -3 eV from the L$\alpha$ line. 
-% XRB list Mo K$\beta$ as three lines, with energies 19.59, 19.61, and 19.97 keV, and the weights are 0.08, 0.15, and 0.03, respectively.
 
 
 
-% %   - energy issues
-% %   - overvoltage (deviations from q-mec, something in my notes)
 
-
-%
-%
-\subsection{Bremsstrahlung - the background radiation}
-\label{sec:theory:empirical:background}
-Why linear and why sixth order polynomial. Which are better.
-\brynjar{I might use background removal as some results, but I'm not sure. That would be comparing the different methods, and looking at smoothing of the data before removing the background.}
-
-\brynjar{TODO: Include a illustration of background. } % label fig:theory:background_illustration
-
-
-
-% does this fit here?
-\subsection{Sample thickness}
-\label{sec:theory:empirical:samplethickness}
-Thin vs bulk samples.
-%   - thin and bulk samples
 
 
 
@@ -492,13 +509,28 @@ Thin vs bulk samples.
 This section on data processing covers what HyperSpy is, quantification with Cliff-Lorimer and calibration of a spectrum.
 
 
+
+
+
+
 \subsection{HyperSpy}
 \label{sec:theory:data:hyperspy}
 
 
-% what HyperSpy is
+HyperSpy is a Python package for processing and analyzing signals and multidimensional data.
+It is open-source and free to use, and is developed by a community of scientists and engineers.
+Updates and discussion about the package is done on GitHub at \url{https://github.com/hyperspy/hyperspy}.
+The documentation for the package is available at \url{https://hyperspy.org/hyperspy-doc/current/index.html}.
+The origin of HyperSpy is in the field of TEM, but it has been expanded to include other fields such as SEM.
 
-% how to use HyperSpy, which is explained in detail in discussion
+Currently, HyperSpy have implemented functions for quantification of TEM EDS data, but not for SEM EDS data.
+The functions and methods for treating SEM EDS data is still limited, while the methods for TEM EDS data is more developed.
+
+
+
+
+
+
 
 
 %
@@ -507,25 +539,20 @@ This section on data processing covers what HyperSpy is, quantification with Cli
 % k-ratios
 \subsection{Cliff-Lorimer and the k-factors}
 \label{sec:theory:empirical:kfactors}
-About the k-factors, and perhaps the k-ratios as well.
 
-Cliff-Lorimer is page 23 in Skomedal.
-
-Explain the equations and where they come from.
-
-Castaings model:
-
-\begin{equation}
-    \frac{C_\textnormal{i}}{C_\textnormal{(i)}} = K \frac{I_\textnormal{i}}{I_\textnormal{(i)}}
-\end{equation}
-
-Cliff and Lorimer took it further and swapped the standard for the ratios of intensities from two elements measured in the same spectrum:
+One of the included quantification methods in HyperSpy is Cliff-Lorimer \cite{CL1975}.
+The method is based on the thin-foil criteria, where it is assumed that all absorption and fluorescence can be ignored.
+The CL method is based on the assumption that the intensity of the characteristic X-rays from two elements in the sample is proportional to the concentration of the elements.
+Each element has a correction factor for the intensity emitted from its lines, which is called the k-factor.
+The concentrations, intensities and k-factors are related by the following equation:
 
 \begin{equation}
     \frac{C_\textnormal{a}}{C_\textnormal{b}} = \frac{k_\textnormal{a} I_\textnormal{a}}{k_\textnormal{b} I_\textnormal{b}} = k_\textnormal{ab}  \frac{I_\textnormal{a}}{I_\textnormal{b}}
 \end{equation}
 
-
+If the same method is to be applied for a sample where the thin-foil criteria is not valid, a correction matrix must be applied.
+The correction matrix in SEM EDS is correcting for the atomic number effects (Z), the absorption in the bulk sample (A) and the fluorescence (F).
+This is called the ZAF correction matrix \cite{ZAF_1978}.
 
 %
 % calibration of the spectrum
@@ -533,11 +560,12 @@ Cliff and Lorimer took it further and swapped the standard for the ratios of int
 \label{sec:theory:calibration}
 
 % General calibration, which needs peak centers. Just mention fitting.
-
 % my notebook
-
 % equation dispersion = e2 - e1 / c2 - c1
 
+Calibration of a spectrum is finding the energy per channel of the spectrum and the zero-offset.
+The calibration process is a general process, and is not specific to SEM EDS.
+In EDS the calibration can be calculated with two known peaks.
 $E_1$ and $E_2$ is the energy of the two characteristic X-rays, and $c_1$ and $c_2$ is the channel number of the two characteristic X-rays.
 
 \begin{equation}
@@ -545,20 +573,12 @@ $E_1$ and $E_2$ is the energy of the two characteristic X-rays, and $c_1$ and $c
     \textnormal{Dispersion} = \frac{E_2 - E_1}{C_2 - C_1}
 \end{equation}
 
-Get as little extrapolation as possible by selecting the longest possible distance between the two characteristic X-rays, while still using peaks with good signal-to-noise ratio.
-\brynjar{Quantify signal-to-noise ratio?}
-Assume calibration on one spectrum and use it on all spectra for the same instrument.
+With the dispersion, the zero-offset can be calculated with the following equation
 
-
-Zero-offset in channels is:
 \begin{equation}
     \label{eq:theory:calibration:offset}
     \textnormal{Zero-offset in channels} = C_1 - E_1 \cdot \textnormal{Dispersion}
 \end{equation}
-
-% dispersion
-% zero-offset
-
 
 
 
@@ -576,13 +596,25 @@ Zero-offset in channels is:
 \section{Detection system}
 \label{sec:theory:detectionsystem}
 
-This section covers briefly the EDS detector and the SEM.
+This section covers briefly the EDS detector.
+It is expected that the reader knows the working principles of a SEM.
 
 
 \subsection{EDS detector}
 \label{sec:theory:edsdetector}
 
-Detector efficiency, detector resolution, dead time, angle/placement of detector, beam issues, stray: secondary excitations in the sample, Si stray, holder / chamber stray detection.
+An EDS system consist of a detector inside an electron microscope and a computer controlling the system.
+The detector is a silicon drift detector (SDD) that is sensitive to X-rays.
+The incident electron beam hits the sample where X-rays are generated and emitted.
+When the X-rays hit the detector, the electrons in the silicon drift detector are excited and the electrons drift to the anode.
+This is registered as a signal, and the amount of electrons is proportional to the intensity of the X-rays.
+When a signal is being registered, the detector cannot receive any more signals, and this is called the dead time.
+The computer controls the detector and shuts the detector off and on during the acquisition of the spectrum.
+Even though it looks like a spectrum is acquired simultaneously for all the energies in the spectrum, the detector can only register one photon at a time.
+The registered photons are registered in channels, which are a small energy range.
+
+The EDS system is described nicely in Skomedal \cite{skomedal_improving_2022}, and more in detail in Goldstein \cite{goldstein_scanning_2018}.
+A nice table with relevant parameters for the EDS system is found in "Getting Started with NIST* DTSA-II" by Ritchie \cite{NIST-DTSA-II}.
 
 % Ton:
 % here are several things to write out
@@ -601,17 +633,6 @@ Detector efficiency, detector resolution, dead time, angle/placement of detector
 
 
 
-\subsection{SEM}
-\label{sec:theory:sem}
-
-
-- how (e-beam, vacuum, ...)
-
-
-- hardware (scanning coils, astigmatism)
-
-
-- imaging (contrast, SE, BSE)
 
 
 % Data processing (hvis jeg kommer dit)

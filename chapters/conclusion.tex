@@ -1,10 +1,10 @@
 % conclusion with future work
 
-\chapter{Conclusion}
+\chapter{Conclusion and future work}
 \label{chap:conclusion}
 
 
-The conclusion chapter covers the main finding, the limitations of the work done in this project and ideas future work.
+The conclusion chapter covers the main finding and the limitations of the work done in this project and ideas future work.
 
 
 
@@ -17,67 +17,65 @@ The conclusion chapter covers the main finding, the limitations of the work done
 
 % How do different spectroscopy data processing influence the qualitative analysis, and how do they affect the quantitative Cliff-Lorimer analysis in HyperSpy
 
-This project on trying to improve the analysis of EDS data from SEM have been a learning process for the author, building knowledge for future projects on the topic, while also having some direct findings which can improve EDS analysis.
+This project on analyzing and trying to improve the analysis of EDS data from SEM.
+It has been a learning process for the author, building knowledge for future projects on data drivel analytical work.
+For the given studied set-up, some improvements have been apparent.
 The project have dealt with how data processing influence both the qualitative and quantitative analysis of EDS data.
-The main findings are improvements on calibration, how the background could be modelled better, how the HyperSpy code works and code for direct analysis of EDS data in Python.
+The main findings are improvements on calibration of the energy scale, how the background could be modelled better, how the HyperSpy code works and code for direct analysis of EDS data in Python.
+The limitations were the authors experience with the topic and the available quantification methods in HyperSpy.
 
 
 % Calibration
 % deviations are small. Se fig Ga-K and the table wit p accuracy
 % conclusion: recalibrate would be nice, but not critical
-The results from the calibrations examined in this project show that the deviations are small, but doing a recalibration could be beneficial for future analysis.
+The results from the calibrations examined in this project show that the peak deviations are relatively small, compared to the energy resolution of the detector.
+The reported energy resolution of the detector is 127 eV, while the deviations are from 1-20 eV for the best calibration, and 3-50 eV for the built-in calibration of the AZtec software.
+Thus, it might be beneficial to recalibrate the energy scale, but it is assumed not to be critical.
 Calibration in the SEM APREO at NTNU NanoLab can be changed a few percent to improve the peak accuracy, which could be beneficial for the quantitative analysis.
 The calibration should be done with 30 kV spectra with far apart peaks to get clear peaks and little extrapolation.
-Most importantly is to have good peaks in the calibration spectra.
-The spectra taken have a three times lower RMS error than the built-in calibration in AZtec, but if a recalibration is done, it would probably be beneficial to take new spectra and calculate the calibration on multiple spectra.
-When doing the calibration calculation, HyperSpy provides a good tool, but the calculation could also be done with some code produced in this project.
+Calibration was done with Mo L$\alpha$ and Mo K$\alpha$ peaks, but these results were not the best.
+It was found that using Ga L$\alpha$ and As K$\alpha$ peaks gave the best results, even though the peaks are not as far apart as the Mo peaks.
+This was concluded to be because of the peaks being more well-defined in the GaAs spectrum.
+The GaAs calibration was quantified to have three times lower RMS error than the built-in calibration in AZtec.
+If a recalibration is done, it would probably be beneficial to take new spectra and calculate the calibration on multiple spectra.
+When doing the calibration calculation, HyperSpy provides a good tool, but the calculation could also be done with the code produced in this project, which is more transparent and easier to understand.
 
 
 % Background as spline
 % Not done, but observations imply that it would enhance the bg subtraction and peak fitting, which would improve the quantitative analysis
 % modelling spectra to get peak intensities give better area counts than just using a window. ref figure of the model fit and overlapping peaks.
-While working with the calibration and model fitting, the author found that the fit of the background as a polynomial tends to be poor at the lower energies, which is where the highest peaks are located.
+While working with the calibration and model fitting, it was found that the fit of the background as a polynomial tends to be poor at the lower energies, which is where the highest peaks are located.
 Modelling the background is a better way to get the peak intensities compared to just using a window around the peaks and raw counts.
 The fit of the background is partially poor because the intensity of the background is higher before than after the main peaks in the spectrum.
 The main peak or peaks are the highest peaks in the spectrum, which usually are located around 1-3 keV, and this is the area where the intensity and shape of the background is changing the most.
-An observed trend is that the background is more linear until the main peak, and then after the peak it both drop in intensity and follows the more expected background shape.
+An observed trend is that the background is more linear until the most intense peak, and then after the peak it both drop in intensity and follows the expected background shape.
 
 
 % How HS works
 % sometimes breaks down, but still gives an answer
 % working with open-source to know what I am doing, not just using black boxes. How important this is. Issues in AZ is calibration, not labelling Ga Kb, not being able to adjust params
-The HyperSpy Python package is a scientific tool for signal treatment, and the EDS analysis methods in HyperSpy explored in this project have been qualitative analysis, calibration, peak fitting, background subtraction and quantification.
-A section of the discussion is covering the code used for these steps, with the aim of explaining and discussing how HyperSpy works.
+% The HyperSpy Python package is a scientific tool for signal treatment, and the EDS analysis methods in HyperSpy explored in this project have been qualitative analysis, calibration, peak fitting, background subtraction and quantification.
+A section of the discussion is covering what steps in HyperSpy was done, and what these steps do.
 Working with open-source software allows the user to both understand the steps and alter the analysis to fit the needs of the user.
 Even though it can take more time than the black-box software, open-source software gives huge advantages which allowing better results.
+Two of the ultimate goals would be to make the quantification in HyperSpy more accurate and to implement SEM EDS data quantification in HyperSpy.
+The HyperSpy code needs to be robust and general, which means that the code needs to handle many edge cases.
+Implementing absorption and fluorescence correction in HyperSpy is beyond the scope of this project.
 
 % Direct analysis of EDS data in Python. the notebooks which enhance users understanding
 In addition to working with the open-source software HyperSpy, the EDS data acquired was analyzed directly in Python.
-The Jupiter notebooks used for the analysis are available on GitHub, and the notebooks are a good way to show how the analysis is done.
+The Jupyter notebooks used for the analysis are available on GitHub, and the notebooks are a good way to show how the analysis is done.
 The steps which are covered in the notebooks are calibration, peak fitting, background subtraction and quantification.
 Using the notebooks can enhance the understanding of the analysis, because the notebooks are not made to handle edge cases and are not as general as the HyperSpy code.
 This allows the notebooks to be a better tool for understanding the steps in the analysis, while the HyperSpy code is a better tool for general analysis.
 
 
 
-% No artifact like the Al peak in Skomedal is visible in all spectra (?)
 
 
 
 
-
-
-
-
-
-
-
-
-\section{Limitations}
-\label{sec:limitations}
-
-While the project have been a learning process for the author, there are some limitations which should be enlightened.
-The limitations were the authors experience with the topic, the available quantification methods in HyperSpy and the complexity of the HyperSpy code.
+% limitations
 
 
 % data was sampled by an unexperienced user
@@ -100,15 +98,6 @@ However, many of the steps in the analysis are independent of the data being SEM
 Acquiring SEM data with good signal-to-noise ratio gives a good foundation for the analysis, and with the knowledge gained in this project, the author could be able to improve the EDS analysis in a more general way during the master thesis project.
 
 
-% understanding open-source code in a package is hard, because thay have enge cases to handle
-Two of the ultimate goals would be to make the quantification in HyperSpy more accurate and to implement SEM EDS data quantification in HyperSpy, but as the code base for the HyperSpy Python package is complex, this was not achievable in this project.
-The HyperSpy code needs to be robust and general, which means that the code needs to handle many edge cases.
-This makes the code complex, and the author did not have the time to both learn the topic and understand the HyperSpy code base in this project.
-The author have definitely improved the understanding of the HyperSpy code base, but the code is still complex compared to the notebooks produced in this project.
-
-
-
-
 
 
 
@@ -125,12 +114,18 @@ The author have definitely improved the understanding of the HyperSpy code base,
 
 % Være veldig konkret, gjerne noen superspesifikke greier. eg sjekke NW med høy DT for Mo L-peaks
 
-Ideas for future work based on the findings of this project are separated into three categories: improvements for the current code developed, implementations for HyperSpy and general ideas for future work in EDS analysis.
+The aim of this project was to improve EDS analysis by using open-source packages.
+For qualitative analysis, this has been achieved for energy calibration and identifying spectral artifacts.
+For the qualitative analysis, progress have been made in understanding the fitting of the background with a better model.
+Ideas for future work based on the findings of this project are separated into three categories: i) improvements for the current code developed, ii) implementations for HyperSpy and iii) general ideas for future work in EDS analysis.
+
+
+%%%%%%%%%%%%% Fortsett her
 
 
 % Improve the current code
 % what the data is. dependency on detector angle, and figure out if APREO is good.
-In the discussion chapter there are multiple ideas for improvements of the current code developed in this project.
+i) In the discussion chapter there are multiple ideas for improvements of the current code developed in this project.
 One of the ideas is to model the background as a spline, which would improve the background subtraction and peak fitting.
 Another idea is to fine tune the peak finder and combine it with the lines in the HyperSpy library, which can improve the peak fitting.
 The current spectra can be used, but new spectra with e.g. different beam currents on 30 kV should be taken to analyze the fit of the new spectrum model on different data.
@@ -142,7 +137,7 @@ Acquiring data with different dead times would also be interesting, to try to se
 % Implementations for HyperSpy
 % figure out all the methods in HyperSpy. ML tools and other tools which are in TEM HS, and would work with SEM data.
 % eventually treat the data with Python and HS, then do quantitative analysis in AZ which have ZAF
-Adding quantification methods for SEM data to HyperSpy would be a great improvement of the package.
+ii) Adding quantification methods for SEM data to HyperSpy would be a great improvement of the package.
 Much of the basis for the quantification methods in HyperSpy is available in the TEM signal module, thus the needed new code would mainly be the ZAF matrix correction.
 Another idea is to get a better overview of all the methods available on TEM data, and figure out which ones work on SEM data.
 Then these methods, for example machine learning tools, could be used on SEM data to improve the analysis in AZtec.
@@ -151,7 +146,7 @@ This would be a tedious process, but it would allow the user to use the best of 
 It might also lead to more accurate results, because HyperSpy have methods which are not available in AZtec, which could improve the results.
 
 %  HS plots
-Another idea, which would require less work, is to enhance the plotting of models in HyperSpy.
+ii) Another idea, which would require less work, is to enhance the plotting of models in HyperSpy.
 A simple and effective improvement would be to add a legend with explanations to the plots, which would make the plots more understandable.
 That would allow the users to see a clearer connection between the spectrum and the listed excitation lines.
 Since HyperSpy makes models with the excitation lines, it would be easier to find the strays in the spectrum, because they do not get a line in the model.
@@ -161,7 +156,7 @@ This change, however, would probably require a lot of work, since the plotting b
 
 
 % General ideas for future work in EDS analysis
-Some general ideas for future work in EDS analysis emerged during the project.
+iii) Some general ideas for future work in EDS analysis emerged during the project.
 One of the ideas is to make an optimized workflow for data acquisition.
 The data acquired have some flaws, which could be avoided by an optimized workflow.
 One of these flaws is the poor quality of the Cu-tape spectra, which could be avoided by an optimized workflow.
@@ -179,7 +174,7 @@ The X-ray Data Booklet lacks a line which is clearly visible in the spectra, whi
 % Doing in the master thesis project
 For the author's master thesis project, the work with improving EDS analysis will continue, and the ideas from this project will be the starting points.
 Improvements on the current code developed in this project will be done, but the main goal will be to contribute to HyperSpy.
-Making Jupiter notebooks with examples of how to analyze EDS data is nice and can help a user understand what is happening, but making meaningful contributions to HyperSpy will potentially have a bigger impact.
+Making Jupyter notebooks with examples of how to analyze EDS data is nice and can help a user understand what is happening, but making meaningful contributions to HyperSpy will potentially have a bigger impact.
 
 
 % finishing remarks

@@ -75,11 +75,7 @@ Al is the Al FIB stub.
 \section{The microscope and the detector}
 \label{sec:method:detector}
 The data was collected with the SEM Apreo from FEI with an Oxford EDX detector at NTNU NanoLab.
-The detector is an EDX Oxford Xmax 80 mm$^2$ detector, with reported energy resolution of 127 eV (Cite: ntnu.norfab.no on the instrument).
-\brynjar{Fix citation}
-% Ton: Can cite Oxford or manual. Avoid as much as possible web links, but here probably not to be avoid.
-% Ton: 127 eV can serve as a reference to what you determine.Future work: does 80 mm^2 matter, can rather solid angle be measured?
-% Ton done: remove "Solid angle" from "Solid angle detector"
+The detector is an EDX Oxford Xmax 80 mm$^2$ detector, with reported energy resolution of 127 eV \cite{oxford_xmax_80}.
 The acceleration voltage, $V_\textnormal{acc}$, can be set from 0.2 to 30 kV.
 In this project the $V_\textnormal{acc}$ was set to 5, 10, 15, and 30 kV.
 The beam current, $I_\textnormal{beam}$, has a maximum value of 400 nA.
@@ -217,7 +213,7 @@ A plot of the spectrum and the fit are shown, and the user can decide if the fit
 The code then calculates the dispersion, and the zero-offset.
 In the end the code plots the spectrum with the calibration, and the user can decide if the calibration is good enough.
 The same calibration principle is implemented in "eds-analysis-final", but without the plots and the user interaction.
-\brynjar{Implement the sentence above.}
+% \brynjar{Implement the sentence above.}
 The final calibration is using the fifth model with both background and peaks in one fit.
 However, since the calibration only needs the distance between two peaks, using the first model could be sufficient.
 
