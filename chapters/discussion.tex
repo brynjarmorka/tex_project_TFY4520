@@ -44,7 +44,7 @@ It might be that this signal is from Fe, but it might also just be noise or an a
 \cref{tab:theory:Ga-lines} list the Ga-lines and their weights, and it is clear that some lines have very low weights.
 In this project it was decided not to use a hard threshold for the signal-to-noise ratio, which can be helpful in some cases.
 Setting a hard threshold should be based on both literature and empirical data for the specific detector setup.
-A issue with setting a hard threshold is that it can be too strict, which can lead to missing peaks of elements which are low in concentration.
+An issue with setting a hard threshold is that it can be too strict, which can lead to missing peaks of elements which are low in concentration.
 If the sampling settings were not good enough, some peaks can be missing in the spectra.
 One example of this is in the NW spectrum: the low As K$\beta$ peak in the 15 kV spectrum has an overvoltage of ~3 keV and is visible, but the Cu K$\alpha$ peak in the 10 kV spectrum with overvoltage of ~2 keV is not visible.
 Multiple data sets on the same area can be used to verify the sampling settings, since missing peaks in one data set can be visible in another data set.
@@ -54,13 +54,13 @@ In conclusion, it is assumed that the sampling settings were good, at lest when 
 
 % Peak intensities in relation to the element
 Different elements do give different peak intensities, as expected.
-The intensity is dependent on the atomic number, which affects both the fluorescenct yield and ionization cross section.
+The intensity is dependent on the atomic number, which affects both the fluorescent yield and ionization cross section.
 In the GaAs spectrum, with Ga ($Z=31$) and As ($Z=33$), the Ga peaks have both higher max counts and higher sum counts, given in \cref{tab:results:detector:settings} and \cref{tab:results:ratios}.
-From the theory of fluorescenct yield and \cref{eq:empirical:fluorescentyieldapprox}, one would expect the As peaks to be more intense than the Ga peaks, but this is not the case.
+From the theory of fluorescent yield and \cref{eq:empirical:fluorescentyieldapprox}, one would expect the As peaks to be more intense than the Ga peaks, but this is not the case.
 For the K-peaks this could be an effect of the overvoltage, but that would not explain the difference in the L-peaks.
 Another factor affected by the atomic number is the absorption, which is higher for heavier elements.
 In the k-factor approach with TEM thin samples the absorption is assumed to be negligible, which is not the case for bulk samples.
-Thus, some correction for the absorption should be done for bulk samples, which would be Z-depentent.
+Thus, some correction for the absorption should be done for bulk samples, which would be Z dependent.
 In addition, X-rays with lower energies are more absorbed than X-rays with higher energies.
 The ZAF matrix correction for SEM EDS data would correct for the absorption, but that have not been done in this project.
 Looking into the ZAF matrix correction would be a good next step for this project.
@@ -107,7 +107,7 @@ When the spectra on the Cu-tape sample area was taken, beam made visible damages
 In the end, the spectra from the Cu-tape are regarded as unreliable.
 Finding both K-lines and L-lines is an important aspect of qualitative EDS analysis, because a present K-line without an L-line indicate that the identified element is not the correct one.
 The result with the missing L-line show that, unfortunately, it is possible to acquire spectra where a K-line is present, but the L-line is missing.
-Further investigating this could reveal if this is an issue with the Cu-tape, the detector, the settings, or an artifact that can appear in other spectra.
+Further, investigating this could reveal if this is an issue with the Cu-tape, the detector, the settings, or an artifact that can appear in other spectra.
 
 
 % width of the peaks
@@ -201,7 +201,7 @@ The main peak effect on the background is changing both the value and the shape 
 The shape of the background is varying between the spectra, and is affected by the peaks and the acceleration voltage.
 All the 5 kV spectra decrease more or less linearly from 1 to 5 keV.
 This is due to the overvoltage, which lowers the possible background radiation to zero after 5 keV in the 5 kV spectra.
-When the acceleration voltage is just 5 kV, the critical ionization energy it not higher than 5 keV.
+When the acceleration voltage is just 5 kV, the critical ionization energy is not higher than 5 keV.
 In the GaAs, Si and Mo the relative height of the background decrease with higher acceleration voltage.
 The background in the Cu spectra increase with higher acceleration voltage.
 The most similar background signal over different voltages are in the NW spectra. % discuss: thin sample -> less background?
@@ -217,7 +217,7 @@ In addition to the characteristic peaks and the background, there are also artif
 The background is an artifact which already have been discussed.
 One of the artifacts that will be discussed below is X-rays generated outside the area of the beam.
 Understanding the details in a spectrum is key for the qualitative analysis, which is the foundation for the quantitative analysis.
-Identifying peaks as strays or artifacts can be used to exclude certain elements, as well as making the anaøyst more certain of what elements are present.
+Identifying peaks as strays or artifacts can be used to exclude certain elements, as well as making the analyst more certain of what elements are present.
 Lower peaks are central for the analysis.
 One example of this is the Al spectra, where two lower peaks match with the energies of Mg and Mn.
 Asserting what is a stray or artifact and what is a characteristic peak can be challenging, as they can be very similar to the characteristic peaks.
@@ -242,7 +242,7 @@ No sum peak is visible in the NW spectrum, except for the possibility of the sum
 There are no sum peaks in the Cu spectra, but these spectra are as explained earlier questionable.
 Sum peaks are a peak where two X-rays are counted as one, giving a peak at the sum of the energies of the two X-rays.
 This occurs because the detector can only count one X-ray at a time, and since the counting does take some time, two X-rays can be registered as one.
-The process is depentent on the counting, which takes a certain amount of time, and this time is the dead time.
+The process is dependent on the counting, which takes a certain amount of time, and this time is the dead time.
 In other words, a higher dead time will result in more signal in the sum peaks.
 A good example of this is the GaAs spectra, where the 5 and 30 kV spectra have DT at 33 and 30\% and show almost no L-line sum peaks, while the 10 and 15 kV spectra have DT at 65 and 58\% and clearly show the L-line sum peaks.
 The NW spectra have the lowest dead time, which might be why there are no sum peaks in the NW spectra, which fit well with the difference in the GaAs bulk spectra.
@@ -265,7 +265,7 @@ When looking at the Al spectrum, with DT at 22\%, the sum peak is in the same si
 The Al spectrum of the FIB stub are labeled with three peaks in the same size order as the Al K$\alpha$ sum peak.
 These three peaks are from Mg, Si and Mn, which could be present in the FIB stub.
 An Al alloy with Mg and Si is quite common, according to the supervisor of this project.
-An Al alloy of Al, Mg, Mn, Si, Fe and Cu is analyzed in an article by Wojciech \cite{al_alloy}, and could thus be another possibility, explaing all the peaks and the very low but barely visible singal from Fe K$\alpha$.
+An Al alloy of Al, Mg, Mn, Si, Fe and Cu is analyzed in an article by Wojciech \cite{al_alloy}, and an alloy like that would explain all the peaks and the very low but barely visible signal from Fe K$\alpha$.
 Another possible explanation for the Mn peak is that the FIB stub used had some contamination, which could be tested by taking spectra of other FIB stubs.
 Determining how much of the Si peak is from the alloy and how much is the internal fluorescence peak could be done by taking spectra at different DT.
 
@@ -423,7 +423,7 @@ The breaking down of the analysis is discussed further in \cref{sec:discussion:f
 
 Results in this project show that the CL method in HyperSpy for TEM EDS data sometimes yield plausible results on SEM EDS data and sometimes break down, thus the method should be used with caution.
 The goal of this project was not to do or to implement cutting edge quantification of EDS data from a SEM sample, but rather to understand the analysis steps and what factors that could affect the results.
-Thus, using the quantification method from the TEM signal type was regarded as good enough for this project.
+Thus, using the quantification method from the TEM signal type was regarded as good enough for the principles tested in this project.
 
 
 
@@ -809,7 +809,7 @@ If this was true, the Ga K$\alpha$ peak would be an overlapping peak with a broa
 The figure show that the peak fit exactly one Gaussian curve, with its center directly on the K$\alpha$ line from HS, which is the K$\alpha$1 line in the XRB.
 The XRB claim that the listed lines are the strongest lines \cite[P. 33, Sec. 1.2]{thompson_x-ray_2004}, but it is missing the Mo L$\gamma$3 line, which is visible in the Mo spectrum.
 In general, the weights of the lines listed in the XRB and HS seem to be slightly off from the data collected in this project, because some lines are not visible and some are, but this cannot be explained solely by the weights.
-It could be that the listed weights would be correct when collecting the data in a different way or with different materials.
+It could be that the listed weights would be correct when collecting the data differently or with different materials.
 
 
 % The author have not been able to find the source of the lines in the HyperSpy liberary, but it might be the NIST database, as this is one of the references in HyperSpy\footnote{link??}.%\url{http://hyperspy.org/hyperspy-doc/current/user_guide/bibliography.html#chantler2005}}.
@@ -848,7 +848,7 @@ Why the analysis fail would be a good starting point to improve the EDS analysis
 % treating SEM data as TEM data
 The fact that the quantification fails when the SEM EDS data is treated as TEM data was expected.
 As stated earlier, when doing TEM analysis there are some key assumptions which are not valid for SEM data.
-When analyzing SEM EDS data it is neccessary to do the ZAF correction, which was described briefly in \cref{sec:discussion:steps:load}.
+When analyzing SEM EDS data it is necessary to do the ZAF correction, which was described briefly in \cref{sec:discussion:steps:load}.
 Implementing the ZAF matrix correction in HyperSpy for the SEM signal would be a helpful contribution to the HyperSpy project, as this has been mentioned as one key missing feature to do SEM EDS quantification with HyperSpy in the GitHub discussion threads.
 
 
@@ -856,13 +856,13 @@ Implementing the ZAF matrix correction in HyperSpy for the SEM signal would be a
 
 % HS breakdown at 10 and 15 kV
 One of the strangest results in this project was that the quantification failed at 10 and 15 kV in HyperSpy.
-The excact same CL quantification code was used on the 5, 10, 15 and 30 kV spectra, but only the 5 and 30 kV spectra gave a reasonable result.
+The exact same CL quantification code was used on the 5, 10, 15 and 30 kV spectra, but only the 5 and 30 kV spectra gave a reasonable result.
 The most puzzling thing is that the code gives results on the 5 and 30 kV spectra which looks similar to the TEM quantification results in AZtec, so the code described above in \cref{sec:discussion:steps} is not completely wrong.
 The four spectra look quite similar.
 One difference is that the 10 and 15 kV spectra have a dead time which was around twice as long as the 5 and 30 kV spectra.
-The different DT is not a sufficient explaination, it is just an observed difference.
+The different DT is not a sufficient explanation, it is just an observed difference.
 The author did not have time to dig deep enough into the source code of HyperSpy to find the reason for the failure.
-Possible explainations are the selection of lines to use in the quantification, an error in the code or the extracted data, a bug in HyperSpy for certain settings, something with the data treatment as TEM data, or something else.
+Possible explanations are the selection of lines to use in the quantification, an error in the code or the extracted data, a bug in HyperSpy for certain settings, something with the data treatment as TEM data, or something else.
 The suggestions are not really helpful, but could be a starting point for further investigation.
 
 
