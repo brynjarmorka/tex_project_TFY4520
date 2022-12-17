@@ -129,7 +129,7 @@ i) In the discussion chapter there are multiple ideas for improvements of the cu
 One of the ideas is to model the background as a spline, which would improve the background subtraction and peak fitting.
 Another idea is to fine tune the peak finder and combine it with the lines in the HyperSpy library, which can improve the peak fitting.
 The current spectra can be used, but new spectra with e.g. different beam currents on 30 kV should be taken to analyze the fit of the new spectrum model on different data.
-Data with poorer signal-to-noise ratio should also be taken to analyze the effect of the improved model on these types of spectra.
+Data with poorer signal-to-noise ratio should also be taken to analyze the effect of the improved model on these types of spectra, for example by applying denoising routines \cite{moreira_2022}.
 Acquiring data with different dead times would also be interesting, to try to see if artifacts like sum peaks can be treated with data processing.
 
 
@@ -138,15 +138,15 @@ Acquiring data with different dead times would also be interesting, to try to se
 % figure out all the methods in HyperSpy. ML tools and other tools which are in TEM HS, and would work with SEM data.
 % eventually treat the data with Python and HS, then do quantitative analysis in AZ which have ZAF
 ii) Adding quantification methods for SEM data to HyperSpy would be a great improvement of the package.
-Much of the basis for the quantification methods in HyperSpy is available in the TEM signal module, thus the needed new code would mainly be the ZAF matrix correction.
+Much of the basis for the quantification methods in HyperSpy is available in the TEM signal module, thus the needed new code would mainly be the ZAF matrix correction \cite{ZAF_1978,goldstein_scanning_2018}.
 Another idea is to get a better overview of all the methods available on TEM data, and figure out which ones work on SEM data.
 Then these methods, for example machine learning tools, could be used on SEM data to improve the analysis in AZtec.
 In other words, the analysis could be extraction the data from AZtec, applying some methods in HyperSpy and then quantifying the data in AZtec.
-This would be a tedious process, but it would allow the user to use the best of both worlds, the open-source software and the closed-source software.
-It might also lead to more accurate results, because HyperSpy have methods which are not available in AZtec, which could improve the results.
+It would allow the user to use the best of both worlds, the open-source software and the closed-source software.
+% It might also lead to more accurate results, because HyperSpy have methods which are not available in AZtec, which could improve the results.
 
 %  HS plots
-ii) Another idea, which would require less work, is to enhance the plotting of models in HyperSpy.
+ii) Another idea is to enhance the plotting of models in HyperSpy.
 A simple and effective improvement would be to add a legend with explanations to the plots, which would make the plots more understandable.
 That would allow the users to see a clearer connection between the spectrum and the listed excitation lines.
 Since HyperSpy makes models with the excitation lines, it would be easier to find the strays in the spectrum, because they do not get a line in the model.
@@ -162,9 +162,19 @@ The data acquired have some flaws, which could be avoided by an optimized workfl
 One of these flaws is the poor quality of the Cu-tape spectra, which could be avoided by an optimized workflow.
 Another idea is to figure out better how AZtec calculates the k-factors, because they are a central part of the Cliff-Lorimer quantification method.
 This could be done by experimenting with different settings while acquiring data, and then analyzing the effect of the settings on the k-factors.
-Another improvement to EDS analysis would be to figure out why the X-ray Data Booklet and the HyperSpy X-ray database have slightly different values for line energies and why some lines are included in one but not the other.
-The X-ray Data Booklet lacks a line which is clearly visible in the spectra, which could be a problem for users analyzing their spectra.
+% Another improvement to EDS analysis would be to figure out why the X-ray Data Booklet and the HyperSpy X-ray database have slightly different values for line energies and why some lines are included in one but not the other.
+% The X-ray Data Booklet lacks a line which is clearly visible in the spectra, which could be a problem for users analyzing their spectra.
 
+
+
+
+
+
+
+
+% TODO:
+% Ton
+% I would delete this last paragraph, keep the suggestions more general, less specific to you as author.
 
 
 
@@ -176,8 +186,6 @@ For the author's master thesis project, the work with improving EDS analysis wil
 Improvements on the current code developed in this project will be done, but the main goal will be to contribute to HyperSpy.
 Making Jupyter notebooks with examples of how to analyze EDS data is nice and can help a user understand what is happening, but making meaningful contributions to HyperSpy will potentially have a bigger impact.
 
-
-% finishing remarks
 
 
 

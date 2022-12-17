@@ -301,20 +301,6 @@ Both \cref{fig:theory:actual_peaks,fig:theory:expected_background} have counts o
 \end{figure}
 
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{figures/GaAs30kV-Ga-K-lines.png}
-%     \caption{
-%         The theoretical lines K$\alpha_1 = 9.25174$ and K$\alpha_2 = 9.22482$ from the X-ray Data Booklet with K$\alpha = 9.251$ from HyperSpy and the fitted peak K$\alpha$.
-%         The spectrum is calibrated to Ga $L\alpha$ and As K$\alpha$, where the energy of the peaks is taken from HyperSpy.
-%         HyperSpy gives Ga K$\alpha$ almost directly on top of the theoretical K$\alpha_1$.
-%         This figure show that the lines which are separated with small energy differences are so close that they make one single peak in the EDS spectrum.
-%         Data from the SEM Apreo at NTNU NanoLab, 30kV.
-%         \ton{This is more results than theory I would say. But I do remember you saying something about having this in the theory section.}
-%     }
-%     \label{fig:theory:GaAs30keV-K-lines}
-% \end{figure}
-
 
 
 % theoretical values of the lines
@@ -326,7 +312,8 @@ One bigger difference between the two tables is that HyperSpy have a line for Mo
 Another difference is that the X-ray Data Booklet splits the K$\alpha$ line into two lines, while HyperSpy have one line for the K$\alpha$ line.
 In addition, the XRB list Mo L$\alpha$ as two lines and Mo K$\beta$ as three lines.
 These additional lines are very close in energy and only one of the lines have a higher weight, so these line separations are excluded from the tables.
-% include the table in table/Ga-lines.tex
+
+
 \input{tables/Ga-lines.tex}
 
 \input{tables/Mo-lines.tex}
@@ -552,7 +539,7 @@ The concentrations, intensities and k-factors are related by the following equat
 
 If the same method is to be applied for a sample where the thin-foil criteria is not valid, a correction matrix must be applied.
 The correction matrix in SEM EDS is correcting for the atomic number effects (Z), the absorption in the bulk sample (A) and the fluorescence (F).
-This is called the ZAF correction matrix \cite{ZAF_1978}.
+This is called the ZAF correction matrix \cite{ZAF_1978} \cite[Sec. 19.10]{goldstein_scanning_2018}.
 
 %
 % calibration of the spectrum

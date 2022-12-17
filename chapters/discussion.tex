@@ -365,7 +365,7 @@ HyperSpy have documentation online, and the following subsections explain how th
 
 
 Each subsection starts with some code lines, followed by an explanation of what the lines do.
-All variables inside crocodile need to be set by the user, e.g. \verb|<element_list>| would be set to \verb|['Ga', 'As']| for the GaAs wafer.
+All variables inside crocodile need to be set by the user, e.g. \cverb|<element_list>| would be set to \cverb|['Ga', 'As']| for the GaAs wafer.
 An example notebook with quantification of the GaAs wafer is attached in APPENDIX.
 \brynjar{Make a notebook with GaAs quantification in HyperSpy, with the data somehow.}
 
@@ -378,19 +378,24 @@ An example notebook with quantification of the GaAs wafer is attached in APPENDI
 \subsection{Loading the data and specifying the elements}
 \label{sec:discussion:steps:load}
 
-\begin{quote}
-    \verb|s = hs.load(<filepath>, signal="EDS_TEM")|
+% \begin{quote}
+%     \cverb|s = hs.load(<filepath>, signal="EDS_TEM")
 
-    \verb|s.set_elements(<element_list>)|
-\end{quote}
+%     \cverb|s.set_elements(<element_list>)
+% \end{quote}
+\begin{lcverbatim}
+    s = hs.load(<filepath>, signal="EDS_TEM")
 
-The first step in the analysis is to load the data as a HyperSpy \verb|signal| type, and specifying the signal as TEM.
-The \verb|signal| type is a class in HyperSpy that contains the data and the metadata, and it has methods for analysis.
-The \verb|signal| type must be specified as TEM, because the \verb|signal| type for SEM is very limited and does not have a method for quantification.
+    s.set_elements(<element_list>)
+\end{lcverbatim}
+
+The first step in the analysis is to load the data as a HyperSpy \cverb|signal| type, and specifying the signal as TEM.
+The \cverb|signal| type is a class in HyperSpy that contains the data and the metadata, and it has methods for analysis.
+The \cverb|signal| type must be specified as TEM, because the \cverb|signal| type for SEM is very limited and does not have a method for quantification.
 When using .emsa files from AZtec, as is done in this project, the metadata contains some relevant and some irrelevant information.
 The information relevant later in this project is:
 acceleration voltage, dispersion, zero offset, energy resolution Mn K$\alpha$,
-After loading, it is possible to plot the data with \verb|s.plot()|.
+After loading, it is possible to plot the data with \cverb|s.plot()|.
 
 Already at this point there is a big problem with using HyperSpy on the acquired data: the analysis methods are not implemented for SEM but for TEM.
 As explained by Skomedal in her master's thesis \cite{skomedal_improving_2022}, the quantification with the Cliff-Lorimer method of TEM EDS data use approximations which are valid for thin samples.
@@ -416,7 +421,7 @@ This implies that the calibration is not the most important factor for the quant
 The different calibrations are discussed further in \cref{sec:discussion:calibration}.
 In the 30 kV GaAs sample the signal-to-noise ratio is good, the sample time was long and the peaks are well resolved, which make the input data good and allows for better quantification.
 The CL method is known to work on SEM data, but normally one would also do the ZAF correction, which is described in chapter 19.10.3 of Goldstein \cite{goldstein_scanning_2018}.
-The ZAF correction adjust the signal for the atomic number effect, the absorption in the bulk of the sample and the X-ray fluorescence of new lines with lower energy than the initial characteristic X-ray.
+The ZAF correction adjust the signal for the atomic number effect, the absorption in the bulk of the sample and the X-ray fluorescence of new lines with lower energy than the initial characteristic X-ray \cite[Sec. 19.10]{goldstein_scanning_2018}.
 Since Ga and As are number 31 and 33 in the periodic table, it could be that the ZAF corrections are small and would not have a big effect on the results.
 When doing the quantification it was tested to include O and C, but that changed the results from plausible to completely wrong.
 The quantification analysis also broke down when using the 10 and 15 kV spectra, but the reason for that was not clear.
@@ -437,22 +442,30 @@ Thus, using the quantification method from the TEM signal type was regarded as g
 
 \subsection{Removing the background linearly}
 \label{sec:discussion:steps:background}
-\begin{quote}
-    \verb|bw = s1.estimate_background_windows(windows_width=<number>)|
+% \begin{quote}
+%     \cverb|bw = s1.estimate_background_windows(windows_width=<number>)
 
-    \verb|iw =  s1.estimate_integration_windows(windows_width=<number>)|
-\end{quote}
+%     \cverb|iw =  s1.estimate_integration_windows(windows_width=<number>)
+% \end{quote}
+\begin{lcverbatim}
+    bw = s1.estimate_background_windows(windows_width=<number>)
+
+    iw =  s1.estimate_integration_windows(windows_width=<number>)
+\end{lcverbatim}
 
 The next step is to remove the background, which with the above code is done by a linear fit.
 The background can be removed through model fitting, which is covered in \cref{sec:discussion:steps:model_fitting}.
-The variable \verb|windows_width| sets how wide the windows are for the background and integration, measured in FWHMs.
-A good starting value for \verb|windows_width| is 2, but it should be tested by the user with a plot to see if the background will be removed correctly.
+The variable \cverb|windows_width| sets how wide the windows are for the background and integration, measured in FWHMs.
+A good starting value for \cverb|windows_width| is 2, but it should be tested by the user with a plot to see if the background will be removed correctly.
 The estimated windows can be plotted with:
 
-\begin{quote}
-    \verb|s.plot(xray_lines=True, background_windows=bw, integration_windows=iw)|
-\end{quote}
+% \begin{quote}
+%     \cverb|s.plot(xray_lines=True, background_windows=bw, integration_windows=iw)
+% \end{quote}
 
+\begin{lcverbatim}
+    s.plot(xray_lines=True, background_windows=bw, integration_windows=iw)
+\end{lcverbatim}
 
 Plotting has proven to be a very useful tool for understanding what the different steps in the analysis do.
 Unfortunately, the implemented plotting in HyperSpy is limited.
@@ -482,20 +495,30 @@ The background removal is discussed further in \cref{sec:discussion:modelling}.
 \subsection{Quantification after linear background removal}
 \label{sec:discussion:steps:quantification:linear}
 
-\begin{quote}
-    \verb|s_i = s.get_lines_intensity(background_windows=bw, integration_windows=iw)|
+% \begin{quote}
+%     \cverb|s_i = s.get_lines_intensity(background_windows=bw, integration_windows=iw)
 
-    \verb|k_factors = [<k-factor 1>, <k-factor 2>]  |
+%     \cverb|k_factors = [<k-factor 1>, <k-factor 2>]  
 
-    \verb|quant = s.quantification(s_i, method='CL', factors=k_factors)|
+%     \cverb|quant = s.quantification(s_i, method='CL', factors=k_factors)
 
-    \verb|print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')|
-\end{quote}
+%     \cverb|print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')
+% \end{quote}
+
+\begin{lcverbatim}
+    s_i = s.get_lines_intensity(background_windows=bw, integration_windows=iw)
+
+    k_factors = [<k-factor 1>, <k-factor 2>]
+
+    quant = s.quantification(s_i, method='CL', factors=k_factors)
+
+    print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')
+\end{lcverbatim}
 
 The quantification is done with the four lines of code above, where the last one prints the results.
 The first line gets the intensity of the peak corresponding to the lines of the specified element.
 HyperSpy selects automatically which lines to use for quantification.
-To see which lines are used, the \verb|s_i| variable can be printed.
+To see which lines are used, the \cverb|s_i| variable can be printed.
 The second line sets the k-factors.
 The k-factors in this project have been the one from AZtec, which are theoretically estimated.
 The third line does the quantification, where the method is specified.
@@ -537,37 +560,54 @@ The reason for this being not that clear, is probably that different detectors h
 The zero peak is removed by skipping the first n channels, where n=30 works well with the data from the GaAs wafer.
 The model fitting is done with the following code:
 
-\begin{quote}
-    \verb|s = s.isig[<zero_peak_last_index>:]|
+% \begin{quote}
+%     \cverb|s = s.isig[<zero_peak_last_index>:]
 
-    \verb|m = s.create_model(auto_background=False)|
+%     \cverb|m = s.create_model(auto_background=False)
 
-    \verb|m.add_polynomial_background(order=12)|
+%     \cverb|m.add_polynomial_background(order=12)
 
-    \verb|m.add_family_lines(<list_of_element_lines>)|
+%     \cverb|m.add_family_lines(<list_of_element_lines>)
 
-    \verb|m.plot()|
+%     \cverb|m.plot()
 
-\end{quote}
+% \end{quote}
 
-The lines above removes the zero peak, create a model from the \verb|signal| s, adds a 12th order polynomial, add the lines of the elements in the \verb|signal|, and plot the model.
+\begin{lcverbatim}
+    s = s.isig[<zero_peak_last_index>:]
+
+    m = s.create_model(auto_background=False)
+
+    m.add_polynomial_background(order=12)
+
+    m.add_family_lines(<list_of_element_lines>)
+
+    m.plot()
+
+\end{lcverbatim}
+
+The lines above removes the zero peak, create a model from the \cverb|signal| s, adds a 12th order polynomial, add the lines of the elements in the \cverb|signal|, and plot the model.
 This model is not fitted, it is just a generated spectrum with the lines of the elements.
-Eventually, the method \verb|create_model()| can take the boolean argument \verb|auto_add_lines=True|, which will automatically detect the elements in the sample.
-The model consists of a number of components, which can be accessed with \verb|m.components|.
+Eventually, the method \cverb|create_model()| can take the \cverb|auto_add_lines=True| argument, which will automatically detect the elements in the sample.
+The model consists of a number of components, which can be accessed with \cverb|m.components|.
 The components are all the Gaussian peaks in the spectrum, in addition to the background as a 12th order polynomial.
-The Gaussian components are based on the lines that the added elements in \verb|<element_list>| have.
-If \verb|auto_background| is not set to false, HyperSpy will add a 6th order polynomial.
+The Gaussian components are based on the lines that the added elements in \cverb|<element_list>| have.
+If \cverb|auto_background| is not set to false, HyperSpy will add a 6th order polynomial.
 The order of the polynomial can be changed, but it should be tested by the user to see if it is a good fit.
 6th order polynomials work, but as shown in \cref{fig:results:fit_GaAs30kV}, the 12th order polynomial has a lower RMS error and is thus preferred.
 Further, the model must be fitted.
 
-\begin{quote}
-    \verb|m.fit()|
+% \begin{quote}
+%     \cverb|m.fit()
 
-    % \verb|m.fit_background()| % not neccessary
+%     \cverb|m.plot()
+% \end{quote}
 
-    \verb|m.plot()|
-\end{quote}
+\begin{lcverbatim}
+    m.fit()
+
+    m.plot()
+\end{lcverbatim}
 
 The first line fits the model to the data to the components and the second line plots the model.
 HyperSpy have an own option for fitting only the background.
@@ -581,16 +621,27 @@ Since the background is one of the components in m, it is fitted with the code l
 \subsection{Quantification after model fitting}
 \label{sec:discussion:steps:quantification:model}
 
-\begin{quote}
-    \verb|m_i = m.get_lines_intensity()|
+% \begin{quote}
+%     \cverb|m_i = m.get_lines_intensity()
 
-    \verb|k_factors = [<k-factor 1>, <k-factor 2>] |
+%     \cverb|k_factors = [<k-factor 1>, <k-factor 2>] 
 
-    \verb|quant = s.quantification(s_i, method='CL', factors=k_factors)|
+%     \cverb|quant = s.quantification(s_i, method='CL', factors=k_factors)
 
-    \verb|print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')|
+%     \cverb|print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')
 
-\end{quote}
+% \end{quote}
+
+\begin{lcverbatim}
+    m_i = m.get_lines_intensity()
+
+    k_factors = [<k-factor 1>, <k-factor 2>]
+
+    quant = s.quantification(s_i, method='CL', factors=k_factors)
+
+    print(f'E1: {quant[0].data[0]:.2f} \%, E1: {quant[1].data[0]:.2f} \%')
+
+\end{lcverbatim}
 
 The quantification after model fitting is done in the same way as in \cref{sec:discussion:steps:quantification:linear}, but with intensity from the model instead of the signal.
 When modelling GaAs, the model can add the intensity from both K-lines and L-lines.
@@ -605,16 +656,24 @@ As explained in \cref{sec:discussion:general:intensities}, overlapping peaks nee
 \subsection{Calibrating the spectrum with the HyperSpy model}
 \label{sec:discussion:steps:HyperSpycalibration}
 
-\begin{quote}
+% \begin{quote}
 
-    \verb|m.calibrate_energy_axis(calibrate='scale')|
+%     \cverb|m.calibrate_energy_axis(calibrate='scale')
 
-    \verb|m.calibrate_energy_axis(calibrate='offset')|
+%     \cverb|m.calibrate_energy_axis(calibrate='offset')
 
-\end{quote}
+% \end{quote}
+
+\begin{lcverbatim}
+
+    m.calibrate_energy_axis(calibrate='scale')
+
+    m.calibrate_energy_axis(calibrate='offset')
+
+\end{lcverbatim}
 
 The two lines above calibrates the spectrum with the HyperSpy model and updates the dispersion and zero offset.
-The metadata in the \verb|signal| s is updated with the new calibration.
+The metadata in the \cverb|signal| s is updated with the new calibration.
 Thus, doing the previous step with quantification after model fitting can give a more correct quantification.
 This is the HyperSpy calibration that is used in \cref{tab:results:calibration-quantification}.
 As shown in the table, the HyperSpy calibration gives a better peak accuracy than the calibration from AZtec, and it is about as accurate as the self produced calibration done on the GaAs 30 kV spectrum.
@@ -649,7 +708,7 @@ The first step in creating a model is to identify the peaks.
 The peaks are assumed to be Gaussian curves.
 Other possible shapes are Lorentzian curves, but that has not been a part of this project.
 The initial way of identifying peaks was that the user manually identified the peaks.
-Later the peaks were identified with the function \verb|scipy.signal.find_peaks()|, using the argument \verb|prominence=0.01|.
+Later the peaks were identified \cverb|scipy.signal.find_peaks()|, using the argument \cverb|prominence=0.01|.
 The prominence is the height of the peak above the background\footnote{\url{https://en.wikipedia.org/wiki/Topographic_prominence}}.
 As seen in \cref{fig:results:fit_GaAs30kV}, the given prominence identifies many but not all the peaks.
 Further work on the peak finder is needed to find a good and robust way of identifying the peaks.
@@ -677,7 +736,7 @@ With the initial guesses, the whole model is ready to be fitted.
 % why normalize
 Normalization is a technique that is often used in data analysis to make the fitting process faster and more stable.
 In the case of this project, it was found that normalizing the data was necessary in order to avoid failure of the SciPy fitting algorithm.
-This failure is likely due to the fact that \verb|scipy.optimize.curve_fit()| is optimized for certain types or ranges of data, and normalizing the data allows it to handle the data more effectively.
+This failure is likely due to the fact that \cverb|scipy.optimize.curve_fit()| is optimized for certain types or ranges of data, and normalizing the data allows it to handle the data more effectively.
 It is important to note that although the data is normalized for the purpose of fitting, the quantification of the peaks is based on the ratios between the peaks, which are not affected by the normalization.
 This means that the normalization does not affect the accuracy of the quantification, but only the speed and stability of the fitting process.
 However, the perceived spectrum is affected by the normalization, which is important in the qualitative analysis.
@@ -698,7 +757,7 @@ Thus, the linear scale with normalization was chosen as the best way to visualiz
 % curve fit
 % problem: sometimes fails
 With the model components ready and the data normalized, the model can be fitted to the data.
-The \verb|curve_fit()| function uses the Levenberg–Marquardt algorithm to fit the model to the data, and returns the optimal fitted parameters.
+The \cverb|curve_fit()| function uses the Levenberg–Marquardt algorithm to fit the model to the data, and returns the optimal fitted parameters.
 Fitting both the Gaussians and the background at the same time makes the fitting more stable.
 One of the first iterations, where the user manually inputted the peaks, the fitting tended to partially fail.
 The issue was that the fitting only was done on the peaks.

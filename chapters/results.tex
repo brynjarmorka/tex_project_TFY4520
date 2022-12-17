@@ -41,7 +41,7 @@ The spectra are presented as plots and the calibrations are presented in tables,
 The initial plots are \cref{fig:GaAs30kV_AZ} and \cref{fig:GaAs30kV_HS}, showing the GaAs 30 kV spectrum.
 In \cref{sec:results:qualitative:each_sample_area} all the spectra are presented.
 The initial two plots use the calibration from AZtec.
-The first figure is two screen shots from the AZtec software, and the second figure is a plot from HyperSpy.
+The first figure is two screenshots from the AZtec software, and the second figure is a plot from HyperSpy.
 In (a) Ga and As are annotated.
 In (b) Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
 (c) has a logarithmic scale on the y-axis, which is another way to show the smaller peaks.
@@ -79,7 +79,7 @@ In the following section, the spectrum is calibrated using SciPy, and plotted wi
 % add figure figures/GaAs30kV_HS.png
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.95\textwidth]{figures/GaAs30kV_HS.png}
+    \includegraphics[width=0.99\textwidth]{figures/GaAs30kV_HS.png}
     \caption{
         The GaAs bulk spectrum taken at 30 kV, plotted with HyperSpy.
         The vertical lines are the theoretical peak centers.%, with weights as heights.
@@ -93,8 +93,6 @@ In the following section, the spectrum is calibrated using SciPy, and plotted wi
     }
     \label{fig:GaAs30kV_HS}
 \end{figure}
-
-
 
 
 
@@ -154,15 +152,19 @@ The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ pe
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/fit/fit_GaAs30kV_whole.png}
-    \includegraphics[width=0.45\textwidth]{figures/fit/fit_GaAs30kV_L.png}
-    \includegraphics[width=0.45\textwidth]{figures/fit/fit_GaAs30kV_K.png}
-    \includegraphics[width=0.9\textwidth]{figures/fit/fit_GaAs30kV_bg.png}
+    \includegraphics[width=0.95\textwidth]{figures/fit/fit_GaAs30kV_whole.png}
+    \includegraphics[width=0.95\textwidth]{figures/fit/fit_GaAs30kV_L.png}
+    \includegraphics[width=0.95\textwidth]{figures/fit/fit_GaAs30kV_K.png}
+    \includegraphics[width=0.95\textwidth]{figures/fit/fit_GaAs30kV_bg.png}
     \caption{
         The fit of the 30 kV GaAs spectrum.
         The plots show the raw data (blue markers), the fit (green and orange) and the background (red and purple).
         The two different fits and backgrounds are with background polynomial of order 6 and 12, respectively.
         The RMSE for the area of each plot is given on the figures.
+        (a) the whole spectrum.
+        (b) the L-peaks.
+        (c) the K-peaks.
+        (d) the background at the L-peaks.
     }
     \label{fig:results:fit_GaAs30kV}
 \end{figure}
@@ -193,7 +195,7 @@ The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ pe
 
 % The goal of this section/the qualitative analysis is ... 
 \cref{fig:results:Spectra_Al} to \cref{fig:results:Spectra_NW} shows the spectra for the six different areas of the sample plotted with Plotly.
-The parameters and settings for each spectra are given in \cref{tab:results:detector:settings}, which does include, accelerating voltage, beam current, dead time, live time, maximum counts registered in one channel and the total counts.
+The parameters and settings for all spectra are given in \cref{tab:results:detector:settings}, which does include, accelerating voltage, beam current, dead time, live time, maximum counts registered in one channel and the total counts.
 The plots are available as an interactive HTML plots on the GitHub repository
 % \brynjar{Upload the HTML files to the GitHub repository.}.
 The calibration used in these spectra is one with the lowest RMSD, which is the one from the self-made model fit on GaAs.
@@ -408,7 +410,6 @@ The Ga and As L$\alpha$ sum peaks could have been visible, but the sum peak sign
 The 10, 15 and 30 kV signal have Mo Ll peak at 2.02 keV, between Si K$\alpha$ and Mo L$\alpha$. % discussion: what is this? Sum peak? No elemet match well. or escape peak (Line - Si Ka)? Figured it was Mo Ll, but can discuss
 
 
-% discussion: se most sum peaks. No escape peak, even though the Si peak from the detector is present.
 
 % figure Spectra_NW.png
 \begin{figure}[ht!]
@@ -426,6 +427,27 @@ The 10, 15 and 30 kV signal have Mo Ll peak at 2.02 keV, between Si K$\alpha$ an
 
 
 \newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Quantitative results}
 \label{sec:results:quantification}
