@@ -3,21 +3,24 @@
 \input{setup/packages.tex}
 
 
-\title{Improving qualitative and quantitative SEM EDS analysis with open-source data processing}
-\author{Brynjar Morka Mæhlum}
+% \title{Improving qualitative and quantitative SEM EDS analysis with open-source data processing}
+% \author{Brynjar Morka Mæhlum}
 
 
 \begin{document}
 
 \pagenumbering{roman}
 
-\maketitle
+\input{setup/title.tex}
+
+\pagecolor{white}  %black
+\color{black}  %grey
 
 % intro 
-% \input{chapters/intro/abstract.tex}
-% \input{chapters/intro/sammendrag.tex}
-% \input{chapters/intro/preface.tex}
-% \input{chapters/intro/abbrevations.tex}
+\input{chapters/intro/abstract.tex}
+\input{chapters/intro/sammendrag.tex}
+\input{chapters/intro/preface.tex}
+\input{chapters/intro/abbrevations.tex}
 
 % \newpage
 \tableofcontents
@@ -41,5 +44,9 @@
 \bibliography{references_EDS}{}
 \bibliographystyle{ieeetr} % chronological order of references. use abbrv for alphabetical order with abbreviations
 
+
+\begin{appendices}
+    \input{chapters/appendix.tex}
+\end{appendices}
 
 \end{document}

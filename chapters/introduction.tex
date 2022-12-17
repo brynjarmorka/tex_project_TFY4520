@@ -5,7 +5,7 @@
 
 
 The main goal of this project is to improve EDS analysis.
-EDS analysis is a high spatial resolution comppositional imaging technique, which is used for the elemental characterization of materials at the microscopic scale.
+EDS analysis is a high spatial resolution compositional imaging technique, which is used for the elemental characterization of materials at the microscopic scale.
 EDS is a powerful technique used in many fields, including materials science, geology, biology and environmental science.
 The technique is used to identify the chemical composition of samples, study microstructures and phases, and understand the properties of materials.
 In general, EDS analysis involves four steps.
@@ -18,16 +18,20 @@ The fourth step is quantitative analysis, where the concentration of each elemen
 
 Improving EDS analysis would benefit many fields, and there are many ways to improve EDS analysis.
 The improvement could be both qualitative and quantitative.
-One way is to make the analysis more transparent, which would allow users to understand better the analysis and adjust it to their needs.
-A second option is to improve the input parameters of the analysis by control checking the instrument with a known sample.
+The accuracy of quantitative EDS, which is how accurate the concentration of each element is, is limited by a number of factors, and the accuracy is typically in the range of 5-10\% \cite{goldstein_scanning_2018,carter2016transmission}.
+One way to improve EDS is to make the analysis more transparent, which would allow users to understand the analysis better and adjust it to their needs.
+One example of this is when a user adjusts the peak model to fit the data better, it is likely that they can improve the accuracy of the analysis.
+A second option is to improve the input parameters of the analysis by control checking the instrument with a known sample, and also alter the analysis steps to enhance the results.
+If the instrument is not calibrated correctly, the results will probably get worse.
 A third way is to make the quantitative analysis more accurate, which would improve EDS analysis.
 
+
 % explain the problem statement
-Most of the time used in this project was spent on trying to understand some of the methods of data processing in EDS analysis.
+Most of the time used in this project was spent on trying to understand some methods of data processing in EDS analysis.
 The different methods were applied on the same data sets to see how they influence the qualitative analysis.
-Towards the end the Cliff-Lorimer quantification in HyperSpy was applied on some of the data to see how data processing influence the quantitative analysis.
+Towards the end the Cliff-Lorimer quantification in HyperSpy was applied on some data to see how data processing influence the quantitative analysis.
 Increasing the transparency was done by doing the analysis in open-source Jupyter Notebooks.
-With these Notebooks, which are available on Github\footnote{\url{https://github.com/brynjarmorka/eds-analysis}}\footnote{\url{https://github.com/brynjarmorka/eds-analysis-final}}, an analyst can easily see what is happening in the different steps of the analysis.
+With these Notebooks, which are available on GitHub\footnote{\url{https://github.com/brynjarmorka/eds-analysis}}\footnote{\url{https://github.com/brynjarmorka/eds-analysis-final}}, an analyst can easily see what is happening in the different steps of the analysis.
 The Notebooks also allow the user to adjust the analysis to their needs, for example by changing the model of the peaks and background.
 In this project, the main focus have been trying to improve the transparency of the analysis.
 A main problem statement was formulated, and it was broken down into five sub-problems.
@@ -35,14 +39,20 @@ A main problem statement was formulated, and it was broken down into five sub-pr
 
 % make a grey centered box with the main problem statement
 \begin{center}
-    \fcolorbox{black}{light_pink}{\parbox{0.8\textwidth}{
-            \begin{mainprob}
-                \label{mainproblem}
-                \color{dark_purple}
+    \vspace*{0.8cm}
+    \fcolorbox{black}{titlepaperbg}{\parbox{0.8\textwidth}{
+            \vspace*{0.3cm}
+
+            \color{titletext}
+            \begin{mainprob}\label{mainproblem}
                 \textbf{How do different spectroscopy data processing influence the qualitative analysis, and how do they affect the quantitative Cliff-Lorimer analysis in HyperSpy?}
             \end{mainprob}
+            \vspace*{0.3cm}
+
         }
     }
+    \vspace*{0.8cm}
+
 \end{center}
 
 
@@ -51,17 +61,22 @@ The first subproblem is about the analysis in AZtec.
 AZtec is the software provided by Oxford Instruments for analyzing EDS data.
 AZtec is a black box, which means that the code is hidden, and the user does not know what is happening inside the software.
 The analysis was done both on quantification and to see what the software identifies.
-It was expected that AZtec would have functionality for some of the data processing, while also lacking some functionality.
+It was expected that AZtec would have functionality for some data processing, while also lacking some functionality.
 Since it is a black box, the user has few options to change the analysis, and verifying the results is difficult.
 
 \begin{center}
-    \fcolorbox{black}{light_pink}{\parbox{0.9\textwidth}{
+    \vspace*{0.2cm}
+
+    \fcolorbox{black}{titlepaperbg}{\parbox{0.9\textwidth}{
+            \vspace*{0.2cm}
+            \color{titletext}
             \begin{subprob} \label{subproblem1}
-                \color{dark_purple}
                 How accurate is the quantification in AZtec, and what does it identify?
+                \vspace*{0.2cm}
             \end{subprob}
         }
     }
+    \vspace*{0.2cm}
 \end{center}
 
 
@@ -70,34 +85,44 @@ The second subproblem is about the data processing in HyperSpy.
 HyperSpy is an open-source Python package for analyzing EDS data, and it is used in this project.
 Since HyperSpy is open-source, the code is available, and the user can see what is happening inside the software.
 The Python package is developed by a community of scientists, where the starting point was TEM data analysis.
-HYperSpy have functionality for EDS analysis, but is somewhat limited on SEM EDS analysis.
+HyperSpy have functionality for EDS analysis, but is somewhat limited on SEM EDS analysis.
 However, many of the methods implemented for TEM data analysis is equally applicable for SEM data analysis.
 
 \begin{center}
-    \fcolorbox{black}{light_pink}{\parbox{0.9\textwidth}{
+    \vspace*{0.2cm}
+
+    \fcolorbox{black}{titlepaperbg}{\parbox{0.9\textwidth}{
+            \vspace*{0.2cm}
+            \color{titletext}
             \begin{subprob} \label{subproblem2}
-                \color{dark_purple}
                 What are done with the data at the different steps in the analysis when using HyperSpy?
+                \vspace*{0.2cm}
             \end{subprob}
         }
     }
+    \vspace*{0.2cm}
 \end{center}
 
 
 
 
-After analysing the data with AZtec and HyperSpy, the third subproblem is dealing with code developed in this project for analysing the data.
+After analyzing the data with AZtec and HyperSpy, the third subproblem is dealing with code developed in this project for analyzing the data.
 The analysis is done with Python files and Jupyter Notebooks, and are dealing with making a model of the peaks and background.
 Making a model of the spectrum is an important step in the EDS analysis.
 
 \begin{center}
-    \fcolorbox{black}{light_pink}{\parbox{0.9\textwidth}{
+    \vspace*{0.2cm}
+
+    \fcolorbox{black}{titlepaperbg}{\parbox{0.9\textwidth}{
+            \vspace*{0.2cm}
+            \color{titletext}
             \begin{subprob} \label{subproblem3}
-                \color{dark_purple}
                 How can the peaks and the background be modelled?
+                \vspace*{0.2cm}
             \end{subprob}
         }
     }
+    \vspace*{0.2cm}
 \end{center}
 
 
@@ -107,32 +132,42 @@ The fourth subproblem is about the calibration of the energy scale, where method
 Calibration is a crucial step in the EDS analysis, and it is important to have a good calibration to get accurate results.
 
 \begin{center}
-    \fcolorbox{black}{light_pink}{\parbox{0.9\textwidth}{
+    \vspace*{0.2cm}
+
+    \fcolorbox{black}{titlepaperbg}{\parbox{0.9\textwidth}{
+            \vspace*{0.2cm}
+            \color{titletext}
             \begin{subprob} \label{subproblem4}
-                \color{dark_purple}
                 How good is the calibration in AZtec and HyperSpy?
+                \vspace*{0.2cm}
             \end{subprob}
         }
     }
+    \vspace*{0.2cm}
 \end{center}
 
 
 
 The fifth and last subproblem is about the analysis failing.
-During the project some choises were made, and some of the choises were not optimal.
+During the project some choices were made, and some choices were not optimal.
 The subproblem is both about when the analysis fails, and trying to identify why it fails.
 The identification of such fails is important to improve the analysis.
-Sometimes the analysis fails because of the data, and sometimes it fails because of the user making poor choises, and sometimes it fails because of the software.
+Sometimes the analysis fails because of the data, and sometimes it fails because of the user making poor choices, and sometimes it fails because of the software.
 
 
 \begin{center}
-    \fcolorbox{black}{light_pink}{\parbox{0.9\textwidth}{
+    \vspace*{0.2cm}
+
+    \fcolorbox{black}{titlepaperbg}{\parbox{0.9\textwidth}{
+            \vspace*{0.2cm}
+            \color{titletext}
             \begin{subprob} \label{subproblem5}
-                \color{dark_purple}
                 When does the analysis fail, both in AZtec and HyperSpy?
+                \vspace*{0.2cm}
             \end{subprob}
         }
     }
+    \vspace*{0.2cm}
 \end{center}
 
 
@@ -140,8 +175,8 @@ Sometimes the analysis fails because of the data, and sometimes it fails because
 
 
 
-This raport is structured as follows.
-The pre chapters contain abbreviations, abstract, preface, and abstract in Norwegian.
+This report is structured as follows.
+The pre chapters contain the abstract in English and Norwegian, the preface and acknowledgements, and the abbreviations.
 This introduction chapter contains the motivation for the project, the main problem statement, and the sub-problems.
 The theory chapter contains the physics of X-rays and empirical adjustments in the analysis, a section on data processing, and a section about the hardware in an EDS setup.
 The method chapter explains how the data was collected.
@@ -152,4 +187,4 @@ The result chapter contains qualitative and quantitative results.
 % The different adjustments are results with different calibrations and different background models.
 The discussion chapter follow the structure of the sub-problems, and discuss both the methods and the results of the analysis consecutively.
 The conclusion chapter summarizes the report with an answer to the main problem statement, and provides ideas for further work.
-The appendix contains the some code used in the analysis, which is also available on GitHub\footnote{\url{https://github.com/brynjarmorka?tab=repositories}}.
+The appendix contains a part of the code used in the analysis, which is also available on GitHub\footnote{\url{https://github.com/brynjarmorka?tab=repositories}}.

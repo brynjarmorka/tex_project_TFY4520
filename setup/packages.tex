@@ -27,6 +27,8 @@
 \definecolor{light_pink}{RGB}{240,218,220}
 \definecolor{dark_purple}{RGB}{80,42,72}
 
+\definecolor{titlepaperbg}{RGB}{69,76,97}
+\definecolor{titletext}{RGB}{226,240,217}
 
 
 % light mode
@@ -83,6 +85,8 @@
 
 \usepackage{parskip} % add space between paragraphs and not indent
 
+% appendix package
+\usepackage[toc,page]{appendix}
 
 
 % verbatim with bg color
@@ -96,10 +100,12 @@
 {\SaveVerbatim{cverb}}
 {\endSaveVerbatim
     \flushleft\fboxrule=0pt\fboxsep=.5em
+    \vspace*{0.2cm}
     \colorbox{cverbbg}{%
         \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
     }
     \endflushleft
+    \vspace*{0.2cm}
 }
 
 \newcommand{\ctexttt}[1]{\colorbox{cverbbg}{\texttt{#1}}}

@@ -1,3 +1,28 @@
 \chapter*{Abstract}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae
+Energy dispersive spectroscopy (EDS) is a widely used analytical technique for identifying the elemental composition of materials.
+The accuracy of EDS analysis can be affected by various factors, including instrumental parameters and setup, sample preparation, and the various steps involved in the analysis process.
+In this study, the aim was to improve the accuracy of EDS analysis through the development of new or improved data processing techniques.
+The approach involved both qualitative and quantitative analysis.
+The results demonstrated some potential improvement of the EDS analysis, including improved calibration of the used setup, an idea for new background modelling, and Jupyter Notebooks to improve the transparency of the analysis.
+While the work represents a small contribution to the field of EDS analysis, it has the potential to help an analyst to improve their understanding of the analysis process.
+
+
+In this work, a scanning electron microscope (SEM) was used to acquire EDS data, which was analyzed in the software from the detector manufacturer (AZtec), with the open-source Python package HyperSpy, and with custom Python code, using Jupyter Notebooks, SciPy, NumPy, and Plotly.
+One of the results is a suggested improvement to calibration of the setup used, an Oxford Instruments Xmax 80 mm$^2$ detector on a FEI SEM APREO, located at the NanoLab at Norwegian University of Science and Technology (NTNU).
+The new calibration is based on peak and background modelling done with Python.
+The difference between the current and suggested calibration is to increase the dispersion from 10 eV/channel to 10.03 eV/channel, and increase the zero-offset from 20 channels to 21.1 channels.
+The suggested calibration is shown to have a root-mean-square deviation of 1/3 of the current calibration, on the peaks acquired in this study.
+
+Some of the code used in this study is attached in the appendix, and all code is available on GitHub.
+Two repositories are available, one for all the code produced in this study, and one distilled version with the most important parts of the code.
+The repositories include the data used, and are intended to be used for people who want to understand parts of the steps in the analysis process better.
+The code can do interactive plotting, peak and background modelling, calibration of the energy scale, and simple quantitative analysis.
+Links to the repositories are:
+
+\url{https://github.com/brynjarmorka/eds-analysis}
+
+\url{https://github.com/brynjarmorka/eds-analysis-final}
+
+
+

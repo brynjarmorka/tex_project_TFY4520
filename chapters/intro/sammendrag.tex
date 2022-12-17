@@ -1,4 +1,32 @@
 \chapter*{Sammendrag}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae
+Energidispersivrøntgenspektroskopi (EDS) er en mye brukt analysemetode for å identifisere den elementære sammensetningen av materialer.
+Nøyaktigheten til EDS-analyser kan påvirkes av ulike faktorer, inkludert instrumentparametere og -oppsett, prøveforberedelse og ulike trinn i analyseprosessen.
+I denne studien var målet å forbedre EDS-analysen gjennom utvikling av nye eller forbedrede databehandlingsteknikker.
+Tilnærmingen involverte både kvalitativ og kvantitativ analyse.
+Resultatene viser muligheter for å forbedre EDS-analysen, inkludert forbedret kalibrering av det brukte oppsettet, en idé om ny bakgrunnsmodellering og Jupyter Notebooks for å øke transparensen i analysen.
+Selv om arbeidet utgjør et lite bidrag til feltet EDS-analyse, har arbeidet potensialet til å øke forståelsen av analyseprosessen for brukere.
+
+
+
+I denne studien ble et skanneelektronmikroskop (SEM) brukt til å anskaffe EDS-data, som ble analysert i programvaren AZtec fra detektorprodusenten, med den åpne kildekoden HyperSpy og tilpasset Python-kode, med hjelp fra Jupyter Notebooks, SciPy, NumPy og Plotly.
+Et av resultatene er et forslag om å forbedre kalibreringen av oppsettet som ble brukt, en Oxford Instruments Xmax 80 mm$^2$ detektor på en FEI SEM APREO, som er på NanoLab ved Norges teknisk-naturvitenskapelige universitet (NTNU).
+Den nye kalibreringen baserer seg på røntgentopp- og bakgrunnsmodellering gjort med Python.
+Forskjellen mellom den gjeldende og foreslåtte kalibreringen er å øke dispersjonen fra 10 eV/kanal til 10,03 eV/kanal, og øke nullpunktjusteringen fra 20 kanaler til 21,1 kanaler.
+Den foreslåtte kalibreringen viser seg å ha et gjennomsnittlig kvadratisk avvik på 1/3 av den gjeldende kalibreringen, på de røntgentoppene som ble analysert i denne studien.
+
+
+
+Noen av koden som ble brukt i denne studien er vedlagt i appendiks, og all koden er tilgjengelig på GitHub.
+Koden kan plotte spekter, modellere karakteristiske røntgenstråletopper og bakgrunnsstråling, kalibrere energiskalaen og gjøre enkel kvantitativ analyse.
+To reservoar er tilgjengelige, én for all koden som ble produsert i denne studien, og én destillert versjon med utvalgte deler av koden.
+Reservoarene (repositories) inneholder også datagrunnlaget, og de er tilgjengelig primært for at en bruker skal kunne lettere forstå deler av EDS-analysen.
+Reservoarene er tilgjengelig på:
+
+
+
+\url{https://github.com/brynjarmorka/eds-analysis}
+
+\url{https://github.com/brynjarmorka/eds-analysis-final}
+
 
