@@ -42,15 +42,16 @@ The initial plots are \cref{fig:GaAs30kV_AZ} and \cref{fig:GaAs30kV_HS}, showing
 In \cref{sec:results:qualitative:each_sample_area} all the spectra are presented.
 The initial two plots use the calibration from AZtec.
 The first figure is two screenshots from the AZtec software, and the second figure is a plot from HyperSpy.
+AZtec give the atomic percent of the elements in these plots.
+\cref{fig:GaAs30kV_AZ} from AZtec have three subplots.
 In (a) Ga and As are annotated.
 In (b) Ga, As, Si, O and C are annotated, and the y-axis is scaled to show the smaller peaks.
 (c) has a logarithmic scale on the y-axis, which is another way to show the smaller peaks.
-AZtec also give the atomic percent of the elements in these plots.
-The HyperSpy plot utilize the Python package Matplotlib for plotting, and it has the theoretical line values annotated.
+The HyperSpy plot in \cref{fig:GaAs30kV_HS} utilize the Python package Matplotlib for plotting, and it has the theoretical line values annotated.
 % The plotting in HyperSpy can add the theoretical peak centers as vertical lines, which is done in the plot for Ga and As.
 The height of the line show an estimate of the weight of the peak.
 In the plot it is clear that the calibration is somewhat off, since the line positions does not match the center of the peaks.
-In the following section, the spectrum is calibrated using SciPy, and plotted with Plotly to more clearly visualize the spectra details.
+In the next section, the spectrum is calibrated using SciPy, and plotted with Plotly to more clearly visualize the spectra details.
 
 % AZtec figure
 \begin{figure}[p]
@@ -112,11 +113,11 @@ The third type use Ga L$\alpha$ and As K$\alpha$ peaks in the GaAs 30 kV spectru
 % the values
 Values for the four calibrations are given in \cref{tab:results:calibrations}, i.e. the dispersion and the offset.
 The deviations are a some eV, and the accuracy of the different calibrations give on specific peaks are given in \cref{tab:results:calibration-peak-accuracy}.
-Here accuracy is the difference between the theoretical peak position and the peak center in the spectrum, given in eV.
+Here accuracy is the difference between the theoretical peak position and the fitted peak center in the spectrum, given in eV.
 The percentage deviation is also given.
 At the bottom of the table the root-mean-square deviation (RMSD) is given.
 For almost all the peaks, the deviation is greatest for the AZtec calibration.
-One exception is the C K$\alpha$ peak, which deviates a lot less for the AZtec calibration. %discussion: Aztec might use the zero peak to calibrate, but that is just speculation.
+One exception is the C K$\alpha$ peak, which deviates a less for the AZtec calibration. %discussion: Aztec might use the zero peak to calibrate, but that is just speculation.
 The difference between the HyperSpy calibration and the self-made calibration on the GaAs is small.
 In the qualitative section, the effect of the different calibrations on the spectra are explored.
 % Discuss: even though Mo is further apart, this calibration is worse than GaAs
@@ -181,7 +182,7 @@ The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ pe
         The XRB K$\alpha$1 and XRB K$\alpha$2 are the theoretical peak positions from the X-ray Data Booklet.
         The HS K$\alpha$ is the peak position from HyperSpy.
         Annotated in the upper right corner are the deviations from the dashed lines to the fitted peak position.
-        Given the energy resolution of 130 eV, the deviations are small.
+        Given the energy resolution of 127 eV, the deviations are small.
     }
     \label{fig:results:Ga-K}
 \end{figure}
@@ -196,7 +197,7 @@ The HyperSpy library with X-ray lines only give one line for the Ga K$\alpha$ pe
 % The goal of this section/the qualitative analysis is ... 
 \cref{fig:results:Spectra_Al} to \cref{fig:results:Spectra_NW} shows the spectra for the six different areas of the sample plotted with Plotly.
 The parameters and settings for all spectra are given in \cref{tab:results:detector:settings}, which does include, accelerating voltage, beam current, dead time, live time, maximum counts registered in one channel and the total counts.
-The plots are available as an interactive HTML plots on the GitHub repository
+The plots are available as an interactive HTML plots on the GitHub repository.
 % \brynjar{Upload the HTML files to the GitHub repository.}.
 The calibration used in these spectra is one with the lowest RMSD, which is the one from the self-made model fit on GaAs.
 The y-axis is normalized to the highest peak value in each spectrum, i.e. the highest peak is always 1.
